@@ -8,24 +8,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory-->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Montserrat:400,700%7COpen+Sans:300italic,400italic,600italic,700italic,800italic,300,400,600,700">
-    <link rel="stylesheet" href="styles/font-awesome.css">
-    <link rel="stylesheet" href="styles/owl.carousel.css">
-    <link rel="stylesheet" href="styles/owl.theme.css">
-    <link rel="stylesheet" href="styles/slit-slider-style.css">
-    <link rel="stylesheet" href="styles/slit-slider-custom.css">
-    <link rel="stylesheet" href="styles/idangerous.swiper.css">
-    <link rel="stylesheet" href="styles/yamm.css">
-    <link rel="stylesheet" href="styles/animate.css">
-    <link rel="stylesheet" href="styles/prettyPhoto.css">
-    <link rel="stylesheet" href="styles/bootstrap-slider.css">
-    <link rel="stylesheet" href="styles/device-mockups2.css">
-    <link rel="stylesheet" href="styles/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/main-responsive.css">
-    <link id="primary_color_scheme" rel="stylesheet" href="styles/theme_meadow.css">
-    <script src="scripts/vendor/modernizr.js"></script>
+    <link rel="stylesheet" href="/site/styles/font-awesome.css">
+    <link rel="stylesheet" href="/site/styles/owl.carousel.css">
+    <link rel="stylesheet" href="/site/styles/owl.theme.css">
+    <link rel="stylesheet" href="/site/styles/slit-slider-style.css">
+    <link rel="stylesheet" href="/site/styles/slit-slider-custom.css">
+    <link rel="stylesheet" href="/site/styles/idangerous.swiper.css">
+    <link rel="stylesheet" href="/site/styles/yamm.css">
+    <link rel="stylesheet" href="/site/styles/animate.css">
+    <link rel="stylesheet" href="/site/styles/prettyPhoto.css">
+    <link rel="stylesheet" href="/site/styles/bootstrap-slider.css">
+    <link rel="stylesheet" href="/site/styles/device-mockups2.css">
+    <link rel="stylesheet" href="/site/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="/site/styles/main.css">
+    <link rel="stylesheet" href="/site/styles/main-responsive.css">
+    <link id="primary_color_scheme" rel="stylesheet" href="/site/styles/theme_meadow.css">
+    <script src="/site/scripts/vendor/modernizr.js"></script>
     <noscript>
-      <link rel="stylesheet" href="styles/styleNoJs.css">
+      <link rel="stylesheet" href="/site/styles/styleNoJs.css">
     </noscript>
   </head>
   <body>
@@ -71,7 +71,7 @@
             <!-- end slide-->
             <!-- start slide-->
             <div data-orientation="horizontal" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5" class="sl-slide">
-              <div style="background: url(img/intro-home1.jpg);" class="sl-slide-inner">
+              <div style="background: url(/site/img/intro-home1.jpg);" class="sl-slide-inner">
                 <div class="slide-container">
                   <div class="slide-content text-center">
                     <h2 class="main-title">Feature 2&nbsp;<span class="text-primary">Name</span></h2>
@@ -85,7 +85,7 @@
             <!-- end slide-->
             <!-- start slide-->
             <div data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1" class="sl-slide">
-              <div style="background: url(img/intro-home7.jpg);" class="sl-slide-inner">
+              <div style="background: url(/site/img/intro-home7.jpg);" class="sl-slide-inner">
                 <div class="slide-container">
                   <div class="slide-content text-center"><img src="/site/img/pubsavvy-icon.png" alt="Ottavio" class="deco">
                     <h2 class="main-title">Fully responsive &&nbsp;<span class="text-primary">Retina ready</span></h2>
@@ -155,7 +155,7 @@
           <div class="row"></div>
           <div class="row">
             <div class="col-md-6">
-              <div data-wow-delay=".3s" class="wow bounceInLeft"><img src="img/ipad_slide.jpg" alt="" class="img-responsive"></div>
+              <div data-wow-delay=".3s" class="wow bounceInLeft"><img src="/site/img/ipad_slide.jpg" alt="" class="img-responsive"></div>
             </div>
             <div class="col-md-6">
               <div data-wow-delay=".3s" class="wow bounceInRight">
@@ -296,7 +296,7 @@
           <div class="container">
             <div class="row">
               <div class="col-md-3 col-sm-6">
-                <div class="widget sep-top-lg"><img src="img/logo-white.png" alt="" class="logo"><small class="sep-top-xs sep-bottom-md">Dolor church-key veniam, fap Bushwick mumblecore irure Vice consectetur 3 wolf moon sapiente literally quinoa.</small>
+                <div class="widget sep-top-lg"><img src="/site/img/logo-white.png" alt="" class="logo"><small class="sep-top-xs sep-bottom-md">Dolor church-key veniam, fap Bushwick mumblecore irure Vice consectetur 3 wolf moon sapiente literally quinoa.</small>
                   
                 </div>
               </div>
@@ -335,36 +335,36 @@
       </footer>
       <!-- End Footer section-->
     </div>
-    <script src="scripts/vendor/jquery.js"></script>
-    <script src="scripts/vendor/queryloader2.min.js"></script>
-    <script src="scripts/vendor/owl.carousel.js"></script>
-    <script src="scripts/vendor/jquery.ba-cond.min.js"></script>
-    <script src="scripts/vendor/jquery.slitslider.js"></script>
-    <script src="scripts/vendor/idangerous.swiper.js"></script>
-    <script src="scripts/vendor/jquery.fitvids.js"></script>
-    <script src="scripts/vendor/jquery.countTo.js"></script>
-    <script src="scripts/vendor/TweenMax.min.js"></script>
-    <script src="scripts/vendor/ScrollToPlugin.min.js"></script>
-    <script src="scripts/vendor/jquery.scrollmagic.min.js"></script>
-    <script src="scripts/vendor/jquery.easypiechart.js"></script>
-    <script src="scripts/vendor/jquery.validate.js"></script>
-    <script src="scripts/vendor/wow.min.js"></script>
-    <script src="scripts/vendor/jquery.placeholder.js"></script>
-    <script src="scripts/vendor/jquery.easing.1.3.min.js"></script>
-    <script src="scripts/vendor/jquery.waitforimages.min.js"></script>
-    <script src="scripts/vendor/jquery.prettyPhoto.js"></script>
-    <script src="scripts/vendor/imagesloaded.pkgd.min.js"></script>
-    <script src="scripts/vendor/isotope.pkgd.min.js"></script>
-    <script src="scripts/vendor/jquery.fillparent.min.js"></script>
-    <script src="scripts/vendor/raphael-min.js"></script>
-    <script src="scripts/vendor/bootstrap.js"></script>
-    <script src="scripts/vendor/jquery.bootstrap-touchspin.min.js"></script>
-    <script src="scripts/vendor/bootstrap-slider.js"></script>
-    <script src="scripts/vendor/bootstrap-rating-input.js"></script>
-    <script src="scripts/vendor/bootstrap-hover-dropdown.min.js"></script>
-    <script src="scripts/jquery.gmap.min.js"></script>
-    <script src="scripts/circle_diagram.js"></script>
-    <script src="scripts/main.js"></script>
+    <script src="/site/scripts/vendor/jquery.js"></script>
+    <script src="/site/scripts/vendor/queryloader2.min.js"></script>
+    <script src="/site/scripts/vendor/owl.carousel.js"></script>
+    <script src="/site/scripts/vendor/jquery.ba-cond.min.js"></script>
+    <script src="/site/scripts/vendor/jquery.slitslider.js"></script>
+    <script src="/site/scripts/vendor/idangerous.swiper.js"></script>
+    <script src="/site/scripts/vendor/jquery.fitvids.js"></script>
+    <script src="/site/scripts/vendor/jquery.countTo.js"></script>
+    <script src="/site/scripts/vendor/TweenMax.min.js"></script>
+    <script src="/site/scripts/vendor/ScrollToPlugin.min.js"></script>
+    <script src="/site/scripts/vendor/jquery.scrollmagic.min.js"></script>
+    <script src="/site/scripts/vendor/jquery.easypiechart.js"></script>
+    <script src="/site/scripts/vendor/jquery.validate.js"></script>
+    <script src="/site/scripts/vendor/wow.min.js"></script>
+    <script src="/site/scripts/vendor/jquery.placeholder.js"></script>
+    <script src="/site/scripts/vendor/jquery.easing.1.3.min.js"></script>
+    <script src="/site/scripts/vendor/jquery.waitforimages.min.js"></script>
+    <script src="/site/scripts/vendor/jquery.prettyPhoto.js"></script>
+    <script src="/site/scripts/vendor/imagesloaded.pkgd.min.js"></script>
+    <script src="/site/scripts/vendor/isotope.pkgd.min.js"></script>
+    <script src="/site/scripts/vendor/jquery.fillparent.min.js"></script>
+    <script src="/site/scripts/vendor/raphael-min.js"></script>
+    <script src="/site/scripts/vendor/bootstrap.js"></script>
+    <script src="/site/scripts/vendor/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="/site/scripts/vendor/bootstrap-slider.js"></script>
+    <script src="/site/scripts/vendor/bootstrap-rating-input.js"></script>
+    <script src="/site/scripts/vendor/bootstrap-hover-dropdown.min.js"></script>
+    <script src="/site/scripts/jquery.gmap.min.js"></script>
+    <script src="/site/scripts/circle_diagram.js"></script>
+    <script src="/site/scripts/main.js"></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
