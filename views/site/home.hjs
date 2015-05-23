@@ -43,6 +43,7 @@
             <button type="button" class="navbar-toggle"><i class="fa fa-close fa-lg"></i></button>
             <ul class="nav yamm navbar-nav navbar-left main-nav">
                     <!-- istanzio un id univoco-->
+                    <li><a href="#" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >About</a></li>                   
                     <li><a href="#" title="Home" id="menu_item_Home" data-ref="#">Features</a></li>
                     <li><a href="#" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >FAQ</a></li>                   
             </ul>
@@ -346,19 +347,7 @@
                   </ul>
                 </div>
               </div>
-              <div class="col-md-3 col-sm-6">
-                <div class="widget sep-top-lg">
-                  <h6 class="upper widget-title">Flickr Photostream</h6>
-                  <div class="flickr_container sep-top-xs">
-                    <div id="flickr_badge_image1" class="flickr_badge_image"><a href="http://www.flickr.com/photos/we-are-envato/14983708011/"><img width="75" height="75" title="Collis does the ice bucket challenge" alt="Una foto su Flickr" src="http://farm4.staticflickr.com/3923/14983708011_6bcbba0e2c_s.jpg"></a></div>
-                    <div id="flickr_badge_image2" class="flickr_badge_image"><a href="http://www.flickr.com/photos/we-are-envato/14596923138/"><img width="75" height="75" title="Justin 05" alt="Una foto su Flickr" src="http://farm6.staticflickr.com/5555/14596923138_d4d46d271c_s.jpg"></a></div>
-                    <div id="flickr_badge_image3" class="flickr_badge_image"><a href="http://www.flickr.com/photos/we-are-envato/14760569666/"><img width="75" height="75" title="Justin 04" alt="Una foto su Flickr" src="http://farm4.staticflickr.com/3909/14760569666_7c6c02da27_s.jpg"></a></div>
-                    <div id="flickr_badge_image4" class="flickr_badge_image"><a href="http://www.flickr.com/photos/we-are-envato/14783568265/"><img width="75" height="75" title="Justin 03" alt="Una foto su Flickr" src="http://farm6.staticflickr.com/5590/14783568265_90657d440f_s.jpg"></a></div>
-                    <div id="flickr_badge_image5" class="flickr_badge_image"><a href="http://www.flickr.com/photos/we-are-envato/14781214704/"><img width="75" height="75" title="Justin 01" alt="Una foto su Flickr" src="http://farm3.staticflickr.com/2925/14781214704_955df76638_s.jpg"></a></div>
-                    <div id="flickr_badge_image6" class="flickr_badge_image"><a href="http://www.flickr.com/photos/we-are-envato/14471910420/"><img width="75" height="75" title="Envato Live" alt="Una foto su Flickr" src="http://farm6.staticflickr.com/5548/14471910420_cf12dd0a16_s.jpg"></a></div>
-                  </div>
-                </div>
-              </div>
+
             </div>
           </div>
         </div>
@@ -371,7 +360,6 @@
         </div>
       </footer>
       <!-- End Footer section-->
-      <div id="back_to_top"><a href="#" class="fa fa-arrow-up fa-lg"></a></div>
     </div>
     <script src="scripts/vendor/jquery.js"></script>
     <script src="scripts/vendor/queryloader2.min.js"></script>
