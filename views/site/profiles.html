@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    {{ head }}
+    
+  </head>
+  
+  
+  
+  
+  <body ng-app="Terranga" ng-controller="ProfilesController" ng-init="init()">
+  
+ <!-- Profile Modal -->
+<div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div style="width:60%" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="border:none">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <div class="social" style="text-align:center">
+            <img style="width:160px" src="/site/img/logo-dark.png" alt=""><br /><br />
+            <img style="width:84px;border-radius:42px;border:1px solid #ddd" src="/site/images/{{ selectedProfile.image }}?crop=256" />
+            <h4 style="font-size:18px">{{ capitalize(selectedProfile.firstName) }} {{ capitalize(selectedProfile.lastName) }}, {{ selectedProfile.age }}</h4>
+            {{ capitalize(selectedProfile.city) }}, {{ capitalize(selectedProfile.country) }}
+            <hr /><br />
+			<div>
+                  	<table style="margin-left:auto;margin-right:auto">
+                  		<thead>
+                  			<tr style="text-align:center">
+                  				<td style="border-top:1px solid #ddd;border-left:1px solid #ddd;border-right:1px solid #ddd;background:#f9f9f9">
+                  					<h5>Bio</h5>
+                  				</td>
+                  				<td>&nbsp&nbsp&nbsp&nbsp</td>
+                  				<td style="border-top:1px solid #ddd;border-left:1px solid #ddd;border-right:1px solid #ddd;background:#f9f9f9">
+                  					<h5>Dream</h5>
+                  				</td>
+                  				<td>&nbsp&nbsp&nbsp&nbsp</td>
+                  				<td style="border-top:1px solid #ddd;border-left:1px solid #ddd;border-right:1px solid #ddd;background:#f9f9f9">
+                  					<h5>Insights</h5>
+                  				</td>
+                  			</tr>
+                  		</thead>
+                  		<tbody>
+                  			<tr style="text-align:center;">
+                  				<td style="border-left:1px solid #ddd;border-right:1px solid #ddd;background:#f9f9f9">
+                  					<img style="height:64px;border-radius:32px;border:1px solid #ddd"src="/site/img/child.png"/>
+                  				</td>
+                  				<td></td>
+                  				<td style="border-left:1px solid #ddd;border-right:1px solid #ddd;background:#f9f9f9">
+                  					<img style="height:64px;border-radius:32px;border:1px solid #ddd"src="/site/img/star.png"/>
+	                  			</td>
+	                  			<td></td>
+	                  			<td style="border-left:1px solid #ddd;border-right:1px solid #ddd;background:#f9f9f9">
+                  					<img style="height:64px;border-radius:32px;border:1px solid #ddd"src="/site/img/lightbulb.png"/>
+	                  			</td>
+                  			</tr>
+                  			<tr style="text-align:center;font-weight:500;font-size:15px">
+                  				<td style="vertical-align:text-top;border-left:1px solid #ddd;border-right:1px solid #ddd;border-bottom:1px solid #ddd;padding:20px 20px 0px 20px;width:300px;background:#f9f9f9;font-weight:500">
+	                  				<p>{{ selectedProfile.bio }}</p><br/>
+                  				</td>
+                  				<td></td>
+                  				<td style="vertical-align:text-top;border-left:1px solid #ddd;border-right:1px solid #ddd;border-bottom:1px solid #ddd;padding:20px 20px 0px 20px;width:300px;background:#f9f9f9;font-weight:500">
+		                  			<p>{{ selectedProfile.dream }}</p><br/>
+	                  			</td>
+	                  			<td>     </td>
+	                  			<td style="vertical-align:text-top;border-left:1px solid #ddd;border-right:1px solid #ddd;border-bottom:1px solid #ddd;padding:20px 20px 0px 20px;width:300px;background:#f9f9f9;font-weight:500">
+		                  			<p>Insights go here.</p><br/>
+	                  			</td>
+                  			</tr>
+                  		</tbody>
+                  	</table>             	
+                  </div>
+            <br/>
+          </div>
+      </div>
+      
+        <div style="width:100%;text-align:center;padding:40px;border-bottom-left-radius:6px;border-bottom-right-radius:6px;background:#ddd">
+          <a style="color:#fff" class="btn btn-lg" href="/site/profile/{{ selectedProfile.id }}">View Full Profile</a>
+        </div>
+      
+    </div>
+  </div>
+</div>			
+  
+  
+    <div id="load"></div><!--[if lt IE 9]>
+    <p class="browsehappy">You are using an strong outdated browser. <br>Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="page">
+    
+    
+      <!-- Start Nav Section-->
+      {{ nav }}
+      
+      
+          <div class="row">
+            <div class="col-md-4" style="background:#fff;border-right:1px solid #ddd;padding:0px;min-height:760px;">
+              <div style="width:100%;height:260px;background:#f9f9f9;padding:100px 0px 0px 48px;">
+                <img align="left" style="margin-top:12px;margin-right:24px;width:84px;border-radius:42px;border:1px solid #fff" src="/site/img/logo_square.png" />
+                <h4 style="margin-bottom:0px">Kobe <span style="color:#43AEC6;">Bryant</span></h4>
+                <hr style="margin-bottom:6px;margin-top:6px;" />
+                <span style="font-weight:100;font-size:12px">Traveler, Los Angeles</span><br />
+                <a style="font-weight:100;font-size:12px;color:#43AEC6" href="#">Manage Profile</a>
+              </div>
+              
+              <div style="padding:36px 36px 36px 48px ">
+                <img align="left" style="height:80px;width:80px;border:2px solid #ddd;border-radius:40px;margin-right:10px;"src="/site/img/sara.jpg"/>
+                <p style="margin-left:100px;padding-right:10px;font-weight:100">
+                  <em>
+                    "My local host from Terranga was fantastic! She showed me the authentic Santiago, Chile experience! Terranga makes exploring new places much more accessible."
+                    <br/>
+                  </em>
+                </p>
+                
+                <h5 style="float:right">- Sara, <span style="color:#43AEC6;">Traveler</span></h5>
+                
+                <br /><br /><hr/><br />
+                
+                <img align="left" style="height:80px;width:80px;border:2px solid #ddd;border-radius:40px;margin-right:10px;"src="/site/img/jose.JPG"/>
+                <p style="margin-left:100px;padding-right:10px;font-weight:100">
+                  <em>
+                    "My name is Jose and I'm from Bogota, Colombia. My guests from Terranga were really interested in Colombian food, and so 
+                    I showed them the best places to eat in the city. We all had a great time, and they helped me out by donating to my dream to study abroad!"
+                    <br/>
+                  </em>
+                </p>
+                <h5 style="float:right">- Jose, <span style="color:#43AEC6;">Local</span></h5>
+              </div>
+              
+            </div>
+            
+            
+            
+            <div class="col-md-8" style="background-size:cover;background-image:url('/site/img/slides/slide3.jpg');padding-left:0px">
+              <div class="screen">
+              
+                <div style="width:90%;height:90%;background:rgba(255, 255, 255, 0.97);margin-left:auto;margin-right:auto;">
+                  <div style="height:80px;background:#f1f1f1;text-align:center;padding-top:18px;border-bottom:1px solid #ddd">
+                    <h4 style="color:#444">Meet the Terranga Community</h4>
+                  </div>
+                  
+                  <br />
+                  
+                  <div class="profileBox" ng-repeat="profile in featuredProfiles track by $index">
+                    <a ng-click="viewProfile($index)" data-toggle="modal" data-target="#profileModal" href="">
+                      <img src="/site/images/{{ profile.image }}?crop=256" />
+                      {{ capitalize(profile.firstName) }} {{ capitalize(profile.lastName) }}, {{ profile.age }}
+					</a>                    
+                  </div>                  
+                  <br /><br /><br />
+
+                
+                </div>
+              
+              </div>
+            </div>
+            
+          </div>
+      
+      
+      <!-- Start Footer section-->
+      {{ footer }}
+      
+      
+      
+    </div>
+    
+    {{ scripts }}
+    
+    
+  </body>
+</html>
