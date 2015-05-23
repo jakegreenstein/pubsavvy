@@ -35,7 +35,7 @@
     <div class="page">
       <!-- Start Nav Section-->
       <nav id="main-navigation" role="navigation" class="navbar navbar-fixed-top navbar-standard"><a href="javascript:void(0)" class="search_button"><i class="fa fa-search"></i></a>
-        <form action="search.html" method="get" role="search" class="h_search_form">
+        <form action="search" method="get" role="search" class="h_search_form">
           <div class="container">
             <div class="h_search_form_wrapper">
               <div class="input-group"><span class="input-group-btn">
@@ -88,7 +88,7 @@
                     <div class="total">
                       <h6>Subtotal</h6><span>$70.00</span>
                     </div>
-                    <div class="action-button"><a href="shop-cart.html" class="btn btn-dark btn-bordered btn-xs upper">View Cart</a><a href="shop-checkout.html" class="btn btn-primary btn-xs upper">Checkout</a></div>
+                    <div class="action-button"><a href="shop-cart" class="btn btn-dark btn-bordered btn-xs upper">View Cart</a><a href="shop-checkout" class="btn btn-primary btn-xs upper">Checkout</a></div>
                   </div>
                 </div>
               </li>
@@ -99,13 +99,13 @@
                     <li class="dropdown"><a href="#" title="Home" data-toggle="dropdown" data-hover="dropdown" id="menu_item_Home" data-ref="#" class="dropdown-toggle">Home<span class="caret"></span></a>
                       <ul aria-labelledby="menu_item_Home" class="dropdown-menu">
                               <!-- istanzio un id univoco-->
-                              <li><a href="index.html" title="Single page" data-ref="index">Single page</a></li>
+                              <li><a href="index" title="Single page" data-ref="index">Single page</a></li>
                               <!-- istanzio un id univoco-->
-                              <li class="active"><a href="home-1.html" title="Multi page - Corporate Version" data-ref="home-1">Multi page - Corporate Version</a></li>
+                              <li class="active"><a href="home-1" title="Multi page - Corporate Version" data-ref="home-1">Multi page - Corporate Version</a></li>
                               <!-- istanzio un id univoco-->
-                              <li><a href="home-2.html" title="Multi page - Blog Version" data-ref="home-2">Multi page - Blog Version</a></li>
+                              <li><a href="home-2" title="Multi page - Blog Version" data-ref="home-2">Multi page - Blog Version</a></li>
                               <!-- istanzio un id univoco-->
-                              <li><a href="home-3.html" title="Multi page - Shop Version" data-ref="home-3">Multi page - Shop Version</a></li>
+                              <li><a href="home-3" title="Multi page - Shop Version" data-ref="home-3">Multi page - Shop Version</a></li>
                       </ul>
                     </li>
                     <!-- istanzio un id univoco-->
@@ -115,24 +115,24 @@
                               <li class="dropdown-submenu"><a href="#" title="Portfolio" id="menu_item_Portfolio1">Portfolio</a>
                                 <ul aria-labelledby="menu_item_Portfolio1" class="dropdown-menu">
                                         <!-- istanzio un id univoco-->
-                                        <li><a href="portfolio.html" title="Masonry" data-ref="portfolio">Masonry</a></li>
+                                        <li><a href="portfolio" title="Masonry" data-ref="portfolio">Masonry</a></li>
                                         <!-- istanzio un id univoco-->
-                                        <li><a href="portfolio-2.html" title="Grid (no spacing)" data-ref="portfolio-2">Grid (no spacing)</a></li>
+                                        <li><a href="portfolio-2" title="Grid (no spacing)" data-ref="portfolio-2">Grid (no spacing)</a></li>
                                         <!-- istanzio un id univoco-->
-                                        <li><a href="portfolio-3.html" title="Grid (with spacing)" data-ref="portfolio-3">Grid (with spacing)</a></li>
+                                        <li><a href="portfolio-3" title="Grid (with spacing)" data-ref="portfolio-3">Grid (with spacing)</a></li>
                                         <!-- istanzio un id univoco-->
-                                        <li><a href="portfolio-4.html" title="Full width" data-ref="portfolio-4">Full width</a></li>
+                                        <li><a href="portfolio-4" title="Full width" data-ref="portfolio-4">Full width</a></li>
                                 </ul>
                               </li>
                               <!-- istanzio un id univoco-->
                               <li class="dropdown-submenu"><a href="#" title="Portfolio detail" id="menu_item_Portfoliodetail">Portfolio detail</a>
                                 <ul aria-labelledby="menu_item_Portfoliodetail" class="dropdown-menu">
                                         <!-- istanzio un id univoco-->
-                                        <li><a href="portfolio-detail.html" title="Portfolio detail" data-ref="portfolio-detail">Portfolio detail</a></li>
+                                        <li><a href="portfolio-detail" title="Portfolio detail" data-ref="portfolio-detail">Portfolio detail</a></li>
                                         <!-- istanzio un id univoco-->
-                                        <li><a href="portfolio-detail-sidebar.html" title="Portfolio detail with sidebar" data-ref="portfolio-detail-sidebar">Portfolio detail with sidebar</a></li>
+                                        <li><a href="portfolio-detail-sidebar" title="Portfolio detail with sidebar" data-ref="portfolio-detail-sidebar">Portfolio detail with sidebar</a></li>
                                         <!-- istanzio un id univoco-->
-                                        <li><a href="portfolio-detail-sidebar-2.html" title="Portfolio detail with sidebar 2" data-ref="portfolio-detail-sidebar-2">Portfolio detail with sidebar 2</a></li>
+                                        <li><a href="portfolio-detail-sidebar-2" title="Portfolio detail with sidebar 2" data-ref="portfolio-detail-sidebar-2">Portfolio detail with sidebar 2</a></li>
                                 </ul>
                               </li>
                       </ul>
@@ -146,19 +146,19 @@
                                     <div class="col-md-3">
                                       <h6 class="upper hidden-xs">Shop</h6>
                                       <ul class="sep-top-xs widget widget-cat">
-                                        <li class="cat-item"><a href="home-3.html" class="upper">Shop Landing Page</a></li>
-                                        <li class="cat-item"><a href="shop.html" class="upper">Shop category</a></li>
-                                        <li class="cat-item"><a href="shop-sidebar-left.html" class="upper">Shop with left sidebar</a></li>
-                                        <li class="cat-item"><a href="shop-sidebar-right.html" class="upper">Shop with right sidebar</a></li>
-                                        <li class="cat-item"><a href="shop-product.html" class="upper">Shop product page</a></li>
+                                        <li class="cat-item"><a href="home-3" class="upper">Shop Landing Page</a></li>
+                                        <li class="cat-item"><a href="shop" class="upper">Shop category</a></li>
+                                        <li class="cat-item"><a href="shop-sidebar-left" class="upper">Shop with left sidebar</a></li>
+                                        <li class="cat-item"><a href="shop-sidebar-right" class="upper">Shop with right sidebar</a></li>
+                                        <li class="cat-item"><a href="shop-product" class="upper">Shop product page</a></li>
                                       </ul>
                                     </div>
                                     <div class="col-md-3 hidden-xs">
                                       <h6 class="upper">Latest products</h6>
                                       <ul class="sep-top-xs widget widget-media">
-                                        <li class="media media-bordered"><a href="shop-product.html" class="pull-left"><img src="img/products/3.jpg" alt="" class="media-object"></a>
+                                        <li class="media media-bordered"><a href="shop-product" class="pull-left"><img src="img/products/3.jpg" alt="" class="media-object"></a>
                                           <div class="media-body"><small class="upper">Woman</small>
-                                            <h6 class="media-heading"><a href="shop-product.html">New Peace Baja</a></h6>
+                                            <h6 class="media-heading"><a href="shop-product">New Peace Baja</a></h6>
                                             <div class="product-detail">
                                               <div class="price-shop">
                                                 <del>$19.00</del><ins>$15.00</ins>
@@ -166,9 +166,9 @@
                                             </div>
                                           </div>
                                         </li>
-                                        <li class="media media-bordered"><a href="shop-product.html" class="pull-left"><img src="img/products/5.jpg" alt="" class="media-object"></a>
+                                        <li class="media media-bordered"><a href="shop-product" class="pull-left"><img src="img/products/5.jpg" alt="" class="media-object"></a>
                                           <div class="media-body"><small class="upper">Man</small>
-                                            <h6 class="media-heading"><a href="shop-product.html">Sunny Tank Selected</a></h6>
+                                            <h6 class="media-heading"><a href="shop-product">Sunny Tank Selected</a></h6>
                                             <div class="product-detail">
                                               <div class="price-shop">
                                                 <del>$19.00</del><ins>$15.00</ins>
@@ -184,7 +184,7 @@
                                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
                                         <p>Lorem Ipsum is simply dummy text.</p>
                                       </div>
-                                      <div class="sep-top-xs"><a href="shop-cart.html" class="btn btn-dark btn-bordered btn-block"><i class="fa fa-shopping-cart"></i>&nbsp;view cart</a></div>
+                                      <div class="sep-top-xs"><a href="shop-cart" class="btn btn-dark btn-bordered btn-block"><i class="fa fa-shopping-cart"></i>&nbsp;view cart</a></div>
                                     </div>
                                     <div class="col-md-3 hidden-xs">
                                       <h6 class="upper">Shop Checkout</h6>
@@ -196,7 +196,7 @@
                                           <li><i class="fa fa-cc-mastercard fa-3x"></i></li>
                                           <li><i class="fa fa-cc-visa fa-3x"></i></li>
                                         </ul>
-                                      </div><a href="shop-checkout.html" class="btn btn-primary btn-block">checkout</a>
+                                      </div><a href="shop-checkout" class="btn btn-primary btn-block">checkout</a>
                                     </div>
                                   </div>
                                 </div>
@@ -207,13 +207,13 @@
                     <li class="dropdown"><a href="#" title="Blog" data-toggle="dropdown" data-hover="dropdown" id="menu_item_Blog" data-ref="#" class="dropdown-toggle">Blog<span class="caret"></span></a>
                       <ul aria-labelledby="menu_item_Blog" class="dropdown-menu">
                               <!-- istanzio un id univoco-->
-                              <li><a href="blog.html" title="Blog with featured post" data-ref="blog">Blog with featured post</a></li>
+                              <li><a href="blog" title="Blog with featured post" data-ref="blog">Blog with featured post</a></li>
                               <!-- istanzio un id univoco-->
-                              <li><a href="blog-2.html" title="Blog without featured post" data-ref="blog-2">Blog without featured post</a></li>
+                              <li><a href="blog-2" title="Blog without featured post" data-ref="blog-2">Blog without featured post</a></li>
                               <!-- istanzio un id univoco-->
-                              <li><a href="blog-masonry.html" title="Blog masonry layout" data-ref="blog-masonry">Blog masonry layout</a></li>
+                              <li><a href="blog-masonry" title="Blog masonry layout" data-ref="blog-masonry">Blog masonry layout</a></li>
                               <!-- istanzio un id univoco-->
-                              <li><a href="blog-detail.html" title="Blog detail" data-ref="blog-detail">Blog detail</a></li>
+                              <li><a href="blog-detail" title="Blog detail" data-ref="blog-detail">Blog detail</a></li>
                       </ul>
                     </li>
                     <!-- istanzio un id univoco-->
@@ -226,20 +226,20 @@
                                         <li class="dropdown-submenu"><a href="#" title="About us" id="menu_item_Aboutus">About us</a>
                                           <ul aria-labelledby="menu_item_Aboutus" class="dropdown-menu">
                                                   <!-- istanzio un id univoco-->
-                                                  <li><a href="about.html" title="Version 1" data-ref="about">Version 1</a></li>
+                                                  <li><a href="about" title="Version 1" data-ref="about">Version 1</a></li>
                                                   <!-- istanzio un id univoco-->
-                                                  <li><a href="about-2.html" title="Version 2" data-ref="about-2">Version 2</a></li>
+                                                  <li><a href="about-2" title="Version 2" data-ref="about-2">Version 2</a></li>
                                                   <!-- istanzio un id univoco-->
-                                                  <li><a href="about-3.html" title="Version 3" data-ref="about-3">Version 3</a></li>
+                                                  <li><a href="about-3" title="Version 3" data-ref="about-3">Version 3</a></li>
                                           </ul>
                                         </li>
                                         <!-- istanzio un id univoco-->
                                         <li class="dropdown-submenu"><a href="#" title="About me" id="menu_item_Aboutme">About me</a>
                                           <ul aria-labelledby="menu_item_Aboutme" class="dropdown-menu">
                                                   <!-- istanzio un id univoco-->
-                                                  <li><a href="about-me.html" title="Version 1" data-ref="about-me">Version 1</a></li>
+                                                  <li><a href="about-me" title="Version 1" data-ref="about-me">Version 1</a></li>
                                                   <!-- istanzio un id univoco-->
-                                                  <li><a href="about-me-2.html" title="Version 2" data-ref="about-me-2">Version 2</a></li>
+                                                  <li><a href="about-me-2" title="Version 2" data-ref="about-me-2">Version 2</a></li>
                                           </ul>
                                         </li>
                                 </ul>
@@ -248,58 +248,58 @@
                               <li class="dropdown-submenu"><a href="#" title="Services" id="menu_item_Services">Services</a>
                                 <ul aria-labelledby="menu_item_Services" class="dropdown-menu">
                                         <!-- istanzio un id univoco-->
-                                        <li><a href="services.html" title="Services 1" data-ref="services">Services 1</a></li>
+                                        <li><a href="services" title="Services 1" data-ref="services">Services 1</a></li>
                                         <!-- istanzio un id univoco-->
-                                        <li><a href="services-2.html" title="Services 2" data-ref="services-2">Services 2</a></li>
+                                        <li><a href="services-2" title="Services 2" data-ref="services-2">Services 2</a></li>
                                 </ul>
                               </li>
                               <!-- istanzio un id univoco-->
-                              <li><a href="pricing.html" title="Pricing" data-ref="pricing">Pricing</a></li>
+                              <li><a href="pricing" title="Pricing" data-ref="pricing">Pricing</a></li>
                               <!-- istanzio un id univoco-->
-                              <li><a href="faq.html" title="FAQs" data-ref="faq">FAQs</a></li>
+                              <li><a href="faq" title="FAQs" data-ref="faq">FAQs</a></li>
                               <!-- istanzio un id univoco-->
-                              <li><a href="search.html" title="Search results" data-ref="search">Search results</a></li>
+                              <li><a href="search" title="Search results" data-ref="search">Search results</a></li>
                               <!-- istanzio un id univoco-->
-                              <li><a href="error-404.html" title="404" data-ref="error-404">404</a></li>
+                              <li><a href="error-404" title="404" data-ref="error-404">404</a></li>
                               <!-- istanzio un id univoco-->
-                              <li><a href="error-500.html" title="500" data-ref="error-500">500</a></li>
+                              <li><a href="error-500" title="500" data-ref="error-500">500</a></li>
                       </ul>
                     </li>
                     <!-- istanzio un id univoco-->
-                    <li class="dropdown"><a href="features-grid.html" title="Features" data-toggle="dropdown" data-hover="dropdown" id="menu_item_features-grid" data-ref="features-grid" class="dropdown-toggle">Features<span class="caret"></span></a>
+                    <li class="dropdown"><a href="features-grid" title="Features" data-toggle="dropdown" data-hover="dropdown" id="menu_item_features-grid" data-ref="features-grid" class="dropdown-toggle">Features<span class="caret"></span></a>
                       <ul aria-labelledby="menu_item_features-grid" class="dropdown-menu">
                               <!-- istanzio un id univoco-->
                               <li class="dropdown-submenu"><a href="#" title="Menu alternative" id="menu_item_Menualternative">Menu alternative</a>
                                 <ul aria-labelledby="menu_item_Menualternative" class="dropdown-menu">
                                         <!-- istanzio un id univoco-->
-                                        <li><a href="menu-alternative.html" title="Menu Default" data-ref="menu-alternative">Menu Default</a></li>
+                                        <li><a href="menu-alternative" title="Menu Default" data-ref="menu-alternative">Menu Default</a></li>
                                         <!-- istanzio un id univoco-->
-                                        <li><a href="menu-alternative-2.html" title="Menu Light" data-ref="menu-alternative-2">Menu Light</a></li>
+                                        <li><a href="menu-alternative-2" title="Menu Light" data-ref="menu-alternative-2">Menu Light</a></li>
                                         <!-- istanzio un id univoco-->
-                                        <li><a href="menu-alternative-3.html" title="Menu Dark" data-ref="menu-alternative-3">Menu Dark</a></li>
+                                        <li><a href="menu-alternative-3" title="Menu Dark" data-ref="menu-alternative-3">Menu Dark</a></li>
                                         <!-- istanzio un id univoco-->
-                                        <li><a href="menu-alternative-4.html" title="Menu Semidark" data-ref="menu-alternative-4">Menu Semidark</a></li>
+                                        <li><a href="menu-alternative-4" title="Menu Semidark" data-ref="menu-alternative-4">Menu Semidark</a></li>
                                         <!-- istanzio un id univoco-->
-                                        <li><a href="menu-alternative-5.html" title="Menu Primary" data-ref="menu-alternative-5">Menu Primary</a></li>
+                                        <li><a href="menu-alternative-5" title="Menu Primary" data-ref="menu-alternative-5">Menu Primary</a></li>
                                 </ul>
                               </li>
                               <!-- istanzio un id univoco-->
                               <li class="dropdown-submenu"><a href="#" title="Footer alternative" id="menu_item_Footeralternative">Footer alternative</a>
                                 <ul aria-labelledby="menu_item_Footeralternative" class="dropdown-menu">
                                         <!-- istanzio un id univoco-->
-                                        <li><a href="footer-alternative.html" title="Footer version 1" data-ref="footer-alternative">Footer version 1</a></li>
+                                        <li><a href="footer-alternative" title="Footer version 1" data-ref="footer-alternative">Footer version 1</a></li>
                                         <!-- istanzio un id univoco-->
-                                        <li><a href="footer-alternative-2.html" title="Footer version 2" data-ref="footer-alternative-2">Footer version 2</a></li>
+                                        <li><a href="footer-alternative-2" title="Footer version 2" data-ref="footer-alternative-2">Footer version 2</a></li>
                                         <!-- istanzio un id univoco-->
-                                        <li><a href="footer-alternative-3.html" title="Footer version 3" data-ref="footer-alternative-3">Footer version 3</a></li>
+                                        <li><a href="footer-alternative-3" title="Footer version 3" data-ref="footer-alternative-3">Footer version 3</a></li>
                                 </ul>
                               </li>
                               <!-- istanzio un id univoco-->
-                              <li><a href="features-grid.html" title="Grid system" data-ref="features-grid">Grid system</a></li>
+                              <li><a href="features-grid" title="Grid system" data-ref="features-grid">Grid system</a></li>
                               <!-- istanzio un id univoco-->
-                              <li><a href="features-typography.html" title="Typography" data-ref="features-typography">Typography</a></li>
+                              <li><a href="features-typography" title="Typography" data-ref="features-typography">Typography</a></li>
                               <!-- istanzio un id univoco-->
-                              <li><a href="features-buttons.html" title="Buttons" data-ref="features-buttons">Buttons</a></li>
+                              <li><a href="features-buttons" title="Buttons" data-ref="features-buttons">Buttons</a></li>
                               <!-- istanzio un id univoco-->
                               <li class="dropdown-submenu"><a href="#" title="Multi level menu" id="menu_item_Multilevelmenu">Multi level menu</a>
                                 <ul aria-labelledby="menu_item_Multilevelmenu" class="dropdown-menu">
@@ -324,11 +324,11 @@
                     <li class="dropdown"><a href="#" title="Contact us" data-toggle="dropdown" data-hover="dropdown" id="menu_item_Contactus" data-ref="#" class="dropdown-toggle">Contact us<span class="caret"></span></a>
                       <ul aria-labelledby="menu_item_Contactus" class="dropdown-menu">
                               <!-- istanzio un id univoco-->
-                              <li><a href="contact-us.html" title="Version 1" data-ref="contact-us">Version 1</a></li>
+                              <li><a href="contact-us" title="Version 1" data-ref="contact-us">Version 1</a></li>
                               <!-- istanzio un id univoco-->
-                              <li><a href="contact-us-2.html" title="Version 2" data-ref="contact-us-2">Version 2</a></li>
+                              <li><a href="contact-us-2" title="Version 2" data-ref="contact-us-2">Version 2</a></li>
                               <!-- istanzio un id univoco-->
-                              <li><a href="contact-us-3.html" title="Version 3" data-ref="contact-us-3">Version 3</a></li>
+                              <li><a href="contact-us-3" title="Version 3" data-ref="contact-us-3">Version 3</a></li>
                       </ul>
                     </li>
             </ul>
@@ -636,51 +636,51 @@
           <div class="swiper-wrapper sep-top-2x">
             <!--       Article-->
             <article class="swiper-slide">
-              <div class="post-info text-center"><span class="info-text pull-left text-right">4 April 2014<small>8:36</small></span><a href="blog-detail.html"><img src="img/team/square/5.jpg" alt="Anna Larkins" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Anna Larkins<small><a href="blog-detail.html">0 Comment</a></small></span></div><a href="blog-detail.html"><img src="img/blog1.jpg" alt="Saepe Eveniet Voluptates Repudiandae" class="img-responsive"></a>
+              <div class="post-info text-center"><span class="info-text pull-left text-right">4 April 2014<small>8:36</small></span><a href="blog-detail"><img src="img/team/square/5.jpg" alt="Anna Larkins" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Anna Larkins<small><a href="blog-detail">0 Comment</a></small></span></div><a href="blog-detail"><img src="img/blog1.jpg" alt="Saepe Eveniet Voluptates Repudiandae" class="img-responsive"></a>
               <div class="post-content">
-                <h5><a href="blog-detail.html">Saepe Eveniet Voluptates Repudiandae</a></h5>
+                <h5><a href="blog-detail">Saepe Eveniet Voluptates Repudiandae</a></h5>
                 <p>Nunc blandit tincidunt consequat. Duis diam metus, suscipit in pulvinar eget, egestas id arcu. Duis a enim vel mauris ultrices. Nullam aliquet velit ac velit tempus in semper neque auctor.</p>
               </div>
             </article>
             <!--       Article end-->
             <!--       Article-->
             <article class="swiper-slide">
-              <div class="post-info text-center"><span class="info-text pull-left text-right">4 April 2014<small>8:36</small></span><a href="blog-detail.html"><img src="img/team/square/3.jpg" alt="Scott Sanchez" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Scott Sanchez<small><a href="blog-detail.html">0 Comment</a></small></span></div>
+              <div class="post-info text-center"><span class="info-text pull-left text-right">4 April 2014<small>8:36</small></span><a href="blog-detail"><img src="img/team/square/3.jpg" alt="Scott Sanchez" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Scott Sanchez<small><a href="blog-detail">0 Comment</a></small></span></div>
               <iframe src="http://player.vimeo.com/video/80547152" width="500" height="281" allowfullscreen="allowfullscreen"></iframe>
               <div class="post-content">
-                <h5><a href="blog-detail.html">How Videos can help promote your business</a></h5>
+                <h5><a href="blog-detail">How Videos can help promote your business</a></h5>
                 <p>Nunc blandit tincidunt consequat. Duis diam metus, suscipit in pulvinar eget, egestas id arcu. Duis a enim vel mauris ultrices. Nullam aliquet velit ac velit tempus in semper neque auctor.</p>
               </div>
             </article>
             <!--       Article end-->
             <!--       Article-->
             <article class="swiper-slide">
-              <div class="post-info text-center"><span class="info-text pull-left text-right">4 April 2014<small>8:36</small></span><a href="blog-detail.html"><img src="img/team/square/2.jpg" alt="Henry Kolms" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Henry Kolms<small><a href="blog-detail.html">0 Comment</a></small></span></div>
+              <div class="post-info text-center"><span class="info-text pull-left text-right">4 April 2014<small>8:36</small></span><a href="blog-detail"><img src="img/team/square/2.jpg" alt="Henry Kolms" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Henry Kolms<small><a href="blog-detail">0 Comment</a></small></span></div>
               <div data-navitagion="false" data-slide-speed="300" data-pagination-speed="400" data-single-item="true" data-auto-height="true" data-auto-play="true" class="owl-carousel owl-theme">
-                <div class="item"><a href="blog-detail.html"><img src="img/blog2.jpg" alt="" class="img-responsive"></a></div>
-                <div class="item"><a href="blog-detail.html"><img src="img/blog3.jpg" alt="" class="img-responsive"></a></div>
-                <div class="item"><a href="blog-detail.html"><img src="img/blog4.jpg" alt="" class="img-responsive"></a></div>
+                <div class="item"><a href="blog-detail"><img src="img/blog2.jpg" alt="" class="img-responsive"></a></div>
+                <div class="item"><a href="blog-detail"><img src="img/blog3.jpg" alt="" class="img-responsive"></a></div>
+                <div class="item"><a href="blog-detail"><img src="img/blog4.jpg" alt="" class="img-responsive"></a></div>
               </div>
               <div class="post-content">
-                <h5><a href="blog-detail.html">Saepe Eveniet Voluptates Repudiandae</a></h5>
+                <h5><a href="blog-detail">Saepe Eveniet Voluptates Repudiandae</a></h5>
                 <p>Nunc blandit tincidunt consequat. Duis diam metus, suscipit in pulvinar eget, egestas id arcu. Duis a enim vel mauris ultrices. Nullam aliquet velit ac velit tempus in semper neque auctor.</p>
               </div>
             </article>
             <!--       Article end-->
             <!--       Article-->
             <article class="swiper-slide">
-              <div class="post-info text-center"><span class="info-text pull-left text-right">4 April 2014<small>8:36</small></span><a href="blog-detail.html"><img src="img/team/square/1.jpg" alt="Marc Crow" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Marc Crow<small><a href="blog-detail.html">0 Comment</a></small></span></div><a href="blog-detail.html"><img src="img/blog5.jpg" alt="Facilisis tincidunt justo eget urna leo" class="img-responsive"></a>
+              <div class="post-info text-center"><span class="info-text pull-left text-right">4 April 2014<small>8:36</small></span><a href="blog-detail"><img src="img/team/square/1.jpg" alt="Marc Crow" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Marc Crow<small><a href="blog-detail">0 Comment</a></small></span></div><a href="blog-detail"><img src="img/blog5.jpg" alt="Facilisis tincidunt justo eget urna leo" class="img-responsive"></a>
               <div class="post-content">
-                <h5><a href="blog-detail.html">Facilisis tincidunt justo eget urna leo</a></h5>
+                <h5><a href="blog-detail">Facilisis tincidunt justo eget urna leo</a></h5>
                 <p>Nunc blandit tincidunt consequat. Duis diam metus, suscipit in pulvinar eget, egestas id arcu. Duis a enim vel mauris ultrices. Nullam aliquet velit ac velit tempus in semper neque auctor.</p>
               </div>
             </article>
             <!--       Article end-->
             <!--       Article-->
             <article class="swiper-slide">
-              <div class="post-info text-center"><span class="info-text pull-left text-right">4 April 2014<small>8:36</small></span><a href="blog-detail.html"><img src="img/team/square/5.jpg" alt="Anna Larkins" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Anna Larkins<small><a href="blog-detail.html">0 Comment</a></small></span></div><a href="blog-detail.html"><img src="img/blog4.jpg" alt="Facilisis tincidunt justo eget urna leo" class="img-responsive"></a>
+              <div class="post-info text-center"><span class="info-text pull-left text-right">4 April 2014<small>8:36</small></span><a href="blog-detail"><img src="img/team/square/5.jpg" alt="Anna Larkins" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Anna Larkins<small><a href="blog-detail">0 Comment</a></small></span></div><a href="blog-detail"><img src="img/blog4.jpg" alt="Facilisis tincidunt justo eget urna leo" class="img-responsive"></a>
               <div class="post-content">
-                <h5><a href="blog-detail.html">Saepe Eveniet Voluptates Repudiandae</a></h5>
+                <h5><a href="blog-detail">Saepe Eveniet Voluptates Repudiandae</a></h5>
                 <p>Nunc blandit tincidunt consequat. Duis diam metus, suscipit in pulvinar eget, egestas id arcu. Duis a enim vel mauris ultrices. Nullam aliquet velit ac velit tempus in semper neque auctor.</p>
               </div>
             </article>
@@ -716,7 +716,7 @@
             <div class="col-md-9">
               <h5 class="action-title upper light">HAVE AN IDEA? WE’RE HERE TO HELP YOU MANAGE YOUR WORK</h5>
             </div>
-            <div class="col-md-3 text-right"><a href="contact-us.html" class="btn btn-light btn-bordered btn-lg">Contact us</a></div>
+            <div class="col-md-3 text-right"><a href="contact-us" class="btn btn-light btn-bordered btn-lg">Contact us</a></div>
           </div>
         </div>
       </section>
@@ -741,9 +741,9 @@
                 <div class="widget sep-top-lg">
                   <h6 class="upper widget-title">Latest blog post</h6>
                   <ul class="widget-post sep-top-xs">
-                    <li><span class="date-post">17<small class="upper">apr</small></span><a href="blog-detail.html" class="title-post">Jheni and Alessandra on the road</a><small><a href="blog-detail.html#comments">5 comment</a></small></li>
-                    <li><span class="date-post">17<small class="upper">apr</small></span><a href="blog-detail.html" class="title-post">Donec Suscipit Dim Euismods</a><small><a href="blog-detail.html#comments">5 comment</a></small></li>
-                    <li><span class="date-post">17<small class="upper">apr</small></span><a href="blog-detail.html" class="title-post">How Videos can help promote your business</a><small><a href="blog-detail.html#comments">5 comment</a></small></li>
+                    <li><span class="date-post">17<small class="upper">apr</small></span><a href="blog-detail" class="title-post">Jheni and Alessandra on the road</a><small><a href="blog-detail#comments">5 comment</a></small></li>
+                    <li><span class="date-post">17<small class="upper">apr</small></span><a href="blog-detail" class="title-post">Donec Suscipit Dim Euismods</a><small><a href="blog-detail#comments">5 comment</a></small></li>
+                    <li><span class="date-post">17<small class="upper">apr</small></span><a href="blog-detail" class="title-post">How Videos can help promote your business</a><small><a href="blog-detail#comments">5 comment</a></small></li>
                   </ul>
                 </div>
               </div>
