@@ -119,6 +119,78 @@
         <!-- End slider-wrapper-->
       </section>
       <!-- End Header Section-->
+
+      <!-- Start Portfolio section-->
+      <section id="portfolio" class="sep-top-3x">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="section-title">
+                <h2 class="bordered-left upper wow flipInX">PubSavvy Apps</h2>
+                <p class="lead wow flipInX">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially</p>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="device-content">
+                <div data-device="ipad" data-orientation="landscape" data-color="white" class="device-mockup">
+                  <div class="device">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-primary sep-top-md sep-bottom-md">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <p class="lead x2 light wow bounceInLeft">We have put together the best of our experience</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+<!-- Start right section-->
+      <section class="section-gray sep-top-2x sep-bottom-2x">
+        <div class="container">
+          <div class="row"></div>
+          <div class="row">
+            <div class="col-md-6">
+              <div data-wow-delay=".5s" class="wow bounceInLeft"><img src="img/ipad_slide.jpg" alt="" class="img-responsive"></div>
+            </div>
+            <div class="col-md-6">
+              <div data-wow-delay=".5s" class="wow bounceInRight">
+                <h3 class="upper">Demo content</h3>
+                <p class="lead">
+                  A wonderful serenity has taken possession of my entire soul, like
+                  these sweet mornings of spring which I enjoy with my whole heart.
+                  I am alone, and feel the charm of existence in this spot, which was
+                  created for the bliss of souls like mine. I am so happy, my dear
+                  friend, so absorbed in the exquisite sense of mere tranquil existence,
+                  that I neglect my talents. I should be incapable of drawing a single
+                  stroke at the present moment; and yet I feel that I never was a
+                  greater artist than now.
+                </p>
+                <p class="lead">
+                  mine. I am so happy, my dear friend, so absorbed in the exquisite
+                  sense of mere tranquil existence, that I neglect my talents. I
+                  should be incapable of drawing a single stroke at the present
+                  moment; and yet I feel that I never was a greater artist than now.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End right section-->
+
+
+
+
       <!-- Start About section-->
       <section class="sep-top-2x sep-bottom-2x">
         <div class="container">
@@ -171,47 +243,13 @@
         </div>
       </section>
       <!-- End About section-->
-      <!-- Start Skills section-->
-      <section class="section-gray sep-top-2x sep-bottom-2x">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6">
-              <div data-wow-delay="0.5s" class="sep-top-xs wow bounceInLeft"><img src="img/macbook-pro.png" alt="" class="img-responsive"></div>
-            </div>
-            <div class="col-md-6">
-              <div data-wow-delay="0.5s" class="wow bounceInRight">
-                <h3 class="upper">Creative identity</h3>
-                <p>
-                  A wonderful serenity has taken possession of my entire soul, like
-                  these sweet mornings of spring which I enjoy with my whole heart.
-                  I should be incapable of drawing a single
-                  stroke at the present moment; and yet I feel that I never was a
-                  greater artist than now.
-                </p>
-                <div class="sep-top-xs">
-                  <div class="progress">
-                    <div role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;" class="progress-bar">Photoshop</div>
-                  </div>
-                  <div class="progress">
-                    <div role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;" class="progress-bar">Php & MySql</div>
-                  </div>
-                  <div class="progress">
-                    <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;" class="progress-bar">Html & Css</div>
-                  </div>
-                  <div class="indicator"><span class="indicator-line"></span><span class="pull-left">0</span><span class="middle">50</span><span class="pull-right">100</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- End Skills section-->
+      
       <!-- Start team section-->
       <section class="sep-top-2x sep-bottom-2x">
         <div class="container">
           <h4 class="upper">Our Team</h4>
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-6">
               <div class="sep-top-xs sep-bottom-sm">
                 <div class="team-photo"><img src="img/team/landscape/1.jpg" alt="Marc Crow" class="img-responsive">
                   <div class="team-connection">
@@ -231,7 +269,7 @@
               </div>
               <p>Pellentesque pellentesque pharetra lacus, eget aliquet mi mattis eu. Cum sociis natoque penatibus et magnis.</p>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
               <div class="sep-top-xs sep-bottom-sm">
                 <div class="team-photo"><img src="img/team/landscape/2.jpg" alt="Henry Kolms" class="img-responsive">
                   <div class="team-connection">
@@ -251,178 +289,14 @@
               </div>
               <p>Pellentesque pellentesque pharetra lacus, eget aliquet mi mattis eu. Cum sociis natoque penatibus et magnis.</p>
             </div>
-            <div class="col-md-3">
-              <div class="sep-top-xs sep-bottom-sm">
-                <div class="team-photo"><img src="img/team/landscape/4.jpg" alt="Michelle White" class="img-responsive">
-                  <div class="team-connection">
-                    <div class="team-connection-list text-center">
-                      <ul>
-                        <li><a href="#"><i class="fa fa-github fa-2x"></i></a></li>
-                        <li><a href="#"><i class="fa fa-pinterest fa-2x"></i></a></li>
-                        <li><a href="#"><i class="fa fa-dribbble fa-2x"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter fa-2x"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="team-name">
-                <h5 class="upper">Michelle White</h5><span>Web Developer</span>
-              </div>
-              <p>Pellentesque pellentesque pharetra lacus, eget aliquet mi mattis eu. Cum sociis natoque penatibus et magnis.</p>
-            </div>
-            <div class="col-md-3">
-              <div class="sep-top-xs sep-bottom-sm">
-                <div class="team-photo"><img src="img/team/landscape/5.jpg" alt="Anna Larkins" class="img-responsive">
-                  <div class="team-connection">
-                    <div class="team-connection-list text-center">
-                      <ul>
-                        <li><a href="#"><i class="fa fa-github fa-2x"></i></a></li>
-                        <li><a href="#"><i class="fa fa-pinterest fa-2x"></i></a></li>
-                        <li><a href="#"><i class="fa fa-dribbble fa-2x"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter fa-2x"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="team-name">
-                <h5 class="upper">Anna Larkins</h5><span>Web Designer</span>
-              </div>
-              <p>Pellentesque pellentesque pharetra lacus, eget aliquet mi mattis eu. Cum sociis natoque penatibus et magnis.</p>
-            </div>
+            
+            
           </div>
         </div>
       </section>
       <!-- End team section-->
-      <!-- Start Parallax section-->
-      <section id="parallax4" style="background-image: url(img/intro-home7.jpg);" class="parallax">
-        <div class="section-shade sep-top-3x sep-bottom-2x">
-          <div class="container">
-            <div data-wow-delay="1s" class="section-title text-center wow bounceInDown">
-              <h3 class="upper light small-space">Creativity, innovation and knowledge</h3>
-              <p class="lead light lighter">Pellentesque pellentesque pharetra lacus, eget aliquet mi mattis eu. Cum sociis natoque penatibus et magnis.</p>
-            </div>
-            <div class="row">
-              <div class="col-md-10 col-md-offset-1">
-                <div id="charts-wrapper" class="row">
-                  <!-- Start Chart item-->
-                  <div data-wow-delay="1s" class="col-md-4 text-center sep-top-lg light wow fadeInUp">
-                    <div data-percent='72' class="chart"><span><b data-from="0" data-to='72' class="counter">0</b><em>%</em></span></div>
-                    <p class="lead x2">HTML &amp; CSS</p>
-                    <p class="light lighter">Pellentesque pellentesque pharetra lacus, eget aliquet mi mattis eu.</p>
-                  </div>
-                  <!-- End Chart item-->
-                  <!-- Start Chart item-->
-                  <div data-wow-delay="1s" class="col-md-4 text-center sep-top-lg light wow fadeInUp">
-                    <div data-percent='56' class="chart"><span><b data-from="0" data-to='56' class="counter">0</b><em>%</em></span></div>
-                    <p class="lead x2">Javascript</p>
-                    <p class="light lighter">Pellentesque pellentesque pharetra lacus, eget aliquet mi mattis eu.</p>
-                  </div>
-                  <!-- End Chart item-->
-                  <!-- Start Chart item-->
-                  <div data-wow-delay="1s" class="col-md-4 text-center sep-top-lg light wow fadeInUp">
-                    <div data-percent='84' class="chart"><span><b data-from="0" data-to='84' class="counter">0</b><em>%</em></span></div>
-                    <p class="lead x2">Php &amp; MySql</p>
-                    <p class="light lighter">Pellentesque pellentesque pharetra lacus, eget aliquet mi mattis eu.</p>
-                  </div>
-                  <!-- End Chart item-->
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- End Parallax section-->
-      <!-- Start Blog preview Section-->
-      <section id="blog" class="sep-top-2x">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-              <div class="section-title text-center">
-                <h2 class="upper">From the blog</h2>
-                <p class="lead">Nowadays, everybody wants an online shop. With The Company, this won’t be a problem. We made sure that WooCommerce is fully integrated in the design of The Company.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="blog-preview swiper-container">
-          <div class="swiper-wrapper sep-top-2x">
-            <!--       Article-->
-            <article class="swiper-slide">
-              <div class="post-info text-center"><span class="info-text pull-left text-right">4 April 2014<small>8:36</small></span><a href="blog-detail.html"><img src="img/team/square/5.jpg" alt="Anna Larkins" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Anna Larkins<small><a href="blog-detail.html">0 Comment</a></small></span></div><a href="blog-detail.html"><img src="img/blog1.jpg" alt="Saepe Eveniet Voluptates Repudiandae" class="img-responsive"></a>
-              <div class="post-content">
-                <h5><a href="blog-detail.html">Saepe Eveniet Voluptates Repudiandae</a></h5>
-                <p>Nunc blandit tincidunt consequat. Duis diam metus, suscipit in pulvinar eget, egestas id arcu. Duis a enim vel mauris ultrices. Nullam aliquet velit ac velit tempus in semper neque auctor.</p>
-              </div>
-            </article>
-            <!--       Article end-->
-            <!--       Article-->
-            <article class="swiper-slide">
-              <div class="post-info text-center"><span class="info-text pull-left text-right">4 April 2014<small>8:36</small></span><a href="blog-detail.html"><img src="img/team/square/3.jpg" alt="Scott Sanchez" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Scott Sanchez<small><a href="blog-detail.html">0 Comment</a></small></span></div>
-              <iframe src="http://player.vimeo.com/video/80547152" width="500" height="281" allowfullscreen="allowfullscreen"></iframe>
-              <div class="post-content">
-                <h5><a href="blog-detail.html">How Videos can help promote your business</a></h5>
-                <p>Nunc blandit tincidunt consequat. Duis diam metus, suscipit in pulvinar eget, egestas id arcu. Duis a enim vel mauris ultrices. Nullam aliquet velit ac velit tempus in semper neque auctor.</p>
-              </div>
-            </article>
-            <!--       Article end-->
-            <!--       Article-->
-            <article class="swiper-slide">
-              <div class="post-info text-center"><span class="info-text pull-left text-right">4 April 2014<small>8:36</small></span><a href="blog-detail.html"><img src="img/team/square/2.jpg" alt="Henry Kolms" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Henry Kolms<small><a href="blog-detail.html">0 Comment</a></small></span></div>
-              <div data-navitagion="false" data-slide-speed="300" data-pagination-speed="400" data-single-item="true" data-auto-height="true" data-auto-play="true" class="owl-carousel owl-theme">
-                <div class="item"><a href="blog-detail.html"><img src="img/blog2.jpg" alt="" class="img-responsive"></a></div>
-                <div class="item"><a href="blog-detail.html"><img src="img/blog3.jpg" alt="" class="img-responsive"></a></div>
-                <div class="item"><a href="blog-detail.html"><img src="img/blog4.jpg" alt="" class="img-responsive"></a></div>
-              </div>
-              <div class="post-content">
-                <h5><a href="blog-detail.html">Saepe Eveniet Voluptates Repudiandae</a></h5>
-                <p>Nunc blandit tincidunt consequat. Duis diam metus, suscipit in pulvinar eget, egestas id arcu. Duis a enim vel mauris ultrices. Nullam aliquet velit ac velit tempus in semper neque auctor.</p>
-              </div>
-            </article>
-            <!--       Article end-->
-            <!--       Article-->
-            <article class="swiper-slide">
-              <div class="post-info text-center"><span class="info-text pull-left text-right">4 April 2014<small>8:36</small></span><a href="blog-detail.html"><img src="img/team/square/1.jpg" alt="Marc Crow" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Marc Crow<small><a href="blog-detail.html">0 Comment</a></small></span></div><a href="blog-detail.html"><img src="img/blog5.jpg" alt="Facilisis tincidunt justo eget urna leo" class="img-responsive"></a>
-              <div class="post-content">
-                <h5><a href="blog-detail.html">Facilisis tincidunt justo eget urna leo</a></h5>
-                <p>Nunc blandit tincidunt consequat. Duis diam metus, suscipit in pulvinar eget, egestas id arcu. Duis a enim vel mauris ultrices. Nullam aliquet velit ac velit tempus in semper neque auctor.</p>
-              </div>
-            </article>
-            <!--       Article end-->
-            <!--       Article-->
-            <article class="swiper-slide">
-              <div class="post-info text-center"><span class="info-text pull-left text-right">4 April 2014<small>8:36</small></span><a href="blog-detail.html"><img src="img/team/square/5.jpg" alt="Anna Larkins" style="width:99px; height:99px;" class="img-circle user-thumb"></a><span class="info-text pull-right text-left">Anna Larkins<small><a href="blog-detail.html">0 Comment</a></small></span></div><a href="blog-detail.html"><img src="img/blog4.jpg" alt="Facilisis tincidunt justo eget urna leo" class="img-responsive"></a>
-              <div class="post-content">
-                <h5><a href="blog-detail.html">Saepe Eveniet Voluptates Repudiandae</a></h5>
-                <p>Nunc blandit tincidunt consequat. Duis diam metus, suscipit in pulvinar eget, egestas id arcu. Duis a enim vel mauris ultrices. Nullam aliquet velit ac velit tempus in semper neque auctor.</p>
-              </div>
-            </article>
-            <!--       Article end-->
-          </div>
-        </div>
-      </section>
-      <!-- End Blog preview Section-->
-      <!-- Start Clients section-->
-      <section class="sep-top-md sep-bottom-2x">
-        <div class="container">
-          <div class="text-center">
-            <h4 class="upper">We've worked for:</h4>
-          </div>
-          <div data-auto-play="3000" data-items="6" data-auto-height="true" class="owl-carousel owl-theme">
-            <div class="item"><img src="img/clients/1.png" alt="" class="img-responsive"></div>
-            <div class="item"><img src="img/clients/2.png" alt="" class="img-responsive"></div>
-            <div class="item"><img src="img/clients/3.png" alt="" class="img-responsive"></div>
-            <div class="item"><img src="img/clients/4.png" alt="" class="img-responsive"></div>
-            <div class="item"><img src="img/clients/5.png" alt="" class="img-responsive"></div>
-            <div class="item"><img src="img/clients/6.png" alt="" class="img-responsive"></div>
-            <div class="item"><img src="img/clients/7.png" alt="" class="img-responsive"></div>
-            <div class="item"><img src="img/clients/8.png" alt="" class="img-responsive"></div>
-            <div class="item"><img src="img/clients/9.png" alt="" class="img-responsive"></div>
-          </div>
-        </div>
-      </section>
-      <!-- End Clients section-->
+      
+      
       <!-- Start call to action section-->
       <section class="call-to-action bg-primary sep-top-md sep-bottom-md">
         <div class="container">
