@@ -130,10 +130,16 @@
             <div class="col-md-4">
               <div class="section-title">
                 <h2 class="bordered-left upper wow flipInX">PubSavvy Apps</h2>
-                <p class="lead wow flipInX">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially</p>
+                <p class="lead wow flipInX">
+                  Frame Research brings you two apps for powerful medical search: PubSavvy PubMed Search and PubSavvy Swipe. These apps, featured right, enable a new way to discover medical journals. PubSavvy Swipe, our newest addition to the PubSavvy family, features a revised elegant interface for reading through and discovering medical journals.
+                </p>
+                <br/>
               </div>
             </div>
             
+
+
+
           </div>
         </div>
         <div class="bg-primary sep-top-md sep-bottom-md">
@@ -141,6 +147,9 @@
             <div class="row">
               <div class="col-md-4">
                 <p class="lead x2 light wow bounceInLeft">Available now in the App Store</p>
+              </div>
+              <div class="col-md-4">
+                <a href="#" target="_blank"><img style="padding-left:20px;height:60px" src="/site/img/download.png"/></a>
               </div>
             </div>
           </div>
@@ -183,8 +192,10 @@
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
               <div data-wow-delay="0.5s" class="text-center wow bounceInLeft">
-                <h3 class="upper">Want to say Hey or find out more?</h3>
-                <p class="lead">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown</p>
+                <h3 class="upper">Powered by PubSavvy</h3>
+                <p class="lead">
+                  PubSavvy Apps give you powerful search tools at your fingertips. Our apps seamlessly integrate medical journals into a single location for discovery.
+                </p>
               </div>
             </div>
           </div>
@@ -193,35 +204,43 @@
               <div class="icon-box icon-horizontal icon-lg">
                 <div data-wow-delay=".5s" class="icon-content img-circle wow bounceInUp"><i class="fa fa-lightbulb-o"></i></div>
                 <div class="icon-box-content">
-                  <h5 class="upper">Strategy Solutions</h5>
-                  <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took</p>
+                  <h5 class="upper">Running a New Search</h5>
+                  <p>
+                    PubSavvy is the only PubMed search app to offer a custom keyboard interface, so that commonly used entries are not buried 2 or 3 screens down on your iPhone standard keyboard
+                    </p>
                 </div>
               </div>
             </div>
             <div class="col-md-3 sep-top-2x icon-gradient">
               <div class="icon-box icon-horizontal icon-lg">
-                <div data-wow-delay=".5s" class="icon-content img-circle wow bounceInUp"><i class="fa fa-gamepad"></i></div>
+                <div data-wow-delay=".5s" class="icon-content img-circle wow bounceInUp"><i class="fa fa-history"></i></div>
                 <div class="icon-box-content">
-                  <h5 class="upper">Digital Design</h5>
-                  <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took</p>
+                  <h5 class="upper">Search History</h5>
+                  <p>
+                    PubSavvy saves your search history, even when you are not connected to the internet. Unlike search histories on the PubMed website which can expire after a few hours, PubSavvy search terms are stored on your device.   
+                  </p>
                 </div>
               </div>
             </div>
             <div class="col-md-3 sep-top-2x icon-gradient">
               <div class="icon-box icon-horizontal icon-lg">
-                <div data-wow-delay=".5s" class="icon-content img-circle wow bounceInUp"><i class="fa fa-code-fork"></i></div>
+                <div data-wow-delay=".5s" class="icon-content img-circle wow bounceInUp"><i class="fa fa-filter"></i></div>
                 <div class="icon-box-content">
-                  <h5 class="upper">Web Development</h5>
-                  <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took</p>
+                  <h5 class="upper">Refine Search</h5>
+                  <p>
+                    Because the database is so comprehensive, PubMed searches often return many more citations than the user intended. PubSavvy helps you to refine your search with pre-set limits.
+                  </p>
                 </div>
               </div>
             </div>
             <div class="col-md-3 sep-top-2x icon-gradient">
               <div class="icon-box icon-horizontal icon-lg">
-                <div data-wow-delay=".5s" class="icon-content img-circle wow bounceInUp"><i class="fa fa-android"></i></div>
+                <div data-wow-delay=".5s" class="icon-content img-circle wow bounceInUp"><i class="fa fa-file-o"></i></div>
                 <div class="icon-box-content">
-                  <h5 class="upper">App Development</h5>
-                  <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took</p>
+                  <h5 class="upper">View Full Text PDFs</h5>
+                  <p>
+                    PubSavvy allows you to view and email full text pdfs for open access journals and those with subscriptions held by your institution.
+                  </p>
                 </div>
               </div>
             </div>
@@ -237,7 +256,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="sep-top-xs sep-bottom-sm">
-                <div class="team-photo"><img src="/site/img/diana.jpg" alt="Marc Crow" class="img-responsive">
+                <div class="team-photo"><img style="border:2px solid #ddd;border-radius:6px" src="/site/img/diana.jpg" alt="Marc Crow" class="img-responsive">
                 </div>
               </div>
               <div class="team-name">
@@ -249,7 +268,7 @@
             </div>
             <div class="col-md-6">
               <div class="sep-top-xs sep-bottom-sm">
-                <div class="team-photo"><img src="/site/img/leslie.jpg" class="img-responsive">
+                <div class="team-photo"><img style="border:2px solid #ddd;border-radius:6px" src="/site/img/leslie.jpg" class="img-responsive">
                 </div>
               </div>
               <div class="team-name">
