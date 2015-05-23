@@ -252,43 +252,27 @@
           <div class="row">
             <div class="col-md-6">
               <div class="sep-top-xs sep-bottom-sm">
-                <div class="team-photo"><img src="img/team/landscape/1.jpg" alt="Marc Crow" class="img-responsive">
-                  <div class="team-connection">
-                    <div class="team-connection-list text-center">
-                      <ul>
-                        <li><a href="#"><i class="fa fa-github fa-2x"></i></a></li>
-                        <li><a href="#"><i class="fa fa-pinterest fa-2x"></i></a></li>
-                        <li><a href="#"><i class="fa fa-dribbble fa-2x"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter fa-2x"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
+                <div class="team-photo"><img src="/site/img/diana.jpg" alt="Marc Crow" class="img-responsive">
                 </div>
               </div>
               <div class="team-name">
-                <h5 class="upper">Marc Crow</h5><span>Founder</span>
+                <h5 class="upper">Diana Frame</h5><span>Founder, MPH</span>
               </div>
-              <p>Pellentesque pellentesque pharetra lacus, eget aliquet mi mattis eu. Cum sociis natoque penatibus et magnis.</p>
+              <p>
+                The founder of Frame Research and a resident of Brooklyn, NY, Diana Frame has 15 years of experience in evidence-based medicine research, primarily systematic literature review. She has advised decision makers at academic centers as well as pharmaceutical, biotechnology, and medical device clients. 
+              </p>
             </div>
             <div class="col-md-6">
               <div class="sep-top-xs sep-bottom-sm">
-                <div class="team-photo"><img src="img/team/landscape/2.jpg" alt="Henry Kolms" class="img-responsive">
-                  <div class="team-connection">
-                    <div class="team-connection-list text-center">
-                      <ul>
-                        <li><a href="#"><i class="fa fa-github fa-2x"></i></a></li>
-                        <li><a href="#"><i class="fa fa-pinterest fa-2x"></i></a></li>
-                        <li><a href="#"><i class="fa fa-dribbble fa-2x"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter fa-2x"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
+                <div class="team-photo"><img src="/site/img/leslie.jpg" class="img-responsive">
                 </div>
               </div>
               <div class="team-name">
-                <h5 class="upper">Henry Kolms</h5><span>CEO</span>
+                <h5 class="upper">Leslie Wallace Pilcher</h5><span>MPH</span>
               </div>
-              <p>Pellentesque pellentesque pharetra lacus, eget aliquet mi mattis eu. Cum sociis natoque penatibus et magnis.</p>
+              <p>
+                Leslie Pilcher joined Frame Research in January, 2010. Prior to Frame Research, Leslie managed prevention outreach and disease management programs for Blue Shield of California. She received her MPH in Epidemiology/Biostatistics from the University of California, Berkeley in 2008.
+                </p>
             </div>
             
             
