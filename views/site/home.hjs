@@ -37,7 +37,7 @@
       <nav id="main-navigation" role="navigation" class="navbar navbar-fixed-top navbar-standard">        
         <div class="container">
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle"><i class="fa fa-align-justify fa-lg"></i></button><a href="#" class="navbar-brand"><img src="img/logo-white.png" alt="" class="logo-white"><img src="img/logo-dark.png" alt="" class="logo-dark"></a>
+            <button type="button" class="navbar-toggle"><i class="fa fa-align-justify fa-lg"></i></button><a href="#" class="navbar-brand"><img src="/site/img/pubsavvy-logo-white.png" alt="" class="logo-white"><img src="/site/img/pubsavvy-logo.png" alt="" class="logo-dark"></a>
           </div>
           <div class="navbar-collapse collapse">
             <button type="button" class="navbar-toggle"><i class="fa fa-close fa-lg"></i></button>
