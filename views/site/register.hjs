@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+  	{{ head }}
+  </head>
+  
+  
+  
+  <body ng-app="Terranga" ng-controller="RegisterController" style="background:#f9f9f9" ng-init="init()">
+  
+  <!-- REGISTER MODAL -->
+	<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div style="width:50%" class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header" style="border:none">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	          <div class="social" style="text-align:center">
+               <img style="width:160px" src="/site/img/logo-dark.png" alt=""><br /><br />
+	            
+		            <div style="text-align:center">
+		              <h4 class="upper">Traveler</h4>
+		              <img style="height:84px;border-radius:42px;border:2px solid #fff" src="/site/img/traveler.png"/>
+		              <p style="padding:24px 24px 0px 24px;min-height:80px">Create a free profile to begin connecting with local tour guides!</p>
+
+		               <div class="contact-form" style="padding:0px">
+		              	<table style="margin-left:auto;margin-right:auto">
+		              		<tr>
+		              			<td style="padding-right:20px">
+		       						<div class="form-group">
+				              			<label for="firstName" class="upper">First Name</label>
+				                        <input ng-model="traveler.firstName" id="firstName" type="text" placeholder="First name" name="senderFirstName" class="form-control input-lg required">
+			                        </div>
+		              			</td>
+
+		              			<td style="padding-left:20px">
+		       						<div class="form-group">
+				              			<label for="lastName" class="upper">Last Name</label>
+				                        <input ng-model="traveler.lastName" id="lastName" type="text" placeholder="Last name" name="senderLastName" class="form-control input-lg required">
+			                        </div>
+		              			</td>
+		              		</tr>
+		              		<tr>
+		              			<td style="padding-right:20px">
+		       						<div class="form-group">
+				              			<label for="email" class="upper">Email</label>
+				                        <input ng-model="traveler.email" id="email" type="text" placeholder="Email" name="senderEmail" class="form-control input-lg required">
+			                        </div>
+		              			</td>
+		              			<td style="padding-left:20px">
+		       						<div class="form-group">
+				              			<label for="password" class="upper">Password</label>
+				                        <input ng-model="traveler.password" id="password" type="password" placeholder="Password" name="senderPassword" class="form-control input-lg required">
+			                        </div>
+		              			</td>
+		              		</tr>
+		              	</table>
+		              </div>
+		            </div>
+		         
+	            <br/>
+	          </div>
+	      </div>
+	        <div style="width:100%;text-align:center;padding:40px;border-bottom-left-radius:6px;border-bottom-right-radius:6px;background:#ddd">
+             <button ng-click="register('traveler')" type="submit" style="width:60%" class="btn btn-primary">REGISTER</button>
+	        </div>
+	    </div>
+	  </div>
+	</div>			  
+	
+	
+	
+	
+	<!-- APPLY MODAL -->
+	<div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div style="width:50%" class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header" style="border:none">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	          <div class="social" style="text-align:center">
+               <img style="width:160px" src="/site/img/logo-dark.png" alt=""><br /><br />
+	            <div style="text-align:center">
+		              <h4 class="upper">Local</h4>
+		              <img style="height:84px;border-radius:42px;border:2px solid #fff" src="/site/img/passport.png"/>
+		              <p style="padding:24px 24px 0px 24px;min-height:80px">Create a free profile to begin connecting with local tour guides!</p>
+
+		               <div class="contact-form" style="padding:0px">
+		              	<table style="margin-left:auto;margin-right:auto">
+		              		<tr>
+		              			<td style="padding-right:20px">
+		       						<div class="form-group">
+				              			<label for="firstName" class="upper">First Name</label>
+				                        <input ng-model="local.firstName" id="firstName" type="text" placeholder="First name" name="senderFirstName" class="form-control input-lg required">
+			                        </div>
+		              			</td>
+
+		              			<td style="padding-left:20px">
+		       						<div class="form-group">
+				              			<label for="lastName" class="upper">Last Name</label>
+				                        <input ng-model="local.lastName" id="lastName" type="text" placeholder="Last name" name="senderLastName" class="form-control input-lg required">
+			                        </div>
+		              			</td>
+		              		</tr>
+		              		<tr>
+		              			<td style="padding-right:20px">
+		       						<div class="form-group">
+				              			<label for="email" class="upper">Email</label>
+				                        <input ng-model="local.email" id="email" type="text" placeholder="Email" name="senderEmail" class="form-control input-lg required">
+			                        </div>
+		              			</td>
+		              			<td style="padding-left:20px">
+		       						<div class="form-group">
+				              			<label for="password" class="upper">Password</label>
+				                        <input ng-model="local.password" id="password" type="password" placeholder="Password" name="senderPassword" class="form-control input-lg required">
+			                        </div>
+		              			</td>
+		              		</tr>
+		              	</table>
+		              </div>
+		            </div>
+	            <br/>
+	          </div>
+	      </div>
+	        <div style="width:100%;text-align:center;padding:40px;border-bottom-left-radius:6px;border-bottom-right-radius:6px;background:#ddd">
+          	 <button ng-click="register('local')" type="submit" style="width:60%" class="btn btn-primary">APPLY</button>
+	        </div>
+	    </div>
+	  </div>
+	</div>			  
+	
+	
+	
+	
+	
+  
+    <div id="load"></div><!--[if lt IE 9]>
+    <p class="browsehappy">You are using an strong outdated browser. <br>Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="page">
+      <!-- Start Nav Section-->
+	{{ nav }}      
+	
+      <!-- Start header Section-->
+      <section style="background-image: url('/site/img/slides/slide1.jpg');" class="header-section fading-title parallax">
+        <div class="section-shade sep-top-5x sep-bottom-3x">
+          <div class="container">
+            <div class="section-title upper">
+              <h2 class="light small-space">Join&nbsp;<span class="text-primary">Us</span></h2>
+              <p class="lead light">Register below as a traveler or tour guide.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End header Section-->
+      
+      
+      
+      
+      <!-- Start Contact section-->
+      <section class="sep-bottom-2x">
+        <div class="container">
+          <div class="row">          
+            <div class="col-md-6 sep-top-2x" style="text-align:center">
+              <h4 class="upper">Traveler</h4>
+               <a data-toggle="modal" data-target="#registerModal" href="">
+              	<img style="height:84px;border-radius:42px;border:2px solid #fff" src="/site/img/traveler.png"/>
+               </a>
+              <p style="padding:24px 24px 0px 24px;min-height:80px">Create a free profile to begin connecting with local tour guides!</p>
+              <div class="row">
+               <div class="col-md-12 sep-top-xs">
+               	<a data-toggle="modal" data-target="#registerModal" href="">
+                 <button type="submit" style="width:60%" class="btn btn-primary">REGISTER</button>
+                </a>
+               </div>
+             </div>
+            </div>
+            
+            
+            
+             <div class="col-md-6 sep-top-2x" style="text-align:center">
+              <h4 class="upper">Local</h4>
+              <a data-toggle="modal" data-target="#applyModal" href="">
+              <img style="height:84px;border-radius:42px;border:2px solid #fff" src="/site/img/passport.png"/>
+              </a>
+              <p style="padding:24px 24px 0px 24px;min-height:80px">Apply to be a local, and we will send you an email with additional questions.</p>
+                  <div class="row">
+                    <div class="col-md-12 sep-top-xs">
+                     <a data-toggle="modal" data-target="#applyModal" href="">
+                        <button type="submit" style="width:60%" class="btn btn-primary">APPLY</button>
+                     </a>
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Contact section-->
+      
+      
+      
+      
+      
+      
+       <!-- Start Footer section-->
+      {{ foot }}
+    </div>
+    {{ scripts }}
+  </body>
+</html>

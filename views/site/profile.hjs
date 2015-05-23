@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html class="no-js">
+  {{ head }}
+  
+  
+  <body ng-app="Terranga" ng-controller="ProfileController" ng-init="init()">
+
+    
+    <div id="load"></div><!--[if lt IE 9]>
+    <p class="browsehappy">You are using an strong outdated browser. <br>Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    
+    <div class="page">
+      {{ nav }}
+      <!-- Start header Section-->
+      <section style="background-image: url('/site/img/slides/slide2.jpg');" class="header-section fading-title parallax">
+        <div class="section-shade sep-top-3x sep-bottom-2x">
+          <div class="container">
+            <div class="section-title upper text-center">
+              <h2 class="light small-space">{{ profile.firstName }}&nbsp;<span class="text-primary">{{ profile.lastName }}</span></h2>
+              <img style="width:120px;border-radius:60px;border:2px solid #ddd;" src='/site/images/{{ profile.image }}?crop=240'/><br /><br />
+              <p class="lead light">{{ capitalize(profile.city) }}, {{ profile.country.toUpperCase() }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End header Section-->
+      
+      
+      <!-- Start Contact section-->
+		<div class="container" style="padding-top:20px;background-image:url('/site/img/slides/slide8_fade.jpg');width:100%;min-height:800px">
+          <div class="col-md-4" style="background:rgba(249, 249, 249, 0.96);border:1px solid #ddd;padding:0px;min-height:500px;">
+            <div style="text-align:center;">
+              <br/>
+              <h4 style="margin-top:0px">Reviews</h4>
+            </div>
+            <br/>
+            <div style="padding-left:30px;padding-right:30px">
+	            <img align="left" style="height:80px;width:80px;border:2px solid #ddd;border-radius:40px;margin-right:10px;"src="/site/img/sara.jpg"/>
+                <p style="margin-left:100px;padding-right:10px;font-weight:100">
+                  <em>
+                    "{{ capitalize(profile.firstName) }} was fantastic! He showed me the authentic Santiago, Chile experience! Terranga makes exploring new places much more accessible."
+                    <br/>
+                  </em>
+                </p>
+                <h5 style="float:right">- Sara, <span style="color:#43AEC6;">Traveler</span></h5>
+                <br/><hr/>
+                <img align="left" style="height:80px;width:80px;border:2px solid #ddd;border-radius:40px;margin-right:10px;"src="/site/img/lea.jpg"/>
+                <p style="margin-left:100px;padding-right:10px;font-weight:100">
+                  <em>
+                    "What a great person! {{ capitalize(profile.firstName) }} guided my entire trip, and I was more than happy to be able to give back by donating to his dream to study abroad in the UK!"
+                    <br/>
+                  </em>
+                </p>
+                <h5 style="float:right">- Lea, <span style="color:#43AEC6;">Traveler</span></h5>
+                <br/><hr/>
+                <img align="left" style="height:80px;width:80px;border:2px solid #ddd;border-radius:40px;margin-right:10px;"src="/site/img/kyla.jpg"/>
+                <p style="margin-left:100px;padding-right:10px;font-weight:100">
+                  <em>
+                    "What a great time! I got to see so many beautiful sights, eat lots of delicious food, and discover a whole new side of Santiago that I'd never seen before during my travels."
+                    <br/>
+                  </em>
+                </p>
+                <h5 style="float:right">- Kyla, <span style="color:#43AEC6;">Traveler</span></h5>
+                <br/><hr/>
+            </div>
+          </div>
+            
+            
+            
+            <div class="col-md-8" style="background-size:cover;padding-left:0px">
+              
+                <div style="width:90%;height:90%;background:rgba(255, 255, 255, 0.96);margin-left:auto;margin-right:auto;">
+                  <div style="height:80px;background:#f1f1f1;text-align:center;padding-top:18px;border:1px solid #ddd">
+                    <h4 style="color:#444">Meet {{ capitalize(profile.firstName) }}</h4>
+                  </div>
+                  <br />
+                  <div>
+                  	<table style="margin-left:auto;margin-right:auto">
+                  		<thead>
+                  			<tr style="text-align:center">
+                  				<td>
+                  					<h5>Bio</h5>
+                  				</td>
+                  				<td>
+                  					<h5>Dream</h5>
+                  				</td>
+                  				<td>
+                  					<h5>Insights</h5>
+                  				</td>
+                  			</tr>
+                  		</thead>
+                  		<tbody>
+                  			<tr style="text-align:center;">
+                  				<td>
+                  					<img style="height:64px;border-radius:32px;border:1px solid #ddd"src="/site/img/child.png"/>
+                  				</td>
+                  				<td>
+                  					<img style="height:64px;border-radius:32px;border:1px solid #ddd"src="/site/img/star.png"/>
+	                  			</td>
+	                  			<td>
+                  					<img style="height:64px;border-radius:32px;border:1px solid #ddd"src="/site/img/lightbulb.png"/>
+	                  			</td>
+                  			</tr>
+                  			<tr style="text-align:center;font-weight:500;font-size:15px">
+                  				<td style="vertical-align:text-top;padding:20px 20px 0px 20px;width:300px">
+	                  				<p>{{ profile.bio }}</p>
+                  				</td>
+                  				<td style="vertical-align:text-top;padding:20px 20px 0px 20px;width:300px">
+		                  			<p>{{ profile.dream }}</p>
+	                  			</td>
+	                  			<td style="vertical-align:text-top;padding:20px 20px 0px 20px;width:300px">
+		                  			<p>Insights go here.</p>
+	                  			</td>
+                  			</tr>
+                  		</tbody>
+                  	</table>             	
+                  </div>
+                  
+                  <br /><br /><br />
+
+                
+                </div>
+            </div>
+            </div>
+            
+       
+      <!-- End Contact section-->
+     
+      {{ footer }}
+
+            </div>
+      
+    {{ scripts }}
+  </body>
+</html>
