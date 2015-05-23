@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ottavio Html Template - Home Page Version 1</title>
+    <title>PubSavvy - Frame Research</title>
     <meta name="description" content="Home Page Version 1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory-->
@@ -60,7 +60,7 @@
               <div style="background-image: url(img/intro-home9.jpg);" class="sl-slide-inner">
                 <div class="slide-container">
                   <div class="slide-content text-center"><img src="img/themes/meadow/logo-intro.png" alt="Ottavio" class="deco">
-                    <h2 class="main-title">Clean, flat & polished&nbsp;<span class="text-primary">Design</span></h2>
+                    <h2 class="main-title">Feature 1&nbsp;<span class="text-primary">Name</span></h2>
                     <blockquote>
                       <p>Using best web solutions with html5/css3</p><a class="btn btn-light btn-bordered btn-lg">Our Works</a><a href="http://themeforest.net/item/ottavio-multipurpose-html5-bootstrap-template/9562624?ref=kleis" target="_blank" class="btn btn-primary btn-lg">Buy the theme</a>
                     </blockquote>
@@ -74,7 +74,7 @@
               <div style="background: url(img/intro-home1.jpg);" class="sl-slide-inner">
                 <div class="slide-container">
                   <div class="slide-content text-center">
-                    <h2 class="main-title">Multi-purpose html&nbsp;<span class="text-primary">Template</span></h2>
+                    <h2 class="main-title">Feature 2&nbsp;<span class="text-primary">Name</span></h2>
                     <blockquote>
                       <p>Unique and modern design</p><a class="btn btn-light btn-bordered btn-lg">Our Works</a><a href="http://themeforest.net/item/ottavio-multipurpose-html5-bootstrap-template/9562624?ref=kleis" target="_blank" class="btn btn-primary btn-lg">Buy the theme</a>
                     </blockquote>
@@ -97,24 +97,10 @@
               </div>
             </div>
             <!-- end slide-->
-            <!-- start slide-->
-            <div data-orientation="horizontal" data-slice1-rotation="-5" data-slice2-rotation="25" data-slice1-scale="2" data-slice2-scale="1" class="sl-slide">
-              <div style="background: url(img/intro-home5.jpg);" class="sl-slide-inner">
-                <div class="slide-container">
-                  <div class="slide-content text-center">
-                    <h2 class="main-title">Clean & fresh fully&nbsp;<span class="text-primary">Responsive design</span></h2>
-                    <blockquote>
-                      <p>We are ottavio</p><a class="btn btn-light btn-bordered btn-lg">Our Works</a><a href="http://themeforest.net/item/ottavio-multipurpose-html5-bootstrap-template/9562624?ref=kleis" target="_blank" class="btn btn-primary btn-lg">Buy the theme</a>
-                    </blockquote>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- end slide-->
           </div>
           <!-- start slider navigation-->
           <nav id="nav-arrows" class="nav-arrows"><span class="nav-arrow-prev">Previous</span><span class="nav-arrow-next">Next</span></nav>
-          <nav id="nav-dots" class="nav-dots"><span class="nav-dot-current"></span><span></span><span></span><span></span></nav>
+          <nav id="nav-dots" class="nav-dots"><span class="nav-dot-current"></span><span></span><span></span></nav>
           <!-- end slider navigation-->
         </div>
         <!-- End slider-wrapper-->
