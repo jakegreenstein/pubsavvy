@@ -41,7 +41,7 @@
           </div>
           <div class="navbar-collapse collapse">
             <button type="button" class="navbar-toggle"><i class="fa fa-close fa-lg"></i></button>
-            <ul class="nav yamm navbar-nav navbar-left main-nav">
+            <ul class="nav yamm navbar-nav navbar-right main-nav">
                     <!-- istanzio un id univoco-->
                     <li><a href="#" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >About</a></li>                   
                     <li><a href="#" title="Home" id="menu_item_Home" data-ref="#">Features</a></li>
@@ -57,9 +57,9 @@
           <div class="sl-slider">
             <!-- start slide-->
             <div data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2" class="sl-slide">
-              <div style="background-image: url(img/intro-home9.jpg);" class="sl-slide-inner">
+              <div style="background-image: url(/site/img/intro-home9.jpg);" class="sl-slide-inner">
                 <div class="slide-container">
-                  <div class="slide-content text-center"><img src="img/themes/meadow/logo-intro.png" alt="Ottavio" class="deco">
+                  <div class="slide-content text-center"><img src="/site/img/pubsavvy-icon.png" alt="Ottavio" class="deco">
                     <h2 class="main-title">Feature 1&nbsp;<span class="text-primary">Name</span></h2>
                     <blockquote>
                       <p>Using best web solutions with html5/css3</p><a class="btn btn-light btn-bordered btn-lg">Our Works</a><a href="http://themeforest.net/item/ottavio-multipurpose-html5-bootstrap-template/9562624?ref=kleis" target="_blank" class="btn btn-primary btn-lg">Buy the theme</a>
@@ -87,7 +87,7 @@
             <div data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1" class="sl-slide">
               <div style="background: url(img/intro-home7.jpg);" class="sl-slide-inner">
                 <div class="slide-container">
-                  <div class="slide-content text-center"><img src="img/themes/meadow/logo-intro.png" alt="Ottavio" class="deco">
+                  <div class="slide-content text-center"><img src="/site/img/pubsavvy-icon.png" alt="Ottavio" class="deco">
                     <h2 class="main-title">Fully responsive &&nbsp;<span class="text-primary">Retina ready</span></h2>
                     <blockquote>
                       <p>Based on twitter bootstrap</p><a class="btn btn-light btn-bordered btn-lg">Our Works</a><a href="http://themeforest.net/item/ottavio-multipurpose-html5-bootstrap-template/9562624?ref=kleis" target="_blank" class="btn btn-primary btn-lg">Buy the theme</a>
@@ -122,20 +122,24 @@
                 <br/>
               </div>
             </div>
-            
+            <div class="col-md-8">
+              <img style="width:500px" src="/site/img/ipad-landscape.png"/>
+              <img style="width:220px" src="/site/img/history.png"/>
+              <br/><br/>
+            </div>
 
 
 
           </div>
         </div>
-        <div class="bg-primary sep-top-md sep-bottom-md">
+        <div class="bg-primary sep-top-sm sep-bottom-sm">
           <div class="container">
             <div class="row">
               <div class="col-md-4">
                 <p class="lead x2 light wow bounceInLeft">Available now in the App Store</p>
               </div>
               <div class="col-md-4">
-                <a href="#" target="_blank"><img style="padding-left:20px;height:60px" src="/site/img/download.png"/></a>
+                <a href="#" target="_blank" class="wow bounceInRight"><img style="padding-left:20px;height:60px" src="/site/img/download.png"/></a>
               </div>
             </div>
           </div>
@@ -151,10 +155,10 @@
           <div class="row"></div>
           <div class="row">
             <div class="col-md-6">
-              <div data-wow-delay=".5s" class="wow bounceInLeft"><img src="img/ipad_slide.jpg" alt="" class="img-responsive"></div>
+              <div data-wow-delay=".3s" class="wow bounceInLeft"><img src="img/ipad_slide.jpg" alt="" class="img-responsive"></div>
             </div>
             <div class="col-md-6">
-              <div data-wow-delay=".5s" class="wow bounceInRight">
+              <div data-wow-delay=".3s" class="wow bounceInRight">
                 <h3 class="upper">Search smarter, not harder</h3>
                 <p class="lead">
                   Search thousands of biomedical journals at the same time, using PubSavvy's useful interface and the power of the National Library of Medicine's PubMed database. PubSavvy PubMed Search lets you access over 23 million journal abstracts indexed in PubMed/MEDLINE, using integrated tools and smart shortcuts developed by an expert searcher. Read about how PubSavvy's features help you screen through this wealth of information quickly and effectively.
@@ -177,7 +181,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
-              <div data-wow-delay="0.5s" class="text-center wow bounceInLeft">
+              <div data-wow-delay="0.3s" class="text-center wow bounceInLeft">
                 <h3 class="upper">Powered by PubSavvy</h3>
                 <p class="lead">
                   PubSavvy Apps give you powerful search tools at your fingertips. Our apps seamlessly integrate medical journals into a single location for discovery.
@@ -188,7 +192,7 @@
           <div class="row">
             <div class="col-md-3 sep-top-2x icon-gradient">
               <div class="icon-box icon-horizontal icon-lg">
-                <div data-wow-delay=".5s" class="icon-content img-circle wow bounceInUp"><i class="fa fa-lightbulb-o"></i></div>
+                <div data-wow-delay=".2s" class="icon-content img-circle wow bounceInUp"><i class="fa fa-lightbulb-o"></i></div>
                 <div class="icon-box-content">
                   <h5 class="upper">Running a New Search</h5>
                   <p>
@@ -199,7 +203,7 @@
             </div>
             <div class="col-md-3 sep-top-2x icon-gradient">
               <div class="icon-box icon-horizontal icon-lg">
-                <div data-wow-delay=".5s" class="icon-content img-circle wow bounceInUp"><i class="fa fa-history"></i></div>
+                <div data-wow-delay=".3s" class="icon-content img-circle wow bounceInUp"><i class="fa fa-history"></i></div>
                 <div class="icon-box-content">
                   <h5 class="upper">Search History</h5>
                   <p>
@@ -210,7 +214,7 @@
             </div>
             <div class="col-md-3 sep-top-2x icon-gradient">
               <div class="icon-box icon-horizontal icon-lg">
-                <div data-wow-delay=".5s" class="icon-content img-circle wow bounceInUp"><i class="fa fa-filter"></i></div>
+                <div data-wow-delay=".4s" class="icon-content img-circle wow bounceInUp"><i class="fa fa-filter"></i></div>
                 <div class="icon-box-content">
                   <h5 class="upper">Refine Search</h5>
                   <p>
@@ -293,13 +297,7 @@
             <div class="row">
               <div class="col-md-3 col-sm-6">
                 <div class="widget sep-top-lg"><img src="img/logo-white.png" alt="" class="logo"><small class="sep-top-xs sep-bottom-md">Dolor church-key veniam, fap Bushwick mumblecore irure Vice consectetur 3 wolf moon sapiente literally quinoa.</small>
-                  <h6 class="upper widget-title">Stay connected</h6>
-                  <ul class="social-icon sep-top-xs">
-                    <li><a href="#" class="fa fa-github fa-lg"></a></li>
-                    <li><a href="#" class="fa fa-twitter fa-lg"></a></li>
-                    <li><a href="#" class="fa fa-facebook fa-lg"></a></li>
-                    <li><a href="#" class="fa fa-google-plus fa-lg"></a></li>
-                  </ul>
+                  
                 </div>
               </div>
               <div class="col-md-3 col-sm-6">
@@ -330,7 +328,7 @@
         <div class="copyright sep-top-xs sep-bottom-xs">
           <div class="container">
             <div class="row">
-              <div class="col-md-12"><small>Copyright 2014 © Kleis Communication Technologies srl. All rights reserved.</small></div>
+              <div class="col-md-12"><small>&copy PubSavvy</small></div>
             </div>
           </div>
         </div>
