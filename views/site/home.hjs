@@ -121,8 +121,10 @@
       </section>
       <!-- End Header Section-->
 
+
+
       <!-- Start Portfolio section-->
-      <section id="portfolio" class="sep-top-3x">
+      <section id="portfolio" class="section-gray sep-top-3x">
         <div class="container">
           <div class="row">
             <div class="col-md-4">
@@ -131,21 +133,14 @@
                 <p class="lead wow flipInX">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially</p>
               </div>
             </div>
-            <div class="col-md-8">
-              <div class="device-content">
-                <div data-device="ipad" data-orientation="landscape" data-color="white" class="device-mockup">
-                  <div class="device">
-                  </div>
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
         <div class="bg-primary sep-top-md sep-bottom-md">
           <div class="container">
             <div class="row">
               <div class="col-md-4">
-                <p class="lead x2 light wow bounceInLeft">We have put together the best of our experience</p>
+                <p class="lead x2 light wow bounceInLeft">Available now in the App Store</p>
               </div>
             </div>
           </div>
@@ -156,7 +151,7 @@
 
 
 <!-- Start right section-->
-      <section class="section-gray sep-top-2x sep-bottom-2x">
+      <section class="sep-top-2x sep-bottom-2x">
         <div class="container">
           <div class="row"></div>
           <div class="row">
@@ -165,22 +160,12 @@
             </div>
             <div class="col-md-6">
               <div data-wow-delay=".5s" class="wow bounceInRight">
-                <h3 class="upper">Demo content</h3>
+                <h3 class="upper">Search smarter, not harder</h3>
                 <p class="lead">
-                  A wonderful serenity has taken possession of my entire soul, like
-                  these sweet mornings of spring which I enjoy with my whole heart.
-                  I am alone, and feel the charm of existence in this spot, which was
-                  created for the bliss of souls like mine. I am so happy, my dear
-                  friend, so absorbed in the exquisite sense of mere tranquil existence,
-                  that I neglect my talents. I should be incapable of drawing a single
-                  stroke at the present moment; and yet I feel that I never was a
-                  greater artist than now.
+                  Search thousands of biomedical journals at the same time, using PubSavvy's useful interface and the power of the National Library of Medicine's PubMed database. PubSavvy PubMed Search lets you access over 23 million journal abstracts indexed in PubMed/MEDLINE, using integrated tools and smart shortcuts developed by an expert searcher. Read about how PubSavvy's features help you screen through this wealth of information quickly and effectively.
                 </p>
                 <p class="lead">
-                  mine. I am so happy, my dear friend, so absorbed in the exquisite
-                  sense of mere tranquil existence, that I neglect my talents. I
-                  should be incapable of drawing a single stroke at the present
-                  moment; and yet I feel that I never was a greater artist than now.
+                  Version 3.1 now available for iPad, iPhone, and iPodTouch. If you have multiple devices, turn on iCloud support to sync your search history and article collections across devices.
                 </p>
               </div>
             </div>
@@ -193,7 +178,7 @@
 
 
       <!-- Start About section-->
-      <section class="sep-top-2x sep-bottom-2x">
+      <section class="section-gray sep-top-2x sep-bottom-2x">
         <div class="container">
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -248,7 +233,7 @@
       <!-- Start team section-->
       <section class="sep-top-2x sep-bottom-2x">
         <div class="container">
-          <h4 class="upper">Our Team</h4>
+          <h4 class="upper">Brought to you by Frame Research</h4>
           <div class="row">
             <div class="col-md-6">
               <div class="sep-top-xs sep-bottom-sm">
@@ -277,6 +262,8 @@
             
             
           </div>
+          <br/><br/>
+          <a href="http://www.frameresearch.com" target="_blank"><img src="/site/img/frame-logo.jpg"/></a>
         </div>
       </section>
       <!-- End team section-->
@@ -287,9 +274,9 @@
         <div class="container">
           <div class="row">
             <div class="col-md-9">
-              <h5 class="action-title upper light">HAVE AN IDEA? WE’RE HERE TO HELP YOU MANAGE YOUR WORK</h5>
+              <h5 class="action-title upper light">DOWNLOAD PUBSAVVY IN THE APP STORE</h5>
             </div>
-            <div class="col-md-3 text-right"><a href="contact-us.html" class="btn btn-light btn-bordered btn-lg">Contact us</a></div>
+            <div class="col-md-3 text-right"><a href="#" class="btn btn-light btn-bordered btn-lg">DOWNLOAD</a></div>
           </div>
         </div>
       </section>
