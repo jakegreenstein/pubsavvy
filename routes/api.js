@@ -41,7 +41,11 @@ router.get('/:resource', function(req, res, next) {
 			var webEnv = eSearchResult.WebEnv;
 			console.log('WEB ENV: '+webEnv);
 			
-			var nextReq = baseUrl+'efetch.fcgi?db=Pubmed&retstart=0&retmax=100&usehistory=y&query_key=1&WebEnv='+webEnv+'&reldate=36500&retmode=xml';
+			var offset = req.query.offset;
+			if (offset==null)
+				offset = '0';
+			
+			var nextReq = baseUrl+'efetch.fcgi?db=Pubmed&retstart='+offset+'&retmax=100&usehistory=y&query_key=1&WebEnv='+webEnv+'&reldate=36500&retmode=xml';
 			urlRequest(nextReq, function(results){
 				res.setHeader('content-type', 'application/json');
 				var json = JSON.stringify({'confirmation':'sucess','results':results}, null, 2); // this makes the json 'pretty' by indenting it
