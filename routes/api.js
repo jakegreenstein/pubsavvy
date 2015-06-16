@@ -2,6 +2,7 @@ var express = require('express');
 var request = require('request');
 var xmlToJson = require('xml2js');
 var Profile = require('../models/Profile');
+var Device = require('../models/Device');
 var router = express.Router();
 
 
@@ -31,6 +32,46 @@ function urlRequest(url, completion){
 router.get('/:resource', function(req, res, next) {
 
 	var resource = req.params.resource;
+	if (resource=='profile'){
+		Profile.find(req.query, function(err, profiles) {
+			if (err){
+				res.json({'confirmation':'fail','message':err.message});
+				return next(err);
+			}
+
+			var results = new Array();
+			for (var i=0; i<profiles.length; i++){
+				var p = profiles[i];
+				results.push(p.summary());
+			}
+
+			res.json({'confirmation':'success', "profiles":results});
+		});
+		return;
+	}
+	
+	
+	if (resource=='device'){
+		Device.find(null, function(err, devices){
+			if (err){
+				res.json({'confirmation':'fail','message':err.message});
+				return next(err);
+			}
+			
+			var results = new Array();
+			for (var i=0; i<devices.length; i++){
+				var p = devices[i];
+				results.push(p.summary());
+			}
+
+			res.json({'confirmation':'success', 'devices':results});
+		});
+		
+		return;
+	}
+	
+	
+	
 	if (resource == 'search'){
 		console.log('SEARCH: '+JSON.stringify(req.query));
 		
@@ -126,23 +167,6 @@ router.get('/:resource', function(req, res, next) {
 	
 	
 	
-	if (resource=='profiles'){
-		Profile.find(req.query, function(err, profiles) {
-			if (err){
-				res.json({'confirmation':'fail','message':err});
-				return next(err);
-			}
-
-			var results = new Array();
-			for (var i=0; i<profiles.length; i++){
-				var p = profiles[i];
-				results.push(p.summary());
-			}
-
-			res.json({'confirmation':'success', "profiles":results});
-		});
-		return;
-	}
 });
 
 router.get('/:resource/:id', function(req, res, next) {
@@ -150,7 +174,7 @@ router.get('/:resource/:id', function(req, res, next) {
 	var resource = req.params.resource;
 	var identifier = req.params.id;
 
-  	if (resource=='profiles'){
+  	if (resource=='profile'){
   		Profile.findById(identifier, function(err, profile) {
 			if (err){
 				res.send({'confirmation':'fail','message':"Profile "+identifier+" not found"});
@@ -164,7 +188,7 @@ router.get('/:resource/:id', function(req, res, next) {
 
 router.post('/:resource', function(req, res, next) {
 	var resource = req.params.resource;
-	if (resource == 'profiles'){
+	if (resource == 'profile'){
 		Profile.create(req.body, function(err, profile){
 			if (err){
 				res.send({'confirmation':'fail', 'message':err.message});
