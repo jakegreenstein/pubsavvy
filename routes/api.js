@@ -36,7 +36,7 @@ router.get('/:resource', function(req, res, next) {
 		Profile.find(req.query, function(err, profiles) {
 			if (err){
 				res.json({'confirmation':'fail','message':err.message});
-				return next(err);
+				return;
 			}
 
 			var results = new Array();
@@ -52,10 +52,10 @@ router.get('/:resource', function(req, res, next) {
 	
 	
 	if (resource=='device'){
-		Device.find(null, function(err, devices){
+		Device.find(req.query, function(err, devices){
 			if (err){
 				res.json({'confirmation':'fail','message':err.message});
-				return next(err);
+				return;
 			}
 			
 			var results = new Array();
@@ -178,12 +178,27 @@ router.get('/:resource/:id', function(req, res, next) {
   		Profile.findById(identifier, function(err, profile) {
 			if (err){
 				res.send({'confirmation':'fail','message':"Profile "+identifier+" not found"});
-				return next(err);
+				return;
 			}
 			res.json({'confirmation':'success', "profile":profile.summary()});
 		});
 		return;
   	}
+	
+  	if (resource=='device'){
+		Device.findById(identifier, function(err, device){
+			if (err){
+				res.send({'confirmation':'fail','message':"Device "+identifier+" not found"});
+				return;
+			}
+			
+		});
+	
+	
+	}
+	
+	
+	
 });
 
 router.post('/:resource', function(req, res, next) {
