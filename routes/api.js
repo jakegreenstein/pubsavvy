@@ -207,12 +207,26 @@ router.post('/:resource', function(req, res, next) {
 		Profile.create(req.body, function(err, profile){
 			if (err){
 				res.send({'confirmation':'fail', 'message':err.message});
-				return next(err);
+				return;
 			}
 			res.json({'confirmation':'success', 'profile':profile.summary()});
 		});
 		return;
 	}
+	
+	
+  	if (resource=='device'){
+		Device.create(req.body, function(err, device){
+			if (err){
+				res.send({'confirmation':'fail', 'message':err.message});
+				return;
+			}
+			
+			res.json({'confirmation':'success', 'device':device.summary()});
+		});
+	}
+	
+	
 });
 
 module.exports = router;
