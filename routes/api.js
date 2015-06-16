@@ -39,7 +39,6 @@ router.get('/:resource', function(req, res, next) {
 		var results = urlRequest(url, function(results){
 			var eSearchResult = results.eSearchResult;
 			var webEnv = eSearchResult.WebEnv;
-//			console.log('WEB ENV: '+webEnv);
 			
 			var offset = req.query.offset;
 			if (offset==null)
@@ -107,14 +106,8 @@ router.get('/:resource', function(req, res, next) {
 					
 					summary['authors'] = authors;
 					
-					
 					if (articleSummary['Language'] != null) // not always there
 						summary['language'] = articleSummary['Language'][0];
-
-					
-//					console.log(JSON.stringify(articleSummary));
-//					console.log(JSON.stringify(summary));
-					
 					
 					list.push(summary);
 					
@@ -122,7 +115,6 @@ router.get('/:resource', function(req, res, next) {
 				}
 				
 				
-//				var json = JSON.stringify({'confirmation':'sucess','results':results}, null, 2); // this makes the json 'pretty' by indenting it
 				var json = JSON.stringify({'confirmation':'sucess','results':list}, null, 2); // this makes the json 'pretty' by indenting it
 				res.send(json);
 				return;
