@@ -115,7 +115,7 @@ router.get('/:resource', function(req, res, next) {
 				}
 				
 				
-				var json = JSON.stringify({'confirmation':'sucess','results':list}, null, 2); // this makes the json 'pretty' by indenting it
+				var json = JSON.stringify({'confirmation':'success','results':list}, null, 2); // this makes the json 'pretty' by indenting it
 				res.send(json);
 				return;
 			});
