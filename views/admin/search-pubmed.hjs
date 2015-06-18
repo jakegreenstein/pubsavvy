@@ -90,8 +90,8 @@
             <div class="col-md-9 col-md-push-3 sep-top-2x">
               <!-- start search form-->
               <div class="input-group theme-form-group"><span class="input-group-btn">
-                  <button ng-click="search()" type="submit" class="btn btn-primary btn-sm"><i class="fa fa-search fa-2x"></i></button></span>
-                <input ng-keyup="$event.keyCode == 13 ? search() : null" ng-model="terms" type="text" placeholder="Search on site" class="form-control input-lg">
+                  <button ng-click="search('0')" type="submit" class="btn btn-primary btn-sm"><i class="fa fa-search fa-2x"></i></button></span>
+                <input ng-keyup="$event.keyCode == 13 ? search('0') : null" ng-model="terms" type="text" placeholder="Search on site" class="form-control input-lg">
               </div>
               <!-- end search form-->
               <div class="sep-top-md">
@@ -103,8 +103,10 @@
                   <!-- start accordion item-->
                   <div ng-repeat="result in results track by $index" class="accordion-item panel">
                     <h5 class="accordion-heading"><a href="#">{{ result['title'] }}</a></h5>
-                    <div class="sep-top-xs">
-                      <h6>PMID: {{ result['pmid'] }}  Date: {{ result['date'] }}  Journal: {{ result['journal']['title'] }}</h6>
+                    <div>
+                      <h6>PMID: {{ result['pmid'] }}&nbsp;&nbsp;Date: {{ result['date'] }}&nbsp;&nbsp;Journal: {{ result['journal']['title'] }}</h6>
+                      <h6>Authors:</h6>
+                      <h6 ng-repeat="author in result['authors'] track by $index">{{ author.firstName }}&nbsp;{{ author.lastName }}</h6>
                     </div>
                     <div class="accordion-body">
                       <p class="lead">
@@ -120,8 +122,8 @@
               <div class="sep-top-md text-center">
                 <ul class="pagination pagination-beads">
                   <li><a href="#">«</a></li>
-                  <li class="active"><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
+                  <li ng-click="search('0')" class="active"><a href="#">1</a></li>
+                  <li ng-click="search('2*results.length')"><a href="#">2</a></li>
                   <li><a href="#">3</a></li>
                   <li><a href="#">4</a></li>
                   <li><a href="#">5</a></li>

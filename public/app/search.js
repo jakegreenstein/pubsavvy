@@ -12,13 +12,13 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 		console.log('Search Controller: INIT');
 	}
 
-    $scope.search = function(){
+    $scope.search = function(offset){
         if ($scope.terms==null||$scope.terms==""){
             alert("Please enter search terms");
             return;
         }
         $scope.loading = true;
-        var url = '/api/search?term='+$scope.terms.toString();
+        var url = '/api/search?term='+$scope.terms.toString()+'&offset='+offset;
         $http.get(url).success(function(data, status, headers, config) {
             // console.log(JSON.stringify(data));
             var confirmation = data['confirmation'];
