@@ -91,7 +91,7 @@
               <!-- start search form-->
               <div class="input-group theme-form-group"><span class="input-group-btn">
                   <button ng-click="search()" type="submit" class="btn btn-primary btn-sm"><i class="fa fa-search fa-2x"></i></button></span>
-                <input ng-model="terms" type="text" placeholder="Search on site" class="form-control input-lg">
+                <input ng-keyup="$event.keyCode == 13 ? search() : null" ng-model="terms" type="text" placeholder="Search on site" class="form-control input-lg">
               </div>
               <!-- end search form-->
               <div class="sep-top-md">
