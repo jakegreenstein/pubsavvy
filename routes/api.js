@@ -73,12 +73,12 @@ router.get('/:resource', function(req, res, next) {
 	
 	
 	if (resource == 'search'){
-		console.log('SEARCH: '+JSON.stringify(req.query));
-		
 		var baseUrl = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/';
 		var url = baseUrl+'esearch.fcgi?db=pubmed&term='+req.query.term+'&usehistory=y&retmax=100';
 		var results = urlRequest(url, function(results){
 			var eSearchResult = results.eSearchResult;
+			var count = eSearchResult['Count'][0];
+//			console.log('COUNT: '+count);
 			var webEnv = eSearchResult.WebEnv;
 			
 			var offset = req.query.offset;
@@ -88,6 +88,7 @@ router.get('/:resource', function(req, res, next) {
 			var nextReq = baseUrl+'efetch.fcgi?db=Pubmed&retstart='+offset+'&retmax=100&usehistory=y&query_key=1&WebEnv='+webEnv+'&reldate=36500&retmode=xml';
 			urlRequest(nextReq, function(results){
 				res.setHeader('content-type', 'application/json');
+				
 				
 				var list = new Array();
 				var PubmedArticleSet = results['PubmedArticleSet'];
@@ -168,7 +169,7 @@ router.get('/:resource', function(req, res, next) {
 				}
 				
 				
-				var json = JSON.stringify({'confirmation':'success','results':list}, null, 2); // this makes the json 'pretty' by indenting it
+				var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
 				res.send(json);
 				return;
 			});
