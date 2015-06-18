@@ -121,15 +121,13 @@
               <!-- start pagination-->
               <div class="sep-top-md text-center">
                 <ul class="pagination pagination-beads">
-                  <li><a href="#">«</a></li>
                   <li ng-click="search('0')" class="active"><a href="#">1</a></li>
-                  <li ng-click="search('2*results.length')"><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
-                  <li><a href="#">6</a></li>
-                  <li><a href="#">7</a></li>
-                  <li><a href="#">»</a></li>
+                  <li ng-click="search(1*results.length)"><a href="#">2</a></li>
+                  <li ng-click="search(2*results.length)"><a href="#">3</a></li>
+                  <li ng-click="search(3*results.length)"><a href="#">4</a></li>
+                  <li ng-click="search(4*results.length)"><a href="#">5</a></li>
+                  <li ng-click="search(5*results.length)"><a href="#">6</a></li>
+                  <li ng-click="search(6*results.length)"><a href="#">7</a></li>
                 </ul>
               </div>
               <!-- end pagination-->
