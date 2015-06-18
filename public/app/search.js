@@ -29,6 +29,7 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
             }            
             
             $scope.results = data['results'];
+            $scope.count = data['count'];
 //            console.log(JSON.stringify($scope.articles[0]));
 //             for (var i=0; i<$scope.articles.length;i++){
 //                 var medlineCitation = $scope.articles[i]['MedlineCitation'];
