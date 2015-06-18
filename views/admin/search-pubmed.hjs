@@ -385,7 +385,7 @@
                 <div class="accordion-group">
                   <!-- start accordion item-->
                   <div ng-repeat="result in results track by $index" class="accordion-item panel">
-                    <h5 class="accordion-heading"><a href="#">{{ result.title }}<span class="accordion-icon primary">0</span></a></h5>
+                    <h5 class="accordion-heading"><a href="#">{{ result['title'] }}<span class="accordion-icon primary">0</span></a></h5>
                     <div class="sep-top-xs">
                       <ul class="social-icon pull-right">
                         <li><a href="#"><i class="fa fa-twitter fa-lg"></i></a></li>
@@ -400,7 +400,7 @@
                     </div>
                     <div class="accordion-body">
                       <p class="lead">
-                        {{ key }}
+                        {{ result['abstract'] }}
                       </p>
                     </div>
                   </div>
