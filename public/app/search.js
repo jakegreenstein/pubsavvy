@@ -6,6 +6,7 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
     $scope.articles = null;
     $scope.results = new Array();
     $scope.keys = null;
+    $scope.loading = false;
 	
 	$scope.init = function(){
 		console.log('Search Controller: INIT');
@@ -16,6 +17,7 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
             alert("Please enter search terms");
             return;
         }
+        $scope.loading = true;
         var url = '/api/search?term='+$scope.terms.toString();
         $http.get(url).success(function(data, status, headers, config) {
             // console.log(JSON.stringify(data));
@@ -58,6 +60,7 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 //             }
 //             $scope.keys = Object.keys($scope.results);
             console.log(JSON.stringify($scope.results));
+            $scope.loading = false;
 
 
         }).error(function(data, status, headers, config) {
