@@ -108,9 +108,11 @@ router.get('/:resource', function(req, res, next) {
 					
 					var dateCreated = meta['DateCreated'][0]; 
 					summary['date'] = months[dateCreated['Month'][0]-1]+' '+dateCreated['Day'][0]+' '+dateCreated['Year'][0];
-
-					var dateRevised = meta['DateRevised'][0]; 
-					summary['dateRevised'] = months[dateRevised['Month'][0]-1]+' '+dateRevised['Day'][0]+' '+dateRevised['Year'][0];
+					
+					if (meta['DateRevised'] != null){
+						var dateRevised = meta['DateRevised'][0]; 
+						summary['dateRevised'] = months[dateRevised['Month'][0]-1]+' '+dateRevised['Day'][0]+' '+dateRevised['Year'][0];
+					}
 					
 					var articleSummary = meta['Article'][0]; 
 					
