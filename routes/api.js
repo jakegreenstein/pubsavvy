@@ -116,8 +116,18 @@ router.get('/:resource', function(req, res, next) {
 					
 					var articleSummary = meta['Article'][0]; 
 					
-					var journal = articleSummary['Journal'][0]; 
-					summary['journal'] = {'title':journal['Title'][0], 'iso':journal['ISOAbbreviation'][0], 'issn':journal['ISSN'][0]['_']};
+					var journal = articleSummary['Journal'][0];
+					var journalInfo = {};
+					if (journal['Title'] != null)
+						journalInfo['title'] = journal['Title'][0];
+
+					if (journal['ISOAbbreviation'] != null)
+						journalInfo['iso'] = journal['ISOAbbreviation'][0];
+
+					if (journal['ISSN'] != null)
+						journalInfo['issn'] = journal['ISSN'][0];
+					
+					summary['journal'] = journalInfo;
 					
 					summary['title'] = articleSummary['ArticleTitle'][0];
 					
