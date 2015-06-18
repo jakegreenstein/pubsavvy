@@ -385,18 +385,9 @@
                 <div class="accordion-group">
                   <!-- start accordion item-->
                   <div ng-repeat="result in results track by $index" class="accordion-item panel">
-                    <h5 class="accordion-heading"><a href="#">{{ result['title'] }}<span class="accordion-icon primary">0</span></a></h5>
+                    <h5 class="accordion-heading"><a href="#">{{ result['title'] }}</a></h5>
                     <div class="sep-top-xs">
-                      <ul class="social-icon pull-right">
-                        <li><a href="#"><i class="fa fa-twitter fa-lg"></i></a></li>
-                        <li><a href="#"><i class="fa fa-facebook-square fa-lg"></i></a></li>
-                        <li><a href="#"><i class="fa fa-pinterest fa-lg"></i></a></li>
-                      </ul>
-                      <ul class="social-icon">
-                        <li><a href="#"><i class="fa fa-heart"></i><small>&nbsp;1500</small></a></li>
-                        <li><a href="#"><i class="fa fa-eye"></i><small>&nbsp;1500</small></a></li>
-                        <li class="maxi"><a href="#"><i class="fa fa-comments"></i><small>&nbsp;1500 Comments</small></a></li>
-                      </ul>
+                      <h6>PMID: {{ result['pmid'] }}  Date: {{ result['date'] }}  Journal: {{ result['journal']['title'] }}</h6>
                     </div>
                     <div class="accordion-body">
                       <p class="lead">
