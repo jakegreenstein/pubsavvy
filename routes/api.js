@@ -127,24 +127,24 @@ router.get('/:resource', function(req, res, next) {
 						summary['abstract'] = articleSummary['Abstract'][0]['AbstractText'][0]['_'];
 					
 					var authors = new Array();
-					var authorList = articleSummary['AuthorList'][0]['Author'];
-					for (var j=0; j<authorList.length; j++){
-						var author = authorList[j];
+					if (articleSummary['AuthorList'] != null){
+						var authorList = articleSummary['AuthorList'][0]['Author'];
+						for (var j=0; j<authorList.length; j++){
+							var author = authorList[j];
 						
-//						console.log(JSON.stringify(author));
-						
-						var authorInfo = {};
-						if (author['LastName'] != null)
-							authorInfo['lastName'] = author['LastName'][0];
+							var authorInfo = {};
+							if (author['LastName'] != null)
+								authorInfo['lastName'] = author['LastName'][0];
 
-						if (author['ForeName'] != null)
-							authorInfo['firstName'] = author['ForeName'][0];
+							if (author['ForeName'] != null)
+								authorInfo['firstName'] = author['ForeName'][0];
 
-						if (author['AffiliationInfo'] != null)
-							authorInfo['affiliation'] = author['AffiliationInfo'][0]['Affiliation'][0];
+							if (author['AffiliationInfo'] != null)
+								authorInfo['affiliation'] = author['AffiliationInfo'][0]['Affiliation'][0];
 							
 						
-						authors.push(authorInfo);
+							authors.push(authorInfo);
+						}
 					}
 					
 					summary['authors'] = authors;
