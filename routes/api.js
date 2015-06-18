@@ -131,7 +131,7 @@ router.get('/:resource', function(req, res, next) {
 					for (var j=0; j<authorList.length; j++){
 						var author = authorList[j];
 						
-						console.log(JSON.stringify(author));
+//						console.log(JSON.stringify(author));
 						
 						var authorInfo = {};
 						if (author['LastName'] != null)
