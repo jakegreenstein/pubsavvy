@@ -114,6 +114,7 @@ router.get('/:resource', function(req, res, next) {
 						summary['dateRevised'] = months[dateRevised['Month'][0]-1]+' '+dateRevised['Day'][0]+' '+dateRevised['Year'][0];
 					}
 					
+					
 					var articleSummary = meta['Article'][0]; 
 					
 					var journal = articleSummary['Journal'][0]; 
