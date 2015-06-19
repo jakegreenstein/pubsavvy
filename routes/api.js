@@ -127,7 +127,8 @@ router.get('/:resource', function(req, res, next) {
 						journalInfo['iso'] = journal['ISOAbbreviation'][0];
 
 					if (journal['ISSN'] != null)
-						journalInfo['issn'] = journal['ISSN'][0];
+						journalInfo['issn'] = journal['ISSN'][0]['_'];
+					
 					
 					summary['journal'] = journalInfo;
 					
