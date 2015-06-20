@@ -81,12 +81,22 @@ router.get('/:resource', function(req, res, next) {
 			var webEnv = eSearchResult.WebEnv;
 			
 			var offset = req.query.offset;
-			if (offset==null)
+			if (offset == null)
 				offset = '0';
+
+			var clean = req.query.clean;
+			if (clean == null)
+				clean = 'yes';
 			
 			var nextReq = baseUrl+'efetch.fcgi?db=Pubmed&retstart='+offset+'&retmax=100&usehistory=y&query_key=1&WebEnv='+webEnv+'&reldate=36500&retmode=xml';
 			urlRequest(nextReq, function(results){
 				res.setHeader('content-type', 'application/json');
+				
+				if (clean != 'yes'){
+					var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':results}, null, 2); // this makes the json 'pretty' by indenting it
+					res.send(json);
+					return;
+				}
 				
 				
 				var list = new Array();
@@ -165,8 +175,6 @@ router.get('/:resource', function(req, res, next) {
 						summary['language'] = articleSummary['Language'][0];
 					
 					list.push(summary);
-					
-					
 				}
 				
 				
