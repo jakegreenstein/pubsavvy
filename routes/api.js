@@ -78,7 +78,6 @@ router.get('/:resource', function(req, res, next) {
 		var results = urlRequest(url, function(results){
 			var eSearchResult = results.eSearchResult;
 			var count = eSearchResult['Count'][0];
-//			console.log('COUNT: '+count);
 			var webEnv = eSearchResult.WebEnv;
 			
 			var offset = req.query.offset;
