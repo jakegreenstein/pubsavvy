@@ -247,8 +247,36 @@ router.post('/:resource', function(req, res, next) {
 			res.json({'confirmation':'success', 'device':device.summary()});
 		});
 	}
-	
-	
 });
+
+
+router.put('/:resource/:id', function(req, res, next) {
+	var resource = req.params.resource;
+	var identifier = req.params.id;
+	
+	if (identifier==null){
+		res.send({'confirmation':'fail', 'message':'Missing resource identifier.'});
+		return
+	}
+	
+	
+  	if (resource=='device'){
+		var query = {_id: identifier};
+		var options = {new: true};
+		
+		
+		Device.findOneAndUpdate(query, req.body, options, function(err, device){
+			if (err){
+				res.send({'confirmation':'fail', 'message':err.message});
+				return;
+			}
+			
+			res.json({'confirmation':'success', 'device':device.summary()});
+		});
+	}
+
+
+
+}
 
 module.exports = router;
