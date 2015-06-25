@@ -192,7 +192,6 @@ router.get('/:resource', function(req, res, next) {
 });
 
 router.get('/:resource/:id', function(req, res, next) {
-
 	var resource = req.params.resource;
 	var identifier = req.params.id;
 
@@ -214,14 +213,12 @@ router.get('/:resource/:id', function(req, res, next) {
 				return;
 			}
 			
+			res.json({'confirmation':'success', 'device':device.summary()});
 		});
-	
-	
 	}
-	
-	
-	
 });
+
+
 
 router.post('/:resource', function(req, res, next) {
 	var resource = req.params.resource;
