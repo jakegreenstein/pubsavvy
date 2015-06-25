@@ -274,9 +274,6 @@ router.put('/:resource/:id', function(req, res, next) {
 			res.json({'confirmation':'success', 'device':device.summary()});
 		});
 	}
-
-
-
-}
+});
 
 module.exports = router;
