@@ -19,6 +19,12 @@
     <!--button ng-click="createAutoSearch()">Create Initial</button-->
     <input ng-model="newTerm" type="text" placeholder="New Term">  
     <button ng-click="addTerm()">Add Term</button>
+    </br>
+
+    <ol>
+         <li ng-repeat="term in autoSearchValue.terms track by $index">{{term}} <button ng-click="deleteTerm(term)">Delete Term</button></li> 
+
+    </ol>
      
 
   </body>
