@@ -11,11 +11,14 @@
     <script src = '/app/search.js'></script>
     <script src = '/app/autosearch.js'></script>
 
-   
+   <title>AutoSearch | Admin</title>
   </head>
    
   <body ng-app="PubSavvySwipe" ng-controller="AutoSearchController" ng-init="init()">
-    <h1> Test Page </h1>
+    <h1>Admin Console: AutoSearch</h1>
+    <!--button ng-click="createAutoSearch()">Create Initial</button-->
+    <input ng-model="newTerm" type="text" placeholder="New Term">  
+    <button ng-click="addTerm()">Add Term</button>
      
 
   </body>

@@ -240,6 +240,17 @@ router.get('/:resource/:id', function(req, res, next) {
 			res.json({'confirmation':'success', 'device':device.summary()});
 		});
 	}
+
+	if (resource=='autosearch'){
+  		AutoSearch.findById(identifier, function(err, autosearch) {
+			if (err){
+				res.send({'confirmation':'fail','message':"AutoSearch "+identifier+" not found"});
+				return;
+			}
+			res.json({'confirmation':'success', "autoseach":autosearch.summary()});
+		});
+		return;
+  	}
 });
 
 
@@ -279,7 +290,7 @@ router.post('/:resource', function(req, res, next) {
 			res.json({'confirmation':'success', 'autosearch':autosearch.summary()});
 		});
 	}
-	
+
 });
 
 
@@ -305,6 +316,20 @@ router.put('/:resource/:id', function(req, res, next) {
 			}
 			
 			res.json({'confirmation':'success', 'device':device.summary()});
+		});
+	}
+
+	if (resource=='autosearch'){
+		var query = {_id: identifier};
+		var options = {new: true};		
+		
+		AutoSearch.findOneAndUpdate(query, req.body, options,function(err, autosearch){
+			if (err){
+				res.send({'confirmation':'fail', 'message':err.message});
+				return;
+			}
+			
+			res.json({'confirmation':'success', 'autosearch':autosearch.summary()});
 		});
 	}
 });
