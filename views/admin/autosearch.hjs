@@ -22,7 +22,7 @@
    
   <body ng-app="PubSavvySwipe" ng-controller="AutoSearchController" ng-init="init()">
     <h1>Admin Console: AutoSearch</h1>
-    <!--button ng-click="createAutoSearch()">Create Initial</button-->
+    <button ng-click="createAutoSearch()">Create Initial</button>
 
 
     <h2> Current AutoSearch Terms: </h2>
