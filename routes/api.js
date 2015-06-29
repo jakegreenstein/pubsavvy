@@ -247,7 +247,7 @@ router.get('/:resource/:id', function(req, res, next) {
 				res.send({'confirmation':'fail','message':"AutoSearch "+identifier+" not found"});
 				return;
 			}
-			res.json({'confirmation':'success', "autoseach":autosearch.summary()});
+			res.json({'confirmation':'success', "autosearch":autosearch.summary()});
 		});
 		return;
   	}

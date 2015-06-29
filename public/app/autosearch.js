@@ -10,7 +10,7 @@ app.controller('AutoSearchController', ['$scope', '$http', function($scope, $htt
 	
 	$scope.init = function(){
 		console.log('AutoSearch Controller: INIT');
-        getAutoSeachID();
+        getAutoSearchID();
 	}
 
     $scope.createAutoSearch = function(){
@@ -59,7 +59,7 @@ app.controller('AutoSearchController', ['$scope', '$http', function($scope, $htt
         updateAutoSearch(json);
     }
 
-    function getAutoSeachID(){
+    function getAutoSearchID(){
         var url = '/api/autosearch';
         $http.get(url).success(function(data, status, headers, config) {
             console.log(JSON.stringify(data));
