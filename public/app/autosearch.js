@@ -45,6 +45,7 @@ app.controller('AutoSearchController', ['$scope', '$http', function($scope, $htt
         var json = JSON.stringify($scope.autoSearchValue);
         console.log('UPDATE AUTOSEARCH: '+ json);
         updateAutoSearch(json);
+        $scope.newTerm = null;
     }
 
     $scope.deleteTerm = function(term){

@@ -10,6 +10,12 @@
     <script src = '/app/profiles.js'></script>
     <script src = '/app/search.js'></script>
     <script src = '/app/autosearch.js'></script>
+    <style> table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }</style>
+
+
 
    <title>AutoSearch | Admin</title>
   </head>
@@ -17,14 +23,23 @@
   <body ng-app="PubSavvySwipe" ng-controller="AutoSearchController" ng-init="init()">
     <h1>Admin Console: AutoSearch</h1>
     <!--button ng-click="createAutoSearch()">Create Initial</button-->
+
+
+    <h2> Current AutoSearch Terms: </h2>
+
+    <div>
+      <table  style="width:50%;">
+        <tr ng-repeat = "term in autoSearchValue.terms track by $index" style= "border: 1px solid black; border-collapse: collapse;">
+          <td style="width:50%;">{{term}}</td>
+          <td style="width:10%;" align= "center"><button ng-click="deleteTerm(term)">Delete Term</button></td>      
+        </tr>
+      </table>
+    <div>
+    <br>
+
+    
     <input ng-model="newTerm" type="text" placeholder="New Term">  
     <button ng-click="addTerm()">Add Term</button>
-    </br>
-
-    <ol>
-         <li ng-repeat="term in autoSearchValue.terms track by $index">{{term}} <button ng-click="deleteTerm(term)">Delete Term</button></li> 
-
-    </ol>
      
 
   </body>
