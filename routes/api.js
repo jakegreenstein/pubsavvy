@@ -3,6 +3,7 @@ var request = require('request');
 var xmlToJson = require('xml2js');
 var Profile = require('../models/Profile');
 var Device = require('../models/Device');
+var AutoSearch = require('../models/AutoSearch');
 var router = express.Router();
 
 
@@ -65,6 +66,25 @@ router.get('/:resource', function(req, res, next) {
 			}
 
 			res.json({'confirmation':'success', 'devices':results});
+		});
+		
+		return;
+	}
+
+	if (resource=='autosearch'){
+		AutoSearch.find(req.query, function(err, autosearches){
+			if (err){
+				res.json({'confirmation':'fail','message':err.message});
+				return;
+			}
+			
+			var results = new Array();
+			for (var i=0; i<autosearches.length; i++){
+				var p = autosearches[i];
+				results.push(p.summary());
+			}
+
+			res.json({'confirmation':'success', 'autosearches':results});
 		});
 		
 		return;
@@ -248,6 +268,18 @@ router.post('/:resource', function(req, res, next) {
 			res.json({'confirmation':'success', 'device':device.summary()});
 		});
 	}
+
+	if (resource=='autosearch'){
+		AutoSearch.create(req.body, function(err, autosearch){
+			if (err){
+				res.send({'confirmation':'fail', 'message':err.message});
+				return;
+			}
+			
+			res.json({'confirmation':'success', 'autosearch':autosearch.summary()});
+		});
+	}
+	
 });
 
 

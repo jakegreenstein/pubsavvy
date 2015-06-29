@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <link rel = "stylesheet" href = "/admin/stylesheets/style.css">
+  
+    <!-- IMPORTS -->
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js'></script>
+    <script src="https://code.angularjs.org/1.2.20/angular-sanitize.min.js"></script>
+
+    <script src = '/app/app.js'></script>
+    <script src = '/app/profiles.js'></script>
+    <script src = '/app/search.js'></script>
+    <script src = '/app/autosearch.js'></script>
+
+   
+  </head>
+   
+  <body ng-app="PubSavvySwipe" ng-controller="AutoSearchController" ng-init="init()">
+    <h1> Test Page </h1>
+     
+
+  </body>
+</html>
