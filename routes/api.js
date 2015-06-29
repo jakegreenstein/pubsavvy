@@ -83,12 +83,16 @@ router.get('/:resource', function(req, res, next) {
 			var offset = req.query.offset;
 			if (offset == null)
 				offset = '0';
+			
+			var limit = req.query.limit;
+			if (limit == null)
+				limit = '100';
 
 			var clean = req.query.clean;
 			if (clean == null)
 				clean = 'yes';
 			
-			var nextReq = baseUrl+'efetch.fcgi?db=Pubmed&retstart='+offset+'&retmax=100&usehistory=y&query_key=1&WebEnv='+webEnv+'&reldate=36500&retmode=xml';
+			var nextReq = baseUrl+'efetch.fcgi?db=Pubmed&retstart='+offset+'&retmax='+limit+'&usehistory=y&query_key=1&WebEnv='+webEnv+'&reldate=36500&retmode=xml';
 			urlRequest(nextReq, function(results){
 				res.setHeader('content-type', 'application/json');
 				
