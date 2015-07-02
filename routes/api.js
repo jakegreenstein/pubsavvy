@@ -17,7 +17,7 @@ function urlRequest(url, completion){
 					return;
 				}
 				 	
-			    console.log(result);
+			    console.log('results');
 				
 				if (completion != null)
 					completion(result);
@@ -110,7 +110,7 @@ router.get('/:resource', function(req, res, next) {
 
 			var clean = req.query.clean;
 			if (clean == null)
-				//clean = 'yes';
+				clean = 'yes';
 			
 			var nextReq = baseUrl+'efetch.fcgi?db=Pubmed&retstart='+offset+'&retmax='+limit+'&usehistory=y&query_key=1&WebEnv='+webEnv+'&reldate=36500&retmode=xml';
 			urlRequest(nextReq, function(results){
@@ -150,6 +150,17 @@ router.get('/:resource', function(req, res, next) {
 					
 					
 					var articleSummary = meta['Article'][0]; 
+
+					if(meta['KeywordList'] != null){
+						var keywordList = meta['KeywordList'][0]; 
+						var keywords = new Array();
+
+						for(var q=0; q < keywordList.Keyword.length; q++){
+							keywords.push(keywordList.Keyword[q]['_']);
+						}
+
+						summary['keywords'] = keywords;
+					}
 					
 					var journal = articleSummary['Journal'][0];
 					var journalInfo = {};
@@ -192,11 +203,13 @@ router.get('/:resource', function(req, res, next) {
 							authors.push(authorInfo);
 						}
 					}
+
 					
 					summary['authors'] = authors;
 					
 					if (articleSummary['Language'] != null) // not always there
 						summary['language'] = articleSummary['Language'][0];
+
 					
 					list.push(summary);
 				}
