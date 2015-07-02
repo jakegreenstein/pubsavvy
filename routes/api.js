@@ -110,7 +110,7 @@ router.get('/:resource', function(req, res, next) {
 
 			var clean = req.query.clean;
 			if (clean == null)
-				clean = 'yes';
+				//clean = 'yes';
 			
 			var nextReq = baseUrl+'efetch.fcgi?db=Pubmed&retstart='+offset+'&retmax='+limit+'&usehistory=y&query_key=1&WebEnv='+webEnv+'&reldate=36500&retmode=xml';
 			urlRequest(nextReq, function(results){
