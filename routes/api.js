@@ -234,6 +234,11 @@ router.get('/:resource', function(req, res, next) {
         				}
    				 	);	
 				}
+				else{
+					var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
+					res.send(json);
+					return;
+				}
 			});
 		});
 		return;
