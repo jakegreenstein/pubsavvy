@@ -50,7 +50,7 @@ router.get('/:resource', function(req, res, next) {
 		});
 		return;
 	}
-	
+
 	
 	if (resource=='device'){
 		Device.find(req.query, function(err, devices){
@@ -214,13 +214,28 @@ router.get('/:resource', function(req, res, next) {
 					list.push(summary);
 				}
 				
-				
-				var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
-				res.send(json);
-				return;
+				if(req.query.device !=null){
+					var deviceID = req.query.device;
+					console.log('deviceID: '+deviceID);
+
+					//SHOULD THIS BE A PUT CALL?!?!
+					Device.findByIdAndUpdate(
+        				deviceID,
+        				{$push: {"searchHistory": req.query.term}},
+        				{safe: true, upsert: true, new : true},
+        				function(err, device) {
+        					if(err){
+        						res.send({'confirmation':'fail','message':err.message});
+								return;
+        					}
+            				var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
+							res.send(json);
+							return;
+        				}
+   				 	);	
+				}
 			});
 		});
-		
 		return;
 	}
 	
