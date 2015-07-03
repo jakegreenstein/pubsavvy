@@ -231,81 +231,6 @@ router.get('/:resource', function(req, res, next) {
 					console.log('deviceID: '+deviceID);
 					var options = {new: true};
 
-					//VERSION 1
-					//adds terms to an array of strings. does not keep track of
-					//number of searches for each term.
-
-					// Device.findByIdAndUpdate(
-     					//deviceID,
-     					//{$push: {"searchHistory": req.query.term}},
-     					//{safe: true, upsert: true, new : true},
-     					//function(err, device) {
-     						//if(err){
-     							//res.send({'confirmation':'fail','message':err.message});
-								//return;
-     						//}
-     						//var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
-							//res.send(json);
-							//return;
-     					//}
-   					//);
-
-
-					//VERSION2
-					//Creates an array of json which includes a term and a count. should
-					//should increment the count if the term is searched (still in progress)
-
-   				 	// Device.findById(deviceID, function(err, device){
-					// 	if (err){
-					// 		res.send({'confirmation':'fail','message':"Device "+deviceID+" not found"});
-					// 		return;
-					// 	}
-
-					// 	
-					// 	var added = false;
-
-					// 	for(var p = 0; p < device.searchHistory.length; p++){
-					// 		if(device.searchHistory[p]['term'] == req.query.term){
-					// 			device.searchHistory[p]['count']++;
-					// 			added = true;
-					// 			// var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
-					// 			// res.send(json);
-					// 			// return;
-					// 			Device.findByIdAndUpdate(deviceID, device, options, function(err, device){
-					// 				if (err){
-					// 					res.send({'confirmation':'fail', 'message':err.message});
-					// 					return;
-					// 				}
-					// 				var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
-					// 				res.send(json);
-					// 				return;
-					// 			});
-					// 			console.log('HERE');
-					// 		}
-					// 	}
-					// 	if(added == false){
-					// 		var newSearch = {'term':req.query.term, 'count':'1'};
-					// 		Device.findByIdAndUpdate(
-     							//deviceID,
-     							//{$push: {"searchHistory": newSearch } },
-     							//{safe: true, upsert: true, new : true},
-     							//function(err, device) {
-     								//if(err){
-     									//res.send({'confirmation':'fail','message':err.message});
-										//return;
-     								//}
-     								//var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
-									//res.send(json);
-									//return;
-     							//}
-   							//);	
-						//}
-					//});
-
-
-					//VERSION 3
-					//search history is not a straight json {} option 
-					//attempt to add terms by using the json as a map
 					Device.findById(deviceID, function(err, device){
 						if (err){
 							res.send({'confirmation':'fail','message':"Device "+deviceID+" not found"});
@@ -345,6 +270,151 @@ router.get('/:resource', function(req, res, next) {
 		});
 		return;
 	}
+
+
+	if (resource == 'related')
+  	{
+  		if(req.query.id == null){
+  			res.send({'confirmation':'fail', 'message':'No id given'})
+  			return;
+  		}
+  		else{
+			var url = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&db=pubmed&id='+req.query.id;
+
+			var results = urlRequest(url, function(results){
+				var eLinkResult = results.eLinkResult;
+				var linkSetDb = eLinkResult.LinkSet[0].LinkSetDb[0];
+				var linkIDs = linkSetDb.Link;
+
+				var numIDs = linkIDs.length;
+				var count = numIDs;
+				if(100 < numIDs)
+					numIDs = 100;
+
+				var linkIDString = linkIDs[0].Id;
+
+				for(var i = 1; i < numIDs; i++){
+					linkIDString = linkIDString+','+linkIDs[i].Id;
+				}
+				console.log('linkIDString: '+linkIDString);
+
+				var clean = 'yes';
+
+				var nextUrl= 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmode=xml&id='+linkIDString;
+
+				var results = urlRequest(nextUrl, function(results){
+					res.setHeader('content-type', 'application/json');
+					if (clean != 'yes'){
+						console.log('I Am Here');
+						var json = JSON.stringify({'confirmation':'success','count':count, 'results':results}, null, 2); // this makes the json 'pretty' by indenting it
+						res.json(json);
+						return;
+					}
+				
+				
+					var list = new Array();
+					var PubmedArticleSet = results['PubmedArticleSet'];
+					var articles = PubmedArticleSet['PubmedArticle'];
+				
+					var months = ['Jan', 'Feb', 'Mac', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+					for (var i=0; i<articles.length; i++){
+						var summary = {};
+						var result = articles[i];
+						var MedlineCitation = result['MedlineCitation']; // this is an array of dictionaries
+					
+						var meta = MedlineCitation[0];
+					
+						var article = meta['$']; // actual article meta is first item in the array
+					
+						var pmid = meta['PMID'][0]; // array
+						summary['pmid'] = pmid['_'];
+					
+						var dateCreated = meta['DateCreated'][0]; 
+						summary['date'] = months[dateCreated['Month'][0]-1]+' '+dateCreated['Day'][0]+' '+dateCreated['Year'][0];
+					
+						if (meta['DateRevised'] != null){
+							var dateRevised = meta['DateRevised'][0]; 
+							summary['dateRevised'] = months[dateRevised['Month'][0]-1]+' '+dateRevised['Day'][0]+' '+dateRevised['Year'][0];
+						}
+					
+					
+						var articleSummary = meta['Article'][0]; 
+
+						if(meta['KeywordList'] != null){
+							var keywordList = meta['KeywordList'][0]; 
+							var keywords = new Array();
+
+							for(var q=0; q < keywordList.Keyword.length; q++){
+								keywords.push(keywordList.Keyword[q]['_']);
+							}
+
+							summary['keywords'] = keywords;
+						}
+					
+						var journal = articleSummary['Journal'][0];
+						var journalInfo = {};
+						if (journal['Title'] != null)
+							journalInfo['title'] = journal['Title'][0];
+
+						if (journal['ISOAbbreviation'] != null)
+							journalInfo['iso'] = journal['ISOAbbreviation'][0];
+
+						if (journal['ISSN'] != null)
+							journalInfo['issn'] = journal['ISSN'][0]['_'];
+					
+					
+						summary['journal'] = journalInfo;
+					
+						summary['title'] = articleSummary['ArticleTitle'][0];
+					
+						if (articleSummary['Abstract'] == null) // not always there
+							summary['abstract'] = 'null';
+						else
+							summary['abstract'] = articleSummary['Abstract'][0]['AbstractText'][0]['_'];
+					
+						var authors = new Array();
+						if (articleSummary['AuthorList'] != null){
+							var authorList = articleSummary['AuthorList'][0]['Author'];
+							for (var j=0; j<authorList.length; j++){
+								var author = authorList[j];
+						
+								var authorInfo = {};
+								if (author['LastName'] != null)
+									authorInfo['lastName'] = author['LastName'][0];
+
+								if (author['ForeName'] != null)
+									authorInfo['firstName'] = author['ForeName'][0];
+
+								if (author['AffiliationInfo'] != null)
+									authorInfo['affiliation'] = author['AffiliationInfo'][0]['Affiliation'][0];
+							
+						
+								authors.push(authorInfo);
+							}
+						}
+
+					
+						summary['authors'] = authors;
+					
+						if (articleSummary['Language'] != null) // not always there
+							summary['language'] = articleSummary['Language'][0];
+
+					
+						list.push(summary);
+					}
+				
+
+					var json = JSON.stringify({'confirmation':'success', 'count':count,  'results':list}, null, 2); // this makes the json 'pretty' by indenting it
+					res.send(json);
+					return;
+				
+				});
+	
+			});
+  		}
+  		
+  	}
 });
 
 router.get('/:resource/:id', function(req, res, next) {
