@@ -218,21 +218,70 @@ router.get('/:resource', function(req, res, next) {
 					var deviceID = req.query.device;
 					console.log('deviceID: '+deviceID);
 
-					//SHOULD THIS BE A PUT CALL?!?!
-					Device.findByIdAndUpdate(
-        				deviceID,
-        				{$push: {"searchHistory": req.query.term}},
-        				{safe: true, upsert: true, new : true},
-        				function(err, device) {
-        					if(err){
-        						res.send({'confirmation':'fail','message':err.message});
-								return;
-        					}
-            				var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
-							res.send(json);
+					// //SHOULD THIS BE A PUT CALL?!?!
+					// Device.findByIdAndUpdate(
+     //    				deviceID,
+     //    				{$push: {"searchHistory": req.query.term}},
+     //    				{safe: true, upsert: true, new : true},
+     //    				function(err, device) {
+     //    					if(err){
+     //    						res.send({'confirmation':'fail','message':err.message});
+					// 			return;
+     //    					}
+     //        				var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
+					// 		res.send(json);
+					// 		return;
+     //    				}
+   		// 		 	);	
+
+   				 	Device.findById(deviceID, function(err, device){
+						if (err){
+							res.send({'confirmation':'fail','message':"Device "+deviceID+" not found"});
 							return;
-        				}
-   				 	);	
+						}
+
+						var options = {new: true};
+						var added = false;
+
+						for(var p = 0; p < device.searchHistory.length; p++){
+							if(device.searchHistory[p]['term'] == req.query.term){
+								device.searchHistory[p]['count']++;
+								added = true;
+								// var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
+								// res.send(json);
+								// return;
+								Device.findByIdAndUpdate(deviceID, device, options, function(err, device){
+									if (err){
+										res.send({'confirmation':'fail', 'message':err.message});
+										return;
+									}
+									var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
+									res.send(json);
+									return;
+								});
+								console.log('HERE');
+							}
+						}
+						if(added == false){
+							var newSearch = {'term':req.query.term, 'count':'1'};
+							Device.findByIdAndUpdate(
+        						deviceID,
+        						{$push: {"searchHistory": newSearch } },
+        						{safe: true, upsert: true, new : true},
+        						function(err, device) {
+        							if(err){
+        								res.send({'confirmation':'fail','message':err.message});
+										return;
+        							}
+            						var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
+									res.send(json);
+									return;
+        						}
+   				 			);	
+						}
+						
+
+					});
 				}
 				else{
 					var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
