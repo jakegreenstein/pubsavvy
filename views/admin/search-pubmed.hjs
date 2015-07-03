@@ -43,6 +43,8 @@
     <script src='/app/profiles.js'></script>
     <script src='/app/search.js'></script>
     <script src='/app/autosearch.js'></script>
+    <script src='/app/newdevice.js'></script>
+
 	
 	
     <noscript>
