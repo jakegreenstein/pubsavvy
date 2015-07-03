@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>New Dream</title>
+    
+    <!-- IMPORTS -->
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js'></script>
+    <script src="https://code.angularjs.org/1.2.20/angular-sanitize.min.js"></script>
+
+    <script src = '/app/app.js'></script>
+    <script src = '/app/profiles.js'></script>
+    <script src = '/app/search.js'></script>
+    <script src = '/app/autosearch.js'></script>
+    <script src = '/app/newdevice.js'></script>
+
+
+    
+    
+  </head>
+
+  <body ng-app="PubSavvySwipe" ng-controller="NewDeviceController" style="padding:20px" ng-init="init()">
+    <h2>Create New Device: </h2> 
+    
+
+    <div class="section">
+    	<input ng-model="device.deviceToken" type="text" placeholder="Device Token: "><br /><br />
+     	<br /><br /><br />
+        <button ng-click="createDevice()">Create</button>     	
+
+    </div>
+    
+    <br /><br />
+    <br /><br />
+    
+  
+  </body>
+  
+  
+  
+  
+  
+</html>

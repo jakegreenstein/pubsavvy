@@ -4,7 +4,9 @@ var DeviceSchema = new mongoose.Schema({
 	deviceToken:String,
 	saved:{type:Array, default:new Array()},
 	timestamp:{type:Date, default:Date.now},
-	searchHistory:[{term:String, count:Number}]
+	//searchHistory:[{term:String, count:Number}]
+	//searchHistory:{default:{'default':0}}
+	searchHistory:{}
 });
 
 DeviceSchema.methods.summary = function(){
