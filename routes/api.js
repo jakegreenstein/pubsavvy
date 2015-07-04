@@ -433,7 +433,7 @@ router.put('/:resource/:id', function(req, res, next) {
 				return;
 			}
 			
-			device['searchHistory'] = searchHistory;
+			device['searchHistory'] = searchHistory.toObject();
 			
 			// EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
 			device.markModified('searchHistory');  
