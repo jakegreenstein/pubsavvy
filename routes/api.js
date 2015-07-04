@@ -197,8 +197,9 @@ router.get('/:resource', function(req, res, next) {
 	
 	
 	if (resource == 'search'){
+		var searchTerm = req.query.term;
 		var baseUrl = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/';
-		var url = baseUrl+'esearch.fcgi?db=pubmed&term='+req.query.term+'&usehistory=y&retmax=100';
+		var url = baseUrl+'esearch.fcgi?db=pubmed&term='+searchTerm+'&usehistory=y&retmax=100';
 		var results = urlRequest(url, function(results){
 			var eSearchResult = results.eSearchResult;
 			var count = eSearchResult['Count'][0];
@@ -230,52 +231,53 @@ router.get('/:resource', function(req, res, next) {
 				var articles = PubmedArticleSet['PubmedArticle'];
 				var list = cleanUpResults(articles);
 				
-				if (req.query.device ==null) {
+				if (req.query.device == null) {
 					var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
 					res.send(json);
 					return;
 				}
 				
-				
-				var deviceID = req.query.device;
-				var options = {new: true};
-
-				Device.findById(deviceID, function(err, device){
+				Device.findById(req.query.device, function(err, device){
 					if (err){
-						res.send({'confirmation':'fail','message':"Device "+deviceID+" not found"});
+						res.json({'confirmation':'fail','message':"Device "+req.query.device+" not found"});
 						return;
 					}
-
-
-					var termCount = device.searchHistory[req.query.term];
-					device.searchHistory[req.query.term] = (termCount == null) ? 1 : termCount+1;
-					device.save();
 					
-					// this makes the json 'pretty' by indenting it:
-					var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2);
-					res.send(json);
-					return;
+					var searchHistory = device.searchHistory;
+					var searchObj = searchHistory.toObject();
+					if (searchObj.hasOwnProperty(searchTerm)){
+						var termCount = searchObj[searchTerm];
+						searchObj[searchTerm] = termCount+1;
+					} 
+					else{
+						searchObj[searchTerm] = 1;
+					}
 					
-
-					// Device.findByIdAndUpdate(deviceID, device, options, function(err, device){
-					// 	if (err){
-					// 		res.send({'confirmation':'fail', 'message':err.message});
-					// 		return;
-					// 	}
-					// 	var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
-					// 	res.send(json);
-					// 	return;
-					// });
-
+					device[searchHistory] = searchObj;
+					
+					// EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
+					device.markModified('searchHistory');  
+					
+					
+					
+					device.save(function (err, device){
+						if (err)
+							console.log('ERROR: '+err.message);
+						else
+							console.log('DEVICE SAVED: '+JSON.stringify(device.summary()));
+						
+						// this makes the json 'pretty' by indenting it:
+						var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2);
+						res.send(json);
+						return;
+						
+					});
+					
 				});
 				
-				var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
-				res.send(json);
-				return;
-				
-
 			});
 		});
+		
 		return;
 	}
 
