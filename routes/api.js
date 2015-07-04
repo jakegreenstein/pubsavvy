@@ -440,10 +440,11 @@ router.put('/:resource/:id', function(req, res, next) {
 			
 			
 			device.save(function (err, device){
-				if (err)
-					console.log('ERROR: '+err.message);
-				else
-					console.log('DEVICE SAVED: '+JSON.stringify(device.summary()));
+				if (err){
+//					console.log('ERROR: '+err.message);
+					res.json({'confirmation':'fail', 'message':err.message});
+					return;
+				}
 				
 				res.json({'confirmation':'success', 'device':device.summary()});
 				return;
