@@ -251,7 +251,8 @@ router.get('/:resource', function(req, res, next) {
 					device.searchHistory[req.query.term] = (termCount == null) ? 1 : termCount+1;
 					device.save();
 					
-					var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
+					// this makes the json 'pretty' by indenting it:
+					var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2);
 					res.send(json);
 					return;
 					
@@ -388,7 +389,7 @@ router.post('/:resource', function(req, res, next) {
 
   		//TEMPORARY WAY TO POPULATE searchHistory with a json object
   		var deviceJson = req.body;
-  		deviceJson['searchHistory']= {'default':0};
+  		deviceJson['searchHistory'] = {'default':0};
   		//FIND BETTER SOLUTION LATER
 
 		Device.create(deviceJson, function(err, device){
@@ -399,6 +400,7 @@ router.post('/:resource', function(req, res, next) {
 			
 			res.json({'confirmation':'success', 'device':device.summary()});
 		});
+		return;
 	}
 
 	if (resource=='autosearch'){
