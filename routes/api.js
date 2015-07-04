@@ -392,14 +392,15 @@ router.post('/:resource', function(req, res, next) {
   		// deviceJson['searchHistory'] = {'default':0};
   		//FIND BETTER SOLUTION LATER
 
-		Device.create(deviceJson, function(err, device){
+		Device.create(req.body, function(err, device){
 			if (err){
-				res.send({'confirmation':'fail', 'message':err.message});
+				res.json({'confirmation':'fail', 'message':err.message});
 				return;
 			}
 			
 			res.json({'confirmation':'success', 'device':device.summary()});
 		});
+		
 		return;
 	}
 
