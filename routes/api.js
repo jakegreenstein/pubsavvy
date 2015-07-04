@@ -205,17 +205,9 @@ router.get('/:resource', function(req, res, next) {
 			var count = eSearchResult['Count'][0];
 			var webEnv = eSearchResult.WebEnv;
 			
-			var offset = req.query.offset;
-			if (offset == null)
-				offset = '0';
-			
-			var limit = req.query.limit;
-			if (limit == null)
-				limit = '100';
-
-			var clean = req.query.clean;
-			if (clean == null)
-				clean = 'yes';
+			var offset = (req.query.offset == null)? '0' : req.query.offset;
+			var limit = (req.query.limit == null)? '100' : req.query.limit;
+			var clean = (req.query.clean == null)? 'yes' : req.query.clean;
 			
 			var nextReq = baseUrl+'efetch.fcgi?db=Pubmed&retstart='+offset+'&retmax='+limit+'&usehistory=y&query_key=1&WebEnv='+webEnv+'&reldate=36500&retmode=xml';
 			urlRequest(nextReq, function(results){
