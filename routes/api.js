@@ -380,12 +380,6 @@ router.post('/:resource', function(req, res, next) {
 	
 	
   	if (resource=='device'){
-
-  		//TEMPORARY WAY TO POPULATE searchHistory with a json object
-  		// var deviceJson = req.body;
-  		// deviceJson['searchHistory'] = {'default':0};
-  		//FIND BETTER SOLUTION LATER
-
 		Device.create(req.body, function(err, device){
 			if (err){
 				res.json({'confirmation':'fail', 'message':err.message});
@@ -429,11 +423,31 @@ router.put('/:resource/:id', function(req, res, next) {
 		
 		Device.findOneAndUpdate(query, req.body, options, function(err, device){
 			if (err){
-				res.send({'confirmation':'fail', 'message':err.message});
+				res.json({'confirmation':'fail', 'message':err.message});
 				return;
 			}
 			
-			res.json({'confirmation':'success', 'device':device.summary()});
+			var searchHistory = req.body.searchHistory;
+			if (searchHistory == null){
+				res.json({'confirmation':'success', 'device':device.summary()});
+				return;
+			}
+			
+			device['searchHistory'] = searchHistory;
+			
+			// EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
+			device.markModified('searchHistory');  
+			
+			
+			device.save(function (err, device){
+				if (err)
+					console.log('ERROR: '+err.message);
+				else
+					console.log('DEVICE SAVED: '+JSON.stringify(device.summary()));
+				
+				res.json({'confirmation':'success', 'device':device.summary()});
+				return;
+			});
 		});
 	}
 
