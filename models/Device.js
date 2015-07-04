@@ -6,7 +6,7 @@ var DeviceSchema = new mongoose.Schema({
 	timestamp:{type:Date, default:Date.now},
 	//searchHistory:[{term:String, count:Number}]
 	//searchHistory:{default:{'default':0}}
-	searchHistory:{default:{}}
+	searchHistory:{type:mongoose.Schema.Types.Mixed, default:{}}
 });
 
 DeviceSchema.methods.summary = function(){
