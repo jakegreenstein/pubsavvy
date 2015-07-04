@@ -125,6 +125,7 @@ function cleanUpResults(articles){
 router.get('/:resource', function(req, res, next) {
 
 	var resource = req.params.resource;
+	
 	if (resource=='profile'){
 		Profile.find(req.query, function(err, profiles) {
 			if (err){
@@ -236,16 +237,15 @@ router.get('/:resource', function(req, res, next) {
 					}
 					
 					var searchHistory = device.searchHistory;
-					var searchObj = searchHistory.toObject();
-					if (searchObj.hasOwnProperty(searchTerm)){
-						var termCount = searchObj[searchTerm];
-						searchObj[searchTerm] = termCount+1;
+					if (searchHistory.hasOwnProperty(searchTerm)){
+						var termCount = searchHistory[searchTerm];
+						searchHistory[searchTerm] = termCount+1;
 					} 
 					else{
-						searchObj[searchTerm] = 1;
+						searchHistory[searchTerm] = 1;
 					}
 					
-					device[searchHistory] = searchObj;
+					device['searchHistory'] = searchHistory;
 					
 					// EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
 					device.markModified('searchHistory');  
@@ -259,7 +259,7 @@ router.get('/:resource', function(req, res, next) {
 							console.log('DEVICE SAVED: '+JSON.stringify(device.summary()));
 						
 						// this makes the json 'pretty' by indenting it:
-						var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2);
+						var json = JSON.stringify({'confirmation':'success', 'device':device.summary(), 'count':count, 'results':list}, null, 2);
 						res.send(json);
 						return;
 						
@@ -418,7 +418,7 @@ router.put('/:resource/:id', function(req, res, next) {
 	
   	if (resource=='device'){
 		var query = {_id: identifier};
-		var options = {new: true};
+		var options = {new: false};
 		
 		
 		Device.findOneAndUpdate(query, req.body, options, function(err, device){
@@ -427,13 +427,14 @@ router.put('/:resource/:id', function(req, res, next) {
 				return;
 			}
 			
+			console.log('DEVICE UPDATE: '+JSON.stringify(req.body));
 			var searchHistory = req.body.searchHistory;
 			if (searchHistory == null){
 				res.json({'confirmation':'success', 'device':device.summary()});
 				return;
 			}
 			
-			device['searchHistory'] = searchHistory.toObject();
+			device['searchHistory'] = searchHistory;
 			
 			// EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
 			device.markModified('searchHistory');  
@@ -441,7 +442,7 @@ router.put('/:resource/:id', function(req, res, next) {
 			
 			device.save(function (err, device){
 				if (err){
-//					console.log('ERROR: '+err.message);
+					console.log('ERROR: '+err.message);
 					res.json({'confirmation':'fail', 'message':err.message});
 					return;
 				}
