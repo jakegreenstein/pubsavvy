@@ -164,7 +164,7 @@ router.get('/:resource', function(req, res, next) {
 	}
 
 	if (resource=='addDevice'){
-		var temp = {'deviceToken':'token6', 'searchHistory':{'default':0}};
+		var temp = {'deviceToken':'token6'};
 		Device.create(temp, function(err, device){
 			if (err){
 				res.send({'confirmation':'fail', 'message':err.message});
@@ -388,8 +388,8 @@ router.post('/:resource', function(req, res, next) {
   	if (resource=='device'){
 
   		//TEMPORARY WAY TO POPULATE searchHistory with a json object
-  		var deviceJson = req.body;
-  		deviceJson['searchHistory'] = {'default':0};
+  		// var deviceJson = req.body;
+  		// deviceJson['searchHistory'] = {'default':0};
   		//FIND BETTER SOLUTION LATER
 
 		Device.create(deviceJson, function(err, device){
