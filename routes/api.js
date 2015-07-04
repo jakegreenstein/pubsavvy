@@ -26,6 +26,98 @@ function urlRequest(url, completion){
 			});
 	    }
 	});
+}
+
+function cleanUpResults(articles){
+	var list = new Array();
+	
+	var months = ['Jan', 'Feb', 'Mac', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+	for (var i=0; i<articles.length; i++){
+		var summary = {};
+		var result = articles[i];
+		var MedlineCitation = result['MedlineCitation']; // this is an array of dictionaries
+	
+		var meta = MedlineCitation[0];
+		var article = meta['$']; // actual article meta is first item in the array
+	
+		var pmid = meta['PMID'][0]; // array
+		summary['pmid'] = pmid['_'];
+	
+		var dateCreated = meta['DateCreated'][0]; 
+		summary['date'] = months[dateCreated['Month'][0]-1]+' '+dateCreated['Day'][0]+' '+dateCreated['Year'][0];
+	
+		if (meta['DateRevised'] != null){
+			var dateRevised = meta['DateRevised'][0]; 
+			summary['dateRevised'] = months[dateRevised['Month'][0]-1]+' '+dateRevised['Day'][0]+' '+dateRevised['Year'][0];
+		}
+	
+	
+		var articleSummary = meta['Article'][0]; 
+
+		if(meta['KeywordList'] != null){
+			var keywordList = meta['KeywordList'][0]; 
+			var keywords = new Array();
+
+			for(var q=0; q < keywordList.Keyword.length; q++){
+				keywords.push(keywordList.Keyword[q]['_']);
+			}
+
+			summary['keywords'] = keywords;
+		}
+	
+		var journal = articleSummary['Journal'][0];
+		var journalInfo = {};
+		if (journal['Title'] != null)
+			journalInfo['title'] = journal['Title'][0];
+
+		if (journal['ISOAbbreviation'] != null)
+			journalInfo['iso'] = journal['ISOAbbreviation'][0];
+
+		if (journal['ISSN'] != null)
+			journalInfo['issn'] = journal['ISSN'][0]['_'];
+	
+	
+		summary['journal'] = journalInfo;
+	
+		summary['title'] = articleSummary['ArticleTitle'][0];
+	
+		if (articleSummary['Abstract'] == null) // not always there
+			summary['abstract'] = 'null';
+		else
+			summary['abstract'] = articleSummary['Abstract'][0]['AbstractText'][0]['_'];
+	
+		var authors = new Array();
+		if (articleSummary['AuthorList'] != null){
+			var authorList = articleSummary['AuthorList'][0]['Author'];
+			for (var j=0; j<authorList.length; j++){
+				var author = authorList[j];
+		
+				var authorInfo = {};
+				if (author['LastName'] != null)
+					authorInfo['lastName'] = author['LastName'][0];
+
+				if (author['ForeName'] != null)
+					authorInfo['firstName'] = author['ForeName'][0];
+
+				if (author['AffiliationInfo'] != null)
+					authorInfo['affiliation'] = author['AffiliationInfo'][0]['Affiliation'][0];
+			
+		
+				authors.push(authorInfo);
+			}
+		}
+
+	
+		summary['authors'] = authors;
+	
+		if (articleSummary['Language'] != null) // not always there
+			summary['language'] = articleSummary['Language'][0];
+
+	
+		list.push(summary);
+	}
+	
+	return list;
 	
 }
 
@@ -134,286 +226,105 @@ router.get('/:resource', function(req, res, next) {
 					return;
 				}
 				
-				
-				var list = new Array();
 				var PubmedArticleSet = results['PubmedArticleSet'];
 				var articles = PubmedArticleSet['PubmedArticle'];
+				var list = cleanUpResults(articles);
 				
-				var months = ['Jan', 'Feb', 'Mac', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-				for (var i=0; i<articles.length; i++){
-					var summary = {};
-					var result = articles[i];
-					var MedlineCitation = result['MedlineCitation']; // this is an array of dictionaries
-					
-					var meta = MedlineCitation[0];
-					
-					var article = meta['$']; // actual article meta is first item in the array
-					
-					var pmid = meta['PMID'][0]; // array
-					summary['pmid'] = pmid['_'];
-					
-					var dateCreated = meta['DateCreated'][0]; 
-					summary['date'] = months[dateCreated['Month'][0]-1]+' '+dateCreated['Day'][0]+' '+dateCreated['Year'][0];
-					
-					if (meta['DateRevised'] != null){
-						var dateRevised = meta['DateRevised'][0]; 
-						summary['dateRevised'] = months[dateRevised['Month'][0]-1]+' '+dateRevised['Day'][0]+' '+dateRevised['Year'][0];
-					}
-					
-					
-					var articleSummary = meta['Article'][0]; 
-
-					if(meta['KeywordList'] != null){
-						var keywordList = meta['KeywordList'][0]; 
-						var keywords = new Array();
-
-						for(var q=0; q < keywordList.Keyword.length; q++){
-							keywords.push(keywordList.Keyword[q]['_']);
-						}
-
-						summary['keywords'] = keywords;
-					}
-					
-					var journal = articleSummary['Journal'][0];
-					var journalInfo = {};
-					if (journal['Title'] != null)
-						journalInfo['title'] = journal['Title'][0];
-
-					if (journal['ISOAbbreviation'] != null)
-						journalInfo['iso'] = journal['ISOAbbreviation'][0];
-
-					if (journal['ISSN'] != null)
-						journalInfo['issn'] = journal['ISSN'][0]['_'];
-					
-					
-					summary['journal'] = journalInfo;
-					
-					summary['title'] = articleSummary['ArticleTitle'][0];
-					
-					if (articleSummary['Abstract'] == null) // not always there
-						summary['abstract'] = 'null';
-					else
-						summary['abstract'] = articleSummary['Abstract'][0]['AbstractText'][0]['_'];
-					
-					var authors = new Array();
-					if (articleSummary['AuthorList'] != null){
-						var authorList = articleSummary['AuthorList'][0]['Author'];
-						for (var j=0; j<authorList.length; j++){
-							var author = authorList[j];
-						
-							var authorInfo = {};
-							if (author['LastName'] != null)
-								authorInfo['lastName'] = author['LastName'][0];
-
-							if (author['ForeName'] != null)
-								authorInfo['firstName'] = author['ForeName'][0];
-
-							if (author['AffiliationInfo'] != null)
-								authorInfo['affiliation'] = author['AffiliationInfo'][0]['Affiliation'][0];
-							
-						
-							authors.push(authorInfo);
-						}
-					}
-
-					
-					summary['authors'] = authors;
-					
-					if (articleSummary['Language'] != null) // not always there
-						summary['language'] = articleSummary['Language'][0];
-
-					
-					list.push(summary);
-				}
-				
-				if(req.query.device !=null){
-					var deviceID = req.query.device;
-					console.log('deviceID: '+deviceID);
-					var options = {new: true};
-
-					Device.findById(deviceID, function(err, device){
-						if (err){
-							res.send({'confirmation':'fail','message':"Device "+deviceID+" not found"});
-							return;
-						}
-
-
-						var termCount = device.searchHistory[req.query.term];
-						if(termCount == null){
-							device.searchHistory[req.query.term] = 1;
-						}
-						else{
-							termCount++;
-							device.searchHistory[req.query.term] = termCount;
-						}
-
-						Device.findByIdAndUpdate(deviceID, device, options, function(err, device){
-							if (err){
-								res.send({'confirmation':'fail', 'message':err.message});
-								return;
-							}
-							var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
-							res.send(json);
-							return;
-						});
-
-					});
-
-				}//END IF DEVICE IS PRESENT 
-
-				else{
+				if (req.query.device ==null) {
 					var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
 					res.send(json);
 					return;
 				}
+				
+				
+				var deviceID = req.query.device;
+				var options = {new: true};
+
+				Device.findById(deviceID, function(err, device){
+					if (err){
+						res.send({'confirmation':'fail','message':"Device "+deviceID+" not found"});
+						return;
+					}
+
+
+					var termCount = device.searchHistory[req.query.term];
+					device.searchHistory[req.query.term] = (termCount == null) ? 1 : termCount+1;
+					device.save();
+					
+					var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
+					res.send(json);
+					return;
+					
+
+					// Device.findByIdAndUpdate(deviceID, device, options, function(err, device){
+					// 	if (err){
+					// 		res.send({'confirmation':'fail', 'message':err.message});
+					// 		return;
+					// 	}
+					// 	var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
+					// 	res.send(json);
+					// 	return;
+					// });
+
+				});
+				
+				var json = JSON.stringify({'confirmation':'success', 'count':count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
+				res.send(json);
+				return;
+				
+
 			});
 		});
 		return;
 	}
 
 
-	if (resource == 'related')
-  	{
-  		if(req.query.id == null){
-  			res.send({'confirmation':'fail', 'message':'No id given'})
+	if (resource == 'related') {
+  		if(req.query.pmid == null){
+  			res.json({'confirmation':'fail', 'message':'Missing pmid parameter.'})
   			return;
   		}
-  		else{
-			var url = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&db=pubmed&id='+req.query.id;
+		
+		var url = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&db=pubmed&id='+req.query.pmid;
+		var results = urlRequest(url, function(results){
+			var eLinkResult = results.eLinkResult;
+			var linkSetDb = eLinkResult.LinkSet[0].LinkSetDb[0];
+			var linkIDs = linkSetDb.Link;
 
-			var results = urlRequest(url, function(results){
-				var eLinkResult = results.eLinkResult;
-				var linkSetDb = eLinkResult.LinkSet[0].LinkSetDb[0];
-				var linkIDs = linkSetDb.Link;
+			var numIDs = linkIDs.length;
+			var count = numIDs;
+			if(100 < numIDs)
+				numIDs = 100;
 
-				var numIDs = linkIDs.length;
-				var count = numIDs;
-				if(100 < numIDs)
-					numIDs = 100;
-
-				var linkIDString = linkIDs[0].Id;
-
-				for(var i = 1; i < numIDs; i++){
-					linkIDString = linkIDString+','+linkIDs[i].Id;
-				}
-				console.log('linkIDString: '+linkIDString);
-
-				var clean = 'yes';
-
-				var nextUrl= 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmode=xml&id='+linkIDString;
-
-				var results = urlRequest(nextUrl, function(results){
-					res.setHeader('content-type', 'application/json');
-					if (clean != 'yes'){
-						console.log('I Am Here');
-						var json = JSON.stringify({'confirmation':'success','count':count, 'results':results}, null, 2); // this makes the json 'pretty' by indenting it
-						res.json(json);
-						return;
-					}
+			var linkIDString = linkIDs[0].Id;
+			for(var i = 1; i < numIDs; i++)
+				linkIDString = linkIDString+','+linkIDs[i].Id;
+			
+			var nextUrl = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmode=xml&id='+linkIDString;
+			var results = urlRequest(nextUrl, function(results){
+				var clean = req.query.clean;
+				if (clean==null)
+					clean = 'yes';
 				
 				
-					var list = new Array();
-					var PubmedArticleSet = results['PubmedArticleSet'];
-					var articles = PubmedArticleSet['PubmedArticle'];
-				
-					var months = ['Jan', 'Feb', 'Mac', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-					for (var i=0; i<articles.length; i++){
-						var summary = {};
-						var result = articles[i];
-						var MedlineCitation = result['MedlineCitation']; // this is an array of dictionaries
-					
-						var meta = MedlineCitation[0];
-					
-						var article = meta['$']; // actual article meta is first item in the array
-					
-						var pmid = meta['PMID'][0]; // array
-						summary['pmid'] = pmid['_'];
-					
-						var dateCreated = meta['DateCreated'][0]; 
-						summary['date'] = months[dateCreated['Month'][0]-1]+' '+dateCreated['Day'][0]+' '+dateCreated['Year'][0];
-					
-						if (meta['DateRevised'] != null){
-							var dateRevised = meta['DateRevised'][0]; 
-							summary['dateRevised'] = months[dateRevised['Month'][0]-1]+' '+dateRevised['Day'][0]+' '+dateRevised['Year'][0];
-						}
-					
-					
-						var articleSummary = meta['Article'][0]; 
-
-						if(meta['KeywordList'] != null){
-							var keywordList = meta['KeywordList'][0]; 
-							var keywords = new Array();
-
-							for(var q=0; q < keywordList.Keyword.length; q++){
-								keywords.push(keywordList.Keyword[q]['_']);
-							}
-
-							summary['keywords'] = keywords;
-						}
-					
-						var journal = articleSummary['Journal'][0];
-						var journalInfo = {};
-						if (journal['Title'] != null)
-							journalInfo['title'] = journal['Title'][0];
-
-						if (journal['ISOAbbreviation'] != null)
-							journalInfo['iso'] = journal['ISOAbbreviation'][0];
-
-						if (journal['ISSN'] != null)
-							journalInfo['issn'] = journal['ISSN'][0]['_'];
-					
-					
-						summary['journal'] = journalInfo;
-					
-						summary['title'] = articleSummary['ArticleTitle'][0];
-					
-						if (articleSummary['Abstract'] == null) // not always there
-							summary['abstract'] = 'null';
-						else
-							summary['abstract'] = articleSummary['Abstract'][0]['AbstractText'][0]['_'];
-					
-						var authors = new Array();
-						if (articleSummary['AuthorList'] != null){
-							var authorList = articleSummary['AuthorList'][0]['Author'];
-							for (var j=0; j<authorList.length; j++){
-								var author = authorList[j];
-						
-								var authorInfo = {};
-								if (author['LastName'] != null)
-									authorInfo['lastName'] = author['LastName'][0];
-
-								if (author['ForeName'] != null)
-									authorInfo['firstName'] = author['ForeName'][0];
-
-								if (author['AffiliationInfo'] != null)
-									authorInfo['affiliation'] = author['AffiliationInfo'][0]['Affiliation'][0];
-							
-						
-								authors.push(authorInfo);
-							}
-						}
-
-					
-						summary['authors'] = authors;
-					
-						if (articleSummary['Language'] != null) // not always there
-							summary['language'] = articleSummary['Language'][0];
-
-					
-						list.push(summary);
-					}
-				
-
-					var json = JSON.stringify({'confirmation':'success', 'count':count,  'results':list}, null, 2); // this makes the json 'pretty' by indenting it
+				res.setHeader('content-type', 'application/json');
+				if (clean != 'yes'){
+					var json = JSON.stringify({'confirmation':'success','count':count, 'results':results}, null, 2); // this makes the json 'pretty' by indenting it
 					res.send(json);
 					return;
+				}
 				
-				});
-	
+				var PubmedArticleSet = results['PubmedArticleSet'];
+				var articles = PubmedArticleSet['PubmedArticle'];
+				var list = cleanUpResults(articles);
+				
+				// this makes the json 'pretty' by indenting it
+				var json = JSON.stringify({'confirmation':'success', 'count':count,  'results':list}, null, 2); 
+				res.send(json);
+				return;
+			
 			});
-  		}
-  		
+		});		
   	}
 });
 
