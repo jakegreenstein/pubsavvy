@@ -1,6 +1,7 @@
 var express = require('express');
 var request = require('request');
 var xmlToJson = require('xml2js');
+var Promise = require('bluebird');
 var Profile = require('../models/Profile');
 var Device = require('../models/Device');
 var AutoSearch = require('../models/AutoSearch');
@@ -14,13 +15,14 @@ function urlRequest(url, completion){
 			parseString(body, function (err, result) {
 				if (err){
 					console.log(err.message);
+					completion(err, null)
 					return;
 				}
 				 	
 			    console.log('results');
 				
 				if (completion != null)
-					completion(result);
+					completion(null, result);
 				
 				return;
 			});
@@ -118,8 +120,41 @@ function cleanUpResults(articles){
 	}
 	
 	return list;
-	
 }
+
+
+var searchRequest = function(searchTerm){
+	return new Promise(function (resolve, reject){
+
+		var baseUrl = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/';
+		var url = baseUrl+'esearch.fcgi?db=pubmed&term='+searchTerm+'&usehistory=y&retmax=100';
+		urlRequest(url, function(err, results){
+			if (err) { reject(err); }
+			else { resolve(results); }
+		});
+	});
+}
+
+var followUpRequest = function(results, offset, limit){
+	return new Promise(function (resolve, reject){
+		var baseUrl = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/';
+		
+		var eSearchResult = results.eSearchResult;
+		var count = eSearchResult['Count'][0];
+		var webEnv = eSearchResult.WebEnv;
+		
+		var nextReq = baseUrl+'efetch.fcgi?db=Pubmed&retstart='+offset+'&retmax='+limit+'&usehistory=y&query_key=1&WebEnv='+webEnv+'&reldate=36500&retmode=xml';
+		urlRequest(nextReq, function(err, results){
+			if (err) { reject(err); }
+			else{
+				var PubmedArticleSet = results['PubmedArticleSet'];
+				var articles = PubmedArticleSet['PubmedArticle'];
+				resolve({'count':count, 'list':articles});
+			}
+		});
+	});
+}
+
 
 /* GET users listing. */
 router.get('/:resource', function(req, res, next) {
@@ -196,12 +231,49 @@ router.get('/:resource', function(req, res, next) {
 	}
 	
 	
-	
 	if (resource == 'search'){
 		var searchTerm = req.query.term;
+		if (searchTerm==null){
+			res.json({'confirmation':'fail', 'message':'Missing search value.'});
+			return;
+		}
+		
+		
+		searchRequest(searchTerm)
+		.then(function(results){
+			var offset = (req.query.offset == null)? '0' : req.query.offset;
+			var limit = (req.query.limit == null)? '100' : req.query.limit;
+			return followUpRequest(results, offset, limit);
+		})
+		.then(function(results){
+			res.setHeader('content-type', 'application/json');
+			
+			var clean = (req.query.clean == null)? 'yes' : req.query.clean;
+			if (clean != 'yes'){
+				var json = JSON.stringify({'confirmation':'success', 'count':results.count, 'results':results.list}, null, 2); // this makes the json 'pretty' by indenting it
+				res.send(json);
+				return;
+			}
+			
+			var list = cleanUpResults(results.list);
+			var json = JSON.stringify({'confirmation':'success', 'count':results.count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
+			res.send(json);
+			return;
+		})
+		.catch(function(err){
+			res.json({'confirmation':'fail','message':err.message});
+			return;
+		});
+	}
+	
+	
+	/*
+	if (resource == 'serch'){
+		var searchTerm = req.query.term;
+		
 		var baseUrl = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/';
 		var url = baseUrl+'esearch.fcgi?db=pubmed&term='+searchTerm+'&usehistory=y&retmax=100';
-		var results = urlRequest(url, function(results){
+		var results = urlRequest(url, function(err, results){
 			var eSearchResult = results.eSearchResult;
 			var count = eSearchResult['Count'][0];
 			var webEnv = eSearchResult.WebEnv;
@@ -211,7 +283,7 @@ router.get('/:resource', function(req, res, next) {
 			var clean = (req.query.clean == null)? 'yes' : req.query.clean;
 			
 			var nextReq = baseUrl+'efetch.fcgi?db=Pubmed&retstart='+offset+'&retmax='+limit+'&usehistory=y&query_key=1&WebEnv='+webEnv+'&reldate=36500&retmode=xml';
-			urlRequest(nextReq, function(results){
+			urlRequest(nextReq, function(err, results){
 				res.setHeader('content-type', 'application/json');
 				
 				if (clean != 'yes'){
@@ -272,6 +344,7 @@ router.get('/:resource', function(req, res, next) {
 		
 		return;
 	}
+	*/
 
 
 	if (resource == 'related') {
@@ -281,7 +354,7 @@ router.get('/:resource', function(req, res, next) {
   		}
 		
 		var url = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&db=pubmed&id='+req.query.pmid;
-		var results = urlRequest(url, function(results){
+		var results = urlRequest(url, function(err, results){
 			var eLinkResult = results.eLinkResult;
 			var linkSetDb = eLinkResult.LinkSet[0].LinkSetDb[0];
 			var linkIDs = linkSetDb.Link;
@@ -296,7 +369,7 @@ router.get('/:resource', function(req, res, next) {
 				linkIDString = linkIDString+','+linkIDs[i].Id;
 			
 			var nextUrl = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmode=xml&id='+linkIDString;
-			var results = urlRequest(nextUrl, function(results){
+			var results = urlRequest(nextUrl, function(err, results){
 				var clean = req.query.clean;
 				if (clean==null)
 					clean = 'yes';
