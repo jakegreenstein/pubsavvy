@@ -309,13 +309,19 @@ router.get('/:resource', function(req, res, next) {
 						device.markModified('searchHistory'); // EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
 		
 						device.save(function (err, device){
-							if (err){ }
+							if (err){
+								var json = JSON.stringify({'confirmation':'success', 'count':results.count, 'results':results.list}, null, 2); // this makes the json 'pretty' by indenting it
+							
+								res.send(json);
+								return;
+							}
+							
+							var json = JSON.stringify({'confirmation':'success', 'device':device.summary(), 'count':results.count, 'results':results.list}, null, 2); // this makes the json 'pretty' by indenting it
+
+							res.send(json);
+							return;
 						});
 						
-						var json = JSON.stringify({'confirmation':'success', 'device':device.summary(), 'count':results.count, 'results':results.list}, null, 2); // this makes the json 'pretty' by indenting it
-
-						res.send(json);
-						return;
 					});
 				}
 				
