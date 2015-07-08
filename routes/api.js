@@ -285,58 +285,56 @@ router.get('/:resource', function(req, res, next) {
 			
 			var clean = (req.query.clean == null)? 'yes' : req.query.clean;
 			if (clean != 'yes'){
-				// var json = JSON.stringify({'confirmation':'success', 'count':results.count, 'results':results.list}, null, 2); // this makes the json 'pretty' by indenting it
-				
-				if (req.query.device != null){
-					Device.findById(req.query.device, function(err, device){
-						if (err){
-							var json = JSON.stringify({'confirmation':'success', 'count':results.count, 'results':results.list}, null, 2); // this makes the json 'pretty' by indenting it
-							
-							res.send(json);
-							return;
-						}
-						
-						var searchHistory = device.searchHistory;
-						if (searchHistory[searchTerm]==null){
-							searchHistory[searchTerm] = 1;
-						}
-						else{
-							var count = searchHistory[searchTerm];
-							searchHistory[searchTerm] = count+1
-						}
-		
-						device['searchHistory'] = searchHistory;
-						device.markModified('searchHistory'); // EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
-		
-						device.save(function (err, device){
-							if (err){
-								var json = JSON.stringify({'confirmation':'success', 'count':results.count, 'results':results.list}, null, 2); // this makes the json 'pretty' by indenting it
-							
-								res.send(json);
-								return;
-							}
-							
-							var json = JSON.stringify({'confirmation':'success', 'device':device.summary(), 'count':results.count, 'results':results.list}, null, 2); // this makes the json 'pretty' by indenting it
-
-							res.send(json);
-							return;
-						});
-						
-					});
-				}
-				
-				// res.send(json);
-
-
-
-
-
+				var json = JSON.stringify({'confirmation':'success', 'count':results.count, 'results':results.list}, null, 2); // this makes the json 'pretty' by indenting it
+				res.send(json);
 				return;
 			}
 			
 			var list = cleanUpResults(results.list);
-			var json = JSON.stringify({'confirmation':'success', 'count':results.count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
-			res.send(json);
+			
+			// var json = JSON.stringify({'confirmation':'success', 'count':results.count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
+			// res.send(json);
+			
+			
+			if (req.query.device != null){
+				Device.findById(req.query.device, function(err, device){
+					if (err){
+						var json = JSON.stringify({'confirmation':'success', 'count':results.count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
+						
+						res.send(json);
+						return;
+					}
+					
+					var searchHistory = device.searchHistory;
+					if (searchHistory[searchTerm]==null){
+						searchHistory[searchTerm] = 1;
+					}
+					else{
+						var count = searchHistory[searchTerm];
+						searchHistory[searchTerm] = count+1
+					}
+	
+					device['searchHistory'] = searchHistory;
+					device.markModified('searchHistory'); // EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
+	
+					device.save(function (err, device){
+						if (err){
+							var json = JSON.stringify({'confirmation':'success', 'count':results.count, 'results':results.list}, null, 2); // this makes the json 'pretty' by indenting it
+						
+							res.send(json);
+							return;
+						}
+						
+						var json = JSON.stringify({'confirmation':'success', 'device':device.summary(), 'count':results.count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
+
+						res.send(json);
+						return;
+					});
+					
+				});
+			}
+			
+			
 			return;
 		})
 		.catch(function(err){
