@@ -123,6 +123,19 @@ function cleanUpResults(articles){
 }
 
 
+var relatedArticlesRequest = function(pmid){
+	return new Promise(function (resolve, reject){
+		var url = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&db=pubmed&id='+pmid;
+		urlRequest(url, function(err, results){
+			if (err) { reject(err); }
+			else { resolve(results); }
+		
+		});
+	});
+}
+
+
+
 var searchRequest = function(searchTerm){
 	return new Promise(function (resolve, reject){
 
@@ -131,17 +144,6 @@ var searchRequest = function(searchTerm){
 		urlRequest(url, function(err, results){
 			if (err) { reject(err); }
 			else { resolve(results); }
-		});
-	});
-}
-
-var relatedArticlesRequest = function(pmid){
-	return new Promise(function (resolve, reject){
-		var url = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&db=pubmed&id='+pmid;
-		urlRequest(url, function(err, results){
-			if (err) { reject(err); }
-			else { resolve(results); }
-		
 		});
 	});
 }
@@ -254,27 +256,27 @@ router.get('/:resource', function(req, res, next) {
 		.then(function(results){
 			var offset = (req.query.offset == null)? '0' : req.query.offset;
 			var limit = (req.query.limit == null)? '100' : req.query.limit;
-			if (req.query.device != null){
-				Device.findById(req.query.device, function(err, device){
-					if (err==null){
-						var searchHistory = device.searchHistory;
-						if (searchHistory[searchTerm]==null){
-							searchHistory[searchTerm] = 1;
-						}
-						else{
-							var count = searchHistory[searchTerm];
-							searchHistory[searchTerm] = count+1
-						}
-			
-						device['searchHistory'] = searchHistory;
-						device.markModified('searchHistory'); // EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
-			
-						device.save(function (err, device){
-							if (err){ }
-						});
-					}
-				});
-			}
+			// if (req.query.device != null){
+			// 	Device.findById(req.query.device, function(err, device){
+			// 		if (err==null){
+			// 			var searchHistory = device.searchHistory;
+			// 			if (searchHistory[searchTerm]==null){
+			// 				searchHistory[searchTerm] = 1;
+			// 			}
+			// 			else{
+			// 				var count = searchHistory[searchTerm];
+			// 				searchHistory[searchTerm] = count+1
+			// 			}
+			//
+			// 			device['searchHistory'] = searchHistory;
+			// 			device.markModified('searchHistory'); // EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
+			//
+			// 			device.save(function (err, device){
+			// 				if (err){ }
+			// 			});
+			// 		}
+			// 	});
+			// }
 			
 			return followUpRequest(results, offset, limit);
 		})
@@ -283,8 +285,46 @@ router.get('/:resource', function(req, res, next) {
 			
 			var clean = (req.query.clean == null)? 'yes' : req.query.clean;
 			if (clean != 'yes'){
-				var json = JSON.stringify({'confirmation':'success', 'count':results.count, 'results':results.list}, null, 2); // this makes the json 'pretty' by indenting it
-				res.send(json);
+				// var json = JSON.stringify({'confirmation':'success', 'count':results.count, 'results':results.list}, null, 2); // this makes the json 'pretty' by indenting it
+				
+				if (req.query.device != null){
+					Device.findById(req.query.device, function(err, device){
+						if (err){
+							var json = JSON.stringify({'confirmation':'success', 'count':results.count, 'results':results.list}, null, 2); // this makes the json 'pretty' by indenting it
+							
+							res.send(json);
+							return;
+						}
+						
+						var searchHistory = device.searchHistory;
+						if (searchHistory[searchTerm]==null){
+							searchHistory[searchTerm] = 1;
+						}
+						else{
+							var count = searchHistory[searchTerm];
+							searchHistory[searchTerm] = count+1
+						}
+		
+						device['searchHistory'] = searchHistory;
+						device.markModified('searchHistory'); // EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
+		
+						device.save(function (err, device){
+							if (err){ }
+						});
+						
+						var json = JSON.stringify({'confirmation':'success', 'device':device.summary(), 'count':results.count, 'results':results.list}, null, 2); // this makes the json 'pretty' by indenting it
+
+						res.send(json);
+						return;
+					});
+				}
+				
+				// res.send(json);
+
+
+
+
+
 				return;
 			}
 			
