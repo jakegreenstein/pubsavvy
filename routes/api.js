@@ -254,6 +254,28 @@ router.get('/:resource', function(req, res, next) {
 		.then(function(results){
 			var offset = (req.query.offset == null)? '0' : req.query.offset;
 			var limit = (req.query.limit == null)? '100' : req.query.limit;
+			if (req.query.device != null){
+				Device.findById(req.query.device, function(err, device){
+					if (err==null){
+						var searchHistory = device.searchHistory;
+						if (searchHistory[searchTerm]==null){
+							searchHistory[searchTerm] = 1;
+						}
+						else{
+							var count = searchHistory[searchTerm];
+							searchHistory[searchTerm] = count+1
+						}
+			
+						device['searchHistory'] = searchHistory;
+						device.markModified('searchHistory'); // EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
+			
+						device.save(function (err, device){
+							if (err){ }
+						});
+					}
+				});
+			}
+			
 			return followUpRequest(results, offset, limit);
 		})
 		.then(function(results){
