@@ -168,6 +168,42 @@ var followUpRequest = function(results, offset, limit){
 	});
 }
 
+var updateDeviceSearchHistory = function(results, req){
+	return new Promise(function (resolve, reject){
+		if (req.query.device==null){
+			resolve(results);
+			return;
+		}
+		
+		Device.findById(req.query.device, function(err, device){
+			if (err){
+				resolve(results);
+				return;
+			}
+			
+			var searchTerm = req.query.term;
+			var searchHistory = device.searchHistory;
+			searchHistory[searchTerm] = (searchHistory[searchTerm]==null) ? 1 : searchHistory[searchTerm]+1;
+
+			device['searchHistory'] = searchHistory;
+			device.markModified('searchHistory'); // EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
+
+			device.save(function (err, device){
+				if (err){
+					resolve(results);
+					return;
+				}
+				
+				results['device'] = device.summary();
+				resolve(results);
+				return;
+			});
+		});
+	});
+}
+
+
+
 
 /* GET users listing. */
 router.get('/:resource', function(req, res, next) {
@@ -256,85 +292,19 @@ router.get('/:resource', function(req, res, next) {
 		.then(function(results){
 			var offset = (req.query.offset == null)? '0' : req.query.offset;
 			var limit = (req.query.limit == null)? '100' : req.query.limit;
-			// if (req.query.device != null){
-			// 	Device.findById(req.query.device, function(err, device){
-			// 		if (err==null){
-			// 			var searchHistory = device.searchHistory;
-			// 			if (searchHistory[searchTerm]==null){
-			// 				searchHistory[searchTerm] = 1;
-			// 			}
-			// 			else{
-			// 				var count = searchHistory[searchTerm];
-			// 				searchHistory[searchTerm] = count+1
-			// 			}
-			//
-			// 			device['searchHistory'] = searchHistory;
-			// 			device.markModified('searchHistory'); // EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
-			//
-			// 			device.save(function (err, device){
-			// 				if (err){ }
-			// 			});
-			// 		}
-			// 	});
-			// }
-			
 			return followUpRequest(results, offset, limit);
+		})
+		.then(function(results){
+			var clean = (req.query.clean == null)? 'yes' : req.query.clean;
+			var list = (clean == 'yes') ? cleanUpResults(results.list) : results.list;
+			var response = {'confirmation':'success', 'count':results.count, 'results':list};
+			return updateDeviceSearchHistory(response, req);
 		})
 		.then(function(results){
 			res.setHeader('content-type', 'application/json');
 			
-			var clean = (req.query.clean == null)? 'yes' : req.query.clean;
-			if (clean != 'yes'){
-				var json = JSON.stringify({'confirmation':'success', 'count':results.count, 'results':results.list}, null, 2); // this makes the json 'pretty' by indenting it
-				res.send(json);
-				return;
-			}
-			
-			var list = cleanUpResults(results.list);
-			
-			// var json = JSON.stringify({'confirmation':'success', 'count':results.count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
-			// res.send(json);
-			
-			
-			if (req.query.device != null){
-				Device.findById(req.query.device, function(err, device){
-					if (err){
-						var json = JSON.stringify({'confirmation':'success', 'count':results.count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
-						
-						res.send(json);
-						return;
-					}
-					
-					var searchHistory = device.searchHistory;
-					if (searchHistory[searchTerm]==null){
-						searchHistory[searchTerm] = 1;
-					}
-					else{
-						var count = searchHistory[searchTerm];
-						searchHistory[searchTerm] = count+1
-					}
-	
-					device['searchHistory'] = searchHistory;
-					device.markModified('searchHistory'); // EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
-	
-					device.save(function (err, device){
-						if (err){
-							var json = JSON.stringify({'confirmation':'success', 'count':results.count, 'results':results.list}, null, 2); // this makes the json 'pretty' by indenting it
-						
-							res.send(json);
-							return;
-						}
-						
-						var json = JSON.stringify({'confirmation':'success', 'device':device.summary(), 'count':results.count, 'results':list}, null, 2); // this makes the json 'pretty' by indenting it
-
-						res.send(json);
-						return;
-					});
-					
-				});
-			}
-			
-			
+			var json = JSON.stringify(results, null, 2);
+			res.send(json);
 			return;
 		})
 		.catch(function(err){
