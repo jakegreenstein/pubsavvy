@@ -313,41 +313,6 @@ router.get('/:resource', function(req, res, next) {
 		});
 	}
 	
-	/*
-	if (resource == 'related') {
-  		if(req.query.pmid == null){
-  			res.json({'confirmation':'fail', 'message':'Missing pmid parameter.'})
-  			return;
-  		}
-		
-		relatedArticlesRequest(req.query.pmid)
-		.then(function(results){
-			var eLinkResult = results.eLinkResult;
-			var linkSetDb = eLinkResult.LinkSet[0].LinkSetDb[0];
-			var linkIDs = linkSetDb.Link;
-
-			var numIDs = linkIDs.length;
-			var count = numIDs;
-			if(100 < numIDs)
-				numIDs = 100;
-
-			var linkIDString = linkIDs[0].Id;
-			for(var i = 1; i < numIDs; i++)
-				linkIDString = linkIDString+','+linkIDs[i].Id;
-			
-			
-			
-		})
-		.then(function(){
-			
-		})
-		.catch(function(err){
-			res.json({'confirmation':'fail','message':err.message});
-			return;
-		});
-	}
-	*/
-	
 	
 	if (resource == 'related') {
   		if(req.query.pmid == null){
@@ -396,6 +361,17 @@ router.get('/:resource', function(req, res, next) {
 			
 			});
 		});		
+  	}
+
+  	if(resource == 'article') {
+  		if(req.query.pmid == null){
+  			res.json({'confirmation':'fail', 'message':'Missing pmid parameter.'});
+  			return;
+  		}
+
+  		else
+  			res.json({'confirmation':'success', 'pmid':req.query.pmid})
+  		return;
   	}
 });
 
