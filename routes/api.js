@@ -357,6 +357,10 @@ router.get('/:resource', function(req, res, next) {
 				
 				var PubmedArticleSet = results['PubmedArticleSet'];
 				var articles = PubmedArticleSet['PubmedArticle'];
+				if(articles == null){
+					res.json({'confirmation':'fail', 'message':'Invalid pmid'});
+  					return;
+				}
 				var list = cleanUpResults(articles);
 				
 				// this makes the json 'pretty' by indenting it
@@ -390,6 +394,10 @@ router.get('/:resource', function(req, res, next) {
 				
 			var PubmedArticleSet = article['PubmedArticleSet'];
 			var articles = PubmedArticleSet['PubmedArticle'];
+			if(articles == null){
+				res.json({'confirmation':'fail', 'message':'Invalid pmid'});
+  				return;
+			}
 			var list = cleanUpResults(articles);
 				
 			// this makes the json 'pretty' by indenting it
