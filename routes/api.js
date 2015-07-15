@@ -85,8 +85,12 @@ function cleanUpResults(articles){
 	
 		if (articleSummary['Abstract'] == null) // not always there
 			summary['abstract'] = 'null';
-		else
-			summary['abstract'] = articleSummary['Abstract'][0]['AbstractText'][0]['_'];
+		else{
+			if( articleSummary['Abstract'][0]['AbstractText'][0]['_'] == null)
+				summary['abstract'] = articleSummary['Abstract'][0]['AbstractText'][0];
+			else
+				summary['abstract'] = articleSummary['Abstract'][0]['AbstractText'][0]['_'];
+		}
 	
 		var authors = new Array();
 		if (articleSummary['AuthorList'] != null){
@@ -122,99 +126,6 @@ function cleanUpResults(articles){
 	return list;
 }
 
-
-
-function cleanUpResultsID(articles){
-	var list = new Array();
-	
-	var months = ['Jan', 'Feb', 'Mac', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-	for (var i=0; i<articles.length; i++){
-		var summary = {};
-		var result = articles[i];
-		var MedlineCitation = result['MedlineCitation']; // this is an array of dictionaries
-	
-		var meta = MedlineCitation[0];
-		var article = meta['$']; // actual article meta is first item in the array
-	
-		var pmid = meta['PMID'][0]; // array
-		summary['pmid'] = pmid['_'];
-	
-		var dateCreated = meta['DateCreated'][0]; 
-		summary['date'] = months[dateCreated['Month'][0]-1]+' '+dateCreated['Day'][0]+' '+dateCreated['Year'][0];
-	
-		if (meta['DateRevised'] != null){
-			var dateRevised = meta['DateRevised'][0]; 
-			summary['dateRevised'] = months[dateRevised['Month'][0]-1]+' '+dateRevised['Day'][0]+' '+dateRevised['Year'][0];
-		}
-	
-	
-		var articleSummary = meta['Article'][0]; 
-
-		if(meta['KeywordList'] != null){
-			var keywordList = meta['KeywordList'][0]; 
-			var keywords = new Array();
-
-			for(var q=0; q < keywordList.Keyword.length; q++){
-				keywords.push(keywordList.Keyword[q]['_']);
-			}
-
-			summary['keywords'] = keywords;
-		}
-	
-		var journal = articleSummary['Journal'][0];
-		var journalInfo = {};
-		if (journal['Title'] != null)
-			journalInfo['title'] = journal['Title'][0];
-
-		if (journal['ISOAbbreviation'] != null)
-			journalInfo['iso'] = journal['ISOAbbreviation'][0];
-
-		if (journal['ISSN'] != null)
-			journalInfo['issn'] = journal['ISSN'][0]['_'];
-	
-	
-		summary['journal'] = journalInfo;
-	
-		summary['title'] = articleSummary['ArticleTitle'][0];
-	
-		if (articleSummary['Abstract'] == null) // not always there
-			summary['abstract'] = 'null';
-		else
-			summary['abstract'] = articleSummary['Abstract'][0]['AbstractText'][0];
-	
-		var authors = new Array();
-		if (articleSummary['AuthorList'] != null){
-			var authorList = articleSummary['AuthorList'][0]['Author'];
-			for (var j=0; j<authorList.length; j++){
-				var author = authorList[j];
-		
-				var authorInfo = {};
-				if (author['LastName'] != null)
-					authorInfo['lastName'] = author['LastName'][0];
-
-				if (author['ForeName'] != null)
-					authorInfo['firstName'] = author['ForeName'][0];
-
-				if (author['AffiliationInfo'] != null)
-					authorInfo['affiliation'] = author['AffiliationInfo'][0]['Affiliation'][0];
-			
-		
-				authors.push(authorInfo);
-			}
-		}
-
-	
-		summary['authors'] = authors;
-	
-		if (articleSummary['Language'] != null) // not always there
-			summary['language'] = articleSummary['Language'][0];
-
-	
-		list.push(summary);
-	}
-	
-	return list;
-}
 
 
 var relatedArticlesRequest = function(pmid){
@@ -446,7 +357,7 @@ router.get('/:resource', function(req, res, next) {
 				
 				var PubmedArticleSet = results['PubmedArticleSet'];
 				var articles = PubmedArticleSet['PubmedArticle'];
-				var list = cleanUpResultsID(articles);
+				var list = cleanUpResults(articles);
 				
 				// this makes the json 'pretty' by indenting it
 				var json = JSON.stringify({'confirmation':'success', 'count':count,  'results':list}, null, 2); 
@@ -479,7 +390,7 @@ router.get('/:resource', function(req, res, next) {
 				
 			var PubmedArticleSet = article['PubmedArticleSet'];
 			var articles = PubmedArticleSet['PubmedArticle'];
-			var list = cleanUpResultsID(articles);
+			var list = cleanUpResults(articles);
 				
 			// this makes the json 'pretty' by indenting it
 			var json = JSON.stringify({'confirmation':'success',  'article':list[0]}, null, 2); 
