@@ -59,6 +59,11 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http){
             console.log("error", data, status, headers, config);
         });
 	}
+
+
+	$scope.login = function(){
+		console.log('Login User Info: '+JSON.stringify($scope.loginUser));
+	}
 	
 
 

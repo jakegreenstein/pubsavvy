@@ -97,7 +97,7 @@
                       </div>
                       <div class="row" style="background:#fff;border-top:1px solid #ccc;margin-top:36px; padding-top:24px; padding-bottom:24px">
                         
-                          <button ng-click="login()" data-toggle="modal" data-target="#registerModal" type="submit" class="btn btn-success btn-large">Log in</button>
+                          <button ng-click="login()" data-toggle="modal" data-target="#loginModal" type="submit" class="btn btn-success btn-large">Log in</button>
                           
                       </div>
                 </div>
