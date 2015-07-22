@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Manage Account</title>
+    
+
+    <!-- ANGULAR -->
+    <!--link rel="stylesheet" href="/admin/styles/style.css"-->
+    <script src="https://malsup.github.com/jquery.form.js"></script>
+    <script src="/admin/js/fileupload/angular-file-upload-shim.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js'></script>
+    <script src="https://code.angularjs.org/1.2.20/angular-sanitize.min.js"></script>  
+    <script src="/admin/js/fileupload/angular-file-upload.js"></script>
+    
+    <script src='/app/app.js'></script>
+    <script src='/app/autosearch.js'></script>
+    <script src='/app/newdevice.js'></script>
+    <script src='/app/profiles.js'></script>
+    <script src='/app/register.js'></script>
+    <script src='/app/search.js'></script>
+    <script src='/app/account.js'></script>
+
+  </head>
+
+  <body ng-app="PubSavvySwipe" ng-controller="AccountController" style="padding:20px" ng-init="init()">
+    <h2>Manage Account</h2>
+    
+    <div class="section">
+      <input ng-model="profile.firstName" type="text" placeholder="First Name"><br /><br />
+      <input ng-model="profile.lastName" type="text" placeholder="Last Name"><br /><br />
+      <input ng-model="profile.email" type="text" placeholder="Email"><br /><br />
+      <input ng-model="profile.password" type="password" placeholder="Password"><br /><br />
+      
+      <div style="min-height:180px" class ="section" ng-file-drop="onFileSelect($files, 'image', 'profile')">
+        <img align="left" style="width:120px;margin-right:12px" src="profile.image"/>
+        <h2>Profile Picture</h2>
+        <p>To change your image drag and drop it here</p>
+      </div>
+      
+      <br /><br />
+      
+      <button ng-click="update()">Create Profile</button><br /><br />
+      
+    </div>
+    
+
+
+    
+	
+	
+  </body>
+  
+  
+  
+  
+  
+</html>
