@@ -4,6 +4,23 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>PubSavvy - Frame Research</title>
+
+    <!-- ANGULAR -->
+    <!--link rel="stylesheet" href="/admin/styles/style.css"-->
+    <script src="https://malsup.github.com/jquery.form.js"></script>
+    <script src="/admin/js/fileupload/angular-file-upload-shim.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js'></script>
+    <script src="https://code.angularjs.org/1.2.20/angular-sanitize.min.js"></script>  
+    <script src="/admin/js/fileupload/angular-file-upload.js"></script>
+    
+    <script src='/app/app.js'></script>
+    <script src='/app/autosearch.js'></script>
+    <script src='/app/newdevice.js'></script>
+    <script src='/app/profiles.js'></script>
+    <script src='/app/register.js'></script>
+    <script src='/app/search.js'></script>
+
+
     <meta name="description" content="Home Page Version 1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory-->
@@ -28,7 +45,39 @@
       <link rel="stylesheet" href="styles/styleNoJs.css">
     </noscript>
   </head>
-  <body>
+
+
+
+  <body ng-app="PubSavvySwipe" ng-controller="RegisterController" style="padding:20px" ng-init="init()">
+
+    <!-- Register Modal -->
+        <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div style="width:35%;min-width:300px" class="modal-dialog">
+            <div class="modal-content">
+              <button type="button" class="close" data-dismiss="modal"><span style="margin-right:5px;" aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <div style="background:rgba(249, 249, 249, 0.96);border:1px solid #ddd;padding:32px 16px 0px 16px;min-height:300px;text-align:center">
+          <img style="width:60%" src="/site/img/logo-dark.png" /><br />
+          <hr />
+                    <h3 style="margin-top:30px;text-align:center">Register</h3>
+                    <div class="contact-form" style="margin-top:40px;width:90%;margin-left:auto;margin-right:auto">
+                        <input ng-model="profile.firstName" type="text" placeholder="First Name" class="form-control">
+                        <input ng-model="profile.lastName" type="text" placeholder="Last Name" class="form-control">
+                        <input ng-model="profile.email" type="text" placeholder="Email" class="form-control">
+                        <input ng-model="profile.password" type="password" placeholder="Password" class="form-control">
+                    </div>
+                    <div class="row" style="background:#fff;border-top:1px solid #ddd;margin-top:36px">
+                          <button ng-click="register()" data-toggle="modal" data-target="#registerModal" type="submit" class="btn btn-success btn-large">Sign Up</button>
+                    </div>
+              </div>
+        
+            </div>
+          </div>
+        </div>        
+
+
+
+
+
     <div id="load"></div><!--[if lt IE 9]>
     <p class="browsehappy">You are using an strong outdated browser. <br>Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -44,14 +93,18 @@
             <ul class="nav yamm navbar-nav navbar-right main-nav">
                     <!-- istanzio un id univoco-->
                     <li><a href="#" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >About</a></li>                   
-                    <li><a href="/admin/faqs" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >FAQ</a></li>                   
+                    <li><a href="/admin/faqs" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >FAQ</a></li> 
+
+                    <li ng-show="currentUser.loggedIn == 'no' "><a href="#" data-toggle="modal" data-target="#registerModal">Join</a></li>   
+
+
             </ul>
           </div>
         </div>
       </nav>
     
       <!-- Start Portfolio section-->
-      <section id="portfolio" class="section-gray sep-top-3x">
+      <section id="portfolio" class="sep-top-3x">
         <div class="container">
           <div class="row">
           <div class="col-md-4">
