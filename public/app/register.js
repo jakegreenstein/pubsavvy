@@ -41,7 +41,7 @@ app.controller('RegisterController', ['$scope', '$http', function($scope, $http)
 		
 		var json = JSON.stringify($scope.profile);
 		
-		
+		$scope.profile = {'email':'', 'password':'', 'firstName':'', 'lastName':''};
 		
     	var url = '/api/profile';
         $http.post(url, json).success(function(data, status, headers, config) {
