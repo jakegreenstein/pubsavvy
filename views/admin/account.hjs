@@ -34,7 +34,7 @@
       <input ng-model="profile.password" type="password" placeholder="Password"><br /><br />
       
       <div style="min-height:180px" class ="section" ng-file-drop="onFileSelect($files, 'image', 'profile')">
-        <img align="left" style="width:120px;margin-right:12px" src="profile.image"/>
+        <img src="{{profile.image}}"align="left" style="width:120px;margin-right:12px"/>
         <h2>Profile Picture</h2>
         <p>To change your image drag and drop it here</p>
       </div>
