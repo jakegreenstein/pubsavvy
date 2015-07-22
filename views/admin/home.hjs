@@ -17,8 +17,9 @@
     <script src='/app/autosearch.js'></script>
     <script src='/app/newdevice.js'></script>
     <script src='/app/profiles.js'></script>
-    <script src='/app/register.js'></script>
+    <script src='/app/home.js'></script>
     <script src='/app/search.js'></script>
+    <script src='/app/account.js'></script>
 
 
     <meta name="description" content="Home Page Version 1">
@@ -48,7 +49,7 @@
 
 
 
-  <body ng-app="PubSavvySwipe" ng-controller="RegisterController" style="padding:20px" ng-init="init()">
+  <body ng-app="PubSavvySwipe" ng-controller="HomeController" style="padding:20px" ng-init="init()">
 
     <!-- Register Modal -->
         <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -77,7 +78,33 @@
         
             </div>
           </div>
-        </div>        
+        </div> 
+
+
+    <!-- Login Modal -->
+          <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div style="width:35%;min-width:300px" class="modal-dialog">
+              <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal"><span style="margin-right:5px;" aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                  <div style="background:rgba(249, 249, 249, 0.96);border:1px solid #ddd;padding:32px 16px 0px 16px;min-height:300px;text-align:center">
+            <img style="width:60%" src="/admin/img/pubsavvy-logo.png" /><br />
+            <hr />
+                      <h4 style="margin-top:30px;text-align:center">Log In</h4>
+                      <div class="contact-form" style="margin-top:40px;width:90%;margin-left:auto;margin-right:auto">
+                          <input ng-model="loginUser.email" type="text" placeholder="Email" class="form-control" style="border:1px solid #ccc">
+                          <br>
+                          <input ng-model="loginUser.password" type="password" placeholder="Password" class="form-control" style="border:1px solid #ccc">
+                      </div>
+                      <div class="row" style="background:#fff;border-top:1px solid #ccc;margin-top:36px; padding-top:24px; padding-bottom:24px">
+                        
+                          <button ng-click="login()" data-toggle="modal" data-target="#registerModal" type="submit" class="btn btn-success btn-large">Log in</button>
+                          
+                      </div>
+                </div>
+          
+              </div>
+            </div>
+          </div>        
 
 
 
@@ -100,9 +127,9 @@
                     <li><a href="#" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >About</a></li>                   
                     <li><a href="/admin/faqs" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >FAQ</a></li> 
 
+                    <li ng-show="currentUser.loggedIn == 'no' "><a href="#" data-toggle="modal" data-target="#loginModal">Log In</a></li>  
+
                     <li ng-show="currentUser.loggedIn == 'no' "><a href="#" data-toggle="modal" data-target="#registerModal">Join</a></li>   
-
-
             </ul>
           </div>
         </div>
