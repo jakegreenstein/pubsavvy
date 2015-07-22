@@ -1,4 +1,4 @@
-var app = angular.module('PubSavvySwipe', ['ProfilesModule', 'SearchModule', 'AutoSearchModule', 'NewDeviceModule', 'RegisterModule']);
+var app = angular.module('PubSavvySwipe', ['ProfilesModule', 'SearchModule', 'AutoSearchModule', 'NewDeviceModule', 'RegisterModule', 'AccountModule']);
 
 
 app.directive('spinner', function() {

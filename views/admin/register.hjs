@@ -5,7 +5,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>Register</title>
 	<!-- ANGULAR -->
-    <link rel="stylesheet" href="/admin/styles/style.css">
+    <!--link rel="stylesheet" href="/admin/styles/style.css"-->
     <script src="https://malsup.github.com/jquery.form.js"></script>
     <script src="/admin/js/fileupload/angular-file-upload-shim.js"></script>
     <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js'></script>
@@ -25,6 +25,7 @@
     <h1>Register Account</h1>
 
     <div>
+        <h2>Sign Up as a Traveler</h2>
         <input ng-model="profile.firstName" type="text" placeholder="First Name" > <br/><br/>
         <input ng-model="profile.lastName" type="text" placeholder="Last Name" > <br/><br/>
         <input ng-model="profile.email" type="text" placeholder="Email" > <br/><br/>
