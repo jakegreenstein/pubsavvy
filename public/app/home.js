@@ -1,12 +1,13 @@
-var app = angular.module('RegisterModule', []);
+var app = angular.module('HomeModule', []);
 
-app.controller('RegisterController', ['$scope', '$http', function($scope, $http){
+app.controller('HomeController', ['$scope', '$http', function($scope, $http){
 	$scope.currentUser = {'loggedIn':'no'};
 	$scope.profile = {'email':'', 'password':'', 'firstName':'', 'lastName':''};
+	$scope.loginUser = {'email':'', 'password':''};
 
 	
 	$scope.init = function(){
-		console.log('Register Controller: INIT');
+		console.log('Home Controller: INIT');
 	}
 
 	$scope.register = function(){		
