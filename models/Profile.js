@@ -10,7 +10,7 @@ var ProfileSchema = new mongoose.Schema({
 });
 
 ProfileSchema.methods.summary = function(){
-	return {'firstName':this.firstName, 'lastName':this.lastName, 'image':this.image, 'timestamp':this.timestamp, 'id':this._id};
+	return {'firstName':this.firstName, 'lastName':this.lastName, 'email':this.email, 'image':this.image, 'timestamp':this.timestamp, 'id':this._id};
 };
 
 module.exports = mongoose.model('ProfileSchema',ProfileSchema);
