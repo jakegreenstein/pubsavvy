@@ -11,6 +11,7 @@
     <script src = '/app/search.js'></script>
     <script src = '/app/autosearch.js'></script>
     <script src = '/app/newdevice.js'></script>
+    <script src = '/app/register.js'></script>
     
     <style> table, th, td {
       border: 1px solid black;
