@@ -127,9 +127,12 @@
                     <li><a href="#" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >About</a></li>                   
                     <li><a href="/admin/faqs" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >FAQ</a></li> 
 
+                    <li ng-show="currentUser.loggedIn == 'yes'"><a href="/admin/account" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >Account</a></li> 
+
                     <li ng-show="currentUser.loggedIn == 'no' "><a href="#" data-toggle="modal" data-target="#loginModal">Log In</a></li>  
 
                     <li ng-show="currentUser.loggedIn == 'no' "><a href="#" data-toggle="modal" data-target="#registerModal">Join</a></li>   
+
 
                     <li ng-show="currentUser.loggedIn == 'yes' "><a ng-click="logout()">Log Out</a></li>  
             </ul>
