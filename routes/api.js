@@ -7,6 +7,8 @@ var Device = require('../models/Device');
 var AutoSearch = require('../models/AutoSearch');
 var router = express.Router();
 
+var accountController = require('../controllers/AccountController.js');
+var controllers = {'account':accountController};
 
 function urlRequest(url, completion){
 	request.get(url, function (error, response, body) {
@@ -126,8 +128,6 @@ function cleanUpResults(articles){
 	return list;
 }
 
-
-
 var relatedArticlesRequest = function(pmid){
 	return new Promise(function (resolve, reject){
 		var url = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&db=pubmed&id='+pmid;
@@ -138,8 +138,6 @@ var relatedArticlesRequest = function(pmid){
 		});
 	});
 }
-
-
 
 var searchRequest = function(searchTerm){
 	return new Promise(function (resolve, reject){
@@ -208,8 +206,6 @@ var updateDeviceSearchHistory = function(results, req){
 }
 
 
-
-
 /* GET users listing. */
 router.get('/:resource', function(req, res, next) {
 
@@ -233,7 +229,6 @@ router.get('/:resource', function(req, res, next) {
 		return;
 	}
 
-	
 	if (resource=='device'){
 		Device.find(req.query, function(err, devices){
 			if (err){
@@ -284,7 +279,6 @@ router.get('/:resource', function(req, res, next) {
 		return;
 	}
 	
-	
 	if (resource == 'search'){
 		var searchTerm = req.query.term;
 		if (searchTerm==null){
@@ -317,7 +311,6 @@ router.get('/:resource', function(req, res, next) {
 			return;
 		});
 	}
-	
 	
 	if (resource == 'related') {
   		if(req.query.pmid == null){
@@ -407,6 +400,11 @@ router.get('/:resource', function(req, res, next) {
 			
 		});
   	}
+
+  	if (resource == 'currentuser'){ // check if current user is logged in
+		accountController.checkCurrentUser(req, res);
+		return;
+	}
 });
 
 router.get('/:resource/:id', function(req, res, next) {
@@ -445,7 +443,6 @@ router.get('/:resource/:id', function(req, res, next) {
 		});
 		return;
   	}
-
   	
 });
 
@@ -463,7 +460,6 @@ router.post('/:resource', function(req, res, next) {
 		});
 		return;
 	}
-	
 	
   	if (resource=='device'){
 		Device.create(req.body, function(err, device){
@@ -488,7 +484,6 @@ router.post('/:resource', function(req, res, next) {
 			res.json({'confirmation':'success', 'autosearch':autosearch.summary()});
 		});
 	}
-
 
 	if (resource == 'login'){
 		var email = req.body.email;
@@ -530,7 +525,6 @@ router.put('/:resource/:id', function(req, res, next) {
 		res.send({'confirmation':'fail', 'message':'Missing resource identifier.'});
 		return
 	}
-	
 	
   	if (resource=='device'){
 		var query = {_id: identifier};

@@ -8,6 +8,20 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http){
 	
 	$scope.init = function(){
 		console.log('Home Controller: INIT');
+		checkCurrentUser();
+	}
+
+	function checkCurrentUser(){
+		var url = '/api/currentuser';
+        $http.get(url).success(function(data, status, headers, config) {
+            console.log(JSON.stringify(data));
+            if (data['confirmation'] != 'success')
+                return;
+    
+            $scope.profile = data['profile'];
+        }).error(function(data, status, headers, config) {
+            console.log("error", data, status, headers, config);
+        });
 	}
 
 	$scope.register = function(){		
@@ -93,8 +107,5 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http){
         });
 	}
 	
-
-
-
 	
 }]);
