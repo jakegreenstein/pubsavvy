@@ -62,7 +62,35 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http){
 
 
 	$scope.login = function(){
-		console.log('Login User Info: '+JSON.stringify($scope.loginUser));
+		if ($scope.loginUser.email.length==0){
+			alert("Please enter your email");
+			return;
+		}
+
+		if ($scope.loginUser.password.length==0){
+			alert("Please enter your password");
+			return;
+		}
+
+		var json = JSON.stringify($scope.loginUser);
+		console.log('Login: '+json);
+		
+		var url = '/api/login';
+        $http.post(url, json).success(function(data, status, headers, config) {
+            console.log(JSON.stringify(data));
+            var confirmation = data['confirmation'];
+
+            if (confirmation != 'success'){
+                alert(data['message']);
+                return;
+            }
+			
+			$scope.profile = data['profile'];
+            window.location.href = '/site/forum';
+
+        }).error(function(data, status, headers, config) {
+            console.log("error", data, status, headers, config);
+        });
 	}
 	
 
