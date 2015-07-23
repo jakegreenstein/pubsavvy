@@ -130,6 +130,8 @@
                     <li ng-show="currentUser.loggedIn == 'no' "><a href="#" data-toggle="modal" data-target="#loginModal">Log In</a></li>  
 
                     <li ng-show="currentUser.loggedIn == 'no' "><a href="#" data-toggle="modal" data-target="#registerModal">Join</a></li>   
+
+                    <li ng-show="currentUser.loggedIn == 'yes' "><a ng-click="logout()">Log Out</a></li>  
             </ul>
           </div>
         </div>

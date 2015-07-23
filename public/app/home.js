@@ -19,6 +19,7 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http){
                 return;
     
             $scope.profile = data['profile'];
+            $scope.currentUser.loggedIn = 'yes';
         }).error(function(data, status, headers, config) {
             console.log("error", data, status, headers, config);
         });
@@ -107,5 +108,9 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http){
         });
 	}
 	
+
+	$scope.logout = function(){
+		console.log('logout and delete session id');
+	}
 	
 }]);

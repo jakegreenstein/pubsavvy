@@ -405,7 +405,9 @@ router.get('/:resource', function(req, res, next) {
 		accountController.checkCurrentUser(req, res);
 		return;
 	}
+
 });
+
 
 router.get('/:resource/:id', function(req, res, next) {
 	var resource = req.params.resource;
@@ -445,7 +447,6 @@ router.get('/:resource/:id', function(req, res, next) {
   	}
   	
 });
-
 
 
 router.post('/:resource', function(req, res, next) {
