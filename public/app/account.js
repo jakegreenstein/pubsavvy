@@ -2,12 +2,33 @@ var app = angular.module('AccountModule', ['angularFileUpload']);
 
 app.controller('AccountController', ['$scope', '$http', '$upload', function($scope, $http, $upload){
 	$scope.currentUser = {'loggedIn':'no'};
-	$scope.profile = {'email':'t', 'password':'e', 'firstName':'m', 'lastName':'p', 'image':'http://imaalibag.com/wp-content/uploads/2013/11/no-profile-image.jpg'};
+	$scope.profile = {'email':'', 'password':'', 'firstName':'', 'lastName':'', 'image':''};
 	$scope.upload;
 	
 	$scope.init = function(){
 		console.log('Account Controller: INIT');
+        checkCurrentUser();
 	}
+
+    function checkCurrentUser(){
+        var url = '/api/currentuser';
+        $http.get(url).success(function(data, status, headers, config) {
+            console.log(JSON.stringify(data));
+            if (data['confirmation'] != 'success'){
+                //alert(data['message']);
+                return;
+            }
+ 
+            $scope.profile = data['profile'];
+            console.log($scope.profile.image);
+            if($scope.profile.image == '' || $scope.profile.image == "none"){
+                $scope.profile.image = 'http://imaalibag.com/wp-content/uploads/2013/11/no-profile-image.jpg';
+            }
+            $scope.currentUser.loggedIn = 'yes';
+        }).error(function(data, status, headers, config) {
+            console.log("error", data, status, headers, config);
+        });
+    }
 
 	
 	$scope.onFileSelect = function(files, property, entity){

@@ -28,9 +28,13 @@
     <h2>Manage Account</h2>
     
     <div class="section">
+      First Name<br>
       <input ng-model="profile.firstName" type="text" placeholder="First Name"><br /><br />
+      Last Name<br>
       <input ng-model="profile.lastName" type="text" placeholder="Last Name"><br /><br />
+      Email<br>
       <input ng-model="profile.email" type="text" placeholder="Email"><br /><br />
+      Password<br>
       <input ng-model="profile.password" type="password" placeholder="Password"><br /><br />
       
       <div style="min-height:180px" class ="section" ng-file-drop="onFileSelect($files, 'image', 'profile')">
