@@ -592,6 +592,20 @@ router.put('/:resource/:id', function(req, res, next) {
 			res.json({'confirmation':'success', 'autosearch':autosearch.summary()});
 		});
 	}
+
+	if (resource=='profile'){
+		var query = {_id: identifier};
+		var options = {new: true};		
+		
+		Profile.findOneAndUpdate(query, req.body, options,function(err, profile){
+			if (err){
+				res.send({'confirmation':'fail', 'message':err.message});
+				return;
+			}
+			
+			res.json({'confirmation':'success', 'profile':profile.summary()});
+		});
+	}
 });
 
 module.exports = router;

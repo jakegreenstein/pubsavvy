@@ -27,32 +27,31 @@
   <body ng-app="PubSavvySwipe" ng-controller="AccountController" style="padding:20px" ng-init="init()">
     <h2>Manage Account</h2>
     
-    <div class="section">
+    <div>
+      <br>
+      <div style="min-height:180px" class ="section" ng-file-drop="onFileSelect($files, 'image', 'profile')">
+        <img src="{{profile.image}}"align="left" style="width:120px;margin-right:12px"/>
+        <h2>Profile Picture</h2>
+        <p>To change your image drag and drop it here</p>
+      </div>
+
       First Name<br>
       <input ng-model="profile.firstName" type="text" placeholder="First Name"><br /><br />
       Last Name<br>
       <input ng-model="profile.lastName" type="text" placeholder="Last Name"><br /><br />
       Email<br>
       <input ng-model="profile.email" type="text" placeholder="Email"><br /><br />
-      Password<br>
-      <input ng-model="profile.password" type="password" placeholder="Password"><br /><br />
+      New Password<br>
+      <input ng-model="newPassword" type="password" placeholder="New Password"><br /><br />
+      Confirm New Password<br>
+      <input ng-model="confirmPassword" type = "password" placeholder = "Confirm New Password"><br />
+
+      <br />
       
-      <div style="min-height:180px" class ="section" ng-file-drop="onFileSelect($files, 'image', 'profile')">
-        <img src="{{profile.image}}"align="left" style="width:120px;margin-right:12px"/>
-        <h2>Profile Picture</h2>
-        <p>To change your image drag and drop it here</p>
-      </div>
-      
-      <br /><br />
-      
-      <button ng-click="update()">Create Profile</button><br /><br />
+      <button ng-click="update()">Update Profile</button><br /><br />
       
     </div>
-    
 
-
-    
-	
 	
   </body>
   
