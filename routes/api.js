@@ -456,6 +456,7 @@ router.post('/:resource', function(req, res, next) {
 				res.send({'confirmation':'fail', 'message':err.message});
 				return;
 			}
+			req.session.user = profile._id; // install cookie with profile id set to 'user'
 			res.json({'confirmation':'success', 'profile':profile.summary()});
 		});
 		return;
