@@ -406,6 +406,18 @@ router.get('/:resource', function(req, res, next) {
 		return;
 	}
 
+	if (resource == 'logout'){
+		req.session.reset();
+  		//res.redirect('/');
+  		console.log(req.session.user);
+  		if(req.session.user != undefined){
+  			res.json({'confirmation':'fail', 'message':'req.session.user != underfined'});
+  			return;
+  		}
+
+  		res.json({'confirmation':'success'});
+	}
+
 });
 
 

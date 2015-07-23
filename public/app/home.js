@@ -15,9 +15,11 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http){
 		var url = '/api/currentuser';
         $http.get(url).success(function(data, status, headers, config) {
             console.log(JSON.stringify(data));
-            if (data['confirmation'] != 'success')
-                return;
-    
+            if (data['confirmation'] != 'success'){
+            	//alert(data['message']);
+            	return;
+            }
+ 
             $scope.profile = data['profile'];
             $scope.currentUser.loggedIn = 'yes';
         }).error(function(data, status, headers, config) {
@@ -111,6 +113,19 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http){
 
 	$scope.logout = function(){
 		console.log('logout and delete session id');
+		var url = '/api/logout';
+        $http.get(url).success(function(data, status, headers, config) {
+            console.log(JSON.stringify(data));
+            if (data['confirmation'] != 'success'){
+            	alert(data['message']);
+                return;
+            }
+            $scope.profile = {'email':'', 'password':'', 'firstName':'', 'lastName':''};
+            $scope.currentUser.loggedIn = 'no';
+
+        }).error(function(data, status, headers, config) {
+            console.log("error", data, status, headers, config);
+        });
 	}
 	
 }]);
