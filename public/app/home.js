@@ -100,7 +100,7 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http){
             }
 			
 			$scope.profile = data['profile'];
-            window.location.href = '/site/forum';
+            window.location.href = '/admin/home';
 
         }).error(function(data, status, headers, config) {
             console.log("error", data, status, headers, config);
