@@ -2,8 +2,10 @@ var app = angular.module('AccountModule', ['angularFileUpload']);
 
 app.controller('AccountController', ['$scope', '$http', '$upload', function($scope, $http, $upload){
 	$scope.currentUser = {'loggedIn':'no'};
-	$scope.profile = {'email':'', 'password':'', 'firstName':'', 'lastName':'', 'image':''};
+	$scope.profile = {'email':'', 'firstName':'', 'lastName':'', 'image':''};
 	$scope.upload;
+    $scope.newPassword = '';
+    $scope.confirmPassword = '';
 	
 	$scope.init = function(){
 		console.log('Account Controller: INIT');
@@ -87,6 +89,40 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
 
           });
         }
+    }
+
+    $scope.update = function(){
+        if($scope.newPassword != $scope.confirmPassword){
+            alert('Passwords Do Not Match');
+            return;
+        }
+
+        if($scope.newPassword != '' && $scope.newPassword == $scope.confirmPassword){
+            $scope.profile.password = $scope.newPassword;
+        }
+
+        var url = '/api/profile/'+ $scope.profile.id;
+        var json = JSON.stringify($scope.profile);
+
+        $http.put(url, json).success(function(data, status, headers, config) {
+            var confirmation = data['confirmation'];
+            //console.log('CONFIRMATION: '+JSON.stringify(data));
+            
+            if (confirmation != 'success'){
+                alert(data['message']);
+                return;
+            }
+            
+           var p = data['profile'];
+           alert(p.firstName+ ' '+p.lastName+' succesfully updated profile.');
+           //$scope.profile = {'firstName':'', 'lastName':'', 'email':'', 'password':''};
+            
+        }).error(function(data, status, headers, config) {
+            console.log("error", data, status, headers, config);
+        });
+
+        
+
     }
 
 }]);
