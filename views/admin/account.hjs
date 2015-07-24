@@ -6,7 +6,7 @@
     <title>Manage Account</title>
     
 
-    <!-- ANGULAR -->
+<!-- ANGULAR -->
     <!--link rel="stylesheet" href="/admin/styles/style.css"-->
     <script src="https://malsup.github.com/jquery.form.js"></script>
     <script src="/admin/js/fileupload/angular-file-upload-shim.js"></script>
@@ -22,37 +22,144 @@
     <script src='/app/search.js'></script>
     <script src='/app/account.js'></script>
 
+
+    <meta name="description" content="Account Page">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory-->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Montserrat:400,700%7COpen+Sans:300italic,400italic,600italic,700italic,800italic,300,400,600,700">
+    <link rel="stylesheet" href="styles/font-awesome.css">
+    <link rel="stylesheet" href="styles/owl.carousel.css">
+    <link rel="stylesheet" href="styles/owl.theme.css">
+    <link rel="stylesheet" href="styles/slit-slider-style.css">
+    <link rel="stylesheet" href="styles/slit-slider-custom.css">
+    <link rel="stylesheet" href="styles/idangerous.swiper.css">
+    <link rel="stylesheet" href="styles/yamm.css">
+    <link rel="stylesheet" href="styles/animate.css">
+    <link rel="stylesheet" href="styles/prettyPhoto.css">
+    <link rel="stylesheet" href="styles/bootstrap-slider.css">
+    <link rel="stylesheet" href="styles/device-mockups2.css">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/main-responsive.css">
+    <link id="primary_color_scheme" rel="stylesheet" href="styles/theme_meadow.css">
+    <script src="scripts/vendor/modernizr.js"></script>
+    <noscript>
+      <link rel="stylesheet" href="styles/styleNoJs.css">
+    </noscript>
   </head>
 
   <body ng-app="PubSavvySwipe" ng-controller="AccountController" style="padding:20px" ng-init="init()">
-    <h2>Manage Account</h2>
-    
-    <div>
-      <br>
-      <div style="min-height:180px" class ="section" ng-file-drop="onFileSelect($files, 'image', 'profile')">
-        <img src="{{profile.image}}"align="left" style="width:120px;margin-right:12px"/>
-        <h2>Profile Picture</h2>
-        <p>To change your image drag and drop it here</p>
-      </div>
+    <div id="load"></div><!--[if lt IE 9]>
+    <p class="browsehappy">You are using an strong outdated browser. <br>Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="page">
 
-      First Name<br>
-      <input ng-model="profile.firstName" type="text" placeholder="First Name"><br /><br />
-      Last Name<br>
-      <input ng-model="profile.lastName" type="text" placeholder="Last Name"><br /><br />
-      Email<br>
-      <input ng-model="profile.email" type="text" placeholder="Email"><br /><br />
-      New Password<br>
-      <input ng-model="newPassword" type="password" placeholder="New Password"><br /><br />
-      Confirm New Password<br>
-      <input ng-model="confirmPassword" type = "password" placeholder = "Confirm New Password"><br />
+      <div class="sep-top-3x">
 
-      <br />
-      
-      <button ng-click="update()">Update Profile</button><br /><br />
-      
+        <h2 class="bordered-left bordered-right upper wow flipInX animated" style="visibility: visible; animation-name: flipInX;">Manage Account</h2>
+        <hr>
+        <div style="padding-left:24px">
+          <div style="min-height:120px" class ="section" ng-file-drop="onFileSelect($files, 'image', 'profile')">
+            <img src="{{profile.image}}"align="left" style="width:120px;margin-right:12px"/>
+            <h5>Profile Picture</h5>
+            <p>To update your profile <br>drag and drop it here</p>
+          </div>
+
+
+          <div>
+            <hr>
+            <h5>Account Name</h5>
+            First Name:<br>
+            <input ng-model="profile.firstName" type="text" placeholder="First Name" style="padding-left:6px"><br /><br />
+            Last Name:<br>
+            <input ng-model="profile.lastName" type="text" placeholder="Last Name" style="padding-left:6px"><br /><hr>
+            <h5>Contact Information</h5>
+            Email:<br>
+            <input ng-model="profile.email" type="text" placeholder="Email" style="padding-left:6px"><br /><hr>
+            <h5>Password</h5>
+            New Password:<br>
+            <input ng-model="newPassword" type="password" placeholder="New Password" style="padding-left:6px"><br /><br />
+            Confirm Password:<br>
+            <input ng-model="confirmPassword" type = "password" placeholder = "New Password" style="padding-left:6px"><br /><hr>
+
+            <div style="width:194px; margin:auto">
+              <button ng-click="update()" class="btn btn-success btn-large" align="center"><i class="fa fa-check-circle-o"></i> Update Profile</button><br /><br />
+            </div>
+
+            
+
+
+          </div>
+        </div>
+      </div> 
+
+      <!-- Start Nav Section-->
+      <nav id="main-navigation" role="navigation" class="navbar navbar-fixed-top navbar-standard">        
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle"><i class="fa fa-align-justify fa-lg"></i></button><a href="/admin/home" class="navbar-brand"><img src="/admin/img/pubsavvy-logo-white.png" alt="" class="logo-white"><img src="/admin/img/pubsavvy-logo.png" alt="" class="logo-dark"></a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <button type="button" class="navbar-toggle"><i class="fa fa-close fa-lg"></i></button>
+            <ul class="nav yamm navbar-nav navbar-right main-nav">
+                    <!-- istanzio un id univoco-->
+                    <li><a href="/admin/home" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >About</a></li>                   
+                    <li><a href="/admin/faqs" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >FAQ</a></li> 
+
+                    <li ng-show="currentUser.loggedIn == 'yes'"><a href="/admin/account" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >Account</a></li> 
+
+                    <li ng-show="currentUser.loggedIn == 'no' "><a href="#" data-toggle="modal" data-target="#loginModal">Log In</a></li>  
+
+                    <li ng-show="currentUser.loggedIn == 'no' "><a href="#" data-toggle="modal" data-target="#registerModal">Join</a></li>   
+
+
+                    <li ng-show="currentUser.loggedIn == 'yes' "><a ng-click="logout()">Log Out</a></li>  
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- Start Footer section-->
+      <footer id="footer">
+        <div class="copyright sep-top-xs sep-bottom-xs" style="width:100%;">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12"><small>&copy PubSavvy</small></div>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- End Footer section-->
     </div>
-
-	
+    <script src="scripts/vendor/jquery.js"></script>
+    <script src="scripts/vendor/queryloader2.min.js"></script>
+    <script src="scripts/vendor/owl.carousel.js"></script>
+    <script src="scripts/vendor/jquery.ba-cond.min.js"></script>
+    <script src="scripts/vendor/jquery.slitslider.js"></script>
+    <script src="scripts/vendor/idangerous.swiper.js"></script>
+    <script src="scripts/vendor/jquery.fitvids.js"></script>
+    <script src="scripts/vendor/jquery.countTo.js"></script>
+    <script src="scripts/vendor/TweenMax.min.js"></script>
+    <script src="scripts/vendor/ScrollToPlugin.min.js"></script>
+    <script src="scripts/vendor/jquery.scrollmagic.min.js"></script>
+    <script src="scripts/vendor/jquery.easypiechart.js"></script>
+    <script src="scripts/vendor/jquery.validate.js"></script>
+    <script src="scripts/vendor/wow.min.js"></script>
+    <script src="scripts/vendor/jquery.placeholder.js"></script>
+    <script src="scripts/vendor/jquery.easing.1.3.min.js"></script>
+    <script src="scripts/vendor/jquery.waitforimages.min.js"></script>
+    <script src="scripts/vendor/jquery.prettyPhoto.js"></script>
+    <script src="scripts/vendor/imagesloaded.pkgd.min.js"></script>
+    <script src="scripts/vendor/isotope.pkgd.min.js"></script>
+    <script src="scripts/vendor/jquery.fillparent.min.js"></script>
+    <script src="scripts/vendor/raphael-min.js"></script>
+    <script src="scripts/vendor/bootstrap.js"></script>
+    <script src="scripts/vendor/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="scripts/vendor/bootstrap-slider.js"></script>
+    <script src="scripts/vendor/bootstrap-rating-input.js"></script>
+    <script src="scripts/vendor/bootstrap-hover-dropdown.min.js"></script>
+    <script src="scripts/jquery.gmap.min.js"></script>
+    <script src="scripts/circle_diagram.js"></script>
+    <script src="scripts/main.js"></script>
   </body>
   
   
