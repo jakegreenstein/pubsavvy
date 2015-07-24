@@ -121,8 +121,24 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
             console.log("error", data, status, headers, config);
         });
 
-        
+    }
 
+    $scope.logout = function(){
+        console.log('logout and delete session id');
+        var url = '/api/logout';
+        $http.get(url).success(function(data, status, headers, config) {
+            console.log(JSON.stringify(data));
+            if (data['confirmation'] != 'success'){
+                alert(data['message']);
+                return;
+            }
+            $scope.profile = {'email':'', 'password':'', 'firstName':'', 'lastName':''};
+            $scope.currentUser.loggedIn = 'no';
+            window.location.href = '/admin/home';
+
+        }).error(function(data, status, headers, config) {
+            console.log("error", data, status, headers, config);
+        });
     }
 
 }]);
