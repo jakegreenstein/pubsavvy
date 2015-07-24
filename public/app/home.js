@@ -59,8 +59,6 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http){
 		
 		var json = JSON.stringify($scope.profile);
 		
-		$scope.profile = {'email':'', 'password':'', 'firstName':'', 'lastName':''};
-		
     	var url = '/api/profile';
         $http.post(url, json).success(function(data, status, headers, config) {
             var confirmation = data['confirmation'];
@@ -70,8 +68,11 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http){
                 alert(data['message']);
                 return;
             }
-            
-            
+
+            $scope.loginUser = {'email':$scope.profile.email, 'password':$scope.profile.password};
+            $scope.profile = {'email':'', 'password':'', 'firstName':'', 'lastName':''};
+            $scope.login();
+
         }).error(function(data, status, headers, config) {
             console.log("error", data, status, headers, config);
         });
