@@ -6,6 +6,7 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
 	$scope.upload;
     $scope.newPassword = '';
     $scope.confirmPassword = '';
+    $scope.section = 'account-information';
 	
 	$scope.init = function(){
 		console.log('Account Controller: INIT');
@@ -24,12 +25,17 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
             $scope.profile = data['profile'];
             console.log($scope.profile.image);
             if($scope.profile.image == '' || $scope.profile.image == "none"){
-                $scope.profile.image = 'http://imaalibag.com/wp-content/uploads/2013/11/no-profile-image.jpg';
+                $scope.profile.image = '/admin/img/no-profile-image.jpg';
             }
             $scope.currentUser.loggedIn = 'yes';
         }).error(function(data, status, headers, config) {
             console.log("error", data, status, headers, config);
         });
+    }
+
+    $scope.updateSection = function(newSection){
+        //console.log('New Section: '+newSection);
+        $scope.section = newSection;
     }
 
 	
@@ -113,9 +119,11 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
                 return;
             }
             
-           var p = data['profile'];
-           alert(p.firstName+ ' '+p.lastName+' succesfully updated profile.');
-           //$scope.profile = {'firstName':'', 'lastName':'', 'email':'', 'password':''};
+            var p = data['profile'];
+            alert(p.firstName+ ' '+p.lastName+' succesfully updated profile.');
+            //$scope.profile = {'firstName':'', 'lastName':'', 'email':'', 'password':''};
+            $scope.newPassword = '';
+            $scope.confirmPassword = '';
             
         }).error(function(data, status, headers, config) {
             console.log("error", data, status, headers, config);
