@@ -142,7 +142,6 @@
 
 
             <div style="width:80%; float:right;">
-
             <!-- START PROFILE PICTURE -->
                 <div ng-show="section == 'profile-picture'" style="padding-left:24px; margin-top:24px; min-height:216px">
                     <h5>Profile Picture</h5>
@@ -150,7 +149,7 @@
                     <div style="min-height:120px" class ="section" ng-file-drop="onFileSelect($files, 'image', 'profile')">
                     <!-- <img src="{{profile.image}}"align="left" style="width:120px;margin-right:12px"/> -->
                         <img style="width:120px;height:120px;border-radius:60px;border:2px solid #ddd;" src="{{profile.image}}">
-                        <p>To update your profile <br>drag and drop it here</p>
+                        <p style="margin-top:24px">To update your profile <br>drag and drop it here <br></p>
                     </div>
                 </div>
             <!-- END PROFILE PICTURE -->
@@ -191,11 +190,26 @@
                         <input ng-model="confirmPassword" type = "password" placeholder = "New Password" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
                     </div>
                 </div>
-            <!-- END PASSWORD -->   
+            <!-- END PASSWORD -->
+
+            <!-- Start SEARCH HISTORY  -->
+                <div ng-show="section == 'search-history'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px"> 
+                    <h5><span class="text-primary">Search History</span></h5>
+                    This <br> Is <br> A <br> New <br> Line <br> Test <br> Another <br> Line <br>
+                    This <br> Is <br> A <br> New <br> Line <br> Test <br> Another <br> Line <br>
+                    This <br> Is <br> A <br> New <br> Line <br> Test <br> Another <br> Line <br>
+                    This <br> Is <br> A <br> New <br> Line <br> Test <br> Another <br> Line <br>
+                    This <br> Is <br> A <br> New <br> Line <br> Test <br> Another <br> Line <br>
+                    This <br> Is <br> A <br> New <br> Line <br> Test <br> Another <br> Line <br>
+                    This <br> Is <br> A <br> New <br> Line <br> Test <br> Another <br> Line <br>
+                    This <br> Is <br> A <br> New <br> Line <br> Test <br> Another <br> Line <br>
+                    This <br> Is <br> A <br> New <br> Line <br> Test <br> Another <br> Line <br>
+                </div>
+            <!-- END SEARCH HISTORY -->   
                 
             </div>
 
-            <div style="width:194px; margin:auto; margin-top:36px;">
+            <div style="width:194px; margin:auto; padding-top:300px;">
                 <button ng-click="update()" class="btn btn-success btn-large" align="center"><i class="fa fa-check-circle-o"></i> Update Profile</button><br /><br />
             </div>
 
