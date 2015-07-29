@@ -7,11 +7,31 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
     $scope.newPassword = '';
     $scope.confirmPassword = '';
     $scope.section = 'account-information';
+    $scope.randomBackground;
 	
 	$scope.init = function(){
 		console.log('Account Controller: INIT');
         checkCurrentUser();
+        generateBackground();
 	}
+
+    function generateBackground(){
+        var selection = getRandomInt(1,3);
+
+        if(selection == 1)
+            $scope.randomBackground = 'img/account-background-1.png';
+
+        else if(selection == 2)
+            $scope.randomBackground = 'img/account-background-2.png';
+
+        else 
+            $scope.randomBackground = 'img/account-background-3.png';
+        
+    }
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
     function checkCurrentUser(){
         var url = '/api/currentuser';

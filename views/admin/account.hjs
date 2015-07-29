@@ -109,7 +109,7 @@
     
 
         <!-- Start header Section-->
-        <section style="background-image: url('img/intro-home5.jpg');" class="header-section fading-title parallax">
+        <section style="background-image: url({{randomBackground}});" class="header-section fading-title parallax">
             <div class="section-shade sep-top-5x sep-bottom-3x">
                 <div class="container">
                     <div class="section-title upper light">
@@ -190,10 +190,10 @@
             <!-- END SETTING DIVS -->
         
             <!-- LEFT MENU -->
-            <div class="col-md-3 col-md-pull-9 sep-top-2x">
+            <div class="col-md-3 col-md-pull-9 sep-top-2x" style="cursor:default">
                 <h5 class="widget-title upper sep-bottom-xs">Categories</h5>
-                  <ul class="widget widget-cat">
-                    <li class="cat-item" ng-click="updateSection('account-information')"><a  class="upper">Account Information&nbsp;<span class="badge"></span></a></li>
+                  <ul style="cursor:pointer"class="widget widget-cat">
+                    <li class="cat-item" ng-click="updateSection('account-information')"><a class="upper">Account Information&nbsp;<span class="badge"></span></a></li>
                     <li class="cat-item" ng-click="updateSection('profile-picture')" ><a  class="upper">Profile Picture&nbsp;<span class="badge"></span></a></li>
                     <li class="cat-item" ng-click="updateSection('contact-information')" ><a  class="upper">Contact Information&nbsp;<span class="badge"></span></a></li>
                     <li class="cat-item" ng-click="updateSection('update-password')"><a  class="upper">Update Password&nbsp;<span class="badge"></span></a></li>
