@@ -7,11 +7,14 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
     $scope.newPassword = '';
     $scope.confirmPassword = '';
     $scope.section = 'account-information';
+
     $scope.randomBackground;
+
 	
 	$scope.init = function(){
 		console.log('Account Controller: INIT');
         checkCurrentUser();
+
         generateBackground();
 	}
 
