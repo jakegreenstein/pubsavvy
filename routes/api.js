@@ -504,8 +504,7 @@ router.put('/:resource/:id', function(req, res, next) {
 	
   	if (resource=='device'){
 		var query = {_id: identifier};
-		var options = {new: false};
-		
+		var options = {new: true}; // important - this has to be set to 'true' 
 		
 		Device.findOneAndUpdate(query, req.body, options, function(err, device){
 			if (err){
@@ -513,29 +512,32 @@ router.put('/:resource/:id', function(req, res, next) {
 				return;
 			}
 			
-			console.log('DEVICE UPDATE: '+JSON.stringify(req.body));
-			var searchHistory = req.body.searchHistory;
-			if (searchHistory == null){
+//			console.log('DEVICE UPDATE: '+JSON.stringify(req.body));
+			
+			var action = req.body.action;
+			if (action == null){
 				res.json({'confirmation':'success', 'device':device.summary()});
 				return;
 			}
 			
-			device['searchHistory'] = searchHistory;
-			
-			// EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
-			device.markModified('searchHistory');  
-			
-			
-			device.save(function (err, device){
-				if (err){
-					console.log('ERROR: '+err.message);
-					res.json({'confirmation':'fail', 'message':err.message});
-					return;
-				}
-				
-				res.json({'confirmation':'success', 'device':device.summary()});
-				return;
-			});
+			if (action == 'searchHistory'){
+				// var searchHistory = req.body.searchHistory;
+				// device['searchHistory'] = searchHistory;
+				//
+				// // EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
+				// device.markModified('searchHistory');
+				//
+				// device.save(function (err, device){
+				// 	if (err){
+				// 		console.log('ERROR: '+err.message);
+				// 		res.json({'confirmation':'fail', 'message':err.message});
+				// 		return;
+				// 	}
+				//
+				// 	res.json({'confirmation':'success', 'device':device.summary()});
+				// 	return;
+				// });
+			}
 		});
 	}
 
