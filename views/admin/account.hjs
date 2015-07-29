@@ -96,7 +96,7 @@
     </noscript>
   </head>
 
-  <body ng-app="PubSavvySwipe" ng-controller="AccountController" style="padding:20px; background: rgba(0, 0, 0, 0.5)" ng-init="init()">
+  <body ng-app="PubSavvySwipe" ng-controller="AccountController"  ng-init="init()">
 
 
 
@@ -106,120 +106,137 @@
     <div class="page">
 
 
-        <div class="sep-top-3x" style = " padding-top:0; background:rgba(249, 249, 249, 1);border:1px solid #ddd; margin-top:75px; border-top-left-radius:12px; border-top-right-radius:12px; padding:6px;">
+    
 
-            <h2 class="bordered-left bordered-right upper wow flipInX animated" style="visibility: visible; animation-name: flipInX; width:90%; margin:auto; margin-top:16px"><img style="width:80px;height:80px;border-radius:40px;border:2px solid #ddd; margin-right:24px" src="{{profile.image}}">Manage <span class="text-primary">Account</span></h2>
-
-            <hr style="border-style: solid;border-color: black; border-width: 1px 0 0 0; margin-bottom:0px">
-
-            <!-- LEFT MENU -->
-            <div style="width:20%; float:left;background-color:white; margin-top:24px; border-top:1px solid #ddd; border-radius:12px;">
-
-                <div ng-click="updateSection('account-information')" id="settingTop">
-                    <p style="padding-left:12px; margin-top:6px; text-align:left; vertical-align: middle;">Account Information</p>
-                </div>
-
-                <div ng-click="updateSection('profile-picture')"  id="settingMiddle">
-                    <p style="padding-left:12px; margin-top:6px; text-align:left; vertical-align: middle;">Profile Picture</p>
-                </div>
-
-                <div ng-click="updateSection('contact-information')"  id="settingMiddle" >
-                    <p style="padding-left:12px; margin-top:6px; text-align:left; vertical-align: middle;">Contact Information</p>
-                </div>
-                <div ng-click="updateSection('update-password')" id="settingMiddle">
-                    <p style="padding-left:12px; margin-top:6px; text-align:left; vertical-align: middle;">Update Password</p>
-                </div>
-                <div ng-click="updateSection('search-history')" id="settingMiddle">
-                    <p style="padding-left:12px; margin-top:6px; text-align:left; vertical-align: middle;">Search History</p>
-                </div>
-                <div ng-click="updateSection('saved-searches')" id="settingBottom">
-                    <p style="padding-left:12px; margin-top:6px; text-align:left; vertical-align: middle;">Saved Searches</p>
-                </div>
-                
-            </div>
-            <!-- END LEFT MENU -->
-
-
-
-            <div style="width:80%; float:right;">
-            <!-- START PROFILE PICTURE -->
-                <div ng-show="section == 'profile-picture'" style="padding-left:24px; margin-top:24px; min-height:216px">
-                    <h5>Profile Picture</h5>
-
-                    <div style="min-height:120px" class ="section" ng-file-drop="onFileSelect($files, 'image', 'profile')">
-                    <!-- <img src="{{profile.image}}"align="left" style="width:120px;margin-right:12px"/> -->
-                        <img style="width:120px;height:120px;border-radius:60px;border:2px solid #ddd;" src="{{profile.image}}">
-                        <p style="margin-top:24px">To update your profile <br>drag and drop it here <br></p>
+        <!-- Start header Section-->
+        <section style="background-image: url('img/intro-home5.jpg');" class="header-section fading-title parallax">
+            <div class="section-shade sep-top-5x sep-bottom-3x">
+                <div class="container">
+                    <div class="section-title upper light">
+                        <h2 class="small-space"><img style="width:80px;height:80px;border-radius:40px;border:2px solid #ddd; margin-right:24px" src="{{profile.image}}">Manage<span class="text-primary"> Account</span></h2>
+                        <p class="lead" style="margin-bottom:20px;">Here you can manage your account information and your stored data.</p>
                     </div>
                 </div>
+            </div>
+        </section>
+      <!-- End header Section-->
+
+        <!-- LEFT MENU -->
+        <div style="width:20%; float:left;background-color:white; margin-top:24px;">
+
+          <!--   <div ng-click="updateSection('account-information')" id="settingTop">
+                <p style="padding-left:12px; margin-top:6px; text-align:left; vertical-align: middle;">Account Information</p>
+            </div>
+
+            <div ng-click="updateSection('profile-picture')"  id="settingMiddle">
+                <p style="padding-left:12px; margin-top:6px; text-align:left; vertical-align: middle;">Profile Picture</p>
+            </div>
+
+            <div ng-click="updateSection('contact-information')"  id="settingMiddle" >
+                <p style="padding-left:12px; margin-top:6px; text-align:left; vertical-align: middle;">Contact Information</p>
+            </div>
+            <div ng-click="updateSection('update-password')" id="settingMiddle">
+                <p style="padding-left:12px; margin-top:6px; text-align:left; vertical-align: middle;">Update Password</p>
+            </div>
+            <div ng-click="updateSection('search-history')" id="settingMiddle">
+                <p style="padding-left:12px; margin-top:6px; text-align:left; vertical-align: middle;">Search History</p>
+            </div>
+            <div ng-click="updateSection('saved-searches')" id="settingBottom">
+                <p style="padding-left:12px; margin-top:6px; text-align:left; vertical-align: middle;">Saved Searches</p>
+            </div> -->
+            <div style="margin-left:20px;">
+                <h5 class="widget-title upper sep-bottom-xs">Categories</h5>
+                  <ul class="widget widget-cat">
+                    <li class="cat-item" ng-click="updateSection('account-information')"><a  class="upper">Account Information&nbsp;<span class="badge"></span></a></li>
+                    <li class="cat-item" ng-click="updateSection('profile-picture')" ><a  class="upper">Profile Picture&nbsp;<span class="badge"></span></a></li>
+                    <li class="cat-item" ng-click="updateSection('contact-information')" ><a  class="upper">Contact Information&nbsp;<span class="badge"></span></a></li>
+                    <li class="cat-item" ng-click="updateSection('update-password')"><a  class="upper">Update Password&nbsp;<span class="badge"></span></a></li>
+                    <li class="cat-item" ng-click="updateSection('search-history')"><a  class="upper">Search History&nbsp;<span class="badge"></span></a></li>
+                    <li class="cat-item" ng-click="updateSection('saved-searches')" ><a class="upper">Saved Searches&nbsp;<span class="badge"></span></a></li>
+                  </ul>
+            </div>
+            
+        </div>
+        <!-- END LEFT MENU -->
+
+
+
+
+        <!-- START SETTING DIVS -->
+        <div style="width:80%; float:right;">
+
+            <!-- START PROFILE PICTURE -->
+            <div ng-show="section == 'profile-picture'" style="padding-left:24px; margin-top:24px; min-height:216px">
+                <h5><span class="text-primary">Profile Picture</span></h5>
+
+                <div style="min-height:120px" class ="section" ng-file-drop="onFileSelect($files, 'image', 'profile')">
+                <!-- <img src="{{profile.image}}"align="left" style="width:120px;margin-right:12px"/> -->
+                    <img style="width:120px;height:120px;border-radius:60px;border:2px solid #ddd;" src="{{profile.image}}">
+                    <p style="margin-top:24px">To update your profile <br>drag and drop it here <br></p>
+                </div>
+            </div>
             <!-- END PROFILE PICTURE -->
 
-            
+        
 
             <!-- Start ACCOUNT INFORMATION -->
-                <div ng-show="section == 'account-information'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px"> 
-                    <h5><span class="text-primary">Account Information</span></h5>
-                    <div style="padding:12px">
-                        First Name:<br>
-                        <input ng-model="profile.firstName" type="text" placeholder="First Name" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
-                        Last Name:<br>
-                        <input ng-model="profile.lastName" type="text" placeholder="Last Name" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
-                    </div>
+            <div ng-show="section == 'account-information'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px"> 
+                <h5><span class="text-primary">Account Information</span></h5>
+                <div style="padding:12px">
+                    First Name:<br>
+                    <input ng-model="profile.firstName" type="text" placeholder="First Name" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
+                    Last Name:<br>
+                    <input ng-model="profile.lastName" type="text" placeholder="Last Name" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
                 </div>
+            </div>
             <!-- END ACCOUNT INFORMATION -->
 
-             
+         
             <!-- Start CONTACT INFORMATION -->
-                <div ng-show="section == 'contact-information'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px"> 
-                    <h5><span class="text-primary">Contact Information</span></h5>
-                    <div style="padding:12px">
-                        Email:<br>
-                        <input ng-model="profile.email" type="text" placeholder="Email" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
-                    </div>
+            <div ng-show="section == 'contact-information'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px"> 
+                <h5><span class="text-primary">Contact Information</span></h5>
+                <div style="padding:12px">
+                    Email:<br>
+                    <input ng-model="profile.email" type="text" placeholder="Email" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
                 </div>
+            </div>
             <!-- END CONTACT INFORMATION -->
 
-     
+
             <!-- Start PASSWORD  -->
-                <div ng-show="section == 'update-password'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px"> 
-                    <h5><span class="text-primary">Update Password</span></h5>
-                    <div style="padding:12px">
-                        New Password:<br>
-                        <input ng-model="newPassword" type="password" placeholder="New Password" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
-                        Confirm Password:<br>
-                        <input ng-model="confirmPassword" type = "password" placeholder = "New Password" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
-                    </div>
+            <div ng-show="section == 'update-password'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px"> 
+                <h5><span class="text-primary">Update Password</span></h5>
+                <div style="padding:12px">
+                    New Password:<br>
+                    <input ng-model="newPassword" type="password" placeholder="New Password" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
+                    Confirm Password:<br>
+                    <input ng-model="confirmPassword" type = "password" placeholder = "New Password" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
                 </div>
+            </div>
             <!-- END PASSWORD -->
 
             <!-- Start SEARCH HISTORY  -->
-                <div ng-show="section == 'search-history'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px"> 
-                    <h5><span class="text-primary">Search History</span></h5>
-                    This <br> Is <br> A <br> New <br> Line <br> Test <br> Another <br> Line <br>
-                    This <br> Is <br> A <br> New <br> Line <br> Test <br> Another <br> Line <br>
-                    This <br> Is <br> A <br> New <br> Line <br> Test <br> Another <br> Line <br>
-                    This <br> Is <br> A <br> New <br> Line <br> Test <br> Another <br> Line <br>
-                    This <br> Is <br> A <br> New <br> Line <br> Test <br> Another <br> Line <br>
-                    This <br> Is <br> A <br> New <br> Line <br> Test <br> Another <br> Line <br>
-                    This <br> Is <br> A <br> New <br> Line <br> Test <br> Another <br> Line <br>
-                    This <br> Is <br> A <br> New <br> Line <br> Test <br> Another <br> Line <br>
-                    This <br> Is <br> A <br> New <br> Line <br> Test <br> Another <br> Line <br>
-                </div>
-            <!-- END SEARCH HISTORY -->   
-                
+            <div ng-show="section == 'search-history'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px"> 
+                <h5><span class="text-primary">Search History</span></h5>
+                This is where search history will go.
             </div>
+            <!-- END SEARCH HISTORY -->
 
-            <div style="width:194px; margin:auto; padding-top:300px;">
-                <button ng-click="update()" class="btn btn-success btn-large" align="center"><i class="fa fa-check-circle-o"></i> Update Profile</button><br /><br />
+            <!-- Start SAVED SEARCHES  -->
+            <div ng-show="section == 'saved-searches'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px"> 
+                <h5><span class="text-primary">Saved Searches</span></h5>
+                This is where saved searches will go.
             </div>
+            <!-- END SAVED SEARCHES --> 
+            
+        </div>
+        <!-- END SETTING DIVS -->
 
+        <div style="width:194px; margin:auto; padding-top:300px;">
+            <button ng-click="update()" class="btn btn-success btn-large" align="center"><i class="fa fa-check-circle-o"></i> Update Profile</button><br /><br />
         </div>
 
-<!--         <div style="border:1px solid #ddd; border-top:0px">
-            <div style="width:194px; margin:auto; padding-top:24px;">
-                <button ng-click="update()" class="btn btn-success btn-large" align="center"><i class="fa fa-check-circle-o"></i> Update Profile</button><br /><br />
-            </div>
-        </div> -->
+
 
       <!-- Start Nav Section-->
       <nav id="main-navigation" role="navigation" class="navbar navbar-fixed-top navbar-standard">        
@@ -246,6 +263,8 @@
           </div>
         </div>
       </nav>
+      <!-- End Nav Section-->
+
       <!-- Start Footer section-->
       <footer id="footer">
         <div class="copyright sep-top-xs sep-bottom-xs" style="width:100%;">
@@ -257,6 +276,7 @@
         </div>
       </footer>
       <!-- End Footer section-->
+
     </div>
     <script src="scripts/vendor/jquery.js"></script>
     <script src="scripts/vendor/queryloader2.min.js"></script>
