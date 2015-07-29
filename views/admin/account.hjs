@@ -167,15 +167,63 @@
 
                     <br>
                     <br>
+                    <div style="width:194px; margin:auto;">
+                <button ng-click="update()" class="btn btn-success btn-large" align="center"><i class="fa fa-check-circle-o"></i> Update Profile</button><br /><br />
+            </div>
                 </div>
                 <!-- END ACCOUNT INFORMATION -->
 
 
 
                 <!-- Start SEARCH HISTORY  -->
-                <div ng-show="section == 'search-history'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px"> 
-                    <h5><span class="text-primary">Search History</span></h5>
-                    This is where search history will go.
+                <div ng-show="section == 'search-history'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px; margin-bottom:60px;"> 
+                    <h5><i class="fa fa-search fa-lg" style="margin-right:12px;"></i><span class="text-primary">Search History</span></h5>
+                    
+                    <table style="width:100%">
+                        <tr style="border-bottom: 2px solid #ccc;">
+                            <th style="width:50%;">Term</th>
+                            <th style="width:20%; text-align:right">Count</th>       
+                            <th style="width:30%; text-align:right; padding-right:12px">View Results</th>
+                        </tr>
+                        <tr>
+                            <td>patients AND jsubsetaim</td>
+                            <td align="right"><span class="badge">11</span></td>      
+                            <td><button type="button" class="btn btn-primary btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-search fa-lg" style="margin-right:12px;"></i> Search</button></td>
+                        </tr>
+                        <tr>
+                            <td>heart OR cardiac OR cardiovascular</td>
+                            <td align="right"><span class="badge">21</span></td>        
+                            <td><button type="button" class="btn btn-primary btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-search fa-lg" style="margin-right:12px;"></i> Search</button></td>
+                        </tr>
+                        <tr>
+                            <td>clinical trial[pt] OR random*</td>
+                            <td align="right"><span class="badge">17</span></td>        
+                            <td><button type="button" class="btn btn-primary btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-search fa-lg" style="margin-right:12px;"></i> Search</button></td>
+                        </tr>
+                        <tr>
+                            <td>therapy[sh] NOT comment[ptyp]</td>
+                            <td align="right"><span class="badge">1</span></td>        
+                            <td><button type="button" class="btn btn-primary btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-search fa-lg" style="margin-right:12px;"></i> Search</button></td>
+                        </tr>
+                        <tr>
+                            <td>loattrfree full text[sb]</td>
+                            <td align="right"><span class="badge">6</span></td>        
+                            <td><button type="button" class="btn btn-primary btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-search fa-lg" style="margin-right:12px;"></i> Search</button></td>
+                        </tr>
+                        <tr>
+                            <td>receptor OR protein OR gene OR genes OR genetic* OR genomic*</td>
+                            <td align="right"><span class="badge">1</span></td>        
+                            <td><button type="button" class="btn btn-primary btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-search fa-lg" style="margin-right:12px;"></i> Search</button></td>
+                        </tr>
+                        <tr>
+                            <td>(disease OR syndrome OR symptom*) AND Review[ptyp]</td>
+                            <td align="right"><span class="badge">12</span></td>        
+                            <td><button type="button" class="btn btn-primary btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-search fa-lg" style="margin-right:12px;"></i> Search</button></td>
+                        </tr>
+                    </table>
+
+
+
                 </div>
                 <!-- END SEARCH HISTORY -->
 
@@ -192,17 +240,15 @@
             <!-- LEFT MENU -->
             <div class="col-md-3 col-md-pull-9 sep-top-2x" style="cursor:default">
                 <h5 class="widget-title upper sep-bottom-xs">Categories</h5>
-                  <ul style="cursor:pointer"class="widget widget-cat">
-                    <li class="cat-item" ng-click="updateSection('account-information')"><a class="upper"><i class="fa fa-user fa-lg" style="margin-right:12px;"></i>Profile&nbsp;<span class="badge"></span></a></li>
-                    <li class="cat-item" ng-click="updateSection('search-history')"><a  class="upper"><i class="fa fa-search fa-lg" style="margin-right:12px;"></i>Search History&nbsp;<span class="badge"></span></a></li>
-                    <li class="cat-item" ng-click="updateSection('saved-searches')" ><a class="upper"><i class="fa fa-history fa-lg" style="margin-right:12px;"></i>Saved Searches&nbsp;<span class="badge"></span></a></li>
-                  </ul>
+              <ul style="cursor:pointer"class="widget widget-cat">
+                <li class="cat-item" ng-click="updateSection('account-information')"><a class="upper"><i class="fa fa-user fa-lg" style="margin-right:12px;"></i>Profile&nbsp;<span class="badge"></span></a></li>
+                <li class="cat-item" ng-click="updateSection('search-history')"><a  class="upper"><i class="fa fa-search fa-lg" style="margin-right:12px;"></i>Search History&nbsp;<span class="badge"></span></a></li>
+                <li class="cat-item" ng-click="updateSection('saved-searches')" ><a class="upper"><i class="fa fa-history fa-lg" style="margin-right:12px;"></i>Saved Searches&nbsp;<span class="badge"></span></a></li>
+              </ul>
             </div>
             <!-- END LEFT MENU -->
 
-            <div style="width:194px; margin:auto; padding-top:300px;">
-                <button ng-click="update()" class="btn btn-success btn-large" align="center"><i class="fa fa-check-circle-o"></i> Update Profile</button><br /><br />
-            </div>
+            
         </div>
 
 
