@@ -124,53 +124,53 @@
         <div class="container">
             <!-- START SETTING DIVS -->
             <div class="col-md-9 col-md-push-3 sep-top-2x">
-                <!-- START PROFILE PICTURE -->
-                <div ng-show="section == 'profile-picture'" style="padding-left:24px; margin-top:24px; min-height:216px">
-                    <h5><span class="text-primary">Profile Picture</span></h5>
 
-                    <div style="min-height:120px" class ="section" ng-file-drop="onFileSelect($files, 'image', 'profile')">
-                    <!-- <img src="{{profile.image}}"align="left" style="width:120px;margin-right:12px"/> -->
-                        <img style="width:120px;height:120px;border-radius:60px;border:2px solid #ddd;" src="{{profile.image}}">
-                        <p style="margin-top:24px">To update your profile <br>drag and drop it here <br></p>
-                    </div>
-                </div>
-                <!-- END PROFILE PICTURE -->
 
                 <!-- Start ACCOUNT INFORMATION -->
                 <div ng-show="section == 'account-information'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px"> 
-                    <h5><span class="text-primary">Account Information</span></h5>
+
+
+                    <h5><i class="fa fa-user fa-lg" style="margin-right:12px;"></i><span class="text-primary">Account Information</span></h5>
                     <div style="padding:12px">
+
+                        <div style="min-height:120px; margin-bottom:36px;" class ="section" ng-file-drop="onFileSelect($files, 'image', 'profile')">
+                            
+                            <p> <img style="width:120px;height:120px;border-radius:60px;border:2px solid #ddd; margin-right:20px" src="{{profile.image}}" align="left"><br>To update your profile <br>drag and drop it here <br></p>
+                            <br>
+                        </div>
+
                         First Name:<br>
                         <input ng-model="profile.firstName" type="text" placeholder="First Name" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
                         Last Name:<br>
                         <input ng-model="profile.lastName" type="text" placeholder="Last Name" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
-                    </div>
-                </div>
-                <!-- END ACCOUNT INFORMATION -->
+                        Specialty:<br>
+                        <input ng-model="profile.specialty" type="text" placeholder="Specialty" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
+                    </div>                    
 
-             
-                <!-- Start CONTACT INFORMATION -->
-                <div ng-show="section == 'contact-information'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px"> 
-                    <h5><span class="text-primary">Contact Information</span></h5>
+
+                    <h5><i class="fa fa-envelope fa-lg" style="margin-right:12px;"></i><span class="text-primary">Contact Information</span></h5>
                     <div style="padding:12px">
                         Email:<br>
                         <input ng-model="profile.email" type="text" placeholder="Email" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
+                        Phone Number:<br>
+                        <input ng-model="profile.phone" type="text" placeholder="(###) - ### - ####" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
                     </div>
-                </div>
-                <!-- END CONTACT INFORMATION -->
 
 
-                <!-- Start PASSWORD  -->
-                <div ng-show="section == 'update-password'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px"> 
-                    <h5><span class="text-primary">Update Password</span></h5>
+                    <h5><i class="fa fa-lock fa-lg" style="margin-right:12px;"></i><span class="text-primary">Update Password</span></h5>
                     <div style="padding:12px">
                         New Password:<br>
                         <input ng-model="newPassword" type="password" placeholder="New Password" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
                         Confirm Password:<br>
                         <input ng-model="confirmPassword" type = "password" placeholder = "New Password" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
                     </div>
+
+                    <br>
+                    <br>
                 </div>
-                <!-- END PASSWORD -->
+                <!-- END ACCOUNT INFORMATION -->
+
+
 
                 <!-- Start SEARCH HISTORY  -->
                 <div ng-show="section == 'search-history'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px"> 
@@ -193,12 +193,9 @@
             <div class="col-md-3 col-md-pull-9 sep-top-2x" style="cursor:default">
                 <h5 class="widget-title upper sep-bottom-xs">Categories</h5>
                   <ul style="cursor:pointer"class="widget widget-cat">
-                    <li class="cat-item" ng-click="updateSection('account-information')"><a class="upper">Account Information&nbsp;<span class="badge"></span></a></li>
-                    <li class="cat-item" ng-click="updateSection('profile-picture')" ><a  class="upper">Profile Picture&nbsp;<span class="badge"></span></a></li>
-                    <li class="cat-item" ng-click="updateSection('contact-information')" ><a  class="upper">Contact Information&nbsp;<span class="badge"></span></a></li>
-                    <li class="cat-item" ng-click="updateSection('update-password')"><a  class="upper">Update Password&nbsp;<span class="badge"></span></a></li>
-                    <li class="cat-item" ng-click="updateSection('search-history')"><a  class="upper">Search History&nbsp;<span class="badge"></span></a></li>
-                    <li class="cat-item" ng-click="updateSection('saved-searches')" ><a class="upper">Saved Searches&nbsp;<span class="badge"></span></a></li>
+                    <li class="cat-item" ng-click="updateSection('account-information')"><a class="upper"><i class="fa fa-user fa-lg" style="margin-right:12px;"></i>Profile&nbsp;<span class="badge"></span></a></li>
+                    <li class="cat-item" ng-click="updateSection('search-history')"><a  class="upper"><i class="fa fa-search fa-lg" style="margin-right:12px;"></i>Search History&nbsp;<span class="badge"></span></a></li>
+                    <li class="cat-item" ng-click="updateSection('saved-searches')" ><a class="upper"><i class="fa fa-history fa-lg" style="margin-right:12px;"></i>Saved Searches&nbsp;<span class="badge"></span></a></li>
                   </ul>
             </div>
             <!-- END LEFT MENU -->
