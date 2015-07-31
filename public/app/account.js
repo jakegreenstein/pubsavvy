@@ -7,6 +7,8 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
     $scope.newPassword = '';
     $scope.confirmPassword = '';
     $scope.section = 'account-information';
+    $scope.devices;
+    $scope.searches = {'saved':[], 'searchHistory':{}};
 
     $scope.randomBackground;
 
@@ -14,7 +16,6 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
 	$scope.init = function(){
 		console.log('Account Controller: INIT');
         checkCurrentUser();
-
         generateBackground();
 	}
 
@@ -46,20 +47,52 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
             }
  
             $scope.profile = data['profile'];
-            console.log($scope.profile.image);
+            //console.log($scope.profile.image);
             if($scope.profile.image == '' || $scope.profile.image == "none"){
                 $scope.profile.image = '/admin/img/no-profile-image.jpg';
             }
+
+            //UPDATE VARIABLES FROM CURRENT USER
+            getDevices();
             $scope.currentUser.loggedIn = 'yes';
+
+
         }).error(function(data, status, headers, config) {
             console.log("error", data, status, headers, config);
         });
+    }
+
+    function getDevices(){
+        var url = '/api/device?profileId='+$scope.profile.id;
+        $http.get(url).success(function(data, status, headers, config) {
+            console.log(JSON.stringify(data));
+            if (data['confirmation'] != 'success'){
+                //alert(data['message']);
+                return;
+            }
+            $scope.devices = data['devices'];
+            updateSaved();
+        }).error(function(data, status, headers, config) {
+            console.log("error", data, status, headers, config);
+        });
+    }
+
+    function updateSaved(){
+        for(var i = 0; i < $scope.devices.length; i++){
+            //Update Saved Article PMIDS
+            for(var j = 0; j < $scope.devices[i].saved.length; j++)
+                $scope.searches.saved.push($scope.devices[i].saved[j]);
+
+            for(var mySearch in $scope.devices[i].searchHistory)
+                $scope.searches.searchHistory[mySearch] = $scope.devices[i].searchHistory[mySearch];
+        }
     }
 
     $scope.updateSection = function(newSection){
         //console.log('New Section: '+newSection);
         $scope.section = newSection;
     }
+
 
 	
 	$scope.onFileSelect = function(files, property, entity){

@@ -7,12 +7,11 @@ var DeviceSchema = new mongoose.Schema({
 	//searchHistory:[{term:String, count:Number}]
 	//searchHistory:{default:{'default':0}}
 	searchHistory:{type:mongoose.Schema.Types.Mixed, default:{}},
-	savedArticles:[String],
 	profileId:String
 });
 
 DeviceSchema.methods.summary = function(){
-	return {'searchHistory':this.searchHistory, 'savedArticles':this.savedArticles, 'saved':this.saved, 'deviceToken':this.deviceToken, 'timestamp':this.timestamp, 'id':this._id};
+	return {'searchHistory':this.searchHistory, 'saved':this.saved, 'profileId':this.profileId, 'deviceToken':this.deviceToken, 'timestamp':this.timestamp, 'id':this._id};
 };
 
 module.exports = mongoose.model('DeviceSchema', DeviceSchema);
