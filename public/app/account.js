@@ -66,7 +66,7 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
     function getDevices(){
         var url = '/api/device?profileId='+$scope.profile.id;
         $http.get(url).success(function(data, status, headers, config) {
-            console.log(JSON.stringify(data));
+            //console.log(JSON.stringify(data));
             if (data['confirmation'] != 'success'){
                 //alert(data['message']);
                 return;
@@ -117,6 +117,12 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
 
     $scope.updateSection = function(newSection){
         $scope.section = newSection;
+    }
+
+    $scope.redirect = function(term){
+        console.log('Redirect: '+term);
+        window.location.href = '/admin/search-pubmed?term='+term;
+
     }
 
 	$scope.onFileSelect = function(files, property, entity){

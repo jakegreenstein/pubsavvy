@@ -186,7 +186,7 @@
                         <tr ng-repeat = "(key, value) in device.searchHistory track by $index" >
                             <td>{{key}}</td>
                             <!-- <td align="right"><span class="badge">{{value}}</span></td>       -->
-                            <td><button type="button" class="btn btn-primary btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-search fa-lg" style="margin-right:12px;"></i> Search</button></td>
+                            <td><button ng-click="redirect(key)" type="button" class="btn btn-primary btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-search fa-lg" style="margin-right:12px;"></i> Search</button></td>
                         </tr>
                     </table>
 
