@@ -183,39 +183,9 @@
                             <th style="width:20%; text-align:right">Count</th>       
                             <th style="width:30%; text-align:right; padding-right:12px">View Results</th>
                         </tr>
-                        <tr>
-                            <td>patients AND jsubsetaim</td>
-                            <td align="right"><span class="badge">11</span></td>      
-                            <td><button type="button" class="btn btn-primary btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-search fa-lg" style="margin-right:12px;"></i> Search</button></td>
-                        </tr>
-                        <tr>
-                            <td>heart OR cardiac OR cardiovascular</td>
-                            <td align="right"><span class="badge">21</span></td>        
-                            <td><button type="button" class="btn btn-primary btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-search fa-lg" style="margin-right:12px;"></i> Search</button></td>
-                        </tr>
-                        <tr>
-                            <td>clinical trial[pt] OR random*</td>
-                            <td align="right"><span class="badge">17</span></td>        
-                            <td><button type="button" class="btn btn-primary btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-search fa-lg" style="margin-right:12px;"></i> Search</button></td>
-                        </tr>
-                        <tr>
-                            <td>therapy[sh] NOT comment[ptyp]</td>
-                            <td align="right"><span class="badge">1</span></td>        
-                            <td><button type="button" class="btn btn-primary btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-search fa-lg" style="margin-right:12px;"></i> Search</button></td>
-                        </tr>
-                        <tr>
-                            <td>loattrfree full text[sb]</td>
-                            <td align="right"><span class="badge">6</span></td>        
-                            <td><button type="button" class="btn btn-primary btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-search fa-lg" style="margin-right:12px;"></i> Search</button></td>
-                        </tr>
-                        <tr>
-                            <td>receptor OR protein OR gene OR genes OR genetic* OR genomic*</td>
-                            <td align="right"><span class="badge">1</span></td>        
-                            <td><button type="button" class="btn btn-primary btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-search fa-lg" style="margin-right:12px;"></i> Search</button></td>
-                        </tr>
-                        <tr>
-                            <td>(disease OR syndrome OR symptom*) AND Review[ptyp]</td>
-                            <td align="right"><span class="badge">12</span></td>        
+                        <tr ng-repeat = "(key, value) in searches.searchHistory track by $index" >
+                            <td>{{key}}</td>
+                            <td align="right"><span class="badge">{{value}}</span></td>      
                             <td><button type="button" class="btn btn-primary btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-search fa-lg" style="margin-right:12px;"></i> Search</button></td>
                         </tr>
                     </table>
@@ -234,35 +204,10 @@
                             <th style="width:20%; text-align:center;">View Article</th>       
                             <th style="width:30%; text-align:right; padding-right:12px">Remove</th>
                         </tr>
-                        <tr>
-                            <td style="padding:12px;">Mitosis Detection for Invasive Breast Cancer Grading in Histopathological Images</td>
+                        <tr ng-repeat = "article in searches.saved track by $index">
+                            <td style="padding:12px;">{{article}}</td>
                             <td align="center"><i style="width:24px;"class="fa fa-file fa-lg" style="margin-right:12px;"></i></td>      
-                            <td><button type="button" class="btn btn-danger btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-trash fa-lg" style="margin-right:12px;"></i> </button></td>
-                        </tr>
-                        <tr>
-                            <td style="padding:12px;">Influence of internal fixation systems on radiation therapy for spinal tumor</td>
-                            <td align="center"><i style="width:24px;"class="fa fa-file fa-lg" style="margin-right:12px;"></i></td>        
-                            <td><button type="button" class="btn btn-danger btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-trash fa-lg" style="margin-right:12px;"></i> </button></td>
-                        </tr>
-                        <tr>
-                            <td style="padding:12px;">Functional imaging of the lungs with gas agents</td>
-                            <td align="center"><i style="width:24px;"class="fa fa-file fa-lg" style="margin-right:12px;"></i></td>        
-                            <td><button type="button" class="btn btn-danger btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-trash fa-lg" style="margin-right:12px;"></i> </button></td>
-                        </tr>
-                        <tr>
-                            <td style="padding:12px;">Outpatient Pharmacy Expenditures for Children With Serious Chronic Illness in California, 2010-2012</td>
-                            <td align="center"><i style="width:24px;"class="fa fa-file fa-lg" style="margin-right:12px;"></i></td>        
-                            <td><button type="button" class="btn btn-danger btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-trash fa-lg" style="margin-right:12px;"></i> </button></td>
-                        </tr>
-                        <tr>
-                            <td style="padding:12px;">The Promise of Effective Pain Treatment Outcomes: Rallying Academic Centers to Lead the Charge</td>
-                            <td align="center"><i style="width:24px;"class="fa fa-file fa-lg" style="margin-right:12px;"></i></td>        
-                            <td><button type="button" class="btn btn-danger btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-trash fa-lg" style="margin-right:12px;"></i> </button></td>
-                        </tr>
-                        <tr>
-                            <td style="padding:12px;">Identification of the miRNA targetome in hippocampal neurons using RIP-seq</td>
-                            <td align="center"><i style="width:24px;"class="fa fa-file fa-lg" style="margin-right:12px;"></i></td>        
-                            <td><button type="button" class="btn btn-danger btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-trash fa-lg" style="margin-right:12px;"></i> </button></td>
+                            <td><button ng-click="removeArticle($index)" type="button" class="btn btn-danger btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-trash fa-lg" style="margin-right:12px;"></i> </button></td>
                         </tr>
                     </table>
                 </div>
