@@ -88,30 +88,26 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
         }
     }
 
+    $scope.removeArticle = function(pmidIndex){
+        if(pmidIndex != -1)
+            $scope.searches.saved.splice(pmidIndex, 1);
+        else
+            alert('Error: Cannot Remove - Index Not Found');
+    }
+
     $scope.updateSection = function(newSection){
-        //console.log('New Section: '+newSection);
         $scope.section = newSection;
     }
 
-
-	
 	$scope.onFileSelect = function(files, property, entity){
    		var url = 'http://media-service.appspot.com/api/upload';
-
         $http.get(url).success(function(data, status, headers, config){
-
             if(data['confirmation'] != 'success'){
                 alert(data['message']);
                 return;
             }
-
             var uploadString = data['upload'];
-
-            //console.log('UPLOAD STRING : ' + uploadString);
-
             uploadFiles(files, uploadString, property, entity);
-
-            //console.log('uploadFiles Complete');
         }).error(function(data, status, headers, config) {
             console.log("error", data, status, headers, config);
         });
