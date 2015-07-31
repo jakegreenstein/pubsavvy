@@ -12,7 +12,7 @@ var DeviceSchema = new mongoose.Schema({
 });
 
 DeviceSchema.methods.summary = function(){
-	return {'searchHistory':this.searchHistory, 'savedArticles':this.savedArticles 'saved':this.saved, 'deviceToken':this.deviceToken, 'timestamp':this.timestamp, 'id':this._id};
+	return {'searchHistory':this.searchHistory, 'savedArticles':this.savedArticles, 'saved':this.saved, 'deviceToken':this.deviceToken, 'timestamp':this.timestamp, 'id':this._id};
 };
 
 module.exports = mongoose.model('DeviceSchema', DeviceSchema);
