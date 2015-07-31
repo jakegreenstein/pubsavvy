@@ -6,11 +6,12 @@ var ProfileSchema = new mongoose.Schema({
 	email:String,
 	password:String,
 	image:{type:String, default:'none'},
-	timestamp:{type:Date, default:Date.now}
+	timestamp:{type:Date, default:Date.now},
+	deviceIds:[String]
 });
 
 ProfileSchema.methods.summary = function(){
-	return {'firstName':this.firstName, 'lastName':this.lastName, 'email':this.email, 'image':this.image, 'timestamp':this.timestamp, 'id':this._id};
+	return {'firstName':this.firstName, 'lastName':this.lastName, 'email':this.email, 'image':this.image, 'deviceIds':this.deviceIds, 'timestamp':this.timestamp, 'id':this._id};
 };
 
 module.exports = mongoose.model('ProfileSchema',ProfileSchema);
