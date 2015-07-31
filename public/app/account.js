@@ -9,6 +9,7 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
     $scope.section = 'account-information';
     $scope.devices;
     $scope.searches = {'saved':[], 'searchHistory':{}};
+    $scope.device;
 
     $scope.randomBackground;
 
@@ -70,27 +71,46 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
                 //alert(data['message']);
                 return;
             }
-            $scope.devices = data['devices'];
-            updateSaved();
+            //$scope.devices = data['devices'];
+            $scope.device = data.devices[0];
+            //updateSaved();
         }).error(function(data, status, headers, config) {
             console.log("error", data, status, headers, config);
         });
     }
 
-    function updateSaved(){
-        for(var i = 0; i < $scope.devices.length; i++){
-            //Update Saved Article PMIDS
-            for(var j = 0; j < $scope.devices[i].saved.length; j++)
-                $scope.searches.saved.push($scope.devices[i].saved[j]);
+    //THIS IS USED TO CREATE SINGLE LISTS OF ARTICLES AND HISTORY FOR ALL DEVICES
+    //LEAVE HERE INCASE WE DECIDE TO GET MORE COMPLICATED THAN JUST USING THE NEWEST DEVICE
+    // function updateSaved(){
+    //     for(var i = 0; i < $scope.devices.length; i++){
+    //         //Update Saved Article PMIDS
+    //         for(var j = 0; j < $scope.devices[i].saved.length; j++)
+    //             $scope.searches.saved.push($scope.devices[i].saved[j]);
 
-            for(var mySearch in $scope.devices[i].searchHistory)
-                $scope.searches.searchHistory[mySearch] = $scope.devices[i].searchHistory[mySearch];
-        }
-    }
+    //         for(var mySearch in $scope.devices[i].searchHistory)
+    //             $scope.searches.searchHistory[mySearch] = $scope.devices[i].searchHistory[mySearch];
+    //     }
+    // }
 
     $scope.removeArticle = function(pmidIndex){
-        if(pmidIndex != -1)
-            $scope.searches.saved.splice(pmidIndex, 1);
+        if(pmidIndex != -1){
+            $scope.device.saved.splice(pmidIndex, 1);
+
+            var url = '/api/device/'+ $scope.device.id;
+            var json = JSON.stringify($scope.device);
+
+            $http.put(url, json).success(function(data, status, headers, config) {
+                var confirmation = data['confirmation'];            
+                if (confirmation != 'success'){
+                    alert(data['message']);
+                    return;
+                }
+                //DO SOMETHING AFTER
+             
+            }).error(function(data, status, headers, config) {
+                console.log("error", data, status, headers, config);
+            });
+        }
         else
             alert('Error: Cannot Remove - Index Not Found');
     }

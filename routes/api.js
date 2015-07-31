@@ -213,7 +213,7 @@ router.get('/:resource', function(req, res, next) {
 
 
 	// if (resource=='addDevice'){
-	// 	var temp = {'deviceToken':'token_B', 'searchHistory':{'search_4':4, 'search_5':5, 'search_6':6}, 'saved':['pmid_3', 'pmid_3',], 'profileId':'55b141957bf4daa7b6b3ff34'};
+	// 	var temp = {'deviceToken':'token_C', 'searchHistory':{'search_7':4, 'search_8':5, 'search_9':6}, 'saved':['pmid_4', 'pmid_5',], 'profileId':'55b141957bf4daa7b6b3ff34'};
 	// 	Device.create(temp, function(err, device){
 	// 		if (err){
 	// 			res.send({'confirmation':'fail', 'message':err.message});
@@ -244,7 +244,7 @@ router.get('/:resource', function(req, res, next) {
 	}
 
 	if (resource=='device'){
-		Device.find(req.query, function(err, devices){
+		Device.find(req.query,{}, { sort: { 'timestamp' : -1 } }, function(err, devices){
 			if (err){
 				res.json({'confirmation':'fail','message':err.message});
 				return;
