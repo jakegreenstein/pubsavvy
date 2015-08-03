@@ -146,7 +146,9 @@ var searchRequest = function(searchTerm){
 		var url = baseUrl+'esearch.fcgi?db=pubmed&term='+searchTerm+'&usehistory=y&retmax=100';
 		urlRequest(url, function(err, results){
 			if (err) { reject(err); }
-			else { resolve(results); }
+			else { 
+				resolve(results);
+			}
 		});
 	});
 }
@@ -172,13 +174,16 @@ var followUpRequest = function(results, offset, limit){
 }
 
 var updateDeviceSearchHistory = function(results, req){
+
 	return new Promise(function (resolve, reject){
+		console.log(results.count);
 		if (req.query.device==null){
 			resolve(results);
 			return;
 		}
 		
 		Device.findById(req.query.device, function(err, device){
+
 			if (err){
 				resolve(results);
 				return;
@@ -186,7 +191,20 @@ var updateDeviceSearchHistory = function(results, req){
 			
 			var searchTerm = req.query.term;
 			var searchHistory = device.searchHistory;
-			searchHistory[searchTerm] = (searchHistory[searchTerm]==null) ? 1 : searchHistory[searchTerm]+1;
+			
+			//searchHistory[searchTerm] = (searchHistory[searchTerm]==null) ? 1 : searchHistory[searchTerm]+1;
+
+			var historyObject = searchHistory[searchTerm];
+
+			var timestamp = new Date();
+			if(historyObject == undefined){
+				searchHistory[searchTerm]  = {'freq':1, 'count':results.count, 'timestamp': timestamp};
+			}
+			else{
+				historyObject['freq'] = historyObject['freq'] + 1;
+				historyObject['count'] = results.count;
+				historyObject['timestamp'] = timestamp;
+			}
 
 			device['searchHistory'] = searchHistory;
 			device.markModified('searchHistory'); // EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
@@ -212,17 +230,17 @@ router.get('/:resource', function(req, res, next) {
 	var resource = req.params.resource;
 
 
-	// if (resource=='addDevice'){
-	// 	var temp = {'deviceToken':'token_C', 'searchHistory':{'search_7':4, 'search_8':5, 'search_9':6}, 'saved':['pmid_4', 'pmid_5',], 'profileId':'55b141957bf4daa7b6b3ff34'};
-	// 	Device.create(temp, function(err, device){
-	// 		if (err){
-	// 			res.send({'confirmation':'fail', 'message':err.message});
-	// 			return;
-	// 		}
+	if (resource=='addDevice'){
+		var temp = {'deviceToken':'UPDATE FROM SEARCH TEST', 'searchHistory':{}, 'saved':['TEST_1', 'TEST_2',]};
+		Device.create(temp, function(err, device){
+			if (err){
+				res.send({'confirmation':'fail', 'message':err.message});
+				return;
+			}
 			
-	// 		res.json({'confirmation':'success', 'device':device.summary()});
-	// 	});
-	// }
+			res.json({'confirmation':'success', 'device':device.summary()});
+		});
+	}
 
 	
 	if (resource=='profile'){
