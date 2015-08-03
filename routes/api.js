@@ -324,10 +324,9 @@ router.get('/:resource', function(req, res, next) {
 
   		var limit = 100;
   		if(req.query.limit != null)
-  			limit = req.query.limit;
+  			limit = req.query.limit; //+1 TO MAINTAIN COUNT WHEN REMOVING FIRST RESULT (1st = search value)
   			
-  		
-		
+
 		
 		var url = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&db=pubmed&id='+req.query.pmid;
 		urlRequest(url, function(err, results){
@@ -338,8 +337,10 @@ router.get('/:resource', function(req, res, next) {
 			var numIDs = linkIDs.length;
 			var count = numIDs;
 
-			if(limit < numIDs)
+			if(limit < numIDs){
 				numIDs = limit;
+				numIDs++;
+			}
 
 			var linkIDString = linkIDs[0].Id;
 			for(var i = 1; i < numIDs; i++)
@@ -351,10 +352,12 @@ router.get('/:resource', function(req, res, next) {
 				if (clean==null)
 					clean = 'yes';
 				
-				
+
+
 				res.setHeader('content-type', 'application/json');
 				if (clean != 'yes'){
-					var json = JSON.stringify({'confirmation':'success','count':numIDs, 'results':results}, null, 2); // this makes the json 'pretty' by indenting it
+					//-1 on numIDs to account for removing first value
+					var json = JSON.stringify({'confirmation':'success','count':numIDs-1, 'results':results}, null, 2); // this makes the json 'pretty' by indenting it 
 					res.send(json);
 					return;
 				}
@@ -366,9 +369,10 @@ router.get('/:resource', function(req, res, next) {
   					return;
 				}
 				var list = cleanUpResults(articles);
+				list.splice(0,1);
 				
 				// this makes the json 'pretty' by indenting it
-				var json = JSON.stringify({'confirmation':'success', 'count':numIDs,  'results':list}, null, 2); 
+				var json = JSON.stringify({'confirmation':'success', 'count':numIDs-1,  'results':list}, null, 2); //-1 on numIDs to account for removing first value
 				res.send(json);
 				return;
 			
