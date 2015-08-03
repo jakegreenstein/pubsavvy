@@ -321,10 +321,21 @@ router.get('/:resource', function(req, res, next) {
   			return;
   		}
 
+  		//GET NUMBER OF PMID'S
+  		var pmidString = req.query.pmid;
+  		var numCommas = pmidString.split(",").length - 1;
+  		var numPmids = numCommas+1;
 
   		var limit = 100;
   		if(req.query.limit != null)
-  			limit = req.query.limit; //+1 TO MAINTAIN COUNT WHEN REMOVING FIRST RESULT (1st = search value)
+  			limit = req.query.limit;
+
+  		//INCREASE LIMIT TO ACCOUNT FOR REMOVED PMIDS (PMIDS in ID field are in innitial results)
+  		for(var test = 0; test < numPmids; test++){
+  			limit++;
+  		}
+
+  
   			
 
 		
@@ -335,12 +346,13 @@ router.get('/:resource', function(req, res, next) {
 			var linkIDs = linkSetDb.Link;
 
 			var numIDs = linkIDs.length;
-			var count = numIDs;
-
+			
+			
 			if(limit < numIDs){
 				numIDs = limit;
-				numIDs++;
 			}
+
+			console.log('Limit: '+limit+'  NumIDs: '+numIDs+' numPmids: '+numPmids);
 
 			var linkIDString = linkIDs[0].Id;
 			for(var i = 1; i < numIDs; i++)
@@ -357,7 +369,7 @@ router.get('/:resource', function(req, res, next) {
 				res.setHeader('content-type', 'application/json');
 				if (clean != 'yes'){
 					//-1 on numIDs to account for removing first value
-					var json = JSON.stringify({'confirmation':'success','count':numIDs-1, 'results':results}, null, 2); // this makes the json 'pretty' by indenting it 
+					var json = JSON.stringify({'confirmation':'success','count':results.PubmedArticleSet.PubmedArticle.length, 'results':results}, null, 2); // this makes the json 'pretty' by indenting it 
 					res.send(json);
 					return;
 				}
@@ -369,10 +381,10 @@ router.get('/:resource', function(req, res, next) {
   					return;
 				}
 				var list = cleanUpResults(articles);
-				list.splice(0,1);
+				list.splice(0,numPmids); //REMOVE SEARCHED PMIDS
 				
 				// this makes the json 'pretty' by indenting it
-				var json = JSON.stringify({'confirmation':'success', 'count':numIDs-1,  'results':list}, null, 2); //-1 on numIDs to account for removing first value
+				var json = JSON.stringify({'confirmation':'success', 'count':list.length,  'results':list}, null, 2);
 				res.send(json);
 				return;
 			
