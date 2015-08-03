@@ -320,6 +320,13 @@ router.get('/:resource', function(req, res, next) {
   			res.json({'confirmation':'fail', 'message':'Missing pmid parameter.'})
   			return;
   		}
+
+
+  		var limit = 100;
+  		if(req.query.limit != null)
+  			limit = req.query.limit;
+  			
+  		
 		
 		
 		var url = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&db=pubmed&id='+req.query.pmid;
@@ -330,8 +337,9 @@ router.get('/:resource', function(req, res, next) {
 
 			var numIDs = linkIDs.length;
 			var count = numIDs;
-			if(100 < numIDs)
-				numIDs = 100;
+
+			if(limit < numIDs)
+				numIDs = limit;
 
 			var linkIDString = linkIDs[0].Id;
 			for(var i = 1; i < numIDs; i++)
@@ -346,7 +354,7 @@ router.get('/:resource', function(req, res, next) {
 				
 				res.setHeader('content-type', 'application/json');
 				if (clean != 'yes'){
-					var json = JSON.stringify({'confirmation':'success','count':count, 'results':results}, null, 2); // this makes the json 'pretty' by indenting it
+					var json = JSON.stringify({'confirmation':'success','count':numIDs, 'results':results}, null, 2); // this makes the json 'pretty' by indenting it
 					res.send(json);
 					return;
 				}
@@ -360,7 +368,7 @@ router.get('/:resource', function(req, res, next) {
 				var list = cleanUpResults(articles);
 				
 				// this makes the json 'pretty' by indenting it
-				var json = JSON.stringify({'confirmation':'success', 'count':count,  'results':list}, null, 2); 
+				var json = JSON.stringify({'confirmation':'success', 'count':numIDs,  'results':list}, null, 2); 
 				res.send(json);
 				return;
 			
