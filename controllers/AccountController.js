@@ -22,6 +22,11 @@ this.checkCurrentUser = function(req, res){
 			res.send({'confirmation':'fail', 'message':'Profile '+userId+' not found'});
 			return;
 		}
+		
+		if (profile == null){
+			res.send({'confirmation':'fail', 'message':'Profile '+userId+' not found'});
+			return;
+		}
 
 		res.json({'confirmation':'success', 'profile':profile.summary()});
 	});
