@@ -519,8 +519,18 @@ router.post('/:resource', function(req, res, next) {
 				res.send({'confirmation':'fail', 'message':err.message});
 				return;
 			}
-			req.session.user = profile._id; // install cookie with profile id set to 'user'
-			res.json({'confirmation':'success', 'profile':profile.summary()});
+
+			//FIND DEVICE AND UPDATE device.profileId
+			var query = {_id: req.body.device};
+			var options = {new: true}; // important - this has to be set to 'true' 
+			Device.findOneAndUpdate(query, {'profileId': profile._id}, options, function(err, device){
+			if (err){
+				res.json({'confirmation':'fail', 'message':err.message});
+				return;
+			}
+				req.session.user = profile._id; // install cookie with profile id set to 'user'
+				res.json({'confirmation':'success', 'profile':profile.summary()});
+			});
 		});
 		return;
 	}
