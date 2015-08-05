@@ -3,15 +3,12 @@ var app = angular.module('AccountModule', ['angularFileUpload']);
 app.controller('AccountController', ['$scope', '$http', '$upload', function($scope, $http, $upload){
 	$scope.currentUser = {'loggedIn':'no'};
 	$scope.profile = {'email':'', 'firstName':'', 'lastName':'', 'image':''};
-	$scope.upload;
     $scope.newPassword = '';
     $scope.confirmPassword = '';
     $scope.section = 'account-information';
-    $scope.devices;
-    $scope.searches = {'saved':[], 'searchHistory':{}};
-    $scope.device;
-
-    $scope.randomBackground;
+    $scope.device = null;
+    $scope.articles = {};
+    $scope.randomBackground = null;
 
 	
 	$scope.init = function(){
@@ -23,6 +20,24 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
     $scope.formatNumber = function(number){
         var string = numeral(number).format('0,0');
         return string;
+    }
+
+    function getArticles(){
+        var base = '/api/search?pmid=';
+        for(var i = 0; i < $scope.device.saved.length; i++){
+            var url = base+$scope.device['saved'][i];
+            $http.get(url).success(function(data, status, headers, config){
+                if (data['confirmation'] != 'success'){
+                    alert(data['message']);
+                    return;
+                }
+                var article = data['article'][0];
+                $scope.articles[article['pmid']] = article;
+            }).error(function(data, status, headers, config) {
+                console.log("error", data, status, headers, config);
+            });   
+        }
+
     }
 
     function generateBackground(){
@@ -79,23 +94,11 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
             //$scope.devices = data['devices'];
             $scope.device = data.devices[0];
             //updateSaved();
+            getArticles();
         }).error(function(data, status, headers, config) {
             console.log("error", data, status, headers, config);
         });
     }
-
-    //THIS IS USED TO CREATE SINGLE LISTS OF ARTICLES AND HISTORY FOR ALL DEVICES
-    //LEAVE HERE INCASE WE DECIDE TO GET MORE COMPLICATED THAN JUST USING THE NEWEST DEVICE
-    // function updateSaved(){
-    //     for(var i = 0; i < $scope.devices.length; i++){
-    //         //Update Saved Article PMIDS
-    //         for(var j = 0; j < $scope.devices[i].saved.length; j++)
-    //             $scope.searches.saved.push($scope.devices[i].saved[j]);
-
-    //         for(var mySearch in $scope.devices[i].searchHistory)
-    //             $scope.searches.searchHistory[mySearch] = $scope.devices[i].searchHistory[mySearch];
-    //     }
-    // }
 
     $scope.removeArticle = function(pmidIndex){
         if(pmidIndex != -1){
