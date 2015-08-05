@@ -153,6 +153,7 @@ var searchRequest = function(searchTerm){
 	});
 }
 
+
 var followUpRequest = function(results, offset, limit){
 	return new Promise(function (resolve, reject){
 		var baseUrl = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/';
@@ -230,17 +231,17 @@ router.get('/:resource', function(req, res, next) {
 	var resource = req.params.resource;
 
 
-	// if (resource=='addDevice'){
-	// 	var temp = {'deviceToken':'Bretts Device', 'searchHistory':{}, 'saved':['1234567', '3456789',], 'profileId':'55c249bfddbdd29a86531fbe'};
-	// 	Device.create(temp, function(err, device){
-	// 		if (err){
-	// 			res.send({'confirmation':'fail', 'message':err.message});
-	// 			return;
-	// 		}
+	if (resource=='addDevice'){
+		var temp = {'deviceToken':'Bretts Device', 'searchHistory':{}, 'saved':['26241990', '26241951',], 'profileId':'55b141957bf4daa7b6b3ff34'};
+		Device.create(temp, function(err, device){
+			if (err){
+				res.send({'confirmation':'fail', 'message':err.message});
+				return;
+			}
 			
-	// 		res.json({'confirmation':'success', 'device':device.summary()});
-	// 	});
-	// }
+			res.json({'confirmation':'success', 'device':device.summary()});
+		});
+	}
 
 	
 	if (resource=='profile'){
@@ -302,11 +303,38 @@ router.get('/:resource', function(req, res, next) {
 	
 	if (resource == 'search'){
 		var searchTerm = req.query.term;
+		var pmid = req.query.pmid;
+
+		
+
+		if(pmid != null){
+			res.setHeader('content-type', 'application/json');
+			console.log('PMID: '+pmid);
+			var url = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id='+pmid+'&retmode=xml';
+			urlRequest(url, function(err, results){
+				if (err) { 
+					res.json({'confirmation':'fail', 'message':err.message});
+				}
+				else{
+					var PubmedArticleSet = results['PubmedArticleSet'];
+					var articles = PubmedArticleSet['PubmedArticle'];
+					var article = cleanUpResults(articles);
+
+					// this makes the json 'pretty' by indenting it
+					var json = JSON.stringify({'confirmation':'success', 'article':article}, null, 2);
+					res.send(json);
+					return;
+				}
+			});
+			return;
+		}
+
+
+
 		if (searchTerm==null){
 			res.json({'confirmation':'fail', 'message':'Missing search value.'});
 			return;
 		}
-		
 		
 		searchRequest(searchTerm)
 		.then(function(results){
@@ -331,6 +359,7 @@ router.get('/:resource', function(req, res, next) {
 			res.json({'confirmation':'fail','message':err.message});
 			return;
 		});
+
 	}
 	
 	if (resource == 'related') {
