@@ -488,6 +488,11 @@ router.get('/:resource/:id', function(req, res, next) {
 				return;
 			}
 			
+			if (device == null){
+				res.send({'confirmation':'fail','message':"Device "+identifier+" not found"});
+				return;
+			}
+			
 			res.json({'confirmation':'success', 'device':device.summary()});
 		});
 	}

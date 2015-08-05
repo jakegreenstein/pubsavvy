@@ -1,13 +1,11 @@
 var mongoose = require ('mongoose');
 
 var DeviceSchema = new mongoose.Schema({
-	deviceToken:String,
+	deviceToken: {type:String, default:''},
 	saved:{type:Array, default:new Array()},
 	timestamp:{type:Date, default:Date.now},
-	//searchHistory:[{term:String, count:Number}]
-	//searchHistory:{default:{'default':0}}
 	searchHistory:{type:mongoose.Schema.Types.Mixed, default:{}},
-	profileId:String
+	profileId:{type:String, default:''},
 });
 
 DeviceSchema.methods.summary = function(){
