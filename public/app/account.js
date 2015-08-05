@@ -20,6 +20,11 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
         generateBackground();
 	}
 
+    $scope.formatNumber = function(number){
+        var string = numeral(number).format('0,0');
+        return string;
+    }
+
     function generateBackground(){
         var selection = getRandomInt(1,3);
 

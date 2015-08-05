@@ -230,17 +230,17 @@ router.get('/:resource', function(req, res, next) {
 	var resource = req.params.resource;
 
 
-	if (resource=='addDevice'){
-		var temp = {'deviceToken':'UPDATE FROM SEARCH TEST', 'searchHistory':{}, 'saved':['TEST_1', 'TEST_2',]};
-		Device.create(temp, function(err, device){
-			if (err){
-				res.send({'confirmation':'fail', 'message':err.message});
-				return;
-			}
+	// if (resource=='addDevice'){
+	// 	var temp = {'deviceToken':'Bretts Device', 'searchHistory':{}, 'saved':['1234567', '3456789',], 'profileId':'55c249bfddbdd29a86531fbe'};
+	// 	Device.create(temp, function(err, device){
+	// 		if (err){
+	// 			res.send({'confirmation':'fail', 'message':err.message});
+	// 			return;
+	// 		}
 			
-			res.json({'confirmation':'success', 'device':device.summary()});
-		});
-	}
+	// 		res.json({'confirmation':'success', 'device':device.summary()});
+	// 	});
+	// }
 
 	
 	if (resource=='profile'){

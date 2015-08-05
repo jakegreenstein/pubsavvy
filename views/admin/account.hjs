@@ -13,7 +13,9 @@
     <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js'></script>
     <script src="https://code.angularjs.org/1.2.20/angular-sanitize.min.js"></script>  
     <script src="/admin/js/fileupload/angular-file-upload.js"></script>
-    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
+
+
     <script src='/app/app.js'></script>
     <script src='/app/autosearch.js'></script>
     <script src='/app/newdevice.js'></script>
@@ -21,6 +23,7 @@
     <script src='/app/home.js'></script>
     <script src='/app/search.js'></script>
     <script src='/app/account.js'></script>
+
 
 
     <style>
@@ -180,12 +183,12 @@
                     <table style="width:100%">
                         <tr style="border-bottom: 2px solid #ccc;">
                             <th style="width:50%;">Term</th>
-                            <!-- <th style="width:20%; text-align:right">Count</th>  -->      
+                            <th style="width:20%; text-align:center">Result Count</th>     
                             <th style="width:30%; text-align:right; padding-right:12px">View Results</th>
                         </tr>
                         <tr ng-repeat = "(key, value) in device.searchHistory track by $index" >
                             <td>{{key}}</td>
-                            <!-- <td align="right"><span class="badge">{{value}}</span></td>       -->
+                            <td align="center"><span class="badge">{{formatNumber(value['count'])}}</span></td>
                             <td><button ng-click="redirect(key)" type="button" class="btn btn-primary btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-search fa-lg" style="margin-right:12px;"></i> Search</button></td>
                         </tr>
                     </table>
