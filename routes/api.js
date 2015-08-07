@@ -9,7 +9,8 @@ var router = express.Router();
 
 var accountController = require('../controllers/AccountController.js');
 var deviceController = require('../controllers/DeviceController.js');
-var controllers = {'account':accountController, 'device':deviceController};
+var profileController = require('../controllers/ProfileController.js');
+var controllers = {'account':accountController, 'device':deviceController, 'profile':profileController};
 
 function urlRequest(url, completion){
 	request.get(url, function (error, response, body) {
@@ -237,23 +238,6 @@ var updateDeviceSearchHistory = function(results, req){
 router.get('/:resource', function(req, res, next) {
 	var resource = req.params.resource;
 	
-	if (resource=='profile'){
-		Profile.find(req.query, function(err, profiles) {
-			if (err){
-				res.json({'confirmation':'fail','message':err.message});
-				return;
-			}
-
-			var results = new Array();
-			for (var i=0; i<profiles.length; i++){
-				var p = profiles[i];
-				results.push(p.summary());
-			}
-
-			res.json({'confirmation':'success', "profiles":results});
-		});
-		return;
-	}
 
 	if (resource=='autosearch'){
 		AutoSearch.find(req.query, function(err, autosearches){
@@ -473,17 +457,6 @@ router.get('/:resource/:id', function(req, res, next) {
 	var resource = req.params.resource;
 	var identifier = req.params.id;
 
-  	if (resource=='profile'){
-  		Profile.findById(identifier, function(err, profile) {
-			if (err){
-				res.send({'confirmation':'fail','message':"Profile "+identifier+" not found"});
-				return;
-			}
-			res.json({'confirmation':'success', "profile":profile.summary()});
-		});
-		return;
-  	}
-
 	if (resource=='autosearch'){
   		AutoSearch.findById(identifier, function(err, autosearch) {
 			if (err){
@@ -509,28 +482,6 @@ router.get('/:resource/:id', function(req, res, next) {
 router.post('/:resource', function(req, res, next) {
 	var resource = req.params.resource;
 
-	if (resource == 'profile'){
-		Profile.create(req.body, function(err, profile){
-			if (err){
-				res.send({'confirmation':'fail', 'message':err.message});
-				return;
-			}
-
-			//FIND DEVICE AND UPDATE device.profileId
-			var query = {_id: req.body.device};
-			var options = {new: true}; // important - this has to be set to 'true' 
-			Device.findOneAndUpdate(query, {'profileId': profile._id}, options, function(err, device){
-				if (err){
-					res.json({'confirmation':'fail', 'message':err.message});
-					return;
-				}
-			
-				req.session.user = profile._id; // install cookie with profile id set to 'user'
-				res.json({'confirmation':'success', 'profile':profile.summary()});
-			});
-		});
-		return;
-	}
 	
 	if (resource=='autosearch'){
 		AutoSearch.create(req.body, function(err, autosearch){
@@ -602,21 +553,6 @@ router.put('/:resource/:id', function(req, res, next) {
 			}
 			
 			res.json({'confirmation':'success', 'autosearch':autosearch.summary()});
-		});
-		return;
-	}
-
-	if (resource=='profile'){
-		var query = {_id: identifier};
-		var options = {new: true};		
-		
-		Profile.findOneAndUpdate(query, req.body, options,function(err, profile){
-			if (err){
-				res.send({'confirmation':'fail', 'message':err.message});
-				return;
-			}
-			
-			res.json({'confirmation':'success', 'profile':profile.summary()});
 		});
 		return;
 	}
