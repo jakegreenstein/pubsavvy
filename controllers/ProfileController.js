@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 this.handleGet = function(req, res, pkg){
 	console.log('Profile CONTROLLER: Handel GET');
 
-	// fetch specific device by ID:
+	// fetch specific profile by ID:
 	if (pkg.id != null){ 
 		Profile.findById(pkg.id, function(err, profile) {
 			if (err){
