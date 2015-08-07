@@ -184,7 +184,6 @@ var updateDeviceSearchHistory = function(results, req){
 		}
 		
 		Device.findById(req.query.device, function(err, device){
-
 			if (err){
 				resolve(results);
 				return;
@@ -206,6 +205,8 @@ var updateDeviceSearchHistory = function(results, req){
 				historyObject['count'] = results.count;
 				historyObject['timestamp'] = timestamp;
 			}
+			
+			results['query'] = historyObject;
 
 			device['searchHistory'] = searchHistory;
 			device.markModified('searchHistory'); // EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
