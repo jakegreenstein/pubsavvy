@@ -60,6 +60,16 @@ this.login = function(req, res){
 	return;
 }
 
+this.logout = function(req, res){
+	req.session.reset();
+  	if(req.session.user != undefined){
+  		res.json({'confirmation':'fail', 'message':'logout unsuccessful'});
+  		return;
+  	}
+  	res.json({'confirmation':'success'});
+  	return;
+}
+
 this.handleGet = function(req, res, pkg){
 	console.log('ACCOUNT CONTROLLER: Handle GET');
 	
