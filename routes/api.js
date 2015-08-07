@@ -235,7 +235,6 @@ var updateDeviceSearchHistory = function(results, req){
 
 /* GET users listing. */
 router.get('/:resource', function(req, res, next) {
-
 	var resource = req.params.resource;
 	
 	if (resource=='profile'){
@@ -271,7 +270,7 @@ router.get('/:resource', function(req, res, next) {
 
 			res.json({'confirmation':'success', 'autosearches':results});
 		});
-		
+
 		return;
 	}
 	
@@ -330,6 +329,7 @@ router.get('/:resource', function(req, res, next) {
 			return;
 		});
 
+		return;
 	}
 	
 	if (resource == 'related') {
@@ -352,7 +352,6 @@ router.get('/:resource', function(req, res, next) {
   			limit++;
   		}
 
-		
 		var url = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&db=pubmed&id='+req.query.pmid;
 		urlRequest(url, function(err, results){
 			var eLinkResult = results.eLinkResult;
@@ -401,7 +400,8 @@ router.get('/:resource', function(req, res, next) {
 				return;
 			
 			});
-		});		
+		});	
+		return;	
   	}
 
   	if(resource == 'article') {
@@ -438,6 +438,7 @@ router.get('/:resource', function(req, res, next) {
 			return;
 			
 		});
+		return;
   	}
 
   	if (resource == 'currentuser'){ // check if current user is logged in
@@ -453,8 +454,8 @@ router.get('/:resource', function(req, res, next) {
   			res.json({'confirmation':'fail', 'message':'req.session.user != underfined'});
   			return;
   		}
-
   		res.json({'confirmation':'success'});
+  		return;
 	}
 
 	var controller = controllers[req.params.resource];
@@ -494,7 +495,6 @@ router.get('/:resource/:id', function(req, res, next) {
 		return;
   	}
 
-  	//CONTROLLERS 
   	var controller = controllers[req.params.resource];
 	if (controller == null){
 		res.send({'confirmation':'fail', 'message':'Invalid Resource: '+req.params.resource});
@@ -508,6 +508,7 @@ router.get('/:resource/:id', function(req, res, next) {
 
 router.post('/:resource', function(req, res, next) {
 	var resource = req.params.resource;
+
 	if (resource == 'profile'){
 		Profile.create(req.body, function(err, profile){
 			if (err){
@@ -528,24 +529,9 @@ router.post('/:resource', function(req, res, next) {
 				res.json({'confirmation':'success', 'profile':profile.summary()});
 			});
 		});
-		
-		
 		return;
 	}
 	
-  	if (resource=='device'){
-		Device.create(req.body, function(err, device){
-			if (err){
-				res.json({'confirmation':'fail', 'message':err.message});
-				return;
-			}
-			
-			res.json({'confirmation':'success', 'device':device.summary()});
-		});
-		
-		return;
-	}
-
 	if (resource=='autosearch'){
 		AutoSearch.create(req.body, function(err, autosearch){
 			if (err){
@@ -555,6 +541,7 @@ router.post('/:resource', function(req, res, next) {
 			
 			res.json({'confirmation':'success', 'autosearch':autosearch.summary()});
 		});
+		return;
 	}
 
 	if (resource == 'login'){
@@ -582,9 +569,15 @@ router.post('/:resource', function(req, res, next) {
 			req.session.user = profile._id; // install cookie with profile id set to 'user'
 		  	res.json({'confirmation':'success', 'profile':profile.summary()});
 		});
-		
 		return;
 	}
+
+	var controller = controllers[req.params.resource];
+	if (controller == null){
+		res.send({'confirmation':'fail', 'message':'Invalid Resource: '+req.params.resource});
+		return;
+	}
+	controller.handlePost(req, res, {'id':null, 'parameters':req.query});
 
 });
 
@@ -598,45 +591,6 @@ router.put('/:resource/:id', function(req, res, next) {
 		return
 	}
 	
-  	if (resource=='device'){
-		var query = {_id: identifier};
-		var options = {new: true}; // important - this has to be set to 'true' 
-		
-		Device.findOneAndUpdate(query, req.body, options, function(err, device){
-			if (err){
-				res.json({'confirmation':'fail', 'message':err.message});
-				return;
-			}
-			
-//			console.log('DEVICE UPDATE: '+JSON.stringify(req.body));
-			
-			var action = req.body.action;
-			if (action == null){
-				res.json({'confirmation':'success', 'device':device.summary()});
-				return;
-			}
-			
-			if (action == 'searchHistory'){
-				// var searchHistory = req.body.searchHistory;
-				// device['searchHistory'] = searchHistory;
-				//
-				// // EXTREMELY IMPORTANT: In Mongoose, 'mixed' object properties don't save automatically - you have to mark them as modified:
-				// device.markModified('searchHistory');
-				//
-				// device.save(function (err, device){
-				// 	if (err){
-				// 		console.log('ERROR: '+err.message);
-				// 		res.json({'confirmation':'fail', 'message':err.message});
-				// 		return;
-				// 	}
-				//
-				// 	res.json({'confirmation':'success', 'device':device.summary()});
-				// 	return;
-				// });
-			}
-		});
-	}
-
 	if (resource=='autosearch'){
 		var query = {_id: identifier};
 		var options = {new: true};		
@@ -649,6 +603,7 @@ router.put('/:resource/:id', function(req, res, next) {
 			
 			res.json({'confirmation':'success', 'autosearch':autosearch.summary()});
 		});
+		return;
 	}
 
 	if (resource=='profile'){
@@ -663,7 +618,23 @@ router.put('/:resource/:id', function(req, res, next) {
 			
 			res.json({'confirmation':'success', 'profile':profile.summary()});
 		});
+		return;
 	}
+
+	//CONTROLLERS
+	var controller = controllers[req.params.resource];
+	if (controller == null){
+		res.send({'confirmation':'fail', 'message':'Invalid Resource: '+req.params.resource});
+		return;
+	}
+	
+	if (req.params.id == null){
+		res.send({'confirmation':'fail', 'message':'Missing resource identiifer.'});
+		return;
+	}
+	controller.handlePut(req, res, {'id':req.params.id, 'parameters':req.query});
+
+
 });
 
 module.exports = router;

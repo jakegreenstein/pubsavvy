@@ -35,23 +35,45 @@ this.handleGet = function(req, res, pkg){
 
 		res.json({'confirmation':'success', 'devices':results});
 	});
+	return;
 }
 
 
 this.handlePost = function(req, res, pkg){
-
+	console.log('Device CONTROLLER: Handel POST');
+	Device.create(req.body, function(err, device){
+		if (err){
+			res.json({'confirmation':'fail', 'message':err.message});
+			return;
+		}
+		res.json({'confirmation':'success', 'device':device.summary()});
+	});
+	return;
 }
 
 
 
-function convertToJson(profiles){
-	var results = new Array();
-    for (var i=0; i<profiles.length; i++){
-  	  var p = profiles[i];
-  	  results.push(p.summary());
-    }
+this.handlePut = function(req, res, pkg){
+	console.log('Device CONTROLLER: Handel PUT');
+	var query = {_id: pkg.id};
+	var options = {new: true}; // important - this has to be set to 'true' 
 	
-	return results;
+	Device.findOneAndUpdate(query, req.body, options, function(err, device){
+		if (err){
+			res.json({'confirmation':'fail', 'message':err.message});
+			return;
+		}
+		
+		var action = req.body.action;
+		if (action == null){
+			res.json({'confirmation':'success', 'device':device.summary()});
+			return;
+		}
+		
+		return;
+	});
+	return;
+
 }
 
 
