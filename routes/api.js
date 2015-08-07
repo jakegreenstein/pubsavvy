@@ -12,7 +12,7 @@ var deviceController = require('../controllers/DeviceController.js');
 var profileController = require('../controllers/ProfileController.js');
 var autosearchController = require('../controllers/AutoSearchController.js');
 var articleController = require('../controllers/ArticleController.js');
-var controllers = {'account':accountController, 'device':deviceController, 'profile':profileController, 'autosearch':autosearchController};
+var controllers = {'account':accountController, 'device':deviceController, 'profile':profileController, 'autosearch':autosearchController, 'article':articleController};
 
 
 /* GET users listing. */
