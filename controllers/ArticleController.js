@@ -294,6 +294,114 @@ this.search = function(req, res){
 	return;
 }
 
+this.related = function(req, res){
+	if(req.query.pmid == null){
+		res.json({'confirmation':'fail', 'message':'Missing pmid parameter.'})
+		return;
+	}
+
+	//GET NUMBER OF PMID'S
+	var pmidString = req.query.pmid;
+	var numCommas = pmidString.split(",").length - 1;
+	var numPmids = numCommas+1;
+
+	var limit = 100;
+	if(req.query.limit != null)
+		limit = req.query.limit;
+
+	//INCREASE LIMIT TO ACCOUNT FOR REMOVED PMIDS (PMIDS in ID field are in innitial results)
+	for(var test = 0; test < numPmids; test++){
+		limit++;
+	}
+
+	var url = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&db=pubmed&id='+req.query.pmid;
+	urlRequest(url, function(err, results){
+		var eLinkResult = results.eLinkResult;
+		var linkSetDb = eLinkResult.LinkSet[0].LinkSetDb[0];
+		var linkIDs = linkSetDb.Link;
+
+		var numIDs = linkIDs.length;
+		
+		
+		if(limit < numIDs){
+			numIDs = limit;
+		}
+
+		console.log('Limit: '+limit+'  NumIDs: '+numIDs+' numPmids: '+numPmids);
+
+		var linkIDString = linkIDs[0].Id;
+		for(var i = 1; i < numIDs; i++)
+			linkIDString = linkIDString+','+linkIDs[i].Id;
+		
+		var nextUrl = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmode=xml&id='+linkIDString;
+		urlRequest(nextUrl, function(err, results){
+			var clean = req.query.clean;
+			if (clean==null)
+				clean = 'yes';
+			
+			res.setHeader('content-type', 'application/json');
+			if (clean != 'yes'){
+				//-1 on numIDs to account for removing first value
+				var json = JSON.stringify({'confirmation':'success','count':results.PubmedArticleSet.PubmedArticle.length, 'results':results}, null, 2); // this makes the json 'pretty' by indenting it 
+				res.send(json);
+				return;
+			}
+			
+			var PubmedArticleSet = results['PubmedArticleSet'];
+			var articles = PubmedArticleSet['PubmedArticle'];
+			if(articles == null){
+				res.json({'confirmation':'fail', 'message':'Invalid pmid'});
+					return;
+			}
+			var list = cleanUpResults(articles);
+			list.splice(0,numPmids); //REMOVE SEARCHED PMIDS
+			
+			// this makes the json 'pretty' by indenting it
+			var json = JSON.stringify({'confirmation':'success', 'count':list.length,  'results':list}, null, 2);
+			res.send(json);
+			return;
+		
+		});
+	});	
+	return;	
+}
+
+this.article = function(req, res){
+	if(req.query.pmid == null){
+			res.json({'confirmation':'fail', 'message':'Missing pmid parameter.'});
+			return;
+		}
+
+		var nextUrl = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmode=xml&id='+req.query.pmid;
+	urlRequest(nextUrl, function(err, article){
+		var clean = req.query.clean;
+		if (clean==null)
+			clean = 'yes';
+			
+			
+		res.setHeader('content-type', 'application/json');
+		if (clean != 'yes'){
+			var json = JSON.stringify({'confirmation':'success', 'article':article}, null, 2); // this makes the json 'pretty' by indenting it
+			res.send(json);
+			return;
+		}
+			
+		var PubmedArticleSet = article['PubmedArticleSet'];
+		var articles = PubmedArticleSet['PubmedArticle'];
+		if(articles == null){
+			res.json({'confirmation':'fail', 'message':'Invalid pmid'});
+				return;
+		}
+		var list = cleanUpResults(articles);
+			
+		// this makes the json 'pretty' by indenting it
+		var json = JSON.stringify({'confirmation':'success',  'article':list[0]}, null, 2); 
+		res.send(json);
+		return;
+		
+	});
+	return;
+}
 
 function convertToJson(profiles){
 	var results = new Array();
