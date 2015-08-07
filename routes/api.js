@@ -454,31 +454,8 @@ router.get('/:resource/:id', function(req, res, next) {
 router.post('/:resource', function(req, res, next) {
 	var resource = req.params.resource;
 
-	if (resource == 'login'){
-		var email = req.body.email;
-		var password = req.body.password;
-		console.log('LOG IN: '+email+' && '+password);
-	  	// res.json({'confirmation':'success', 'profile':req.body});
-		
-		Profile.findOne({'email':email}, function(err, profile){
-			if (err){
-				res.json({'confirmation':'fail', 'message':err.message});
-				return;
-			}
-			
-			if (profile == null){
-				res.json({'confirmation':'fail', 'message':'Profile with email '+email+' not found.'});
-				return;
-			}
-			
-			if (password != profile.password){
-				res.json({'confirmation':'fail', 'message':'Incorrect password.'});
-				return;
-			}
-			
-			req.session.user = profile._id; // install cookie with profile id set to 'user'
-		  	res.json({'confirmation':'success', 'profile':profile.summary()});
-		});
+	if(resource == 'login'){
+		accountController.login(req, res);
 		return;
 	}
 

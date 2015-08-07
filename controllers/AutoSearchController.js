@@ -23,13 +23,11 @@ this.handleGet = function(req, res, pkg){
 			res.json({'confirmation':'fail','message':err.message});
 			return;
 		}
-		
 		var results = new Array();
 		for (var i=0; i<autosearches.length; i++){
 			var p = autosearches[i];
 			results.push(p.summary());
 		}
-
 		res.json({'confirmation':'success', 'autosearches':results});
 	});
 	return;

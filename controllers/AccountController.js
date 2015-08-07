@@ -2,6 +2,7 @@ var Profile = require('../models/Profile.js');
 var mongoose = require('mongoose');
 
 
+
 this.checkCurrentUser = function(req, res){
 	if (!req.session){
 		res.send({'confirmation':'fail', 'message':'User not logged in.'});
@@ -12,7 +13,7 @@ this.checkCurrentUser = function(req, res){
 		res.send({'confirmation':'fail', 'message':'User not logged in.'});
 		return;
 	}
-	
+
 	var userId = req.session.user;
 	console.log('USER '+userId+' LOGGED IN');
 	
@@ -30,7 +31,33 @@ this.checkCurrentUser = function(req, res){
 
 		res.json({'confirmation':'success', 'profile':profile.summary()});
 	});
-	
+}
+
+this.login = function(req, res){
+	var email = req.body.email;
+	var password = req.body.password;
+	console.log('LOG IN: '+email+' && '+password);
+  
+	Profile.findOne({'email':email}, function(err, profile){
+		if (err){
+			res.json({'confirmation':'fail', 'message':err.message});
+			return;
+		}
+		
+		if (profile == null){
+			res.json({'confirmation':'fail', 'message':'Profile with email '+email+' not found.'});
+			return;
+		}
+		
+		if (password != profile.password){
+			res.json({'confirmation':'fail', 'message':'Incorrect password.'});
+			return;
+		}
+		
+		req.session.user = profile._id; // install cookie with profile id set to 'user'
+	  	res.json({'confirmation':'success', 'profile':profile.summary()});
+	});
+	return;
 }
 
 this.handleGet = function(req, res, pkg){
