@@ -166,9 +166,14 @@ var followUpRequest = function(results, offset, limit){
 		urlRequest(nextReq, function(err, results){
 			if (err) { reject(err); }
 			else{
-				var PubmedArticleSet = results['PubmedArticleSet'];
-				var articles = PubmedArticleSet['PubmedArticle'];
-				resolve({'count':count, 'list':articles});
+				if(results['PubmedArticleSet'] == null){
+					resolve({'count':0, 'list':[]})
+				}
+				else{
+					var PubmedArticleSet = results['PubmedArticleSet'];
+					var articles = PubmedArticleSet['PubmedArticle'];
+					resolve({'count':count, 'list':articles});
+				}
 			}
 		});
 	});
