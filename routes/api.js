@@ -11,6 +11,7 @@ var accountController = require('../controllers/AccountController.js');
 var deviceController = require('../controllers/DeviceController.js');
 var profileController = require('../controllers/ProfileController.js');
 var autosearchController = require('../controllers/AutoSearchController.js');
+var articleController = require('../controllers/ArticleController.js');
 var controllers = {'account':accountController, 'device':deviceController, 'profile':profileController, 'autosearch':autosearchController};
 
 function urlRequest(url, completion){
@@ -57,7 +58,6 @@ function cleanUpResults(articles){
 			var dateRevised = meta['DateRevised'][0]; 
 			summary['dateRevised'] = months[dateRevised['Month'][0]-1]+' '+dateRevised['Day'][0]+' '+dateRevised['Year'][0];
 		}
-	
 	
 		var articleSummary = meta['Article'][0]; 
 
@@ -117,17 +117,13 @@ function cleanUpResults(articles){
 				authors.push(authorInfo);
 			}
 		}
-
-	
 		summary['authors'] = authors;
-	
+
 		if (articleSummary['Language'] != null) // not always there
 			summary['language'] = articleSummary['Language'][0];
 
-	
 		list.push(summary);
 	}
-	
 	return list;
 }
 
@@ -239,63 +235,64 @@ var updateDeviceSearchHistory = function(results, req){
 router.get('/:resource', function(req, res, next) {
 	var resource = req.params.resource;
 	
-	
 	if (resource == 'search'){
-		var searchTerm = req.query.term;
-		var pmid = req.query.pmid;
-
-		if(pmid != null){
-			res.setHeader('content-type', 'application/json');
-			console.log('PMID: '+pmid);
-			var url = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id='+pmid+'&retmode=xml';
-			urlRequest(url, function(err, results){
-				if (err) { 
-					res.json({'confirmation':'fail', 'message':err.message});
-				}
-				else{
-					var PubmedArticleSet = results['PubmedArticleSet'];
-					var articles = PubmedArticleSet['PubmedArticle'];
-					var article = cleanUpResults(articles);
-
-					// this makes the json 'pretty' by indenting it
-					var json = JSON.stringify({'confirmation':'success', 'article':article}, null, 2);
-					res.send(json);
-					return;
-				}
-			});
-			return;
-		}
-
-		if (searchTerm==null){
-			res.json({'confirmation':'fail', 'message':'Missing search value.'});
-			return;
-		}
-		
-		searchRequest(searchTerm)
-		.then(function(results){
-			var offset = (req.query.offset == null)? '0' : req.query.offset;
-			var limit = (req.query.limit == null)? '100' : req.query.limit;
-			return followUpRequest(results, offset, limit);
-		})
-		.then(function(results){
-			var clean = (req.query.clean == null)? 'yes' : req.query.clean;
-			var list = (clean == 'yes') ? cleanUpResults(results.list) : results.list;
-			var response = {'confirmation':'success', 'count':results.count, 'results':list};
-			return updateDeviceSearchHistory(response, req);
-		})
-		.then(function(results){
-			res.setHeader('content-type', 'application/json');
-			
-			var json = JSON.stringify(results, null, 2);
-			res.send(json);
-			return;
-		})
-		.catch(function(err){
-			res.json({'confirmation':'fail','message':err.message});
-			return;
-		});
-
+		articleController.search(req, res);
 		return;
+		// var searchTerm = req.query.term;
+		// var pmid = req.query.pmid;
+
+		// if(pmid != null){
+		// 	res.setHeader('content-type', 'application/json');
+		// 	console.log('PMID: '+pmid);
+		// 	var url = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id='+pmid+'&retmode=xml';
+		// 	urlRequest(url, function(err, results){
+		// 		if (err) { 
+		// 			res.json({'confirmation':'fail', 'message':err.message});
+		// 		}
+		// 		else{
+		// 			var PubmedArticleSet = results['PubmedArticleSet'];
+		// 			var articles = PubmedArticleSet['PubmedArticle'];
+		// 			var article = cleanUpResults(articles);
+
+		// 			// this makes the json 'pretty' by indenting it
+		// 			var json = JSON.stringify({'confirmation':'success', 'article':article}, null, 2);
+		// 			res.send(json);
+		// 			return;
+		// 		}
+		// 	});
+		// 	return;
+		// }
+
+		// if (searchTerm==null){
+		// 	res.json({'confirmation':'fail', 'message':'Missing search value.'});
+		// 	return;
+		// }
+		
+		// searchRequest(searchTerm)
+		// .then(function(results){
+		// 	var offset = (req.query.offset == null)? '0' : req.query.offset;
+		// 	var limit = (req.query.limit == null)? '100' : req.query.limit;
+		// 	return followUpRequest(results, offset, limit);
+		// })
+		// .then(function(results){
+		// 	var clean = (req.query.clean == null)? 'yes' : req.query.clean;
+		// 	var list = (clean == 'yes') ? cleanUpResults(results.list) : results.list;
+		// 	var response = {'confirmation':'success', 'count':results.count, 'results':list};
+		// 	return updateDeviceSearchHistory(response, req);
+		// })
+		// .then(function(results){
+		// 	res.setHeader('content-type', 'application/json');
+			
+		// 	var json = JSON.stringify(results, null, 2);
+		// 	res.send(json);
+		// 	return;
+		// })
+		// .catch(function(err){
+		// 	res.json({'confirmation':'fail','message':err.message});
+		// 	return;
+		// });
+
+		// return;
 	}
 	
 	if (resource == 'related') {
