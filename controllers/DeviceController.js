@@ -10,11 +10,11 @@ this.handleGet = function(req, res, pkg){
 	if (pkg.id != null){ 
 		Device.findById(pkg.id, function(err, device){
 			if (err){
-				res.send({'confirmation':'fail','message':"Device "+identifier+" not found"});
+				res.send({'confirmation':'fail','message':"Device "+pkg.id+" not found"});
 				return;
 			}
 			if (device == null){
-				res.send({'confirmation':'fail','message':"Device "+identifier+" not found"});
+				res.send({'confirmation':'fail','message':"Device "+pkg.id+" not found"});
 				return;
 			}
 			res.json({'confirmation':'success', 'device':device.summary()});
