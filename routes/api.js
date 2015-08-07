@@ -10,7 +10,8 @@ var router = express.Router();
 var accountController = require('../controllers/AccountController.js');
 var deviceController = require('../controllers/DeviceController.js');
 var profileController = require('../controllers/ProfileController.js');
-var controllers = {'account':accountController, 'device':deviceController, 'profile':profileController};
+var autosearchController = require('../controllers/AutoSearchController.js');
+var controllers = {'account':accountController, 'device':deviceController, 'profile':profileController, 'autosearch':autosearchController};
 
 function urlRequest(url, completion){
 	request.get(url, function (error, response, body) {
@@ -238,25 +239,6 @@ var updateDeviceSearchHistory = function(results, req){
 router.get('/:resource', function(req, res, next) {
 	var resource = req.params.resource;
 	
-
-	if (resource=='autosearch'){
-		AutoSearch.find(req.query, function(err, autosearches){
-			if (err){
-				res.json({'confirmation':'fail','message':err.message});
-				return;
-			}
-			
-			var results = new Array();
-			for (var i=0; i<autosearches.length; i++){
-				var p = autosearches[i];
-				results.push(p.summary());
-			}
-
-			res.json({'confirmation':'success', 'autosearches':results});
-		});
-
-		return;
-	}
 	
 	if (resource == 'search'){
 		var searchTerm = req.query.term;
@@ -457,16 +439,6 @@ router.get('/:resource/:id', function(req, res, next) {
 	var resource = req.params.resource;
 	var identifier = req.params.id;
 
-	if (resource=='autosearch'){
-  		AutoSearch.findById(identifier, function(err, autosearch) {
-			if (err){
-				res.send({'confirmation':'fail','message':"AutoSearch "+identifier+" not found"});
-				return;
-			}
-			res.json({'confirmation':'success', "autosearch":autosearch.summary()});
-		});
-		return;
-  	}
 
   	var controller = controllers[req.params.resource];
 	if (controller == null){
@@ -481,19 +453,6 @@ router.get('/:resource/:id', function(req, res, next) {
 
 router.post('/:resource', function(req, res, next) {
 	var resource = req.params.resource;
-
-	
-	if (resource=='autosearch'){
-		AutoSearch.create(req.body, function(err, autosearch){
-			if (err){
-				res.send({'confirmation':'fail', 'message':err.message});
-				return;
-			}
-			
-			res.json({'confirmation':'success', 'autosearch':autosearch.summary()});
-		});
-		return;
-	}
 
 	if (resource == 'login'){
 		var email = req.body.email;
@@ -537,26 +496,6 @@ router.put('/:resource/:id', function(req, res, next) {
 	var resource = req.params.resource;
 	var identifier = req.params.id;
 	
-	if (identifier==null){
-		res.send({'confirmation':'fail', 'message':'Missing resource identifier.'});
-		return
-	}
-	
-	if (resource=='autosearch'){
-		var query = {_id: identifier};
-		var options = {new: true};		
-		
-		AutoSearch.findOneAndUpdate(query, req.body, options,function(err, autosearch){
-			if (err){
-				res.send({'confirmation':'fail', 'message':err.message});
-				return;
-			}
-			
-			res.json({'confirmation':'success', 'autosearch':autosearch.summary()});
-		});
-		return;
-	}
-
 	//CONTROLLERS
 	var controller = controllers[req.params.resource];
 	if (controller == null){
