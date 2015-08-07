@@ -198,7 +198,8 @@ var updateDeviceSearchHistory = function(results, req){
 
 			var timestamp = new Date();
 			if(historyObject == undefined){
-				searchHistory[searchTerm]  = {'freq':1, 'count':results.count, 'timestamp': timestamp};
+				historyObject = {'freq':1, 'count':results.count, 'timestamp': timestamp};
+				searchHistory[searchTerm] = historyObject;
 			}
 			else{
 				historyObject['freq'] = historyObject['freq'] + 1;
