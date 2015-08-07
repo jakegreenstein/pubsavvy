@@ -8,7 +8,8 @@ var AutoSearch = require('../models/AutoSearch');
 var router = express.Router();
 
 var accountController = require('../controllers/AccountController.js');
-var controllers = {'account':accountController};
+var deviceController = require('../controllers/DeviceController.js');
+var controllers = {'account':accountController, 'device':deviceController};
 
 function urlRequest(url, completion){
 	request.get(url, function (error, response, body) {
@@ -236,20 +237,6 @@ var updateDeviceSearchHistory = function(results, req){
 router.get('/:resource', function(req, res, next) {
 
 	var resource = req.params.resource;
-
-
-	if (resource=='addDevice'){
-		var temp = {'deviceToken':'Bretts Device', 'searchHistory':{}, 'saved':['26241990', '26241951',], 'profileId':'55b141957bf4daa7b6b3ff34'};
-		Device.create(temp, function(err, device){
-			if (err){
-				res.send({'confirmation':'fail', 'message':err.message});
-				return;
-			}
-			
-			res.json({'confirmation':'success', 'device':device.summary()});
-		});
-	}
-
 	
 	if (resource=='profile'){
 		Profile.find(req.query, function(err, profiles) {
@@ -268,26 +255,6 @@ router.get('/:resource', function(req, res, next) {
 		});
 		return;
 	}
-
-	if (resource=='device'){
-		Device.find(req.query,{}, { sort: { 'timestamp' : -1 } }, function(err, devices){
-			if (err){
-				res.json({'confirmation':'fail','message':err.message});
-				return;
-			}
-			
-			var results = new Array();
-			for (var i=0; i<devices.length; i++){
-				var p = devices[i];
-				results.push(p.summary());
-			}
-
-			res.json({'confirmation':'success', 'devices':results});
-		});
-		
-		return;
-	}
-
 
 	if (resource=='autosearch'){
 		AutoSearch.find(req.query, function(err, autosearches){
@@ -312,8 +279,6 @@ router.get('/:resource', function(req, res, next) {
 		var searchTerm = req.query.term;
 		var pmid = req.query.pmid;
 
-		
-
 		if(pmid != null){
 			res.setHeader('content-type', 'application/json');
 			console.log('PMID: '+pmid);
@@ -335,8 +300,6 @@ router.get('/:resource', function(req, res, next) {
 			});
 			return;
 		}
-
-
 
 		if (searchTerm==null){
 			res.json({'confirmation':'fail', 'message':'Missing search value.'});
@@ -389,9 +352,6 @@ router.get('/:resource', function(req, res, next) {
   			limit++;
   		}
 
-  
-  			
-
 		
 		var url = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&db=pubmed&id='+req.query.pmid;
 		urlRequest(url, function(err, results){
@@ -418,8 +378,6 @@ router.get('/:resource', function(req, res, next) {
 				if (clean==null)
 					clean = 'yes';
 				
-
-
 				res.setHeader('content-type', 'application/json');
 				if (clean != 'yes'){
 					//-1 on numIDs to account for removing first value
@@ -499,6 +457,14 @@ router.get('/:resource', function(req, res, next) {
   		res.json({'confirmation':'success'});
 	}
 
+	var controller = controllers[req.params.resource];
+	if (controller == null){
+		res.send({'confirmation':'fail', 'message':'Invalid Resource: '+req.params.resource});
+		return;
+	}
+	
+	controller.handleGet(req, res, {'id':null, 'parameters':req.query});
+
 });
 
 
@@ -516,22 +482,6 @@ router.get('/:resource/:id', function(req, res, next) {
 		});
 		return;
   	}
-	
-  	if (resource=='device'){
-		Device.findById(identifier, function(err, device){
-			if (err){
-				res.send({'confirmation':'fail','message':"Device "+identifier+" not found"});
-				return;
-			}
-			
-			if (device == null){
-				res.send({'confirmation':'fail','message':"Device "+identifier+" not found"});
-				return;
-			}
-			
-			res.json({'confirmation':'success', 'device':device.summary()});
-		});
-	}
 
 	if (resource=='autosearch'){
   		AutoSearch.findById(identifier, function(err, autosearch) {
@@ -543,6 +493,15 @@ router.get('/:resource/:id', function(req, res, next) {
 		});
 		return;
   	}
+
+  	//CONTROLLERS 
+  	var controller = controllers[req.params.resource];
+	if (controller == null){
+		res.send({'confirmation':'fail', 'message':'Invalid Resource: '+req.params.resource});
+		return;
+	}
+	
+	controller.handleGet(req, res, {'id':req.params.id, 'parameters':req.query});
   	
 });
 
