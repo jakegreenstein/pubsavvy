@@ -432,11 +432,6 @@ this.handleGet = function(req, res, pkg){
 	return;
 }
 
-this.handlePost = function(req, res, pkg){
-
-}
-
-
 
 
 
