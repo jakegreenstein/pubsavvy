@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 
 
 
-this.checkCurrentUser = function(req, res){
+function checkCurrentUser(req, res){
 	if (!req.session){
 		res.send({'confirmation':'fail', 'message':'User not logged in.'});
 		return;
@@ -30,10 +30,12 @@ this.checkCurrentUser = function(req, res){
 		}
 
 		res.json({'confirmation':'success', 'profile':profile.summary()});
+		return;
 	});
+	return;
 }
 
-this.login = function(req, res){
+function login(req, res){
 	var email = req.body.email;
 	var password = req.body.password;
 	console.log('LOG IN: '+email+' && '+password);
@@ -56,11 +58,12 @@ this.login = function(req, res){
 		
 		req.session.user = profile._id; // install cookie with profile id set to 'user'
 	  	res.json({'confirmation':'success', 'profile':profile.summary()});
+	  	return;
 	});
 	return;
 }
 
-this.logout = function(req, res){
+function logout(req, res){
 	req.session.reset();
   	if(req.session.user != undefined){
   		res.json({'confirmation':'fail', 'message':'logout unsuccessful'});
@@ -72,6 +75,17 @@ this.logout = function(req, res){
 
 this.handleGet = function(req, res, pkg){
 	console.log('ACCOUNT CONTROLLER: Handle GET');
+
+	if (req.params.resource == 'currentuser'){
+		checkCurrentUser(req, res);
+		return;
+	}
+
+	if (req.params.resource == 'logout'){
+  		logout(req,res);
+  		return;
+	}
+
 	
 	if (pkg.id != null){
 		Profile.findById(pkg.id, function(err, profile){
@@ -114,6 +128,11 @@ this.handleGet = function(req, res, pkg){
 
 this.handlePost = function(req, res, pkg){
 	console.log('PROFILE CONTROLLER: Handle POST');
+
+	if(req.params.resource == 'login'){
+		login(req, res);
+		return;
+	}
 
 	Profile.create(req.body, function(err, profile){
 		if (err){

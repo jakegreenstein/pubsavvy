@@ -12,7 +12,17 @@ var deviceController = require('../controllers/DeviceController.js');
 var profileController = require('../controllers/ProfileController.js');
 var autosearchController = require('../controllers/AutoSearchController.js');
 var articleController = require('../controllers/ArticleController.js');
-var controllers = {'account':accountController, 'device':deviceController, 'profile':profileController, 'autosearch':autosearchController, 'article':articleController};
+
+var controllers = {
+	'account':accountController,
+ 	'currentuser':accountController,
+ 	'logout':accountController,
+ 	'login':accountController,
+ 	'device':deviceController, 
+ 	'profile':profileController, 
+ 	'autosearch':autosearchController, 
+ 	'article':articleController
+ };
 
 
 /* GET users listing. */
@@ -34,16 +44,6 @@ router.get('/:resource', function(req, res, next) {
   		return;
   	}
 
-  	if (resource == 'currentuser'){ // check if current user is logged in
-		accountController.checkCurrentUser(req, res);
-		return;
-	}
-
-	if (resource == 'logout'){
-  		accountController.logout(req,res);
-  		return;
-	}
-
 	var controller = controllers[req.params.resource];
 	if (controller == null){
 		res.send({'confirmation':'fail', 'message':'Invalid Resource: '+req.params.resource});
@@ -56,9 +56,6 @@ router.get('/:resource', function(req, res, next) {
 
 
 router.get('/:resource/:id', function(req, res, next) {
-	var resource = req.params.resource;
-	var identifier = req.params.id;
-
 
   	var controller = controllers[req.params.resource];
 	if (controller == null){
@@ -72,13 +69,7 @@ router.get('/:resource/:id', function(req, res, next) {
 
 
 router.post('/:resource', function(req, res, next) {
-	var resource = req.params.resource;
-
-	if(resource == 'login'){
-		accountController.login(req, res);
-		return;
-	}
-
+	
 	var controller = controllers[req.params.resource];
 	if (controller == null){
 		res.send({'confirmation':'fail', 'message':'Invalid Resource: '+req.params.resource});
@@ -90,8 +81,6 @@ router.post('/:resource', function(req, res, next) {
 
 
 router.put('/:resource/:id', function(req, res, next) {
-	var resource = req.params.resource;
-	var identifier = req.params.id;
 	
 	//CONTROLLERS
 	var controller = controllers[req.params.resource];
