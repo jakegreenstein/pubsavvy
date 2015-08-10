@@ -7,6 +7,16 @@ var Promise = require('bluebird');
 
 
 //HELPER FUNCTIONS
+function convertToJson(profiles){
+	var results = new Array();
+    for (var i=0; i<profiles.length; i++){
+  	  var p = profiles[i];
+  	  results.push(p.summary());
+    }
+	
+	return results;
+}
+
 function urlRequest(url, completion){
 	console.log('in url request');
 	request.get(url, function (error, response, body) {
@@ -233,7 +243,7 @@ var updateDeviceSearchHistory = function(results, req){
 }
 
 
-this.search = function(req, res){
+function search(req, res){
 	var searchTerm = req.query.term;
 	var pmid = req.query.pmid;
 
@@ -294,7 +304,7 @@ this.search = function(req, res){
 	return;
 }
 
-this.related = function(req, res){
+function related(req, res){
 	if(req.query.pmid == null){
 		res.json({'confirmation':'fail', 'message':'Missing pmid parameter.'})
 		return;
@@ -366,7 +376,7 @@ this.related = function(req, res){
 	return;	
 }
 
-this.article = function(req, res){
+function article(req, res){
 	if(req.query.pmid == null){
 			res.json({'confirmation':'fail', 'message':'Missing pmid parameter.'});
 			return;
@@ -403,15 +413,31 @@ this.article = function(req, res){
 	return;
 }
 
-function convertToJson(profiles){
-	var results = new Array();
-    for (var i=0; i<profiles.length; i++){
-  	  var p = profiles[i];
-  	  results.push(p.summary());
-    }
-	
-	return results;
+this.handleGet = function(req, res, pkg){
+
+	if(req.params.resource == 'search'){
+		search(req, res);
+		return;
+	}
+
+	if(req.params.resource == 'related'){
+		related(req, res);
+		return;
+	}
+
+	if(req.params.resource == 'article'){
+		article(req, res);
+		return;
+	}
+	return;
 }
+
+this.handlePost = function(req, res, pkg){
+
+}
+
+
+
 
 
 

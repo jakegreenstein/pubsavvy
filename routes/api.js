@@ -21,28 +21,14 @@ var controllers = {
  	'device':deviceController, 
  	'profile':profileController, 
  	'autosearch':autosearchController, 
- 	'article':articleController
+ 	'article':articleController,
+ 	'search':articleController,
+ 	'related':articleController
  };
 
 
 /* GET users listing. */
 router.get('/:resource', function(req, res, next) {
-	var resource = req.params.resource;
-	
-	if (resource == 'search'){
-		articleController.search(req, res);
-		return;
-	}
-	
-	if (resource == 'related') {
-		articleController.related(req, res);
-		return;	
-  	}
-
-  	if(resource == 'article') {
-  		articleController.article(req, res);
-  		return;
-  	}
 
 	var controller = controllers[req.params.resource];
 	if (controller == null){
