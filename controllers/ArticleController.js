@@ -18,7 +18,6 @@ function convertToJson(profiles){
 }
 
 function urlRequest(url, completion){
-	console.log('in url request');
 	request.get(url, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
 			var parseString = xmlToJson.parseString;
@@ -28,8 +27,6 @@ function urlRequest(url, completion){
 					completion(err, null)
 					return;
 				}
-				 	
-			    console.log('results');
 				
 				if (completion != null)
 					completion(null, result);
@@ -143,21 +140,16 @@ var relatedArticlesRequest = function(pmid){
 }
 
 var searchRequest = function(searchTerm){
-	console.log('hellooo');
 	return new Promise(function (resolve, reject){
-		console.log('IM IN THE PROMISE');
 
 		var baseUrl = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/';
 		var url = baseUrl+'esearch.fcgi?db=pubmed&term='+searchTerm+'&usehistory=y&retmax=100';
 
 		urlRequest(url, function(err, results){
-			console.log('im here');
 			if (err) {
-				console.log('in error'); 
 				reject(err); 
 			}
 			else { 
-				console.log('get out');
 				resolve(results);
 			}
 		});
@@ -276,20 +268,17 @@ function search(req, res){
 	
 	searchRequest(searchTerm)
 	.then(function(results){
-		console.log('1');
 		var offset = (req.query.offset == null)? '0' : req.query.offset;
 		var limit = (req.query.limit == null)? '100' : req.query.limit;
 		return followUpRequest(results, offset, limit);
 	})
 	.then(function(results){
-		console.log('2');
 		var clean = (req.query.clean == null)? 'yes' : req.query.clean;
 		var list = (clean == 'yes') ? cleanUpResults(results.list) : results.list;
 		var response = {'confirmation':'success', 'count':results.count, 'results':list};
 		return updateDeviceSearchHistory(response, req);
 	})
 	.then(function(results){
-		console.log('3');
 		res.setHeader('content-type', 'application/json');
 		
 		var json = JSON.stringify(results, null, 2);

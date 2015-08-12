@@ -74,7 +74,6 @@ function logout(req, res){
 }
 
 this.handleGet = function(req, res, pkg){
-	console.log('ACCOUNT CONTROLLER: Handle GET');
 
 	if (req.params.resource == 'currentuser'){
 		checkCurrentUser(req, res);
@@ -127,7 +126,6 @@ this.handleGet = function(req, res, pkg){
 
 
 this.handlePost = function(req, res, pkg){
-	console.log('PROFILE CONTROLLER: Handle POST');
 
 	if(req.params.resource == 'login'){
 		login(req, res);

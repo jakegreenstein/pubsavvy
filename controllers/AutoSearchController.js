@@ -4,8 +4,6 @@ var mongoose = require('mongoose');
 
 
 this.handleGet = function(req, res, pkg){
-	console.log('AutoSearch CONTROLLER: Handel GET');
-
 	// fetch specific autoSearch by ID:
 	if (pkg.id != null){ 
 		AutoSearch.findById(pkg.id, function(err, autosearch) {
@@ -35,7 +33,6 @@ this.handleGet = function(req, res, pkg){
 
 
 this.handlePost = function(req, res, pkg){
-	console.log('AutoSearch CONTROLLER: Handel POST');
 	AutoSearch.create(req.body, function(err, autosearch){
 		if (err){
 			res.send({'confirmation':'fail', 'message':err.message});
@@ -50,7 +47,6 @@ this.handlePost = function(req, res, pkg){
 
 
 this.handlePut = function(req, res, pkg){
-	console.log('AutoSearch CONTROLLER: Handel PUT');
 		var query = {_id: pkg.id};
 		var options = {new: true};		
 		

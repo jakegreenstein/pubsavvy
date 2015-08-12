@@ -4,8 +4,6 @@ var mongoose = require('mongoose');
 
 
 this.handleGet = function(req, res, pkg){
-	console.log('Device CONTROLLER: Handel GET');
-
 	// fetch specific device by ID:
 	if (pkg.id != null){ 
 		Device.findById(pkg.id, function(err, device){
@@ -40,7 +38,6 @@ this.handleGet = function(req, res, pkg){
 
 
 this.handlePost = function(req, res, pkg){
-	console.log('Device CONTROLLER: Handel POST');
 	Device.create(req.body, function(err, device){
 		if (err){
 			res.json({'confirmation':'fail', 'message':err.message});
@@ -54,7 +51,6 @@ this.handlePost = function(req, res, pkg){
 
 
 this.handlePut = function(req, res, pkg){
-	console.log('Device CONTROLLER: Handel PUT');
 	var query = {_id: pkg.id};
 	var options = {new: true}; // important - this has to be set to 'true' 
 	

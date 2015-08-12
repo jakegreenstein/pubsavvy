@@ -5,7 +5,6 @@ var mongoose = require('mongoose');
 
 
 this.handleGet = function(req, res, pkg){
-	console.log('Profile CONTROLLER: Handel GET');
 
 	// fetch specific profile by ID:
 	if (pkg.id != null){ 
@@ -39,7 +38,6 @@ this.handleGet = function(req, res, pkg){
 
 
 this.handlePost = function(req, res, pkg){
-	console.log('Profile CONTROLLER: Handel POST');
 	Profile.create(req.body, function(err, profile){
 		if (err){
 			res.send({'confirmation':'fail', 'message':err.message});
@@ -65,7 +63,6 @@ this.handlePost = function(req, res, pkg){
 
 
 this.handlePut = function(req, res, pkg){
-	console.log('Profile CONTROLLER: Handel PUT');
 	var query = {_id: pkg.id};
 	var options = {new: true};		
 		
