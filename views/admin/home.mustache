@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PubSavvy - Frame Research</title>
+
+    <!-- ANGULAR -->
+    <!--link rel="stylesheet" href="/admin/styles/style.css"-->
+    <script src="https://malsup.github.com/jquery.form.js"></script>
+    <script src="/admin/js/fileupload/angular-file-upload-shim.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js'></script>
+    <script src="https://code.angularjs.org/1.2.20/angular-sanitize.min.js"></script>  
+    <script src="/admin/js/fileupload/angular-file-upload.js"></script>
+    
+    <script src='/app/app.js'></script>
+    <script src='/app/autosearch.js'></script>
+    <script src='/app/newdevice.js'></script>
+    <script src='/app/profiles.js'></script>
+    <script src='/app/home.js'></script>
+    <script src='/app/search.js'></script>
+    <script src='/app/account.js'></script>
+
+
+    <meta name="description" content="Home Page Version 1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory-->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Montserrat:400,700%7COpen+Sans:300italic,400italic,600italic,700italic,800italic,300,400,600,700">
+    <link rel="stylesheet" href="styles/font-awesome.css">
+    <link rel="stylesheet" href="styles/owl.carousel.css">
+    <link rel="stylesheet" href="styles/owl.theme.css">
+    <link rel="stylesheet" href="styles/slit-slider-style.css">
+    <link rel="stylesheet" href="styles/slit-slider-custom.css">
+    <link rel="stylesheet" href="styles/idangerous.swiper.css">
+    <link rel="stylesheet" href="styles/yamm.css">
+    <link rel="stylesheet" href="styles/animate.css">
+    <link rel="stylesheet" href="styles/prettyPhoto.css">
+    <link rel="stylesheet" href="styles/bootstrap-slider.css">
+    <link rel="stylesheet" href="styles/device-mockups2.css">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/main-responsive.css">
+    <link id="primary_color_scheme" rel="stylesheet" href="styles/theme_meadow.css">
+    <script src="scripts/vendor/modernizr.js"></script>
+    <noscript>
+      <link rel="stylesheet" href="styles/styleNoJs.css">
+    </noscript>
+  </head>
+
+
+
+  <body ng-app="PubSavvySwipe" ng-controller="HomeController" style="padding:20px" ng-init="init()">
+
+    <!-- Register Modal -->
+        <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div style="width:35%;min-width:300px" class="modal-dialog">
+            <div class="modal-content">
+              <button type="button" class="close" data-dismiss="modal"><span style="margin-right:5px;" aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <div style="background:rgba(249, 249, 249, 0.96);border:1px solid #ddd;padding:32px 16px 0px 16px;min-height:300px;text-align:center">
+          <img style="width:60%" src="/admin/img/pubsavvy-logo.png" /><br />
+          <hr />
+                    <h4 style="margin-top:30px;text-align:center">Register</h4>
+                    <div class="contact-form" style="margin-top:40px;width:90%;margin-left:auto;margin-right:auto">
+                        <input ng-model="profile.firstName" type="text" placeholder="First Name" class="form-control" style= "border:1px solid #ccc">
+                        <br>
+                        <input ng-model="profile.lastName" type="text" placeholder="Last Name" class="form-control" style="border:1px solid #ccc">
+                        <br>
+                        <input ng-model="profile.email" type="text" placeholder="Email" class="form-control" style="border:1px solid #ccc">
+                        <br>
+                        <input ng-model="profile.password" type="password" placeholder="Password" class="form-control" style="border:1px solid #ccc">
+                    </div>
+                    <div class="row" style="background:#fff;border-top:1px solid #ccc;margin-top:36px; padding-top:24px; padding-bottom:24px">
+                      
+                        <button ng-click="register()" data-toggle="modal" data-target="#registerModal" type="submit" class="btn btn-success btn-large">Sign Up</button>
+                        
+                    </div>
+              </div>
+        
+            </div>
+          </div>
+        </div> 
+
+
+    <!-- Login Modal -->
+          <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div style="width:35%;min-width:300px" class="modal-dialog">
+              <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal"><span style="margin-right:5px;" aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                  <div style="background:rgba(249, 249, 249, 0.96);border:1px solid #ddd;padding:32px 16px 0px 16px;min-height:300px;text-align:center">
+            <img style="width:60%" src="/admin/img/pubsavvy-logo.png" /><br />
+            <hr />
+                      <h4 style="margin-top:30px;text-align:center">Log In</h4>
+                      <div class="contact-form" style="margin-top:40px;width:90%;margin-left:auto;margin-right:auto">
+                          <input ng-model="loginUser.email" type="text" placeholder="Email" class="form-control" style="border:1px solid #ccc">
+                          <br>
+                          <input ng-model="loginUser.password" type="password" placeholder="Password" class="form-control" style="border:1px solid #ccc">
+                      </div>
+                      <div class="row" style="background:#fff;border-top:1px solid #ccc;margin-top:36px; padding-top:24px; padding-bottom:24px">
+                        
+                          <button ng-click="login()" data-toggle="modal" data-target="#loginModal" type="submit" class="btn btn-success btn-large">Log in</button>
+                          
+                      </div>
+                </div>
+          
+              </div>
+            </div>
+          </div>        
+
+
+
+
+
+    <div id="load"></div><!--[if lt IE 9]>
+    <p class="browsehappy">You are using an strong outdated browser. <br>Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="page">
+      <!-- Start Nav Section-->
+      <nav id="main-navigation" role="navigation" class="navbar navbar-fixed-top navbar-standard">        
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle"><i class="fa fa-align-justify fa-lg"></i></button><a href="/admin/home" class="navbar-brand"><img src="/admin/img/pubsavvy-logo-white.png" alt="" class="logo-white"><img src="/admin/img/pubsavvy-logo.png" alt="" class="logo-dark"></a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <button type="button" class="navbar-toggle"><i class="fa fa-close fa-lg"></i></button>
+            <ul class="nav yamm navbar-nav navbar-right main-nav">
+                    <!-- istanzio un id univoco-->
+                    <li><a href="#" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >About</a></li>                   
+                    <li><a href="/admin/faqs" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >FAQ</a></li> 
+
+                    <li ng-show="currentUser.loggedIn == 'yes'"><a href="/admin/account" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >Account</a></li> 
+
+                    <li ng-show="currentUser.loggedIn == 'no' "><a href="#" data-toggle="modal" data-target="#loginModal">Log In</a></li>  
+
+                    <li ng-show="currentUser.loggedIn == 'no' "><a href="#" data-toggle="modal" data-target="#registerModal">Join</a></li>   
+
+
+                    <li ng-show="currentUser.loggedIn == 'yes' "><a ng-click="logout()">Log Out</a></li>  
+            </ul>
+          </div>
+        </div>
+      </nav>
+    
+      <!-- Start Portfolio section-->
+      <section id="portfolio" class="sep-top-3x">
+        <div class="container">
+          <div class="row">
+          <div class="col-md-4">
+            <h4 class="upper wow flipInX">PubSavvy PubMed</h4>
+            <img style="width:200px" src="/admin/img/history.png"/>
+          </div>
+            <div class="col-md-4">
+              <div class="section-title">
+                <h2 class="bordered-left bordered-right upper wow flipInX">PubSavvy Apps</h2>
+                <p class="lead wow flipInX">
+                  Frame Research brings you two apps for powerful medical search: PubSavvy PubMed Search and PubSavvy Swipe. These apps, featured right, enable a new way to discover medical journals. PubSavvy Swipe, our newest addition to the PubSavvy family, features a revised elegant interface for reading through and discovering medical journals.
+                </p>
+                <br/>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <img style="width:200px" src="/admin/img/history.png"/>
+              <br/><br/>
+            </div>
+
+
+
+          </div>
+        </div>
+        <div class="bg-primary sep-top-sm sep-bottom-sm">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <p class="lead x2 light wow bounceInLeft">Available now in the App Store</p>
+              </div>
+              <div class="col-md-4">
+                <a href="#" target="_blank" class="wow bounceInRight"><img style="padding-left:20px;height:60px" src="/admin/img/download.png"/></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+<!-- Start right section-->
+      <section class="sep-top-2x sep-bottom-2x">
+        <div class="container">
+          <div class="row"></div>
+          <div class="row">
+            <div class="col-md-6">
+              <div data-wow-delay=".3s" class="wow bounceInLeft"><img src="img/ipad_slide.jpg" alt="" class="img-responsive"></div>
+            </div>
+            <div class="col-md-6">
+              <div data-wow-delay=".3s" class="wow bounceInRight">
+                <h3 class="upper">Search smarter, not harder</h3>
+                <p class="lead">
+                  Search thousands of biomedical journals at the same time, using PubSavvy's useful interface and the power of the National Library of Medicine's PubMed database. PubSavvy PubMed Search lets you access over 23 million journal abstracts indexed in PubMed/MEDLINE, using integrated tools and smart shortcuts developed by an expert searcher. Read about how PubSavvy's features help you screen through this wealth of information quickly and effectively.
+                </p>
+                <p class="lead">
+                  Version 3.1 now available for iPad, iPhone, and iPodTouch. If you have multiple devices, turn on iCloud support to sync your search history and article collections across devices.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End right section-->
+
+
+
+
+      <!-- Start About section-->
+      <section class="section-gray sep-top-2x sep-bottom-2x">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <div data-wow-delay="0.3s" class="text-center wow bounceInLeft">
+                <h3 class="upper">Powered by PubSavvy</h3>
+                <p class="lead">
+                  PubSavvy Apps give you powerful search tools at your fingertips. Our apps seamlessly integrate medical journals into a single location for discovery.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 sep-top-2x icon-gradient">
+              <div class="icon-box icon-horizontal icon-lg">
+                <div data-wow-delay=".2s" class="icon-content img-circle wow bounceInUp"><i class="fa fa-lightbulb-o"></i></div>
+                <div class="icon-box-content">
+                  <h5 class="upper">Running a New Search</h5>
+                  <p>
+                    PubSavvy is the only PubMed search app to offer a custom keyboard interface, so that commonly used entries are not buried 2 or 3 screens down on your iPhone standard keyboard
+                    </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 sep-top-2x icon-gradient">
+              <div class="icon-box icon-horizontal icon-lg">
+                <div data-wow-delay=".3s" class="icon-content img-circle wow bounceInUp"><i class="fa fa-history"></i></div>
+                <div class="icon-box-content">
+                  <h5 class="upper">Search History</h5>
+                  <p>
+                    PubSavvy saves your search history, even when you are not connected to the internet. Unlike search histories on the PubMed website which can expire after a few hours, PubSavvy search terms are stored on your device.   
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 sep-top-2x icon-gradient">
+              <div class="icon-box icon-horizontal icon-lg">
+                <div data-wow-delay=".4s" class="icon-content img-circle wow bounceInUp"><i class="fa fa-filter"></i></div>
+                <div class="icon-box-content">
+                  <h5 class="upper">Refine Search</h5>
+                  <p>
+                    Because the database is so comprehensive, PubMed searches often return many more citations than the user intended. PubSavvy helps you to refine your search with pre-set limits.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 sep-top-2x icon-gradient">
+              <div class="icon-box icon-horizontal icon-lg">
+                <div data-wow-delay=".5s" class="icon-content img-circle wow bounceInUp"><i class="fa fa-file-o"></i></div>
+                <div class="icon-box-content">
+                  <h5 class="upper">View Full Text PDFs</h5>
+                  <p>
+                    PubSavvy allows you to view and email full text pdfs for open access journals and those with subscriptions held by your institution.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End About section-->
+      
+      <!-- Start team section-->
+      <section class="sep-top-2x sep-bottom-2x">
+        <div class="container">
+          <h4 class="upper">Brought to you by Frame Research</h4>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="sep-top-xs sep-bottom-sm">
+                <div class="team-photo"><img style="border:2px solid #ddd;border-radius:6px" src="/admin/img/diana.JPG" class="img-responsive">
+                </div>
+              </div>
+              <div class="team-name">
+                <h5 class="upper">Diana Frame</h5><span>Founder, MPH</span>
+              </div>
+              <p>
+                The founder of Frame Research and a resident of Brooklyn, NY, Diana Frame has 15 years of experience in evidence-based medicine research, primarily systematic literature review. She has advised decision makers at academic centers as well as pharmaceutical, biotechnology, and medical device clients. 
+              </p>
+            </div>
+            
+            
+          </div>
+          <br/><br/>
+          <a href="http://www.frameresearch.com" target="_blank"><img src="/admin/img/frame-logo.jpg"/></a>
+        </div>
+      </section>
+      <!-- End team section-->
+      
+      
+      <!-- Start call to action section-->
+      <section class="call-to-action bg-primary sep-top-md sep-bottom-md">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9">
+              <h5 class="action-title upper light">DOWNLOAD PUBSAVVY IN THE APP STORE</h5>
+            </div>
+            <div class="col-md-3 text-right"><a href="#" class="btn btn-light btn-bordered btn-lg">DOWNLOAD</a></div>
+          </div>
+        </div>
+      </section>
+      <!-- End call to action section-->
+      <!-- Start Footer section-->
+      <footer id="footer">
+        <div class="inner sep-bottom-md">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3 col-sm-6">
+                <div class="widget sep-top-lg"><img src="img/logo-white.png" alt="" class="logo"><small class="sep-top-xs sep-bottom-md">Dolor church-key veniam, fap Bushwick mumblecore irure Vice consectetur 3 wolf moon sapiente literally quinoa.</small>
+                  
+                </div>
+              </div>
+             
+              <div class="col-md-3 col-sm-6">
+                <div class="widget sep-top-lg">
+                  <h6 class="upper widget-title">Visit Us</h6>
+                  <ul class="widget-address sep-top-xs">
+                    <li><i class="fa fa-map-marker fa-lg"></i><small>Elizabeth St, Melbourne, Victoria<br>3000, Australia</small></li>
+                    <li><i class="fa fa-phone fa-lg"></i><small>(+39) 123-456-789 /<br>(+39) 123-456-789</small></li>
+                    <li><i class="fa fa-envelope fa-lg"></i><small><a href="#">info@ottaviostudios.com /</a><br><a href="#">support@ottaviostudios.com</a></small></li>
+                    <li><i class="fa fa-clock-o fa-lg"></i><small>Mon / Friday<br>09:00 - 13.00 / 14:00 - 18:00</small></li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="copyright sep-top-xs sep-bottom-xs">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12"><small>&copy PubSavvy</small></div>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- End Footer section-->
+    </div>
+    <script src="scripts/vendor/jquery.js"></script>
+    <script src="scripts/vendor/queryloader2.min.js"></script>
+    <script src="scripts/vendor/owl.carousel.js"></script>
+    <script src="scripts/vendor/jquery.ba-cond.min.js"></script>
+    <script src="scripts/vendor/jquery.slitslider.js"></script>
+    <script src="scripts/vendor/idangerous.swiper.js"></script>
+    <script src="scripts/vendor/jquery.fitvids.js"></script>
+    <script src="scripts/vendor/jquery.countTo.js"></script>
+    <script src="scripts/vendor/TweenMax.min.js"></script>
+    <script src="scripts/vendor/ScrollToPlugin.min.js"></script>
+    <script src="scripts/vendor/jquery.scrollmagic.min.js"></script>
+    <script src="scripts/vendor/jquery.easypiechart.js"></script>
+    <script src="scripts/vendor/jquery.validate.js"></script>
+    <script src="scripts/vendor/wow.min.js"></script>
+    <script src="scripts/vendor/jquery.placeholder.js"></script>
+    <script src="scripts/vendor/jquery.easing.1.3.min.js"></script>
+    <script src="scripts/vendor/jquery.waitforimages.min.js"></script>
+    <script src="scripts/vendor/jquery.prettyPhoto.js"></script>
+    <script src="scripts/vendor/imagesloaded.pkgd.min.js"></script>
+    <script src="scripts/vendor/isotope.pkgd.min.js"></script>
+    <script src="scripts/vendor/jquery.fillparent.min.js"></script>
+    <script src="scripts/vendor/raphael-min.js"></script>
+    <script src="scripts/vendor/bootstrap.js"></script>
+    <script src="scripts/vendor/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="scripts/vendor/bootstrap-slider.js"></script>
+    <script src="scripts/vendor/bootstrap-rating-input.js"></script>
+    <script src="scripts/vendor/bootstrap-hover-dropdown.min.js"></script>
+    <script src="scripts/jquery.gmap.min.js"></script>
+    <script src="scripts/circle_diagram.js"></script>
+    <script src="scripts/main.js"></script>
+  </body>
+</html>
