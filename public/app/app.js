@@ -1,4 +1,8 @@
-var app = angular.module('PubSavvySwipe', ['SearchModule', 'AutoSearchModule', 'HomeModule', 'AccountModule']);
+var app = angular.module('PubSavvySwipe', ['SearchModule', 'AutoSearchModule', 'HomeModule', 'AccountModule'], function($interpolateProvider) {
+ 
+  $interpolateProvider.startSymbol('<%');
+  $interpolateProvider.endSymbol('%>');
+});
 
 
 app.directive('spinner', function() {

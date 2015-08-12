@@ -38,23 +38,23 @@
               </div>
               <!-- end search form-->
               <div class="sep-top-md">
-                <p class="lead text-muted">Search results for:&nbsp;<strong>{{ terms.toString() }}</strong></p>
-                <p class="lead text-muted"># Results:&nbsp;<strong>{{ count }}</strong></p>
+                <p class="lead text-muted">Search results for:&nbsp;<strong><% terms.toString() %></strong></p>
+                <p class="lead text-muted"># Results:&nbsp;<strong><% count %></strong></p>
               </div>
               <!-- start accordion group-->
               <div class="sep-top-xs">
                 <div class="accordion-group">
                   <!-- start accordion item-->
                   <div ng-repeat="result in results track by $index" class="accordion-item panel">
-                    <h5 class="accordion-heading"><a href="#">{{ result['title'] }}</a></h5>
+                    <h5 class="accordion-heading"><a href="#"><% result['title'] %></a></h5>
                     <div>
-                      <h6>PMID: {{ result['pmid'] }}&nbsp;&nbsp;Date: {{ result['date'] }}&nbsp;&nbsp;Journal: {{ result['journal']['title'] }}</h6>
+                      <h6>PMID: <% result['pmid'] %>&nbsp;&nbsp;Date: <% result['date'] %>&nbsp;&nbsp;Journal: <% result['journal']['title'] %></h6>
                       <h6>Authors:</h6>
-                      <h6 ng-repeat="author in result['authors'] track by $index">{{ author.firstName }}&nbsp;{{ author.lastName }}</h6>
+                      <h6 ng-repeat="author in result['authors'] track by $index"><% author.firstName %>&nbsp;<% author.lastName %></h6>
                     </div>
                     <div class="accordion-body">
                       <p class="lead">
-                        {{ result['abstract'] }}
+                        <% result['abstract'] %>
                       </p>
                     </div>
                   </div>
