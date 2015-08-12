@@ -6,27 +6,14 @@
 
 
 
-  <body>
+  <body ng-app="PubSavvySwipe" ng-controller="HomeController" ng-init="init()" >
     <div id="load"></div><!--[if lt IE 9]>
     <p class="browsehappy">You are using an strong outdated browser. <br>Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <div class="page">
       <!-- Start Nav Section-->
-      <nav id="main-navigation" role="navigation" class="navbar navbar-fixed-top navbar-standard">        
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle"><i class="fa fa-align-justify fa-lg"></i></button><a href="/site/home" class="navbar-brand"><img src="/site/img/pubsavvy-logo-white.png" alt="" class="logo-white"><img src="/site/img/pubsavvy-logo.png" alt="" class="logo-dark"></a>
-          </div>
-          <div class="navbar-collapse collapse">
-            <button type="button" class="navbar-toggle"><i class="fa fa-close fa-lg"></i></button>
-            <ul class="nav yamm navbar-nav navbar-right main-nav">
-                    <!-- istanzio un id univoco-->
-                    <li><a href="/admin/home" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >About</a></li>                   
-                    <li><a href="/admin/faqs" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >FAQ</a></li>                   
-            </ul>
-          </div>
-        </div>
-      </nav>
+      {{>nav}}
+
       <!-- Start header Section-->
       <section style="background-image: url('/site/img/intro-home5.jpg');" class="header-section fading-title parallax">
         <div class="section-shade sep-top-5x sep-bottom-3x">
