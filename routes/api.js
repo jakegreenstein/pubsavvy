@@ -1,10 +1,4 @@
 var express = require('express');
-var request = require('request');
-var xmlToJson = require('xml2js');
-var Promise = require('bluebird');
-var Profile = require('../models/Profile');
-var Device = require('../models/Device');
-var AutoSearch = require('../models/AutoSearch');
 var router = express.Router();
 
 var accountController = require('../controllers/AccountController.js');
