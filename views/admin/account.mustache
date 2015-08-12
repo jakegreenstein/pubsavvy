@@ -3,54 +3,6 @@
 <html>
   <head>
     {{>head}}
-
-    <style>
-        #settingMiddle{
-            min-height:36px;
-            border:1px solid #ddd;
-            background: white;
-        }
-        #settingMiddle:hover{
-            min-height:36px;
-            border:1px solid #ddd;
-            background:rgba(26, 188, 156, 0.15);
-            color:#1abc9c;
-        }
-
-        #settingTop{
-            min-height:36px;
-            border:1px solid #ddd;
-            border-top-left-radius:12px;
-            border-top-right-radius:12px;
-            background: white;
-
-        }
-        #settingTop:hover{
-            min-height:36px;
-            border:1px solid #ddd;
-            background:rgba(26, 188, 156, 0.15);
-            border-top-left-radius:12px; 
-            border-top-right-radius:12px;
-            color:#1abc9c;
-        }
-
-        #settingBottom{
-            min-height:36px;
-            border:1px solid #ddd;
-            border-bottom-left-radius:12px;
-            border-bottom-right-radius:12px;
-            background: white;
-
-        }
-        #settingBottom:hover{
-            min-height:36px;
-            border:1px solid #ddd;
-            background:rgba(26, 188, 156, 0.15);
-            border-bottom-left-radius:12px; 
-            border-bottom-right-radius:12px;
-            color:#1abc9c;
-        }
-    </style>
   </head>
 
 
@@ -192,15 +144,7 @@
 
 
       <!-- Start Footer section-->
-      <footer id="footer">
-        <div class="copyright sep-top-xs sep-bottom-xs" style="width:100%;">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12"><small>&copy PubSavvy</small></div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      {{>footer}}
       <!-- End Footer section-->
 
 

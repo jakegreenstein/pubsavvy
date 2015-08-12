@@ -7,66 +7,6 @@
 
 
   <body ng-app="PubSavvySwipe" ng-controller="HomeController" style="padding:20px" ng-init="init()">
-
-    <!-- Register Modal -->
-        <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div style="width:35%;min-width:300px" class="modal-dialog">
-            <div class="modal-content">
-              <button type="button" class="close" data-dismiss="modal"><span style="margin-right:5px;" aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <div style="background:rgba(249, 249, 249, 0.96);border:1px solid #ddd;padding:32px 16px 0px 16px;min-height:300px;text-align:center">
-          <img style="width:60%" src="/admin/img/pubsavvy-logo.png" /><br />
-          <hr />
-                    <h4 style="margin-top:30px;text-align:center">Register</h4>
-                    <div class="contact-form" style="margin-top:40px;width:90%;margin-left:auto;margin-right:auto">
-                        <input ng-model="profile.firstName" type="text" placeholder="First Name" class="form-control" style= "border:1px solid #ccc">
-                        <br>
-                        <input ng-model="profile.lastName" type="text" placeholder="Last Name" class="form-control" style="border:1px solid #ccc">
-                        <br>
-                        <input ng-model="profile.email" type="text" placeholder="Email" class="form-control" style="border:1px solid #ccc">
-                        <br>
-                        <input ng-model="profile.password" type="password" placeholder="Password" class="form-control" style="border:1px solid #ccc">
-                    </div>
-                    <div class="row" style="background:#fff;border-top:1px solid #ccc;margin-top:36px; padding-top:24px; padding-bottom:24px">
-                      
-                        <button ng-click="register()" data-toggle="modal" data-target="#registerModal" type="submit" class="btn btn-success btn-large">Sign Up</button>
-                        
-                    </div>
-              </div>
-        
-            </div>
-          </div>
-        </div> 
-
-
-    <!-- Login Modal -->
-          <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div style="width:35%;min-width:300px" class="modal-dialog">
-              <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal"><span style="margin-right:5px;" aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                  <div style="background:rgba(249, 249, 249, 0.96);border:1px solid #ddd;padding:32px 16px 0px 16px;min-height:300px;text-align:center">
-            <img style="width:60%" src="/admin/img/pubsavvy-logo.png" /><br />
-            <hr />
-                      <h4 style="margin-top:30px;text-align:center">Log In</h4>
-                      <div class="contact-form" style="margin-top:40px;width:90%;margin-left:auto;margin-right:auto">
-                          <input ng-model="loginUser.email" type="text" placeholder="Email" class="form-control" style="border:1px solid #ccc">
-                          <br>
-                          <input ng-model="loginUser.password" type="password" placeholder="Password" class="form-control" style="border:1px solid #ccc">
-                      </div>
-                      <div class="row" style="background:#fff;border-top:1px solid #ccc;margin-top:36px; padding-top:24px; padding-bottom:24px">
-                        
-                          <button ng-click="login()" data-toggle="modal" data-target="#loginModal" type="submit" class="btn btn-success btn-large">Log in</button>
-                          
-                      </div>
-                </div>
-          
-              </div>
-            </div>
-          </div>        
-
-
-
-
-
     <div id="load"></div><!--[if lt IE 9]>
     <p class="browsehappy">You are using an strong outdated browser. <br>Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -78,10 +18,10 @@
       <section id="portfolio" class="sep-top-3x">
         <div class="container">
           <div class="row">
-          <div class="col-md-4">
-            <h4 class="upper wow flipInX">PubSavvy PubMed</h4>
-            <img style="width:200px" src="/admin/img/history.png"/>
-          </div>
+            <div class="col-md-4">
+              <h4 class="upper wow flipInX">PubSavvy PubMed</h4>
+              <img style="width:200px" src="/admin/img/history.png"/>
+            </div>
             <div class="col-md-4">
               <div class="section-title">
                 <h2 class="bordered-left bordered-right upper wow flipInX">PubSavvy Apps</h2>
@@ -95,9 +35,6 @@
               <img style="width:200px" src="/admin/img/history.png"/>
               <br/><br/>
             </div>
-
-
-
           </div>
         </div>
         <div class="bg-primary sep-top-sm sep-bottom-sm">
@@ -114,10 +51,7 @@
         </div>
       </section>
 
-
-
-
-<!-- Start right section-->
+      <!-- Start right section-->
       <section class="sep-top-2x sep-bottom-2x">
         <div class="container">
           <div class="row"></div>
@@ -140,9 +74,6 @@
         </div>
       </section>
       <!-- End right section-->
-
-
-
 
       <!-- Start About section-->
       <section class="section-gray sep-top-2x sep-bottom-2x">
@@ -224,8 +155,6 @@
                 The founder of Frame Research and a resident of Brooklyn, NY, Diana Frame has 15 years of experience in evidence-based medicine research, primarily systematic literature review. She has advised decision makers at academic centers as well as pharmaceutical, biotechnology, and medical device clients. 
               </p>
             </div>
-            
-            
           </div>
           <br/><br/>
           <a href="http://www.frameresearch.com" target="_blank"><img src="/admin/img/frame-logo.jpg"/></a>
@@ -246,41 +175,11 @@
         </div>
       </section>
       <!-- End call to action section-->
-      <!-- Start Footer section-->
-      <footer id="footer">
-        <div class="inner sep-bottom-md">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-3 col-sm-6">
-                <div class="widget sep-top-lg"><img src="img/logo-white.png" alt="" class="logo"><small class="sep-top-xs sep-bottom-md">Dolor church-key veniam, fap Bushwick mumblecore irure Vice consectetur 3 wolf moon sapiente literally quinoa.</small>
-                  
-                </div>
-              </div>
-             
-              <div class="col-md-3 col-sm-6">
-                <div class="widget sep-top-lg">
-                  <h6 class="upper widget-title">Visit Us</h6>
-                  <ul class="widget-address sep-top-xs">
-                    <li><i class="fa fa-map-marker fa-lg"></i><small>Elizabeth St, Melbourne, Victoria<br>3000, Australia</small></li>
-                    <li><i class="fa fa-phone fa-lg"></i><small>(+39) 123-456-789 /<br>(+39) 123-456-789</small></li>
-                    <li><i class="fa fa-envelope fa-lg"></i><small><a href="#">info@ottaviostudios.com /</a><br><a href="#">support@ottaviostudios.com</a></small></li>
-                    <li><i class="fa fa-clock-o fa-lg"></i><small>Mon / Friday<br>09:00 - 13.00 / 14:00 - 18:00</small></li>
-                  </ul>
-                </div>
-              </div>
 
-            </div>
-          </div>
-        </div>
-        <div class="copyright sep-top-xs sep-bottom-xs">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12"><small>&copy PubSavvy</small></div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <!-- Start Footer section-->
+      {{>footer}}
       <!-- End Footer section-->
+
     </div>
     {{>scripts}}
   </body>
