@@ -11,7 +11,6 @@ var sessions = require('client-sessions');
 var api = require('./routes/api');
 var site = require('./routes/site');
 var admin = require('./routes/admin');
-var theme = require('./routes/theme');
 
 
 var mongoose = require('mongoose');
@@ -56,7 +55,7 @@ app.use('/', site);
 app.use('/api', api);
 app.use('/site', site);
 app.use('/admin', admin);
-app.use('/theme', theme);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
