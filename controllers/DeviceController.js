@@ -62,6 +62,11 @@ this.handlePut = function(req, res, pkg){
 		
 		var action = req.body.action;
 		if (action == null){
+			if (device == null){
+				res.json({'confirmation':'fail', 'message':'Device '+pkg.id+' not found.'});
+				return;
+			}
+			
 			res.json({'confirmation':'success', 'device':device.summary()});
 			return;
 		}
