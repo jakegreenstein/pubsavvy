@@ -196,6 +196,11 @@ var updateDeviceSearchHistory = function(results, req){
 				resolve(results);
 				return;
 			}
+
+			if (device == null){
+				resolve(results);
+				return;
+			}
 			
 			var searchTerm = req.query.term;
 			var searchHistory = device.searchHistory;
