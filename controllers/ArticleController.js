@@ -40,6 +40,10 @@ function urlRequest(url, completion){
 function cleanUpResults(articles){
 	var list = new Array();
 	
+	if (articles == null)
+		return list;
+	
+	
 	var months = ['Jan', 'Feb', 'Mac', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 	for (var i=0; i<articles.length; i++){
 		var summary = {};
@@ -167,7 +171,7 @@ var followUpRequest = function(results, offset, limit){
 		
 		var nextReq = baseUrl+'efetch.fcgi?db=Pubmed&retstart='+offset+'&retmax='+limit+'&usehistory=y&query_key=1&WebEnv='+webEnv+'&reldate=36500&retmode=xml';
 		urlRequest(nextReq, function(err, results){
-			if (err) {reject(err); }
+			if (err) { reject(err); }
 			else{
 				if(results['PubmedArticleSet'] == null){
 					resolve({'count':0, 'list':[]})
@@ -244,7 +248,7 @@ function search(req, res){
 	var searchTerm = req.query.term;
 	var pmid = req.query.pmid;
 
-	if(pmid != null){
+	if (pmid != null){
 		res.setHeader('content-type', 'application/json');
 		console.log('PMID: '+pmid);
 		var url = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id='+pmid+'&retmode=xml';
