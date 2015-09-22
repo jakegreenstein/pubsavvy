@@ -58,7 +58,7 @@ function cleanUpResults(articles){
 
 				for (var j=0; j<articleIds.length; j++){
 					var articleId = articleIds[j];
-					console.log('- - - - - - - - - - - - ARTICLE ID - - - - - - - - '+JSON.stringify(articleId));
+//					console.log('- - - - - - - - - - - - ARTICLE ID - - - - - - - - '+JSON.stringify(articleId));
 					var idType = articleId['$']['IdType'];
 					summary[idType] = articleId['_'];
 				}
