@@ -400,6 +400,29 @@ function article(req, res){
 			return;
 		}
 
+		var meta = req.query.meta; // info or links
+		if (meta == null)
+			meta = 'info';
+
+		if (meta == 'links'){
+			var linkoutUrl = 'http://www.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?db=Pubmed&cmd=prlinks&id='+req.query.pmid+'&reldate=36500&retmode=xml';
+			urlRequest(linkoutUrl, function(err, result){
+				if (err){
+					res.json({'confirmation':'fail', 'message':err.message});
+					return;
+				}
+
+				res.setHeader('content-type', 'application/json');
+				var json = JSON.stringify({'confirmation':'success', 'results':result}, null, 2); // this makes the json 'pretty' by indenting it
+				res.send(json);
+//				res.json({'confirmation':'success', 'results':result});
+				return;
+			});
+
+			return;
+		}
+
+
 		var nextUrl = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmode=xml&id='+req.query.pmid;
 
 		urlRequest(nextUrl, function(err, article){
