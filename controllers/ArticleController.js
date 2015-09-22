@@ -48,6 +48,24 @@ function cleanUpResults(articles){
 	for (var i=0; i<articles.length; i++){
 		var summary = {};
 		var result = articles[i];
+
+		if (result['PubmedData'] != null) { // not always there
+			var pubmedData = result['PubmedData'][0];
+			if (pubmedData['ArticleIdList'] != null){
+
+				var articleIdList = pubmedData['ArticleIdList'][0];
+				var articleIds = articleIdList['ArticleId'];
+
+				for (var j=0; j<articleIds.length; j++){
+					var articleId = articleIds[j];
+					console.log('- - - - - - - - - - - - ARTICLE ID - - - - - - - - '+JSON.stringify(articleId));
+					var idType = articleId['$']['IdType'];
+					summary[idType] = articleId['_'];
+				}
+			}
+		}
+
+
 		var MedlineCitation = result['MedlineCitation']; // this is an array of dictionaries
 	
 		var meta = MedlineCitation[0];
@@ -127,8 +145,11 @@ function cleanUpResults(articles){
 		if (articleSummary['Language'] != null) // not always there
 			summary['language'] = articleSummary['Language'][0];
 
+
+
 		list.push(summary);
 	}
+
 	return list;
 }
 
@@ -187,7 +208,6 @@ var followUpRequest = function(results, offset, limit){
 }
 
 var updateDeviceSearchHistory = function(results, req){
-
 	return new Promise(function (resolve, reject){
 		console.log(results.count);
 		if (req.query.device==null){
@@ -255,22 +275,22 @@ function search(req, res){
 		urlRequest(url, function(err, results){
 			if (err) { 
 				res.json({'confirmation':'fail', 'message':err.message});
-			}
-			else{
-				var PubmedArticleSet = results['PubmedArticleSet'];
-				var articles = PubmedArticleSet['PubmedArticle'];
-				var article = cleanUpResults(articles);
-
-				// this makes the json 'pretty' by indenting it
-				var json = JSON.stringify({'confirmation':'success', 'article':article}, null, 2);
-				res.send(json);
 				return;
 			}
+
+			var PubmedArticleSet = results['PubmedArticleSet'];
+			var articles = PubmedArticleSet['PubmedArticle'];
+			var article = cleanUpResults(articles);
+
+			// this makes the json 'pretty' by indenting it
+			var json = JSON.stringify({'confirmation':'success', 'article':article}, null, 2);
+			res.send(json);
+			return;
 		});
 		return;
 	}
 
-	if (searchTerm==null){
+	if (searchTerm == null){
 		res.json({'confirmation':'fail', 'message':'Missing search value.'});
 		return;
 	}
@@ -381,34 +401,35 @@ function article(req, res){
 		}
 
 		var nextUrl = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmode=xml&id='+req.query.pmid;
-	urlRequest(nextUrl, function(err, article){
-		var clean = req.query.clean;
-		if (clean==null)
-			clean = 'yes';
+
+		urlRequest(nextUrl, function(err, article){
+			var clean = req.query.clean;
+			if (clean == null)
+				clean = 'yes';
 			
 			
-		res.setHeader('content-type', 'application/json');
-		if (clean != 'yes'){
-			var json = JSON.stringify({'confirmation':'success', 'article':article}, null, 2); // this makes the json 'pretty' by indenting it
+			res.setHeader('content-type', 'application/json');
+			if (clean != 'yes'){
+				var json = JSON.stringify({'confirmation':'success', 'article':article}, null, 2); // this makes the json 'pretty' by indenting it
+				res.send(json);
+				return;
+			}
+			
+			var PubmedArticleSet = article['PubmedArticleSet'];
+			var articles = PubmedArticleSet['PubmedArticle'];
+			if (articles == null){
+				res.json({'confirmation':'fail', 'message':'Invalid pmid'});
+					return;
+			}
+			var list = cleanUpResults(articles);
+				
+			// this makes the json 'pretty' by indenting it
+			var json = JSON.stringify({'confirmation':'success',  'article':list[0]}, null, 2); 
 			res.send(json);
 			return;
-		}
-			
-		var PubmedArticleSet = article['PubmedArticleSet'];
-		var articles = PubmedArticleSet['PubmedArticle'];
-		if(articles == null){
-			res.json({'confirmation':'fail', 'message':'Invalid pmid'});
-				return;
-		}
-		var list = cleanUpResults(articles);
-			
-		// this makes the json 'pretty' by indenting it
-		var json = JSON.stringify({'confirmation':'success',  'article':list[0]}, null, 2); 
-		res.send(json);
-		return;
 		
-	});
-	return;
+		});
+		return;
 }
 
 this.handleGet = function(req, res, pkg){
