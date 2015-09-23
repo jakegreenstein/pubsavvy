@@ -413,9 +413,52 @@ function article(req, res){
 				}
 
 				res.setHeader('content-type', 'application/json');
-				var json = JSON.stringify({'confirmation':'success', 'results':result}, null, 2); // this makes the json 'pretty' by indenting it
+				var results = result['eLinkResult'];
+				results = results['LinkSet'][0];
+				results = results['IdUrlList'][0];
+				results = results['IdUrlSet'][0];
+
+				if (results['ObjUrl']==null){
+					var json = JSON.stringify({'confirmation':'success', 'results':{}}, null, 2); // this makes the json 'pretty' by indenting it
+					res.send(json);
+					return;
+				}
+
+				results = results['ObjUrl'][0];
+
+				var keys = Object.keys(results);
+				var links = {};
+				for (var i=0; i<keys.length; i++){
+					var key = keys[i];
+					if (key == 'IconUrl'){
+						links['IconUrl'] = results[key][0]['_'];
+					}
+					else if (key == 'Provider'){
+						var provider = results[key][0];
+						var providerKeys = Object.keys(provider);
+						var p = {};
+						for (var j=0; j<providerKeys.length; j++){
+							var providerKey = providerKeys[j];
+							if (providerKey == 'Url')
+								p[providerKey] = provider['Url'][0]['_'];
+							else if (providerKey == 'IconUrl'){
+								p[providerKey] = provider['IconUrl'][0]['_'];
+							}
+							else
+								p[providerKey] = provider[providerKey][0];
+						}
+
+						links['provider'] = p;
+					}
+					else {
+						var value = results[key][0];
+						links[key] = value;
+					}
+
+				}
+
+				var json = JSON.stringify({'confirmation':'success', 'results':links}, null, 2); // this makes the json 'pretty' by indenting it
 				res.send(json);
-//				res.json({'confirmation':'success', 'results':result});
 				return;
 			});
 
