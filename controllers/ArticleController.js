@@ -457,7 +457,7 @@ function article(req, res){
 
 				}
 
-				var json = JSON.stringify({'confirmation':'success', 'results':links}, null, 2); // this makes the json 'pretty' by indenting it
+				var json = JSON.stringify({'confirmation':'success', 'links':links}, null, 2); // this makes the json 'pretty' by indenting it
 				res.send(json);
 				return;
 			});
