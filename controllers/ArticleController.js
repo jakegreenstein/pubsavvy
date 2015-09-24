@@ -113,11 +113,28 @@ function cleanUpResults(articles){
 	
 		if (articleSummary['Abstract'] == null) // not always there
 			summary['abstract'] = 'null';
-		else{
-			if( articleSummary['Abstract'][0]['AbstractText'][0]['_'] == null)
-				summary['abstract'] = articleSummary['Abstract'][0]['AbstractText'][0];
-			else
-				summary['abstract'] = articleSummary['Abstract'][0]['AbstractText'][0]['_'];
+		else {
+			// if( articleSummary['Abstract'][0]['AbstractText'][0]['_'] == null){
+			// 	summary['abstract'] = articleSummary['Abstract'][0]['AbstractText'][0];
+			// }
+			// else{
+				// summary['abstract'] = articleSummary['Abstract'][0]['AbstractText'][0]['_'];
+			// }
+			
+			var abstractArray = articleSummary['Abstract'][0]['AbstractText'];
+			var abstract = '';
+			for (var k=0; k<abstractArray.length; k++){
+				var a = abstractArray[k];
+				if (a['_']==null){
+					abstract = abstract+a;
+				}
+				else {
+					abstract = abstract+a['$']['Label']+': '+a['_']+'\n\n';
+				}
+			}
+			
+			summary['abstract'] = abstract;
+			
 		}
 	
 		var authors = new Array();
