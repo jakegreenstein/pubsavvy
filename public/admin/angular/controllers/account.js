@@ -4,7 +4,7 @@
 
 var app = angular.module('AccountModule', ['angularFileUpload']);
 
-app.controller('AccountController', ['$scope', '$http', '$upload', function($scope, $http, $upload){
+app.controller('AccountController', ['$scope', '$http', '$upload', 'restService', function($scope, $http, $upload, restService){
 	$scope.currentUser = {'loggedIn':'no'};
 	$scope.profile = {'email':'', 'firstName':'', 'lastName':'', 'image':''};
     $scope.newPassword = '';
@@ -90,20 +90,21 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
     }
 
     function getDevices(){
-        var url = '/api/device?profileId='+$scope.profile.id;
-        $http.get(url).success(function(data, status, headers, config) {
-            //console.log(JSON.stringify(data));
-            if (data['confirmation'] != 'success'){
-                //alert(data['message']);
+        
+         restService.query({resource:'device', term:$scope.profile.id}, function(response){
+            console.log(JSON.stringify(response));
+            if (response.confirmation != 'success') {
+                alert('Error: ' + response.message);
                 return;
             }
-            //$scope.devices = data['devices'];
-            $scope.device = data.devices[0];
-            //updateSaved();
-            getArticles();
-        }).error(function(data, status, headers, config) {
-            console.log("error", data, status, headers, config);
-        });
+            $scope.device = response.devices[0];
+            console.log($scope.device);
+
+            if ($scope.device != null) {
+               getArticles();
+            }
+
+            });
     }
 
     $scope.removeArticle = function(pmidIndex){
