@@ -1,11 +1,11 @@
 {
-  "name": "Y",
-  "version": "0.0.0",
-  "homepage": "https://github.com/sarahsalder/2048",
+  "name": "PubSavvySwipe",
+  "version": "0.0.1",
+  "homepage": "https://github.com/dankwon234/pubsavvyswipe",
   "authors": [
-    "sarahsalder <sarahsalder@gmail.com>"
+    "Frame Research LLC"
   ],
-  "description": "practice",
+  "description": "PubSavvySwipe!",
   "main": "",
   "moduleType": [],
   "license": "MIT",
@@ -17,11 +17,11 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.4.6",
-    "angular-mocks": "~1.4.6",
-    "angular-resource": "~1.4.6",
-    "angular-route": "~1.4.6",
-    "angular-sanitize": "~1.4.6",
+    "angular": "~1.4.7",
+    "angular-mocks": "~1.4.7",
+    "angular-resource": "~1.4.7",
+    "angular-route": "~1.4.7",
+    "angular-sanitize": "~1.4.7",
     "bootstrap": "~3.3.5",
     "jquery": "~2.1.4"
   }
