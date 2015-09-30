@@ -1,4 +1,5 @@
-replace http stuff with
+// add'RestService' in controllers where its used as indicated by http and then again in parens RestService
+
 
 
 var app = angular.module('AccountModule', ['angularFileUpload']);
