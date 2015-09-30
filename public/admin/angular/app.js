@@ -1,12 +1,15 @@
 var modules = [
+  'SearchModule',
+  'AutoSearchModule',
   'HomeModule',
+  'AccountModule',
   'AccountServiceModule', 
   'GeneralServiceModule',
   'RestServiceModule'
 ];
 
 
-var app = angular.module('PubSavvySwipe', ['SearchModule', 'AutoSearchModule', 'HomeModule', 'AccountModule'], function($interpolateProvider) {
+var app = angular.module('PubSavvySwipe', modules, function($interpolateProvider) {
  
   $interpolateProvider.startSymbol('<%');
   $interpolateProvider.endSymbol('%>');
