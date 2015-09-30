@@ -1,7 +1,7 @@
 var app = angular.module('SearchModule', []);
 
 
-app.controller('SearchController', ['$scope', '$http', 'restService', function($scope, $http, restService){
+app.controller('SearchController', ['$scope', 'restService', function($scope, restService){
     $scope.terms = null;
     $scope.articles = null;
     $scope.results = new Array();
