@@ -104,7 +104,7 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
                getArticles();
             }
 
-            });
+        });
     }
 
     $scope.removeArticle = function(pmidIndex){
