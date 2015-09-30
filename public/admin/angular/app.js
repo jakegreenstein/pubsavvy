@@ -5,7 +5,8 @@ var modules = [
   'AccountModule',
   'AccountServiceModule', 
   'GeneralServiceModule',
-  'RestServiceModule'
+  'RestServiceModule', 
+  'UploadServiceModule'
 ];
 
 
