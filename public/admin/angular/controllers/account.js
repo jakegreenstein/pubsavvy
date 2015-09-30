@@ -1,3 +1,6 @@
+replace http stuff with
+
+
 var app = angular.module('AccountModule', ['angularFileUpload']);
 
 app.controller('AccountController', ['$scope', '$http', '$upload', function($scope, $http, $upload){
@@ -26,6 +29,7 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
         var base = '/api/search?pmid=';
         for(var i = 0; i < $scope.device.saved.length; i++){
             var url = base+$scope.device['saved'][i];
+            // replace this with a rest call
             $http.get(url).success(function(data, status, headers, config){
                 if (data['confirmation'] != 'success'){
                     alert(data['message']);
@@ -36,6 +40,7 @@ app.controller('AccountController', ['$scope', '$http', '$upload', function($sco
             }).error(function(data, status, headers, config) {
                 console.log("error", data, status, headers, config);
             });   
+            // kjslfksjdflskjf
         }
 
     }
