@@ -5,7 +5,7 @@ var modules = [
   'RestServiceModule'
 ];
 
-var app = angular.module('Practice', modules, function($interpolateProvider) {
+var app = angular.module('PubSavvySwipe', modules, function($interpolateProvider) {
     // set custom delimiters for angular templates
     $interpolateProvider.startSymbol('<%');
     $interpolateProvider.endSymbol('%>');
