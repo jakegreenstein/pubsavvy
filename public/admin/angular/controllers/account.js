@@ -91,7 +91,7 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
 
     function getDevices(){
         
-         restService.query({resource:'device', term:$scope.profile.id}, function(response){
+         restService.query({resource:'device', profileId:$scope.profile.id}, function(response){
             console.log(JSON.stringify(response));
             if (response.confirmation != 'success') {
                 alert('Error: ' + response.message);
