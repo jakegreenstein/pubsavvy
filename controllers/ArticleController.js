@@ -312,6 +312,15 @@ function search(req, res){
 		return;
 	}
 	
+	var parts = searchTerm.split(' ');
+	if (parts.length > 0){
+		var offset = (req.query.offset == null)? '0' : req.query.offset;
+		if (parts.length == offset){
+			res.json({'confirmation':'success', 'count':'0', 'results':[]});
+			return;
+		}
+	}
+		
 	searchRequest(searchTerm)
 	.then(function(results){
 		var offset = (req.query.offset == null)? '0' : req.query.offset;
