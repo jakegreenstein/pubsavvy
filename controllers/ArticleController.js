@@ -311,6 +311,15 @@ function search(req, res){
 		res.json({'confirmation':'fail', 'message':'Missing search value.'});
 		return;
 	}
+
+	var parts = searchTerm.split(' ');
+	if (parts.length > 0){
+		var offset = (req.query.offset == null)? '0' : req.query.offset;
+		if (parts.length == offset){
+			res.json({'confirmation':'success', 'count':'0', 'results':[]});
+			return;
+		}
+	}
 	
 	searchRequest(searchTerm)
 	.then(function(results){
@@ -326,7 +335,6 @@ function search(req, res){
 	})
 	.then(function(results){
 		res.setHeader('content-type', 'application/json');
-		
 		var json = JSON.stringify(results, null, 2);
 		res.send(json);
 		return;
