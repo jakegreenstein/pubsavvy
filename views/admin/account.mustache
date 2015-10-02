@@ -115,7 +115,11 @@
                         <tr ng-repeat = "pmid in device.saved track by $index">
                             <td style="padding:12px;"><%articles[pmid]['title']%></td>
                             <td align="right"><a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/<%pmid%>"><i style="width:24px;"class="fa fa-file fa-lg" style="margin-right:12px;"></i></a></td>      
-                            <td><button ng-click="removeArticle($index)" type="button" class="btn btn-danger btn-xs" style= "margin:12px; float:right"><i style="width:24px;"class="fa fa-trash fa-lg" style="margin-right:12px;"></i> </button></td>
+                            <td>
+                              <button ng-click="removeArticle($index)" type="button" class="btn btn-danger btn-xs" style= "margin:12px; float:right">
+                                <i style="width:24px;"class="fa fa-trash fa-lg" style="margin-right:12px;"></i> 
+                              </button>
+                            </td>
                         </tr>
                     </table>
                 </div>

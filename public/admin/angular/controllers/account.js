@@ -26,48 +26,6 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
         return string;
     }
 
-    function getArticles(){
-        console.log('getting articles');
-        for(var i = 0; i < $scope.device.saved.length; i++) {
-            restService.query({resource:'search', pmid:$scope.device['saved'][i]}, function(response){
-            console.log(JSON.stringify(response));
-
-            if (response.confirmation != 'success') {
-                alert('Error: ' + response.message);
-                return;
-            }
-
-            var article = response['article'][0];
-            $scope.articles[article['pmid']] = article;
-            
-            }); 
-        }
-    }
-
-
-
-
-
-    //     var base = '/api/search?pmid=';
-
-    //     for(var i = 0; i < $scope.device.saved.length; i++){
-    //         var pmid = $scope.device['saved'][i];
-    //         var url = base+pmid;
-    //         // replace this with a rest call
-    //         $http.get(url).success(function(data, status, headers, config){
-    //             if (data['confirmation'] != 'success'){
-    //                 alert(data['message']);
-    //                 return;
-    //             }
-    //             var article = data['article'][0];
-    //             $scope.articles[article['pmid']] = article;
-    //         }).error(function(data, status, headers, config) {
-    //             console.log("error", data, status, headers, config);
-    //         });   
-    //         // kjslfksjdflskjf
-    //     }
-
-    // }
 
     function generateBackground(){
         var selection = getRandomInt(1,3);
@@ -124,35 +82,68 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
 
 
             if ($scope.device != null) {
-               getArticles();
-               console.log('called get articles');
+                if ($scope.device.saved.length > 0){
+                    var pmid = $scope.device.saved[0];
+                    getArticle(pmid);
+                    console.log('called get articles');
+                }
             }
-
         });
     }
 
-    $scope.removeArticle = function(pmidIndex){
-        if(pmidIndex != -1){
-            $scope.device.saved.splice(pmidIndex, 1);
+    function getArticle(pmid){
 
-            var url = '/api/device/'+ $scope.device.id;
-            var json = JSON.stringify($scope.device);
+        restService.query({resource:'search', pmid:pmid}, function(response){
+            console.log(JSON.stringify(response));
 
-            $http.put(url, json).success(function(data, status, headers, config) {
-                var confirmation = data['confirmation'];            
-                if (confirmation != 'success'){
-                    alert(data['message']);
-                    return;
-                }
-                //DO SOMETHING AFTER
-             
-            }).error(function(data, status, headers, config) {
-                console.log("error", data, status, headers, config);
-            });
-        }
-        else
-            alert('Error: Cannot Remove - Index Not Found');
+            if (response.confirmation == 'success') {
+                var article = response['article'][0];
+                $scope.articles[article['pmid']] = article;
+            }
+
+            var index = $scope.device.saved.indexOf(pmid);
+            if (index < $scope.device.saved.length-1)
+                getArticle($scope.device.saved[index+1]);
+
+        }); 
+
     }
+
+    $scope.removeArticle = function(pmidIndex){
+        var newPmidList = $scope.device.saved.splice(pmidIndex, 1);
+        restService.put({resource:'device', id:$scope.device.id}, $scope.device, function(response){
+            console.log(JSON.stringify(response));
+            $scope.device = response.device;
+        }, function(error, headers){
+            console.log('ERROR ! ! ! -- '+JSON.stringify(error));
+        });
+    }
+
+
+
+
+
+        // if(pmidIndex != -1){
+        //     $scope.device.saved.splice(pmidIndex, 1);
+
+        //     var url = '/api/device/'+ $scope.device.id;
+        //     var json = JSON.stringify($scope.device);
+
+        //     $http.put(url, json).success(function(data, status, headers, config) {
+        //         var confirmation = data['confirmation'];            
+        //         if (confirmation != 'success'){
+        //             alert(data['message']);
+        //             return;
+        //         }
+        //         //DO SOMETHING AFTER
+             
+        //     }).error(function(data, status, headers, config) {
+        //         console.log("error", data, status, headers, config);
+        //     });
+        // }
+        // else
+        //     alert('Error: Cannot Remove - Index Not Found');
+    
 
     $scope.updateSection = function(newSection){
         $scope.section = newSection;

@@ -7,7 +7,9 @@ restService.factory('restService', ['$resource', function($resource){
 		get: { method:'GET'},
 		post: { method:'POST'},
 		put: { method:'PUT'},
-		update: { method:'PUT' }
+		update: { method:'PUT' },
+		delete: { method:'DELETE' }
+
 		
 		// override methods:
 	  // { 'get':    {method:'GET'},
