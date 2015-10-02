@@ -27,24 +27,47 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
     }
 
     function getArticles(){
-        var base = '/api/search?pmid=';
-        for(var i = 0; i < $scope.device.saved.length; i++){
-            var url = base+$scope.device['saved'][i];
-            // replace this with a rest call
-            $http.get(url).success(function(data, status, headers, config){
-                if (data['confirmation'] != 'success'){
-                    alert(data['message']);
-                    return;
-                }
-                var article = data['article'][0];
-                $scope.articles[article['pmid']] = article;
-            }).error(function(data, status, headers, config) {
-                console.log("error", data, status, headers, config);
-            });   
-            // kjslfksjdflskjf
-        }
+        console.log('getting articles');
+        for(var i = 0; i < $scope.device.saved.length; i++) {
+            restService.query({resource:'search', pmid:$scope.device['saved'][i]}, function(response){
+            console.log(JSON.stringify(response));
 
+            if (response.confirmation != 'success') {
+                alert('Error: ' + response.message);
+                return;
+            }
+
+            var article = response['article'][0];
+            $scope.articles[article['pmid']] = article;
+            
+            }); 
+        }
     }
+
+
+
+
+
+    //     var base = '/api/search?pmid=';
+
+    //     for(var i = 0; i < $scope.device.saved.length; i++){
+    //         var pmid = $scope.device['saved'][i];
+    //         var url = base+pmid;
+    //         // replace this with a rest call
+    //         $http.get(url).success(function(data, status, headers, config){
+    //             if (data['confirmation'] != 'success'){
+    //                 alert(data['message']);
+    //                 return;
+    //             }
+    //             var article = data['article'][0];
+    //             $scope.articles[article['pmid']] = article;
+    //         }).error(function(data, status, headers, config) {
+    //             console.log("error", data, status, headers, config);
+    //         });   
+    //         // kjslfksjdflskjf
+    //     }
+
+    // }
 
     function generateBackground(){
         var selection = getRandomInt(1,3);
@@ -90,7 +113,6 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
     }
 
     function getDevices(){
-        
          restService.query({resource:'device', profileId:$scope.profile.id}, function(response){
             console.log(JSON.stringify(response));
             if (response.confirmation != 'success') {
@@ -100,8 +122,10 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
             $scope.device = response.devices[0];
             console.log($scope.device);
 
+
             if ($scope.device != null) {
                getArticles();
+               console.log('called get articles');
             }
 
         });
