@@ -114,7 +114,7 @@ restService.factory('accountService', ['restService', function(restService){
 					completion(null, {'message':response.message});
 				return;
 			}
-			
+
 			if (completion != null)
 				completion(response, null);
 		});

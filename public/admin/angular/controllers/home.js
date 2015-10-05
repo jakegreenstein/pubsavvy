@@ -24,7 +24,6 @@ app.controller('HomeController', ['$scope', 'accountService', function($scope, a
           console.log('ERROR ! ! ! -- '+JSON.stringify(error));
           return;
         }
-
         window.location.href = '/admin/account';
       });
     }
@@ -38,7 +37,6 @@ app.controller('HomeController', ['$scope', 'accountService', function($scope, a
           return;
         }
         $scope.profile = {'id':null, 'email':'', 'password':'', 'firstName':'', 'lastName':''};
-        window.location.href = '/admin/home';
       });
     }
 

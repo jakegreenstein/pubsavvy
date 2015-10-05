@@ -1,8 +1,9 @@
 
 var app = angular.module('AccountModule', ['angularFileUpload']);
 
-app.controller('AccountController', ['$scope', '$http', '$upload', 'restService', 'accountService', function($scope, $http, $upload, restService, accountService){
+app.controller('AccountController', ['$scope', '$http', '$upload', 'restService', 'accountService', 'generalService', function($scope, $http, $upload, restService, accountService, generalService){
 	$scope.currentUser = {'loggedIn':'no'};
+    $scope['generalService'] = generalService;
 	$scope.profile = {'email':'', 'firstName':'', 'lastName':'', 'image':''};
     $scope.newPassword = '';
     $scope.confirmPassword = '';
@@ -18,14 +19,9 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
         generateBackground();
 	}
 
-    $scope.formatNumber = function(number){
-        var string = numeral(number).format('0,0');
-        return string;
-    }
-
 
     function generateBackground(){
-        var selection = getRandomInt(1,3);
+        var selection = $scope.generalService.getRandomInt(1,3);
 
         if(selection == 1)
             $scope.randomBackground = 'img/account-background-1.png';
@@ -35,12 +31,9 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
 
         else 
             $scope.randomBackground = 'img/account-background-3.png';
-        
     }
 
-    function getRandomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+
 
     function checkCurrentUser(){
        accountService.checkCurrentUser(function(response, error){
@@ -199,21 +192,15 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
     }
 
     $scope.logout = function(){
-        console.log('logout and delete session id');
-        var url = '/api/logout';
-        $http.get(url).success(function(data, status, headers, config) {
-            console.log(JSON.stringify(data));
-            if (data['confirmation'] != 'success'){
-                alert(data['message']);
-                return;
-            }
-            $scope.profile = {'email':'', 'password':'', 'firstName':'', 'lastName':''};
-            $scope.currentUser.loggedIn = 'no';
-            window.location.href = '/admin/home';
-
-        }).error(function(data, status, headers, config) {
-            console.log("error", data, status, headers, config);
-        });
+      accountService.logout(function(response, error){
+        if (error != null){
+          alert(error.message);
+          console.log('ERROR ! ! ! -- '+JSON.stringify(error));
+          return;
+        }
+        $scope.profile = {'id':null, 'email':'', 'password':'', 'firstName':'', 'lastName':''};
+        window.location.href = '/admin/home';
+      });
     }
 
 }]);

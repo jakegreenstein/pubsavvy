@@ -1,7 +1,8 @@
 var app = angular.module('SearchModule', []);
 
 
-app.controller('SearchController', ['$scope', 'restService', function($scope, restService){
+app.controller('SearchController', ['$scope', 'restService', 'generalService', function($scope, restService, generalService){
+    $scope['generalService'] = generalService;
     $scope.terms = null;
     $scope.articles = null;
     $scope.results = new Array();
@@ -10,13 +11,14 @@ app.controller('SearchController', ['$scope', 'restService', function($scope, re
 	
 	$scope.init = function(){
 		console.log('Search Controller: INIT');
-        var address = parseLocation('/admin');
-        console.log('addres: '+JSON.stringify(address));
-        //console.log('searchTerm: '+address.params.term);
-        if( address.params.term != null ){
-            $scope.terms = address.params.term;
-            $scope.search(0);
-        }
+        var requestObject = $scope.generalService.parseLocation('admin');
+
+        console.log('addres: '+JSON.stringify(requestObject));
+        if( requestObject.params.term == null ) // no default search, ignore
+            return;
+
+        $scope.terms = requestObject.params.term;
+        $scope.search(0);
 
 	}
 
@@ -42,45 +44,6 @@ app.controller('SearchController', ['$scope', 'restService', function($scope, re
 
 
 
-    function parseLocation(stem){
-        console.log('PARSE LOCATION: '+stem);
-        var resourcePath = location.href.replace(window.location.origin, ''); // strip out the domain root (e.g. http://localhost:8888)
-        var requestInfo = {"resource":null, "identifier":null, 'params':{}};
-
-        // parse out the parameters:
-        var p = resourcePath.split('?');
-        if (p.length > 1){
-            var paramString = p[1];
-            var a = paramString.split('&');
-            var params = {};
-            for (var i=0; i<a.length; i++){
-                var keyValue = a[i].split('=');
-                if (keyValue.length<1)
-                    continue;
-                
-                params[keyValue[0]] = keyValue[1];
-            }
-            
-            requestInfo['params'] = params;
-        }
-        
-        resourcePath = p[0];
-
-        var parts = resourcePath.split(stem+'/');
-        if (parts.length > 1){
-            var hierarchy = parts[1].split('/');
-            for (var i=0; i<hierarchy.length; i++){
-                if (i==0)
-                    requestInfo['resource'] = hierarchy[i]
-
-                if (i==1) 
-                    requestInfo['identifier'] = hierarchy[i];
-                
-            }
-        }
-
-        return requestInfo;
-    }    
 
 
 }]);
