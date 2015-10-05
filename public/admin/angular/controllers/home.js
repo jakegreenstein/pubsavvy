@@ -12,71 +12,16 @@ app.controller('HomeController', ['$scope', '$http', 'accountService', function(
 	}
 
 	function checkCurrentUser(){
-		var url = '/api/currentuser';
-        $http.get(url).success(function(data, status, headers, config) {
-            console.log(JSON.stringify(data));
-            if (data['confirmation'] != 'success'){
-            	//alert(data['message']);
-            	return;
-            }
- 
-            $scope.profile = data['profile'];
-            $scope.currentUser.loggedIn = 'yes';
-        }).error(function(data, status, headers, config) {
-            console.log("error", data, status, headers, config);
-        });
-	}
+    accountService.checkCurrentUser(function(response, error){
 
-	$scope.register = function(){		
-		console.log(JSON.stringify($scope.profile));
-
-		if ($scope.profile.firstName.length==0){
-			alert('Please enter your first name.');
-			return;
-		}
-		
-		if ($scope.profile.lastName.length==0){
-			alert('Please enter your last name.');
-			return;
-		}
-		
-		if ($scope.profile.email.length==0){
-			console.log(JSON.stringify($scope.profile));
-			alert('Please enter your email.');
-			return;
-		}
-
-
-		if ($scope.profile.email.indexOf('@')==-1){
-			alert('Please enter a valid email.');
-			return;
-		}
-		
-		if ($scope.profile.password.length==0){
-			alert('Please enter your password.');
-			return;
-		}
-		
-		var json = JSON.stringify($scope.profile);
-		
-    	var url = '/api/profile';
-        $http.post(url, json).success(function(data, status, headers, config) {
-            var confirmation = data['confirmation'];
-            console.log('CONFIRMATION: '+confirmation);
-            
-            if (confirmation != 'success'){
-                alert(data['message']);
-                return;
-            }
-
-            $scope.loginUser = {'email':$scope.profile.email, 'password':$scope.profile.password};
-            $scope.profile = {'email':'', 'password':'', 'firstName':'', 'lastName':''};
-            $scope.login();
-
-        }).error(function(data, status, headers, config) {
-            console.log("error", data, status, headers, config);
-        });
-	}
+      if (error != null){
+          console.log('ERROR ! ! ! -- '+JSON.stringify(error));
+          return;
+        }
+          $scope.profile = response['profile'];
+          $scope.currentUser.loggedIn = 'yes';
+    });
+  }
 
     $scope.login = function(){
       accountService.login($scope.loginUser, function(response, error){
@@ -90,43 +35,6 @@ app.controller('HomeController', ['$scope', '$http', 'accountService', function(
       });
     }
 
-
-
-	// $scope.login = function(){
-	// 	if ($scope.loginUser.email.length==0){
-	// 		alert("Please enter your email");
-	// 		return;
-	// 	}
-
-	// 	if ($scope.loginUser.password.length==0){
-	// 		alert("Please enter your password");
-	// 		return;
-	// 	}
-
-	// 	var json = JSON.stringify($scope.loginUser);
-	// 	console.log('Login: '+json);
-		
-	// 	var url = '/api/login';
- //        $http.post(url, json).success(function(data, status, headers, config) {
- //            console.log(JSON.stringify(data));
- //            var confirmation = data['confirmation'];
-
- //            if (confirmation != 'success'){
- //                alert(data['message']);
- //                return;
- //            }
-			
-	// 		     $scope.profile = data['profile'];
-
- //            window.location.href = '/admin/account';
-
-
-
- //        }).error(function(data, status, headers, config) {
- //            console.log("error", data, status, headers, config);
- //        });
-	// }
-	
 
 	$scope.logout = function(){
 		console.log('logout and delete session id');

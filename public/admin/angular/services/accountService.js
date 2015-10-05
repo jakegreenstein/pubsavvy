@@ -6,11 +6,15 @@ restService.factory('accountService', ['restService', function(restService){
 	
 	accountManager.checkCurrentUser = function(completion){
 		console.log('ACCOUNT SERVICE: Check Current User ');
-		RestService.get({resource:'currentuser', id:null}, function(response){
+
+		restService.get({resource:'currentuser', id:null}, function(response){
 			console.log('ACCOUNT SERVICE RESPONSE == '+JSON.stringify(response));
-			
-			if (completion != null)
-				completion(response);
+			if (completion != null) {
+				completion(response, null);
+				return;
+			}
+				completion(null, errorObject);
+				console.log(JSON.stringify(errorObject))
 		});
 	};
 
