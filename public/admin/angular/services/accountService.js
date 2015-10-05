@@ -105,6 +105,20 @@ restService.factory('accountService', ['restService', function(restService){
 		});
 	};
 	
+
+	accountManager.logout = function(completion) {
+		restService.query({resource:'logout'}, function(response){
+			console.log('ACCOUNT SERVICE RESPONSE == '+JSON.stringify(response));
+			if (response.confirmation != 'success'){
+				if (completion != null)
+					completion(null, {'message':response.message});
+				return;
+			}
+			
+			if (completion != null)
+				completion(response, null);
+		});
+	}
 	
 	accountManager.fetchMessages = function(profile, completion){
 		var query = {resource:'message', 'recipient.id':profile.id};

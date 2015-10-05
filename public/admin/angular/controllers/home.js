@@ -1,6 +1,6 @@
 var app = angular.module('HomeModule', []);
 
-app.controller('HomeController', ['$scope', '$http', 'accountService', function($scope, $http, accountService){
+app.controller('HomeController', ['$scope', 'accountService', function($scope, accountService){
 	$scope.profile = {'id':null, 'email':'', 'password':'', 'firstName':'', 'lastName':''};
 
 	
@@ -12,7 +12,7 @@ app.controller('HomeController', ['$scope', '$http', 'accountService', function(
           console.log('ERROR ! ! ! -- '+JSON.stringify(error));
           return;
         }
-          $scope.profile = response['profile'];
+          $scope.profile = response.profile;
           console.log($scope.profile);
     });
 	}
@@ -30,22 +30,16 @@ app.controller('HomeController', ['$scope', '$http', 'accountService', function(
     }
 
 
-	$scope.logout = function(){
-		console.log('logout and delete session id');
-		var url = '/api/logout';
-        $http.get(url).success(function(data, status, headers, config) {
-            console.log(JSON.stringify(data));
-            if (data['confirmation'] != 'success'){
-            	alert(data['message']);
-                return;
-            }
-            $scope.profile = {'email':'', 'password':'', 'firstName':'', 'lastName':''};
-            $scope.currentUser.loggedIn = 'no';
-            window.location.href = '/admin/home';
+    $scope.logout = function(){
+      accountService.logout(function(response, error){
+        if (error != null){
+          alert(error.message);
+          console.log('ERROR ! ! ! -- '+JSON.stringify(error));
+          return;
+        }
+        $scope.profile = {'id':null, 'email':'', 'password':'', 'firstName':'', 'lastName':''};
+        window.location.href = '/admin/home';
+      });
+    }
 
-        }).error(function(data, status, headers, config) {
-            console.log("error", data, status, headers, config);
-        });
-	}
-	
 }]);
