@@ -13,14 +13,11 @@
                     <li><a href="/admin/search-pubmed" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >Search</a></li> 
 
 
-                    <li ng-show="currentUser.loggedIn == 'yes'"><a href="/admin/account" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >Account</a></li> 
+                    <li ng-show="profile.id != null"><a href="/admin/account" title="Portfolio"id="menu_item_Portfolio" data-ref="#" >Account</a></li> 
 
-                    <li ng-show="currentUser.loggedIn == 'no' "><a href="#" data-toggle="modal" data-target="#loginModal">Log In</a></li>  
+                    <li ng-show="profile.id == null"><a href="#" data-toggle="modal" data-target="#loginModal">Log In</a></li>   
 
-                    <li ng-show="currentUser.loggedIn == 'no' "><a href="#" data-toggle="modal" data-target="#registerModal">Join</a></li>   
-
-
-                    <li ng-show="currentUser.loggedIn == 'yes' "><a ng-click="logout()">Log Out</a></li>  
+                    <li ng-show="profile.id != null "><a ng-click="logout()">Log Out</a></li>  
             </ul>
           </div>
         </div>

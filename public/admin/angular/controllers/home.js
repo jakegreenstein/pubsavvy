@@ -1,27 +1,21 @@
 var app = angular.module('HomeModule', []);
 
 app.controller('HomeController', ['$scope', '$http', 'accountService', function($scope, $http, accountService){
-	$scope.currentUser = {'loggedIn':'no'};
-	$scope.profile = {'email':'', 'password':'', 'firstName':'', 'lastName':''};
-	$scope.loginUser = {'email':'', 'password':''};
+	$scope.profile = {'id':null, 'email':'', 'password':'', 'firstName':'', 'lastName':''};
 
 	
-	$scope.init = function(){
-		console.log('Home Controller: INIT');
-		checkCurrentUser();
-	}
-
-	function checkCurrentUser(){
-    accountService.checkCurrentUser(function(response, error){
+	$scope.checkCurrentUser = function(){
+		console.log('Home Controller: checkCurrentUser');
+		accountService.checkCurrentUser(function(response, error){
 
       if (error != null){
           console.log('ERROR ! ! ! -- '+JSON.stringify(error));
           return;
         }
           $scope.profile = response['profile'];
-          $scope.currentUser.loggedIn = 'yes';
+          console.log($scope.profile);
     });
-  }
+	}
 
     $scope.login = function(){
       accountService.login($scope.loginUser, function(response, error){

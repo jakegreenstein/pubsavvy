@@ -1,10 +1,7 @@
-// add'RestService' in controllers where its used as indicated by http and then again in parens RestService
-
-
 
 var app = angular.module('AccountModule', ['angularFileUpload']);
 
-app.controller('AccountController', ['$scope', '$http', '$upload', 'restService', function($scope, $http, $upload, restService){
+app.controller('AccountController', ['$scope', '$http', '$upload', 'restService', 'accountService', function($scope, $http, $upload, restService, accountService){
 	$scope.currentUser = {'loggedIn':'no'};
 	$scope.profile = {'email':'', 'firstName':'', 'lastName':'', 'image':''};
     $scope.newPassword = '';
@@ -46,27 +43,14 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
     }
 
     function checkCurrentUser(){
-        var url = '/api/currentuser';
-        $http.get(url).success(function(data, status, headers, config) {
-            console.log(JSON.stringify(data));
-            if (data['confirmation'] != 'success'){
-                //alert(data['message']);
-                return;
-            }
- 
-            $scope.profile = data['profile'];
-            //console.log($scope.profile.image);
-            if($scope.profile.image == '' || $scope.profile.image == "none"){
-                $scope.profile.image = '/admin/img/no-profile-image.jpg';
-            }
+       accountService.checkCurrentUser(function(response, error){
 
-            //UPDATE VARIABLES FROM CURRENT USER
-            getDevices();
-            $scope.currentUser.loggedIn = 'yes';
-
-
-        }).error(function(data, status, headers, config) {
-            console.log("error", data, status, headers, config);
+        if (error != null){
+          console.log('ERROR ! ! ! -- '+JSON.stringify(error));
+          return;
+        }
+          $scope.profile = response['profile'];
+          $scope.currentUser.loggedIn = 'yes';
         });
     }
 
