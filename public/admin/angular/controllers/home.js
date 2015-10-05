@@ -1,6 +1,6 @@
 var app = angular.module('HomeModule', []);
 
-app.controller('HomeController', ['$scope', '$http', function($scope, $http){
+app.controller('HomeController', ['$scope', '$http', 'accountService', function($scope, $http, accountService){
 	$scope.currentUser = {'loggedIn':'no'};
 	$scope.profile = {'email':'', 'password':'', 'firstName':'', 'lastName':''};
 	$scope.loginUser = {'email':'', 'password':''};
@@ -78,41 +78,54 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http){
         });
 	}
 
+    $scope.login = function(){
+      accountService.login($scope.loginUser, function(response, error){
+        if (error != null){
+          alert(error.message);
+          console.log('ERROR ! ! ! -- '+JSON.stringify(error));
+          return;
+        }
 
-	$scope.login = function(){
-		if ($scope.loginUser.email.length==0){
-			alert("Please enter your email");
-			return;
-		}
+        window.location.href = '/admin/account';
+      });
+    }
 
-		if ($scope.loginUser.password.length==0){
-			alert("Please enter your password");
-			return;
-		}
 
-		var json = JSON.stringify($scope.loginUser);
-		console.log('Login: '+json);
+
+	// $scope.login = function(){
+	// 	if ($scope.loginUser.email.length==0){
+	// 		alert("Please enter your email");
+	// 		return;
+	// 	}
+
+	// 	if ($scope.loginUser.password.length==0){
+	// 		alert("Please enter your password");
+	// 		return;
+	// 	}
+
+	// 	var json = JSON.stringify($scope.loginUser);
+	// 	console.log('Login: '+json);
 		
-		var url = '/api/login';
-        $http.post(url, json).success(function(data, status, headers, config) {
-            console.log(JSON.stringify(data));
-            var confirmation = data['confirmation'];
+	// 	var url = '/api/login';
+ //        $http.post(url, json).success(function(data, status, headers, config) {
+ //            console.log(JSON.stringify(data));
+ //            var confirmation = data['confirmation'];
 
-            if (confirmation != 'success'){
-                alert(data['message']);
-                return;
-            }
+ //            if (confirmation != 'success'){
+ //                alert(data['message']);
+ //                return;
+ //            }
 			
-			$scope.profile = data['profile'];
+	// 		     $scope.profile = data['profile'];
 
-            window.location.href = '/admin/account';
+ //            window.location.href = '/admin/account';
 
 
 
-        }).error(function(data, status, headers, config) {
-            console.log("error", data, status, headers, config);
-        });
-	}
+ //        }).error(function(data, status, headers, config) {
+ //            console.log("error", data, status, headers, config);
+ //        });
+	// }
 	
 
 	$scope.logout = function(){

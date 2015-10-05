@@ -118,31 +118,6 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
             console.log('ERROR ! ! ! -- '+JSON.stringify(error));
         });
     }
-
-
-
-
-
-        // if(pmidIndex != -1){
-        //     $scope.device.saved.splice(pmidIndex, 1);
-
-        //     var url = '/api/device/'+ $scope.device.id;
-        //     var json = JSON.stringify($scope.device);
-
-        //     $http.put(url, json).success(function(data, status, headers, config) {
-        //         var confirmation = data['confirmation'];            
-        //         if (confirmation != 'success'){
-        //             alert(data['message']);
-        //             return;
-        //         }
-        //         //DO SOMETHING AFTER
-             
-        //     }).error(function(data, status, headers, config) {
-        //         console.log("error", data, status, headers, config);
-        //     });
-        // }
-        // else
-        //     alert('Error: Cannot Remove - Index Not Found');
     
 
     $scope.updateSection = function(newSection){

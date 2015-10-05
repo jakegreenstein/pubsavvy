@@ -1,6 +1,6 @@
 var accountService = angular.module('AccountServiceModule', ['RestServiceModule']);
 
-restService.factory('accountService', ['RestService', function(RestService){
+restService.factory('accountService', ['restService', function(restService){
 	
 	var accountManager = {};
 	
@@ -88,7 +88,7 @@ restService.factory('accountService', ['RestService', function(RestService){
 		}
 		
 		
-		RestService.post({resource:'login', id:null}, credentials, function(response){
+		restService.post({resource:'login', id:null}, credentials, function(response){
 			console.log('ACCOUNT SERVICE RESPONSE == '+JSON.stringify(response));
 			if (response.confirmation != 'success'){
 				if (completion != null)
