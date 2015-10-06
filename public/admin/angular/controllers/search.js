@@ -18,12 +18,12 @@ app.controller('SearchController', ['$scope', 'restService', 'generalService', f
 	}
 
     $scope.search = function(offset){
-        if ($scope.terms==null||$scope.terms==""){
+        if ($scope.terms==null || $scope.terms==""){
             alert("Please enter search terms");
             return;
         }
-        $scope.loading = true;
 
+        $scope.loading = true;
         restService.query({resource:'search', term:$scope.terms.toString(), offset:offset, id:null}, function(response){
             $scope.loading = false;
             if (response.confirmation != 'success') {
@@ -33,6 +33,6 @@ app.controller('SearchController', ['$scope', 'restService', 'generalService', f
 
             $scope.results = response['results'];
             $scope.count = response['count'];
-            });
-        }
+        });
+    }
 }]);
