@@ -4,7 +4,7 @@ var app = angular.module('AccountModule', ['angularFileUpload']);
 app.controller('AccountController', ['$scope', '$http', '$upload', 'restService', 'accountService', 'generalService', function($scope, $http, $upload, restService, accountService, generalService){
 	$scope.currentUser = {'loggedIn':'no'};
     $scope['generalService'] = generalService;
-	$scope.profile = {'email':'', 'firstName':'', 'lastName':'', 'image':''};
+	$scope.profile = {'email':'', 'firstName':'', 'lastName':'', 'image':'','password':'',};
     $scope.newPassword = '';
     $scope.confirmPassword = '';
     $scope.section = 'account-information';
@@ -36,14 +36,13 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
 
 
     function checkCurrentUser(){
-       accountService.checkCurrentUser(function(response, error){
-
-        if (error != null){
-          console.log('ERROR ! ! ! -- '+JSON.stringify(error));
-          return;
-        }
-          $scope.profile = response['profile'];
-          $scope.currentUser.loggedIn = 'yes';
+        accountService.checkCurrentUser(function(response, error){
+            if (error != null)
+                return;
+            
+            $scope.profile = response['profile'];
+            $scope.currentUser.loggedIn = 'yes';
+            console.log($scope.profile);
         });
     }
 
@@ -167,29 +166,19 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
             $scope.profile.password = $scope.newPassword;
         }
 
-        var url = '/api/profile/'+ $scope.profile.id;
-        var json = JSON.stringify($scope.profile);
-
-        $http.put(url, json).success(function(data, status, headers, config) {
-            var confirmation = data['confirmation'];
-            //console.log('CONFIRMATION: '+JSON.stringify(data));
-            
-            if (confirmation != 'success'){
-                alert(data['message']);
-                return;
+        accountService.updateProfile($scope.profile, function(response, error){
+            if (error != null){
+              alert(error.message);
+              return;
             }
             
-            var p = data['profile'];
-            alert(p.firstName+ ' '+p.lastName+' succesfully updated profile.');
-            //$scope.profile = {'firstName':'', 'lastName':'', 'email':'', 'password':''};
+            alert('You have succesfully updated your profile.');
             $scope.newPassword = '';
             $scope.confirmPassword = '';
-            
-        }).error(function(data, status, headers, config) {
-            console.log("error", data, status, headers, config);
         });
-
     }
+
+
 
     $scope.logout = function(){
       accountService.logout(function(response, error){

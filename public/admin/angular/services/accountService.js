@@ -61,7 +61,7 @@ restService.factory('accountService', ['restService', function(restService){
 	};
 	
 	accountManager.updateProfile = function(profile, completion){
-		RestService.update({resource:'profile', id:profile.id}, profile, function(response){
+		restService.update({resource:'profile', id:profile.id}, profile, function(response){
 			console.log('ACCOUNT SERVICE RESPONSE == '+JSON.stringify(response));
 			if (response.confirmation != 'success'){
 				if (completion != null)
