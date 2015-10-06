@@ -1,7 +1,7 @@
 
 var app = angular.module('AccountModule', ['angularFileUpload']);
 
-app.controller('AccountController', ['$scope', '$http', '$upload', 'restService', 'accountService', 'generalService', function($scope, $http, $upload, restService, accountService, generalService){
+app.controller('AccountController', ['$scope', '$http', '$upload', 'restService', 'accountService', 'generalService', 'uploadService', function($scope, $http, $upload, restService, accountService, generalService, uploadService){
 	$scope.currentUser = {'loggedIn':'no'};
     $scope['generalService'] = generalService;
 	$scope.profile = {'email':'', 'firstName':'', 'lastName':'', 'image':'','password':'',};
@@ -103,58 +103,76 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
     $scope.redirect = function(term){
         console.log('Redirect: '+term);
         window.location.href = '/admin/search-pubmed?term='+term;
-
     }
 
-	$scope.onFileSelect = function(files, property, entity){
-   		var url = 'http://media-service.appspot.com/api/upload';
-        $http.get(url).success(function(data, status, headers, config){
-            if(data['confirmation'] != 'success'){
-                alert(data['message']);
+
+    $scope.onFileSelect = function(files, entity, media){
+        $scope.loading = true;
+        uploadService.uploadFiles({'files':files, 'media':media}, function(response, error){
+            $scope.loading = false;
+            
+            if (error != null){
+                alert(error.message);
                 return;
-            }
-            var uploadString = data['upload'];
-            uploadFiles(files, uploadString, property, entity);
-        }).error(function(data, status, headers, config) {
-            console.log("error", data, status, headers, config);
+            }            
+
+            var image = response['image'];
+            console.log(JSON.stringify(image));
+            $scope.profile.image = image.address;
         });
     }
 
-    function uploadFiles($files, uploadString, property, entity) { 
-        for (var i = 0; i < $files.length; i++) {
-            var file = $files[i];
-            $scope.upload = $upload.upload({
-                url: uploadString, //upload.php script, node.js route, or servlet url
-                method: 'POST',
-                // headers: {'header-key': 'header-value'},
-                // withCredentials: true,
-                data: {myObj: $scope.myModelObj},
-                file: file // or list of files: $files for html5 only
-                /* set the file formData name ('Content-Desposition'). Default is 'file' */
-                //fileFormDataName: myFile, //or a list of names for multiple files (html5).
-            }).progress(function(evt) {
-                console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-        }).success(function(data, status, headers, config){ // file is uploaded successfully           
-            //console.log(JSON.stringify(data));
-            var confirmation = data['confirmation'];
-            
-            if (confirmation != 'success'){
-                alert(data['message']);
-                return;
-            }
-            
-            if(property=='image'){
-                var image = data['image'];
-                if(entity=='profile'){
-                    $scope.profile['image'] = image['address'];
-                }
-            }
 
-            console.log('profile: '+JSON.stringify($scope.profile));
+	// $scope.onFileSelect = function(files, property, entity){
+ //   		var url = 'http://media-service.appspot.com/api/upload';
+ //        $http.get(url).success(function(data, status, headers, config){
+ //            if(data['confirmation'] != 'success'){
+ //                alert(data['message']);
+ //                return;
+ //            }
+ //            var uploadString = data['upload'];
+ //            uploadFiles(files, uploadString, property, entity);
+ //        }).error(function(data, status, headers, config) {
+ //            console.log("error", data, status, headers, config);
+ //        });
+ //    }
 
-          });
-        }
-    }
+
+    // function uploadFiles($files, uploadString, property, entity) { 
+    //     for (var i = 0; i < $files.length; i++) {
+    //         var file = $files[i];
+    //         $scope.upload = $upload.upload({
+    //             url: uploadString, //upload.php script, node.js route, or servlet url
+    //             method: 'POST',
+    //             // headers: {'header-key': 'header-value'},
+    //             // withCredentials: true,
+    //             data: {myObj: $scope.myModelObj},
+    //             file: file // or list of files: $files for html5 only
+    //             /* set the file formData name ('Content-Desposition'). Default is 'file' */
+    //             //fileFormDataName: myFile, //or a list of names for multiple files (html5).
+    //         }).progress(function(evt) {
+    //             console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+    //     }).success(function(data, status, headers, config){ // file is uploaded successfully           
+    //         //console.log(JSON.stringify(data));
+    //         var confirmation = data['confirmation'];
+            
+    //         if (confirmation != 'success'){
+    //             alert(data['message']);
+    //             return;
+    //         }
+            
+            // if(property=='image'){
+            //     var image = data['image'];
+            //     if(entity=='profile'){
+            //         $scope.profile['image'] = image['address'];
+            //     }
+            // }
+
+    //         console.log('profile: '+JSON.stringify($scope.profile));
+
+    //       });
+    //     }
+    // }
 
     $scope.update = function(){
         if($scope.newPassword != $scope.confirmPassword){
@@ -171,7 +189,7 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
               alert(error.message);
               return;
             }
-            
+
             alert('You have succesfully updated your profile.');
             $scope.newPassword = '';
             $scope.confirmPassword = '';
