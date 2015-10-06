@@ -1,51 +1,30 @@
 
-var app = angular.module('AccountModule', ['angularFileUpload']);
+var app = angular.module('AccountModule', []);
 
-app.controller('AccountController', ['$scope', '$http', '$upload', 'restService', 'accountService', 'generalService', 'uploadService', function($scope, $http, $upload, restService, accountService, generalService, uploadService){
-	$scope.currentUser = {'loggedIn':'no'};
+app.controller('AccountController', ['$scope', 'restService', 'accountService', 'generalService', 'uploadService', function($scope, restService, accountService, generalService, uploadService){
     $scope['generalService'] = generalService;
-	$scope.profile = {'email':'', 'firstName':'', 'lastName':'', 'image':'','password':'',};
+	$scope.profile = {'id':null, 'email':'', 'firstName':'', 'lastName':'', 'image':'','password':''};
     $scope.newPassword = '';
     $scope.confirmPassword = '';
     $scope.section = 'account-information';
     $scope.device = null;
     $scope.articles = {};
-    $scope.randomBackground = null;
-
-	
-	$scope.init = function(){
-		console.log('Account Controller: INIT');
-        checkCurrentUser();
-        generateBackground();
-	}
 
 
-    function generateBackground(){
-        var selection = $scope.generalService.getRandomInt(1,3);
-
-        if(selection == 1)
-            $scope.randomBackground = 'img/account-background-1.png';
-
-        else if(selection == 2)
-            $scope.randomBackground = 'img/account-background-2.png';
-
-        else 
-            $scope.randomBackground = 'img/account-background-3.png';
-    }
-
-
-
-    function checkCurrentUser(){
+    $scope.init = function(){
+        $scope.randomBackground = 'img/account-background-'+$scope.generalService.getRandomInt(1,3)+'.png';
         accountService.checkCurrentUser(function(response, error){
             if (error != null)
                 return;
             
             $scope.profile = response['profile'];
-            $scope.currentUser.loggedIn = 'yes';
+            getDevices();
         });
     }
 
+
     function getDevices(){
+        console.log('triggered get devices');
          restService.query({resource:'device', profileId:$scope.profile.id}, function(response){
             console.log(JSON.stringify(response));
             if (response.confirmation != 'success') {
@@ -55,14 +34,14 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
             $scope.device = response.devices[0];
             console.log($scope.device);
 
+            if ($scope.device == null) 
+                return;
 
-            if ($scope.device != null) {
-                if ($scope.device.saved.length > 0){
-                    var pmid = $scope.device.saved[0];
-                    getArticle(pmid);
-                    console.log('called get articles');
-                }
-            }
+            if ($scope.device.saved.length == 0)
+                return;
+            
+            var pmid = $scope.device.saved[0];
+            getArticle(pmid);
         });
     }
 
@@ -81,29 +60,24 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
                 getArticle($scope.device.saved[index+1]);
 
         }); 
-
     }
 
     $scope.removeArticle = function(pmidIndex){
         var newPmidList = $scope.device.saved.splice(pmidIndex, 1);
         restService.put({resource:'device', id:$scope.device.id}, $scope.device, function(response){
-            console.log(JSON.stringify(response));
             $scope.device = response.device;
         }, function(error, headers){
             console.log('ERROR ! ! ! -- '+JSON.stringify(error));
         });
-    }
-    
+    }    
 
     $scope.updateSection = function(newSection){
         $scope.section = newSection;
     }
 
     $scope.redirect = function(term){
-        console.log('Redirect: '+term);
         window.location.href = '/admin/search-pubmed?term='+term;
     }
-
 
     $scope.onFileSelect = function(files, entity, media){
         $scope.loading = true;
@@ -142,8 +116,6 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
             $scope.confirmPassword = '';
         });
     }
-
-
 
     $scope.logout = function(){
       accountService.logout(function(response, error){
