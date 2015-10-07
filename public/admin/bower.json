@@ -1,0 +1,28 @@
+{
+  "name": "PubSavvySwipe",
+  "version": "0.0.1",
+  "homepage": "https://github.com/dankwon234/pubsavvyswipe",
+  "authors": [
+    "Frame Research LLC"
+  ],
+  "description": "PubSavvySwipe!",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.7",
+    "angular-mocks": "~1.4.7",
+    "angular-resource": "~1.4.7",
+    "angular-route": "~1.4.7",
+    "angular-sanitize": "~1.4.7",
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4"
+  }
+}
