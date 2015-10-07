@@ -112,14 +112,8 @@ function cleanUpResults(articles){
 		summary['title'] = articleSummary['ArticleTitle'][0];
 	
 		if (articleSummary['Abstract'] == null) // not always there
-			summary['abstract'] = 'null';
+			summary['abstract'] = '';
 		else {
-			// if( articleSummary['Abstract'][0]['AbstractText'][0]['_'] == null){
-			// 	summary['abstract'] = articleSummary['Abstract'][0]['AbstractText'][0];
-			// }
-			// else{
-				// summary['abstract'] = articleSummary['Abstract'][0]['AbstractText'][0]['_'];
-			// }
 			
 			var abstractArray = articleSummary['Abstract'][0]['AbstractText'];
 			var abstract = '';
