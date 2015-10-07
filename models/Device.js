@@ -9,7 +9,17 @@ var DeviceSchema = new mongoose.Schema({
 });
 
 DeviceSchema.methods.summary = function(){
-	return {'searchHistory':this.searchHistory, 'saved':this.saved, 'profileId':this.profileId, 'deviceToken':this.deviceToken, 'timestamp':this.timestamp, 'id':this._id};
+  var summary = {
+    'searchHistory':this.searchHistory, 
+    'saved':this.saved, 
+    'profileId':this.profileId, 
+    'deviceToken':this.deviceToken, 
+    'timestamp':this.timestamp, 
+    'id':this._id
+
+  }
+
+	return summary;
 };
 
 module.exports = mongoose.model('DeviceSchema', DeviceSchema);

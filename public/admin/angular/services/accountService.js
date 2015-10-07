@@ -1,16 +1,20 @@
 var accountService = angular.module('AccountServiceModule', ['RestServiceModule']);
 
-restService.factory('accountService', ['RestService', function(RestService){
+restService.factory('accountService', ['restService', function(restService){
 	
 	var accountManager = {};
 	
 	accountManager.checkCurrentUser = function(completion){
 		console.log('ACCOUNT SERVICE: Check Current User ');
-		RestService.get({resource:'currentuser', id:null}, function(response){
+
+		restService.get({resource:'currentuser', id:null}, function(response){
 			console.log('ACCOUNT SERVICE RESPONSE == '+JSON.stringify(response));
-			
-			if (completion != null)
-				completion(response);
+			if (completion != null) {
+				completion(response, null);
+				return;
+			}
+				completion(null, errorObject);
+				console.log(JSON.stringify(errorObject))
 		});
 	};
 
@@ -57,7 +61,7 @@ restService.factory('accountService', ['RestService', function(RestService){
 	};
 	
 	accountManager.updateProfile = function(profile, completion){
-		RestService.update({resource:'profile', id:profile.id}, profile, function(response){
+		restService.update({resource:'profile', id:profile.id}, profile, function(response){
 			console.log('ACCOUNT SERVICE RESPONSE == '+JSON.stringify(response));
 			if (response.confirmation != 'success'){
 				if (completion != null)
@@ -88,7 +92,7 @@ restService.factory('accountService', ['RestService', function(RestService){
 		}
 		
 		
-		RestService.post({resource:'login', id:null}, credentials, function(response){
+		restService.post({resource:'login', id:null}, credentials, function(response){
 			console.log('ACCOUNT SERVICE RESPONSE == '+JSON.stringify(response));
 			if (response.confirmation != 'success'){
 				if (completion != null)
@@ -101,6 +105,20 @@ restService.factory('accountService', ['RestService', function(RestService){
 		});
 	};
 	
+
+	accountManager.logout = function(completion) {
+		restService.query({resource:'logout'}, function(response){
+			console.log('ACCOUNT SERVICE RESPONSE == '+JSON.stringify(response));
+			if (response.confirmation != 'success'){
+				if (completion != null)
+					completion(null, {'message':response.message});
+				return;
+			}
+
+			if (completion != null)
+				completion(response, null);
+		});
+	}
 	
 	accountManager.fetchMessages = function(profile, completion){
 		var query = {resource:'message', 'recipient.id':profile.id};

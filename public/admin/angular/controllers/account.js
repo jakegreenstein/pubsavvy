@@ -1,96 +1,30 @@
-// add'RestService' in controllers where its used as indicated by http and then again in parens RestService
 
+var app = angular.module('AccountModule', []);
 
-
-var app = angular.module('AccountModule', ['angularFileUpload']);
-
-app.controller('AccountController', ['$scope', '$http', '$upload', 'restService', function($scope, $http, $upload, restService){
-	$scope.currentUser = {'loggedIn':'no'};
-	$scope.profile = {'email':'', 'firstName':'', 'lastName':'', 'image':''};
+app.controller('AccountController', ['$scope', 'restService', 'accountService', 'generalService', 'uploadService', function($scope, restService, accountService, generalService, uploadService){
+    $scope['generalService'] = generalService;
+	$scope.profile = {'id':null, 'email':'', 'firstName':'', 'lastName':'', 'image':'','password':''};
     $scope.newPassword = '';
     $scope.confirmPassword = '';
     $scope.section = 'account-information';
     $scope.device = null;
     $scope.articles = {};
-    $scope.randomBackground = null;
 
-	
-	$scope.init = function(){
-		console.log('Account Controller: INIT');
-        checkCurrentUser();
-        generateBackground();
-	}
 
-    $scope.formatNumber = function(number){
-        var string = numeral(number).format('0,0');
-        return string;
-    }
-
-    function getArticles(){
-        var base = '/api/search?pmid=';
-        for(var i = 0; i < $scope.device.saved.length; i++){
-            var url = base+$scope.device['saved'][i];
-            // replace this with a rest call
-            $http.get(url).success(function(data, status, headers, config){
-                if (data['confirmation'] != 'success'){
-                    alert(data['message']);
-                    return;
-                }
-                var article = data['article'][0];
-                $scope.articles[article['pmid']] = article;
-            }).error(function(data, status, headers, config) {
-                console.log("error", data, status, headers, config);
-            });   
-            // kjslfksjdflskjf
-        }
-
-    }
-
-    function generateBackground(){
-        var selection = getRandomInt(1,3);
-
-        if(selection == 1)
-            $scope.randomBackground = 'img/account-background-1.png';
-
-        else if(selection == 2)
-            $scope.randomBackground = 'img/account-background-2.png';
-
-        else 
-            $scope.randomBackground = 'img/account-background-3.png';
-        
-    }
-
-    function getRandomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    function checkCurrentUser(){
-        var url = '/api/currentuser';
-        $http.get(url).success(function(data, status, headers, config) {
-            console.log(JSON.stringify(data));
-            if (data['confirmation'] != 'success'){
-                //alert(data['message']);
+    $scope.init = function(){
+        $scope.randomBackground = 'img/account-background-'+$scope.generalService.getRandomInt(1,3)+'.png';
+        accountService.checkCurrentUser(function(response, error){
+            if (error != null)
                 return;
-            }
- 
-            $scope.profile = data['profile'];
-            //console.log($scope.profile.image);
-            if($scope.profile.image == '' || $scope.profile.image == "none"){
-                $scope.profile.image = '/admin/img/no-profile-image.jpg';
-            }
-
-            //UPDATE VARIABLES FROM CURRENT USER
+            
+            $scope.profile = response['profile'];
             getDevices();
-            $scope.currentUser.loggedIn = 'yes';
-
-
-        }).error(function(data, status, headers, config) {
-            console.log("error", data, status, headers, config);
         });
     }
 
+
     function getDevices(){
-        
+        console.log('triggered get devices');
          restService.query({resource:'device', profileId:$scope.profile.id}, function(response){
             console.log(JSON.stringify(response));
             if (response.confirmation != 'success') {
@@ -100,94 +34,65 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
             $scope.device = response.devices[0];
             console.log($scope.device);
 
-            if ($scope.device != null) {
-               getArticles();
-            }
+            if ($scope.device == null) 
+                return;
 
+            if ($scope.device.saved.length == 0)
+                return;
+            
+            var pmid = $scope.device.saved[0];
+            getArticle(pmid);
         });
     }
 
-    $scope.removeArticle = function(pmidIndex){
-        if(pmidIndex != -1){
-            $scope.device.saved.splice(pmidIndex, 1);
+    function getArticle(pmid){
 
-            var url = '/api/device/'+ $scope.device.id;
-            var json = JSON.stringify($scope.device);
+        restService.query({resource:'search', pmid:pmid}, function(response){
+            console.log(JSON.stringify(response));
 
-            $http.put(url, json).success(function(data, status, headers, config) {
-                var confirmation = data['confirmation'];            
-                if (confirmation != 'success'){
-                    alert(data['message']);
-                    return;
-                }
-                //DO SOMETHING AFTER
-             
-            }).error(function(data, status, headers, config) {
-                console.log("error", data, status, headers, config);
-            });
-        }
-        else
-            alert('Error: Cannot Remove - Index Not Found');
+            if (response.confirmation == 'success') {
+                var article = response['article'][0];
+                $scope.articles[article['pmid']] = article;
+            }
+
+            var index = $scope.device.saved.indexOf(pmid);
+            if (index < $scope.device.saved.length-1)
+                getArticle($scope.device.saved[index+1]);
+
+        }); 
     }
+
+    $scope.removeArticle = function(pmidIndex){
+        var newPmidList = $scope.device.saved.splice(pmidIndex, 1);
+        restService.put({resource:'device', id:$scope.device.id}, $scope.device, function(response){
+            $scope.device = response.device;
+        }, function(error, headers){
+            console.log('ERROR ! ! ! -- '+JSON.stringify(error));
+        });
+    }    
 
     $scope.updateSection = function(newSection){
         $scope.section = newSection;
     }
 
     $scope.redirect = function(term){
-        console.log('Redirect: '+term);
         window.location.href = '/admin/search-pubmed?term='+term;
-
     }
 
-	$scope.onFileSelect = function(files, property, entity){
-   		var url = 'http://media-service.appspot.com/api/upload';
-        $http.get(url).success(function(data, status, headers, config){
-            if(data['confirmation'] != 'success'){
-                alert(data['message']);
+    $scope.onFileSelect = function(files, entity, media){
+        $scope.loading = true;
+        uploadService.uploadFiles({'files':files, 'media':media}, function(response, error){
+            $scope.loading = false;
+            
+            if (error != null){
+                alert(error.message);
                 return;
-            }
-            var uploadString = data['upload'];
-            uploadFiles(files, uploadString, property, entity);
-        }).error(function(data, status, headers, config) {
-            console.log("error", data, status, headers, config);
+            }            
+            
+            var image = response['image'];
+            $scope.profile.image = image.id;
+            $scope.update();
         });
-    }
-
-    function uploadFiles($files, uploadString, property, entity) { 
-        for (var i = 0; i < $files.length; i++) {
-            var file = $files[i];
-            $scope.upload = $upload.upload({
-                url: uploadString, //upload.php script, node.js route, or servlet url
-                method: 'POST',
-                // headers: {'header-key': 'header-value'},
-                // withCredentials: true,
-                data: {myObj: $scope.myModelObj},
-                file: file // or list of files: $files for html5 only
-                /* set the file formData name ('Content-Desposition'). Default is 'file' */
-                //fileFormDataName: myFile, //or a list of names for multiple files (html5).
-            }).progress(function(evt) {
-                console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-        }).success(function(data, status, headers, config){ // file is uploaded successfully           
-            //console.log(JSON.stringify(data));
-            var confirmation = data['confirmation'];
-            
-            if (confirmation != 'success'){
-                alert(data['message']);
-                return;
-            }
-            
-            if(property=='image'){
-                var image = data['image'];
-                if(entity=='profile'){
-                    $scope.profile['image'] = image['address'];
-                }
-            }
-
-            console.log('profile: '+JSON.stringify($scope.profile));
-
-          });
-        }
     }
 
     $scope.update = function(){
@@ -200,46 +105,28 @@ app.controller('AccountController', ['$scope', '$http', '$upload', 'restService'
             $scope.profile.password = $scope.newPassword;
         }
 
-        var url = '/api/profile/'+ $scope.profile.id;
-        var json = JSON.stringify($scope.profile);
-
-        $http.put(url, json).success(function(data, status, headers, config) {
-            var confirmation = data['confirmation'];
-            //console.log('CONFIRMATION: '+JSON.stringify(data));
-            
-            if (confirmation != 'success'){
-                alert(data['message']);
-                return;
+        accountService.updateProfile($scope.profile, function(response, error){
+            if (error != null){
+              alert(error.message);
+              return;
             }
-            
-            var p = data['profile'];
-            alert(p.firstName+ ' '+p.lastName+' succesfully updated profile.');
-            //$scope.profile = {'firstName':'', 'lastName':'', 'email':'', 'password':''};
+
+            alert('You have succesfully updated your profile.');
             $scope.newPassword = '';
             $scope.confirmPassword = '';
-            
-        }).error(function(data, status, headers, config) {
-            console.log("error", data, status, headers, config);
         });
-
     }
 
     $scope.logout = function(){
-        console.log('logout and delete session id');
-        var url = '/api/logout';
-        $http.get(url).success(function(data, status, headers, config) {
-            console.log(JSON.stringify(data));
-            if (data['confirmation'] != 'success'){
-                alert(data['message']);
-                return;
-            }
-            $scope.profile = {'email':'', 'password':'', 'firstName':'', 'lastName':''};
-            $scope.currentUser.loggedIn = 'no';
-            window.location.href = '/admin/home';
-
-        }).error(function(data, status, headers, config) {
-            console.log("error", data, status, headers, config);
-        });
+      accountService.logout(function(response, error){
+        if (error != null){
+          alert(error.message);
+          console.log('ERROR ! ! ! -- '+JSON.stringify(error));
+          return;
+        }
+        $scope.profile = {'id':null, 'email':'', 'password':'', 'firstName':'', 'lastName':''};
+        window.location.href = '/admin/home';
+      });
     }
 
 }]);

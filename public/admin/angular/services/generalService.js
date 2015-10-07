@@ -34,8 +34,10 @@ generalService.factory('generalService', [function(){
 		return capitalizedString;
     }
 
-	
-	
+    manager.getRandomInt = function (min, max) {
+        return Math.floor(Math.random() * (max - min +1)) + min;
+    }
+
     manager.formattedDate = function(dateStr) {
     	var date = moment(new Date(dateStr)).format('MMM D, YYYY');
     	return date;
@@ -46,6 +48,10 @@ generalService.factory('generalService', [function(){
     	return date;
     }
 
+    manager.formattedNumber = function(number){
+        var string = numeral(number).format('0,0');
+        return string;
+    }
 
     manager.convertToLinks = function(text) {
 		var replaceText, replacePattern1;
