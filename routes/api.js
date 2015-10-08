@@ -29,7 +29,7 @@ router.get('/:resource', function(req, res, next) {
 			var sendgrid = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD);
 			sendgrid.send({
 				to:       'sarahsalder@gmail.com',
-				from:     'sarahsalder@gmail.com',
+				from:     'info@thegridmedia.com',
 				fromname: 'PubSavvySwipe',
 				subject:  'WELCOME TO PUBSAVVYSWIPE',
 				html:     data
@@ -53,7 +53,6 @@ router.get('/:resource', function(req, res, next) {
 	}
 	controller.handleGet(req, res, {'id':null, 'parameters':req.query});
 });
-
 
 
 
