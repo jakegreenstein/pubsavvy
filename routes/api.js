@@ -22,7 +22,7 @@ var controllers = {
 
 
 router.get('/:resource', function(req, res, next) {
-
+	console.log(req.params.resource);
 	if (req.params.resource == 'sendgrid'){ 
 		fetchFile('public/email/welcome.html')
 		.then(function(data){
@@ -39,7 +39,7 @@ router.get('/:resource', function(req, res, next) {
 					return;
 				}
 
-				res.json({'confirmation':'success', 'message':'Email sent to dan.kwon234@gmail.com'});
+				res.json({'confirmation':'success', 'message':'Email sent to sarahsalder@gmail.com'});
 				return;
 			});
 		
