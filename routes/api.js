@@ -24,7 +24,7 @@ var controllers = {
 router.get('/:resource', function(req, res, next) {
 	console.log(req.params.resource);
 	if (req.params.resource == 'sendgrid'){ 
-		fetchFile('public/email/welcome.html')
+		console.log(req.params.resource);
 		.then(function(data){
 			var sendgrid = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD);
 			sendgrid.send({
