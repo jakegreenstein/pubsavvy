@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var fs = require('fs');
 var accountController = require('../controllers/AccountController.js');
 var deviceController = require('../controllers/DeviceController.js');
 var profileController = require('../controllers/ProfileController.js');
