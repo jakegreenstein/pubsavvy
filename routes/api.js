@@ -21,6 +21,43 @@ var controllers = {
  };
 
 
+router.get('/:resource', function(req, res, next) {
+
+	if (req.params.resource == 'sendgrid'){ 
+		fetchFile('public/email/welcome.html')
+		.then(function(data){
+			var sendgrid = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD);
+			sendgrid.send({
+				to:       'sarahsalder@gmail.com',
+				from:     'sarahsalder@gmail.com',
+				fromname: 'PubSavvySwipe',
+				subject:  'WELCOME TO PUBSAVVYSWIPE',
+				html:     data
+			}, function(err, json) {
+				if (err) {
+					res.json({'confirmation':'fail', 'message':err});
+					return;
+				}
+
+				res.json({'confirmation':'success', 'message':'Email sent to dan.kwon234@gmail.com'});
+				return;
+			});
+		
+		})
+		.catch(function(err){
+			res.json({'confirmation':'fail','message':err.message});
+			return;
+		});
+
+		return;
+	}
+	controller.handleGet(req, res, {'id':null, 'parameters':req.query});
+});
+
+
+
+
+
 /* GET users listing. */
 router.get('/:resource', function(req, res, next) {
 
