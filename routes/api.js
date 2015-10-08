@@ -26,9 +26,16 @@ var controllers = {
 /* GET users listing. */
 router.get('/:resource', function(req, res, next) {
 	if (req.params.resource == 'sendgrid'){ 
+			var recipient = req.query.email;
+			if (recipient == null){
+					res.json({'confirmation':'fail', 'message':'You forgot the email address dummy.'});
+					return;
+			}
+
+
 			var sendgrid = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD);
 			sendgrid.send({
-					to:       'dan.kwon234@gmail.com',
+					to:       recipient,
 					from:     'info@thegridmedia.com',
 					fromname: 'PUB SAVVY',
 					subject:  'WELCOME TO PUB SAVVY',
@@ -39,7 +46,7 @@ router.get('/:resource', function(req, res, next) {
 					return;
 				}
 
-				res.json({'confirmation':'success', 'message':'Email sent to dan.kwon234@gmail.com'});
+				res.json({'confirmation':'success', 'message':'Email sent to '+recipient});
 				return;
 			});
 
