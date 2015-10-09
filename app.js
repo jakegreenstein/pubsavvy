@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var sessions = require('client-sessions');
 
+var index = require('./routes/index');
 var api = require('./routes/api');
 var site = require('./routes/site');
 var admin = require('./routes/admin');
@@ -51,7 +52,7 @@ app.use(sessions({
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', site);
+app.use('/', index);
 app.use('/api', api);
 app.use('/site', site);
 app.use('/admin', admin);
