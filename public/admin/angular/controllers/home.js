@@ -13,7 +13,6 @@ app.controller('HomeController', ['$scope', 'accountService', function($scope, a
           return;
         }
           $scope.profile = response.profile;
-          console.log($scope.profile);
     });
 	}
 
