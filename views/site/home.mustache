@@ -4,38 +4,46 @@
         {{>head}}
     </head>
 
-    
     <body ng-app="PubSavvySwipe" ng-controller="HomeController" ng-init="checkCurrentUser()">
         {{>nav}}
         <div class="main-container">
             
-
+            <!-- Start INTRO section-->
             <section style="margin-bottom: -6em;">
                 <div class="container">
                     <div class="row v-align-children">
-                    <div class="col-md-5 col-md-offset-1 col-sm-7 col-sm-offset-1 v-align-transform right" style="margin-top:15em;">
-                        <h1 class="large mb40 mb-xs-16">PubSavvySwipe</h1>
-                        <h6 class="uppercase mb16">Brought to you by Frame Research</h6>
-                        <p class="lead mb40">
-                            Frame Research brings you two apps for powerful medical search: PubSavvy PubMed Search and PubSavvy Swipe. These apps, featured right, enable a new way to discover medical journals. PubSavvy Swipe, our newest addition to the PubSavvy family, features a revised elegant interface for reading through and discovering medical journals.
-                        </p>
-                        <img style="width: 225px;" src="site/img/download.png"/>
-                    </div>
-                        <div class="col-md-7 col-md-offset-1 col-sm-6 col-sm-offset-1 text-center">
-                            <img style="margin-top:-12em;"class="" alt="Screenshot" src="site/img/clementine_side_edit.png" />
+
+                        <div class="col-md-6 col-md-offset-1 col-sm-7 col-sm-offset-1 v-align-transform" style="margin-top:15em; text-align:center;">
+                            <h1 class="large mb40 mb-xs-16">PubSavvySwipe</h1>
+                            <h6 class="uppercase mb16">Brought to you by Frame Research</h6>
+                            <p class="lead mb40">
+                                Frame Research brings you two apps for powerful medical search: PubSavvy PubMed Search and PubSavvy Swipe. These apps, featured right, enable a new way to discover medical journals. PubSavvy Swipe, our newest addition to the PubSavvy family, features a revised elegant interface for reading through and discovering medical journals.
+                            </p>
+                            <img style="width: 225px;" src="site/img/download.png"/>
                         </div>
+
+                        <div class="col-md-6 col-md-offset-1 col-sm-6 col-sm-offset-1 text-center">
+                            <img style="margin-top:-12em;width:70%;padding-top:36px" alt="Screenshot" src="site/img/phone.png" />
+                        </div>
+
                     </div>
                     <!--end of row-->
+
                 </div>
                 <!--end of container-->
-            </section>
 
+            </section>
+            <!-- End INTRO section-->
+
+
+            <!-- Start SEARCH SMARTER  section-->
             <section class="image-square left bg-secondary" style="border-top:1px solid #ddd;border-bottom:1px solid #ddd">
                 <div class="col-md-6 image">
                     <div class="background-image-holder">
                         <img alt="image" class="background-image" src="site/img/account-background-3.png" />
                     </div>
                 </div>
+
                 <div class="col-md-6 col-md-offset-1 content">
                     <h3>SEARCH SMARTER, <br> NOT HARDER</h3>
                     <p class="mb0">
@@ -44,11 +52,16 @@
                         Version 3.1 now available for iPad, iPhone, and iPodTouch. If you have multiple devices, turn on iCloud support to sync your search history and article collections across devices.
                     </p>
                 </div>
+
             </section>
+            <!-- End SEARCH SMARTER section-->
+
+
+            <!-- Start POWERED BY PUBSAVVY section-->
             <section>
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-12 text-center">
+                        <div class="col-sm-12 text-center" >
                             <h4 class="uppercase mb16">POWERED BY PUBSAVVY</h4>
                             <p class="lead mb64">
                                 PubSavvy Apps give you powerful search tools at your fingertips. Our apps seamlessly integrate medical journals into a single location for discovery.
@@ -57,7 +70,7 @@
                     </div>
                     <!--end of row-->
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-md-3">
                             <div class="feature feature-1 boxed">
                                 <div class="text-center">
                                     <i class="ti-panel icon"></i>
@@ -69,9 +82,9 @@
                             </div>
                             <!--end of feature-->
                         </div>
-                        <div class="col-sm-3">
-                            <div class="feature feature-1 boxed">
-                                <div class="text-center">
+                        <div class="col-md-3">
+                             <div class="feature feature-1 boxed">
+                               <div class="text-center">
                                     <i class="ti-panel icon"></i>
                                     <h5 class="uppercase">SEARCH HISTORY</h5>
                                 </div>
@@ -81,7 +94,7 @@
                             </div>
                             <!--end of feature-->
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-md-3">
                             <div class="feature feature-1 boxed">
                                 <div class="text-center">
                                     <i class="ti-package icon"></i>
@@ -93,7 +106,7 @@
                             </div>
                             <!--end of feature-->
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-md-3">
                             <div class="feature feature-1 boxed">
                                 <div class="text-center">
                                     <i class="ti-pulse icon"></i>
@@ -107,55 +120,57 @@
                         </div>
                     </div>
                     <!--end of row-->
+
                 </div>
                 <!--end of container-->
             </section>
+            <!-- End POWERED BY PUBSAVVY section-->
 
 
-
-<section class="bg-secondary">
+            <!-- Start BROUGHT TO U BY FRAME RESEARCH section-->
+            <section class="bg-secondary">
                 <div class="container">
                 
                     <div class="row v-align-children" style="text-align: center;">
 
                         <div class="col-md-6 col-sm-6">
-                        <h5 class = "uppercase" style="text-align: ;"> Brought to you by Frame Research </h5>
-                        <h4 class="uppercase bold mb0">Diana Frame</h4>
-                        <h4 class="uppercase">Founder, MPH</h4>
-                                    <p>
-                                        The founder of Frame Research and a resident of Brooklyn, NY, Diana Frame has 15 years of experience in evidence-based medicine research, primarily systematic literature review. She has advised decision makers at academic centers as well as pharmaceutical, biotechnology, and medical device clients. 
-                                    </p>
-                                </div>
+                            <h5 class = "uppercase" style="text-align: ;"> Brought to you by Frame Research </h5>
+                            <h4 class="uppercase bold mb0">Diana Frame</h4>
+                            <h4 class="uppercase">Founder, MPH</h4>
+                            <p>
+                                The founder of Frame Research and a resident of Brooklyn, NY, Diana Frame has 15 years of experience in evidence-based medicine research, primarily systematic literature review. She has advised decision makers at academic centers as well as pharmaceutical, biotechnology, and medical device clients. 
+                            </p>
+                        </div>
+
                         <div class="col-md-6 col-md-offset-1 col-sm-6 col-sm-offset-1 text-center">
                             <img class="cast-shadow" alt="Screenshot" src="/admin/img/diana.JPG">
                         </div>
+
                     </div>
                     <!--end of row-->
+
                 </div>
                 <!--end of container-->
+
             </section>
-
-
+            <!-- End BROUGHT TO U BY FRAME RESEARCH section-->
 
       
-      
-      <!-- Start call to action section-->
-      <section class="call-to-action bg-primary sep-top-sm sep-bottom-sm" style="height:225px;">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12" style="text-align: center;margin-top: -30px;">
-              <h4 class="uppercase bold mb0" style="padding-bottom: 1em;" >DOWNLOAD PUBSAVVY IN THE APP STORE</h4>
-              <img style="width: 250px; " style="margin-bottom: 3em;"src="site/img/download.png"/>
-            </div>
-            
+            <!-- Start call to action section-->
+            <section class="call-to-action bg-primary sep-top-sm sep-bottom-sm" style="height:225px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center;margin-top: -30px;">
+                            <h4 class="uppercase bold mb0" style="padding-bottom: 1em;" >DOWNLOAD PUBSAVVY IN THE APP STORE</h4>
+                            <img style="width: 250px; " style="margin-bottom: 3em;"src="site/img/download.png"/>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End call to action section-->
 
-          </div>
+            {{>footer}}
         </div>
-      </section>
-      <!-- End call to action section-->
-
-{{>footer}}
-        </div>
-        {{>scripts}}
+    {{>scripts}}
     </body>
 </html>
