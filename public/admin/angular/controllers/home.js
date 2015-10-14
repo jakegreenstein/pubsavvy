@@ -1,6 +1,6 @@
-var app = angular.module('HomeModule', []);
+var homeCtr = angular.module('HomeModule', []);
 
-app.controller('HomeController', ['$scope', 'accountService', function($scope, accountService){
+homeCtr.controller('HomeController', ['$scope', 'accountService', function($scope, accountService){
 	$scope.profile = {'id':null, 'email':'', 'password':'', 'firstName':'', 'lastName':''};
 
 	

@@ -1,7 +1,7 @@
-var app = angular.module('AutoSearchModule', []);
+var autoSearchCtr = angular.module('AutoSearchModule', []);
 
 
-app.controller('AutoSearchController', ['$scope', '$http', function($scope, $http){
+autoSearchCtr.controller('AutoSearchController', ['$scope', '$http', function($scope, $http){
 	$scope.initialSearch = {'terms':[]};
     $scope.newTerm = null;
     $scope.autoSearchValue = null;

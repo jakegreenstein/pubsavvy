@@ -136,7 +136,7 @@
                                 <ul ng-repeat = "(pmid, article) in relatedArticles track by $index" class=" recent-posts">
                                     <li>
                                         <a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/<%pmid%>"><%relatedArticles[pmid]['title']%></a>
-                                        <span class="date"><%relatedArticles[pmid]['journal']['title']%></span>
+                                        <span class="date" style='text-transform: capitalize;'><%relatedArticles[pmid]['journal']['title']%></span>
                                     </li>
 
                                 </ul>

@@ -1,6 +1,6 @@
-var app = angular.module('SearchModule', []);
+var searchCtr = angular.module('SearchModule', []);
 
-app.controller('SearchController', ['$scope', 'restService', 'generalService', function($scope, restService, generalService){
+searchCtr.controller('SearchController', ['$scope', 'restService', 'generalService', function($scope, restService, generalService){
     $scope['generalService'] = generalService;
     $scope.terms = null;
     $scope.articles = null;
