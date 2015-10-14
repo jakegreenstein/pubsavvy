@@ -9,6 +9,7 @@ app.controller('AccountController', ['$scope', 'restService', 'accountService', 
     $scope.section = 'account-information';
     $scope.device = null;
     $scope.articles = {};
+    $scope.relatedArticles = {};
 
 
     $scope.init = function(){
@@ -47,7 +48,6 @@ app.controller('AccountController', ['$scope', 'restService', 'accountService', 
     }
 
     function getArticle(pmid){
-
         restService.query({resource:'search', pmid:pmid}, function(response){
             console.log(JSON.stringify(response));
 
@@ -57,8 +57,23 @@ app.controller('AccountController', ['$scope', 'restService', 'accountService', 
             }
 
             var index = $scope.device.saved.indexOf(pmid);
+
             if (index < $scope.device.saved.length-1)
                 getArticle($scope.device.saved[index+1]);
+            else {
+                relatedPmids = $scope.device.saved.slice(0,3).join();
+                restService.query({resource:'related', pmid:relatedPmids, limit:5}, function(response){
+                    function createRelatedArticles(article, index, array) {
+                      $scope.relatedArticles[article['pmid']] = article;
+                    }
+                    var results = response.results;
+                    results.forEach(createRelatedArticles);
+                }, function(error, headers){
+                    console.log('ERROR ! ! ! -- '+JSON.stringify(error));
+                });
+
+
+            }
 
         }); 
     }
