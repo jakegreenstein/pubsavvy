@@ -12,6 +12,7 @@ app.controller('AccountController', ['$scope', 'restService', 'accountService', 
 
 
     $scope.init = function(){
+        console.log('init account controller')
         $scope.randomBackground = 'img/account-background-'+$scope.generalService.getRandomInt(1,3)+'.png';
         accountService.checkCurrentUser(function(response, error){
             if (error != null)
