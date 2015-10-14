@@ -65,6 +65,7 @@ app.controller('AccountController', ['$scope', 'restService', 'accountService', 
                 restService.query({resource:'related', pmid:relatedPmids, limit:5}, function(response){
                     function createRelatedArticles(article, index, array) {
                       $scope.relatedArticles[article['pmid']] = article;
+                      console.log(article);
                     }
                     var results = response.results;
                     results.forEach(createRelatedArticles);
