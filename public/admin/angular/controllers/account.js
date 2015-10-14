@@ -3,7 +3,7 @@ var app = angular.module('AccountModule', []);
 
 app.controller('AccountController', ['$scope', 'restService', 'accountService', 'generalService', 'uploadService', function($scope, restService, accountService, generalService, uploadService){
     $scope['generalService'] = generalService;
-	$scope.profile = {'id':null, 'email':'', 'firstName':'', 'lastName':'', 'image':'','password':''};
+	$scope.profile = {'id':null, 'email':'', 'firstName':'', 'lastName':'', 'image':'','password':'', 'phone':'', 'specialty':''};
     $scope.newPassword = '';
     $scope.confirmPassword = '';
     $scope.section = 'account-information';
