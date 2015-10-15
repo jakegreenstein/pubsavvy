@@ -118,6 +118,10 @@
 
 
 
+
+
+
+
 <div class="container">
 
             <div class="col-md-3 hidden-sm pull-left" style="margin-top:2em;">
@@ -150,15 +154,24 @@
                 <!-- Start ACCOUNT INFORMATION -->
 
 
-                <div ng-show="section == 'account-information'" style=" margin-top:24px; min-height:216px"> 
 
-
-                    <h4 class="uppercase" style="margin-right:12px;">Account Information</h4>
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-12 text-center">
+                            <!-- <h4 class="uppercase mb80">Button Tabs</h4> -->
+                            <div class="tabbed-content button-tabs">
+                                <ul class="tabs">
+                                    <li class="active">
+                                        <div ng-click="updateSection('account-information')"  class="tab-title">
+                                            <span>Account Information</span>
+                                        </div>
+                                        <div class="tab-content">
                     <div style="padding:12px">
 
 
 
-                        <div style="min-height:120px; margin-bottom:36px;" class ="section" ng-file-drop="onFileSelect($files, 'image', 'images')">
+                        <div ng-show="section == 'account-information'" style="min-height:120px; margin-bottom:36px;" class ="section" ng-file-drop="onFileSelect($files, 'image', 'images')">
                             
                             <img style="width:120px;height:120px;border-radius:60px;border:2px solid #ddd; margin-right:20px" src="https://media-service.appspot.com/site/images/<%profile.image%>?crop=120" align="left"><br><p class= "uppercase mb16" style="margin-top: 25px;"> To update your profile image, drag and drop here <br />
                             </p>
@@ -199,17 +212,16 @@
 
                     <a ng-click="update()" align="center" class="btn" >Update Profile</a>
                 <br /><br />
-            </div>
-                </div>
-                <!-- END ACCOUNT INFORMATION -->
-
-
-
-
-
-                <!-- Start SEARCH HISTORY  -->
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="tab-title" ng-click="updateSection('search-history')">
+                                            <span>Search History</span>
+                                        </div>
+                                        <div class="tab-content">
+                                                            <!-- Start SEARCH HISTORY  -->
                 <div ng-show="section == 'search-history'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px; margin-bottom:60px;"> 
-                    <h5><i class="fa fa-search fa-lg" style="margin-right:12px;"></i><span class="text-primary">Search History</span></h5>
+                
                     
                     <table style="width:100%">
                         <tr style="border-bottom: 2px solid #ccc;">
@@ -227,8 +239,14 @@
 
                 </div>
                 <!-- END SEARCH HISTORY -->
-
-                <!-- Start SAVED SEARCHES  -->
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="tab-title" ng-click="updateSection('saved-searches')">
+                                            <span>Saved Searches</span>
+                                        </div>
+                                        <div class="tab-content">
+                                                            <!-- Start SAVED SEARCHES  -->
                 <div ng-show="section == 'saved-searches'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px; margin-bottom:60px;"> 
                     <h5><i class="fa fa-history fa-lg" style="margin-right:12px;"></i><span class="text-primary">Saved Articles</span></h5>
                     <table style="width:100%">
@@ -248,7 +266,33 @@
                         </tr>
                     </table>
                 </div>
-                <!-- END SAVED ARTICLES --> 
+                <!-- END SAVED ARTICLES --> >
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="tab-title">
+                                            <span>Method</span>
+                                        </div>
+                                        <div class="tab-content">
+                                            <p>
+                                                Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--end of button tabs-->
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+
+
+
+
+
                 
             </div>
             <!-- END SETTING DIVS -->
