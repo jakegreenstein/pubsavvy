@@ -23,7 +23,7 @@ homeCtr.controller('HomeController', ['$scope', 'accountService', function($scop
           console.log('ERROR ! ! ! -- '+JSON.stringify(error));
           return;
         }
-        window.location.href = '/admin/account';
+        window.location.href = '/site/account';
       });
     }
 
