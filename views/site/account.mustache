@@ -156,14 +156,19 @@
                                         <input ng-model="profile.specialty" type="text" placeholder="Specialty"  class= "form-control input-lg ng-pristine ng-valid">
                                         <br/>
                                     
-                                        <img style=" width:120px;height:120px;border-radius:60px;border:2px solid #ddd; margin:auto;" src="https://media-service.appspot.com/site/images/<%profile.image%>?crop=120" align="left">
+                                     <div ng-show="section == 'account-information'" style="min-width:100%"ng-file-drop="onFileSelect($files, 'image', 'images')">
+
+
                                     
-                                        <p class= "uppercase mb16" style="margin-top: 45px; margin-left: 20px;float:left; color: black;"> To update your profile image, drag and drop here
-                                        </p> <br>
+                                        <p class= "uppercase mb16" style="margin-top:45px;margin-left: 20px;float:left; color: black;"> 
+                                        <img style=" width:120px;height:120px;border-radius:60px;border:2px solid #ddd; margin:auto;" src="https://media-service.appspot.com/site/images/<%profile.image%>?crop=120" align="left">
 
+                                        To update your profile image, drag and drop here
+                                        </p> 
+                                    </div>
 
-<!-- 
-                                    <div class="col-md-12"> -->
+                                    <div class="clearfix"></div>
+
                                         <h4 class="uppercase" style="margin-right:12px; padding-top: 15px;">Contact Information</h4>
                                         <div style="padding:12px">
                                             <h5 style="margin-bottom: 0; text-align: left" class="uppercase mb16">Email</h5><br>
@@ -189,8 +194,7 @@
                                             <a ng-click="update()" align="center" class="btn" >Update Profile</a>
                                         <br /><br />
                                         </div>
-<!--                                     </div> 
-                                    <!-- end col md 12  --> -->
+
                         </li>
                         
                         <li>
