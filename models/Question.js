@@ -8,7 +8,7 @@ var QuestionSchema = new mongoose.Schema({
 });
 
 Question.methods.summary = function(){
-  return {'index': this.index, 'question': this.question, 'answer': this.answer, 'timestamp':this.timestamp};
+  return {'index': this.index, 'question': this.question, 'answer': this.answer, 'timestamp':this.timestamp, 'id':this._id};
 };
 
 module.exports = mongoose.model('QuestionSchema', QuestionSchema);
