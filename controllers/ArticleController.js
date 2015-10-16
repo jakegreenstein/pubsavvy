@@ -112,9 +112,8 @@ function cleanUpResults(articles){
 		summary['title'] = articleSummary['ArticleTitle'][0];
 	
 		if (articleSummary['Abstract'] == null) // not always there
-			summary['abstract'] = '';
+			summary['abstract'] = 'No Abstract';
 		else {
-			
 			var abstractArray = articleSummary['Abstract'][0]['AbstractText'];
 			var abstract = '';
 			for (var k=0; k<abstractArray.length; k++){
@@ -128,7 +127,6 @@ function cleanUpResults(articles){
 			}
 			
 			summary['abstract'] = abstract;
-			
 		}
 	
 		var authors = new Array();
