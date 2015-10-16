@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 this.handleGet = function(req, res, pkg){
   if (pkg.id !=null){
     Question.findById(pkg.id function(err, question){
-      if err {
+      if (err) {
         res.send({'confirmation:' 'fail', 'message': "Question " + pkg.id + "not found"});
         return;
       }

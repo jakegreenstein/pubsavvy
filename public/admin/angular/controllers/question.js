@@ -1,6 +1,6 @@
 var questionCtr = angular.module('QuestionModule',[]);
 
-questionCtr.controller('QuestionController', ['$scope', '$http', function($scope, $http){
+questionCtr.controller('QuestionController', ['$scope', 'restService', function($scope, restService){
 
   $scope.initialSearch = {'terms':[]};
   $scope.newQuestion = null;
