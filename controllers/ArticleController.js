@@ -139,11 +139,9 @@ function cleanUpResults(articles){
 				if (author['LastName'] != null)
 					authorInfo['lastName'] = author['LastName'][0];
 
-				if (author['ForeName'] != null){
-					var initials = author['ForeName'][0];
-					initials = initials.replace(' ', '');
-					authorInfo['firstName'] = initials;
-				}
+				if (author['ForeName'] != null)
+					authorInfo['firstName'] = author['ForeName'][0];
+				
 
 				if (author['AffiliationInfo'] != null)
 					authorInfo['affiliation'] = author['AffiliationInfo'][0]['Affiliation'][0];
