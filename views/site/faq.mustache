@@ -115,11 +115,7 @@
                 </div>
             </div>
 
-            <input ng-model="newQuestion.question" type="text" placeholder="New Question">
-            <input ng-model="newQuestion.answer" type="text" placeholder="New Answer"> 
-            <input ng-model="newQuestion.index" type="text" placeholder="Position">
-
-            <button ng-click="addQuestion()">Add</button>
+            
             
         </div>
    <!--end of container-->
@@ -128,6 +124,11 @@
     <section>
         <div class="container">
             <div class="row">
+            <input ng-model="newQuestion.question" type="text" placeholder="New Question">
+            <input ng-model="newQuestion.answer" type="text" placeholder="New Answer"> 
+            <input ng-model="newQuestion.index" type="text" placeholder="Position">
+
+            <button ng-click="addQuestion()">Add</button>
                 <div class="col-sm-12 text-center">
                     <h4 class="mb16">Common questions about PubSavvySwipe</h4>
                     <p class="lead mb64">
@@ -148,7 +149,7 @@
                 <div class="col-sm-10 col-sm-offset-1">
                     <ul ng-repeat = "question in questions track by $index" class="accordion accordion-2">
                         <li>
-                            <div class="">
+                            <div class=""><h3><%question.index%></h3>
                                 <h4 class="inline-block mb0"><%question.question%></h4>
                             </div>
                             <div>

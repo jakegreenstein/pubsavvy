@@ -20,7 +20,8 @@ this.handleGet = function(req, res, pkg){
     return;
   }
 
-  Question.find(req.query, function(err, questions){
+  Question.find(req.query, null, {sort:{'index': 1}}, function(err, questions){
+
     if (err){
       res.json({'confirmation':'fail','message':err.message});
       return;
@@ -51,6 +52,7 @@ this.handlePost = function(req, res, pkg){
 
 
 this.handlePut = function(req, res, pkg){
+  console.log("HANDLEPUTTTTTTTT");
     var query = {_id: pkg.id};
     var options = {new: true};    
     

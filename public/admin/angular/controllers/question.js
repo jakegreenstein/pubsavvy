@@ -3,7 +3,7 @@ var questionCtr = angular.module('QuestionModule',[]);
 questionCtr.controller('QuestionController', ['$scope', 'restService', function($scope, restService){
 
     $scope.newQuestion = {'question':'', 'answer':'', 'index':0};
-    $scope.questions = [];
+    $scope.questions = null;
 
     $scope.getQuestions = function(){
         restService.query({resource:'question'}, function(response){
@@ -15,6 +15,7 @@ questionCtr.controller('QuestionController', ['$scope', 'restService', function(
             }
 
             $scope.questions = response.questions;
+            $scope.newQuestion.index = $scope.questions.length;
 
         });
     }
@@ -36,15 +37,24 @@ questionCtr.controller('QuestionController', ['$scope', 'restService', function(
                 alert('Error: ' + response.message);
                 return;
             }
-        });
-        var index = $scope.questions.indexOf(question);
-        if (index > -1) {
+
+            var index = $scope.questions.indexOf(question);
+            if (index == -1)
+                return;
+
             $scope.questions.splice(index, 1);
-        }
+        });
     }
 
     $scope.updateQuestion = function(question){
+        console.log(question);
         console.log('updateQuestion: '+JSON.stringify(question));
+        restService.put({resource:'question', id:question.id}, question, function(response){
+            if (response.confirmation != 'success') {
+                alert('Error: ' + response.message);
+                return;
+            }
+        });
     }
-    
+
 }]);
