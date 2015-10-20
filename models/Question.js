@@ -7,7 +7,7 @@ var QuestionSchema = new mongoose.Schema({
   timestamp: {type:Date, default:Date.now}
 });
 
-Question.methods.summary = function(){
+QuestionSchema.methods.summary = function(){
   var summary = {
     'index': this.index,
     'question': this.question,

@@ -4,9 +4,9 @@ var mongoose = require('mongoose');
 
 this.handleGet = function(req, res, pkg){
   if (pkg.id !=null){
-    Question.findById(pkg.id function(err, question){
+    Question.findById(pkg.id, function(err, question){
       if (err) {
-        res.send({'confirmation:' 'fail', 'message': "Question " + pkg.id + "not found"});
+        res.send({'confirmation': 'fail', 'message': "Question " + pkg.id + "not found"});
         return;
       }
 
@@ -65,6 +65,28 @@ this.handlePut = function(req, res, pkg){
     return;
 
 }
+
+this.handleDelete = function(req, res, pkg){
+  console.log(pkg.id);
+
+
+Question.findByIdAndRemove(pkg.id, function(err, question){
+      if (err) {
+        res.send({'confirmation': 'fail', 'message': "Question " + pkg.id + "not found"});
+        return;
+      }
+
+      if (question == null){
+        res.send({'confirmation':'fail', 'message':"Question"+ pkg.id+" not found"});
+        return;
+      }
+
+      res.json({'confirmation':'success'});
+    });
+    return;
+  }
+
+
 
 
 
