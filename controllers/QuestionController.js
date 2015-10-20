@@ -67,23 +67,23 @@ this.handlePut = function(req, res, pkg){
 }
 
 this.handleDelete = function(req, res, pkg){
-  console.log(pkg.id);
 
+  Question.findByIdAndRemove(pkg.id, function(err, question){
+    if (err) {
+      res.send({'confirmation': 'fail', 'message': "Question " + pkg.id + "not found"});
+      return;
+    }
 
-Question.findByIdAndRemove(pkg.id, function(err, question){
-      if (err) {
-        res.send({'confirmation': 'fail', 'message': "Question " + pkg.id + "not found"});
-        return;
-      }
+    if (question == null){
+      res.send({'confirmation':'fail', 'message':"Question"+ pkg.id+" not found"});
+      return;
+    }
 
-      if (question == null){
-        res.send({'confirmation':'fail', 'message':"Question"+ pkg.id+" not found"});
-        return;
-      }
-
-      res.json({'confirmation':'success'});
+    res.json({'confirmation':'success'});
     });
+
     return;
+    
   }
 
 
