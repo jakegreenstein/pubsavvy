@@ -124,16 +124,13 @@
     <section>
         <div class="container">
             <div class="row">
+            <a class="btn"data-target="#addQuestion" data-toggle="modal" data-dismiss="modal"> Add a Question </a>
                 <div class="col-sm-12 text-center">
                     <h4 class="mb16">Common questions about PubSavvySwipe</h4>
                     <p class="lead mb64">
                         <a href="mailto:info@frameresearch.comSubject=Question about PubSavvy" target="_top">Email us</a> if you've got more questions, and we'll do our best to answer
                     </p>
                 </div>
-                <input ng-model="newQuestion.question" type="text" placeholder="New Question">
-                <input ng-model="newQuestion.answer" type="text" placeholder="New Answer"> 
-                <input ng-model="newQuestion.index" type="text" placeholder="Position">
-                <a class='btn' ng-click="addQuestion()">Add</a>
             </div>
                     
             <div class="row">
@@ -144,7 +141,7 @@
                         <div >
                             <input ng-hide="question.hidden =='yes'" ng-blur="updateQuestion(question)" ng-model="question.index" type="text" />
                             <input ng-hide="question.hidden =='yes'" ng-blur="updateQuestion(question)" ng-model="question.question" type="text" />
-                            <input ng-hide="question.hidden =='yes'" ng-blur="updateQuestion(question)" ng-model="question.answer" type="text" />
+                            <textarea ng-hide="question.hidden =='yes'" ng-blur="updateQuestion(question)" ng-model="question.answer" type="text" /></textarea>
                             <a ng-hide="question.hidden == 'yes'" ng-click="finishedEditing(question)"class="btn"> Finished Editing </a>
                         </div>
 
@@ -170,6 +167,30 @@
         </div>
                 <!--end of container-->
     </section>
+
+
+
+<div id="addQuestion" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 style="text-align:center; margin-top: 1em;" class="uppercase mb16">Add A Question</h4>
+          </div>
+          <div class="modal-body">
+            <input ng-model="newQuestion.question" type="text" placeholder="Question">
+            <textarea ng-model="newQuestion.answer" type="text" placeholder="Answer"> </textarea>
+            <input ng-model="newQuestion.index" type="text" placeholder="Position">
+            <a style="text-align:center !important;" class='btn' ng-click="addQuestion()" data-dismiss="modal">Add</a>
+          </div>
+        </div>
+
+
+  </div>
+</div>
     
         {{>footer}}
 

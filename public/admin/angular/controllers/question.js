@@ -34,6 +34,11 @@ questionCtr.controller('QuestionController', ['$scope', 'restService', function(
                 return;
             }
             $scope.questions.push($scope.newQuestion);
+            for (var i=0; i<$scope.questions.length; i++){
+                var question = $scope.questions[i];
+                question['visible'] = 'yes';
+                question['hidden'] = 'yes';
+            }
             orderByIndex();
             $scope.newQuestion = {'question':'', 'answer':'', 'index':$scope.questions.length};
         });
@@ -65,9 +70,6 @@ questionCtr.controller('QuestionController', ['$scope', 'restService', function(
         });
     }
 
-    $scope.editQuestion = function(question){
-        toggleVisibility(question);
-    }
 
     $scope.finishedEditing = function(question){
         $scope.toggleVisibility(question);
