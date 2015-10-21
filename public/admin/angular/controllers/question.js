@@ -27,6 +27,17 @@ questionCtr.controller('QuestionController', ['$scope', 'restService', function(
                 return;
             }
             $scope.questions.push($scope.newQuestion);
+
+            function compare(a,b) {
+              if (a.index < b.index)
+                return -1;
+              if (a.index > b.index)
+                return 1;
+              return 0;
+            }
+
+            $scope.questions.sort(compare);
+
             $scope.newQuestion = {'question':'', 'answer':'', 'index':$scope.questions.length};
         });
     }
