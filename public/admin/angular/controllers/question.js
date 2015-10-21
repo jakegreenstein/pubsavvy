@@ -4,6 +4,8 @@ questionCtr.controller('QuestionController', ['$scope', 'restService', function(
 
     $scope.newQuestion = {'question':'', 'answer':'', 'index':0};
     $scope.questions = null;
+    $scope.visible = true;
+    $scope.hidden = true;
 
     $scope.getQuestions = function(){
         restService.query({resource:'question'}, function(response){
@@ -15,6 +17,11 @@ questionCtr.controller('QuestionController', ['$scope', 'restService', function(
             }
 
             $scope.questions = response.questions;
+            for (var i=0; i<$scope.questions.length; i++){
+                var question = $scope.questions[i];
+                question['visible'] = 'yes';
+                question['hidden'] = 'yes';
+            }
             $scope.newQuestion.index = $scope.questions.length;
 
         });
@@ -27,17 +34,7 @@ questionCtr.controller('QuestionController', ['$scope', 'restService', function(
                 return;
             }
             $scope.questions.push($scope.newQuestion);
-
-            function compare(a,b) {
-              if (a.index < b.index)
-                return -1;
-              if (a.index > b.index)
-                return 1;
-              return 0;
-            }
-
-            $scope.questions.sort(compare);
-
+            orderByIndex();
             $scope.newQuestion = {'question':'', 'answer':'', 'index':$scope.questions.length};
         });
     }
@@ -66,6 +63,43 @@ questionCtr.controller('QuestionController', ['$scope', 'restService', function(
                 return;
             }
         });
+    }
+
+    $scope.editQuestion = function(question){
+        toggleVisibility(question);
+    }
+
+    $scope.finishedEditing = function(question){
+        $scope.toggleVisibility(question);
+        orderByIndex();
+    }
+
+
+    // HELPER METHODS
+
+    function orderByIndex(){
+
+        function compare(a,b) {
+          if (a.index < b.index)
+            return -1;
+          if (a.index > b.index)
+            return 1;
+          return 0;
+        }
+
+        $scope.questions.sort(compare);
+
+    }
+
+    $scope.toggleVisibility = function(question){
+        if (question['visible'] =='no' && question['hidden'] =='no') {
+            question['visible'] = 'yes';
+            question['hidden'] = 'yes';
+            return;
+        }
+
+        question['visible'] = 'no';
+        question['hidden'] = 'no';
     }
 
 }]);
