@@ -7,7 +7,6 @@ router.get('/', function(req, res, next) {
 });
 
 
-
 router.get('/:page', function(req, res, next) {
 	var page = req.params.page;
 	res.render('site/'+page, {'title':page.toUpperCase()});

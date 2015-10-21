@@ -36,7 +36,7 @@
     <script src='/admin/angular/controllers/question.js'></script>
 </head>
 
-    <body ng-app="PubSavvySwipe" ng-controller="QuestionController" ng-init="getQuestions()">
+    <body ng-app="PubSavvySwipe" ng-controller="QuestionController" ng-init="init()">
         <div class="nav-container">
             <a id="top"></a>
             <nav>
@@ -111,8 +111,7 @@
             <div class="row">
                 <div class="col-sm-12 text-left">
                     <h2 class="uppercase mb8">Frequently Asked Questions</h2>
-                    <p class="lead mb40">Find the answers to your problems here</p>
-                </div>
+                    <p class="lead mb40"><a href="mailto:info@frameresearch.comSubject=Question about PubSavvy" target="_top">Email us</a> if you've got more questions, and we'll do our best to answer
             </div>
 
             
@@ -124,11 +123,11 @@
     <section>
         <div class="container">
             <div class="row">
-            <a class="btn"data-target="#addQuestion" data-toggle="modal" data-dismiss="modal"> Add a Question </a>
+            <a style="float:right; margin-top: -2em;" class="btn"data-target="#addQuestion" data-toggle="modal" data-dismiss="modal"> Add a Question </a>
                 <div class="col-sm-12 text-center">
-                    <h4 class="mb16">Common questions about PubSavvySwipe</h4>
+                    <h4 class="mb16"> </h4>
                     <p class="lead mb64">
-                        <a href="mailto:info@frameresearch.comSubject=Question about PubSavvy" target="_top">Email us</a> if you've got more questions, and we'll do our best to answer
+                        
                     </p>
                 </div>
             </div>
@@ -145,18 +144,17 @@
                             <a ng-hide="question.hidden == 'yes'" ng-click="finishedEditing(question)"class="btn"> Finished Editing </a>
                         </div>
 
-
-                                <h3 ng-show="question.visible == 'yes'"><%question.index%></h3>                       
-                                <div ng-show="question.visible == 'yes'">
-                                    <h4 class="inline-block mb0"><%question.question%></h4>
-                                </div>
-                                <div ng-show="question.visible == 'yes'">
-                                    <p>
-                                        <%question.answer%>
-                                    </p>
-                                </div>
-                                <a ng-show="question.visible == 'yes'" ng-click="toggleVisibility(question)"class="btn"> Edit </a>
-
+                        <div ng-show="question.visible == 'yes'" class="">
+                            <h4 class="inline-block mb0"><p style="display:inline;"><%question.index%>.</p> <%question.question%></h4>
+                        </div>
+                        <div ng-show="question.visible == 'yes'" style="padding: 2em">
+                            <p><%question.answer%></p>
+                        </div>
+                       
+                        <div style="margin-left:1em;">       
+                        <a ng-show="question.visible == 'yes'" ng-click="toggleVisibility(question)"class="btn"> Edit </a>
+                        <a ng-show="question.visible == 'yes'" ng-click="deleteQuestion(question)"class="btn"> Delete </a>
+                        </div>
                             </div>
                         </li>
                     </ul>

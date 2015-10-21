@@ -1,13 +1,18 @@
 var questionCtr = angular.module('QuestionModule',[]);
 
-questionCtr.controller('QuestionController', ['$scope', 'restService', function($scope, restService){
+questionCtr.controller('QuestionController', ['$scope', 'restService', 'accountService', function($scope, restService, accountService){
 
     $scope.newQuestion = {'question':'', 'answer':'', 'index':0};
     $scope.questions = null;
     $scope.visible = true;
     $scope.hidden = true;
 
-    $scope.getQuestions = function(){
+    $scope.init = function(){
+        getQuestions();
+        checkIfAdmin();
+    }
+
+    function getQuestions(){
         restService.query({resource:'question'}, function(response){
             console.log(JSON.stringify(response));
 
@@ -26,6 +31,7 @@ questionCtr.controller('QuestionController', ['$scope', 'restService', function(
 
         });
     }
+
 
     $scope.addQuestion = function(){
         restService.post({resource:'question'}, $scope.newQuestion, function(response){
