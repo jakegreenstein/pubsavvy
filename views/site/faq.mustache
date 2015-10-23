@@ -1,19 +1,17 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-<title>PubSavvy Swipe | Account</title>
-<meta name="viewport" content="width=device-width, initial-scale=0.8">
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/themify-icons.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/flexslider.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/lightbox.min.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/ytplayer.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/theme.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/custom.css" rel="stylesheet" type="text/css" media="all" />
-<link href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css'>
-
-
+<head>
+<meta charset="utf-8">
+    <title>PubSavvy Swipe | Account</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/themify-icons.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/flexslider.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/lightbox.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/ytplayer.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/theme.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/custom.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css'>
 
     <!-- ANGULAR -->
     <script src="/admin/bower_components/jquery/dist/jquery.min.js"></script>
@@ -35,10 +33,10 @@
     <script src='/admin/angular/controllers/home.js'></script>
     <script src='/admin/angular/controllers/search.js'></script>
     <script src='/admin/angular/controllers/account.js'></script>
+    <script src='/admin/angular/controllers/question.js'></script>
+</head>
 
-    </head>
-
-    <body ng-app="PubSavvySwipe" ng-controller="AccountController" ng-init="init()">
+    <body ng-app="PubSavvySwipe" ng-controller="QuestionController" ng-init="init()">
         <div class="nav-container">
             <a id="top"></a>
             <nav>
@@ -104,712 +102,108 @@
 
 
 <div class="main-container">
-  <section class="image-bg bg-dark parallax overlay pt140 pb140 pt-xs-40 pb-xs-40">
-                <div class="background-image-holder fadeIn" style="transform: translate3d(0px, 98px, 0px); background: url(file:///Users/sarahalder/Development/pubsavvyswipe/public/template/img/vent3.jpg);">
-                    <img alt="Background Image" class="background-image" src="img/account-background-1.png" style="display: none;">
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12 text-left">
-                            <h2 class="uppercase mb8">Frequently Asked Questions</h2>
-                            <p class="lead mb40">Find the answers to your problems here</p>
-                        </div>
-                    </div>
-                    <!--end of row-->
-                </div>
-                <!--end of container-->
-            </section>
-            <section>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                            <h4 class="mb16">Common questions about PubSavvySwipe</h4>
-                            <p class="lead mb64">
-                                <a href="mailto:info@frameresearch.comSubject=Question about PubSavvy" target="_top">Email us</a> if you've got more questions, and we'll do our best to answer
-                            </p>
-                        </div>
-                    </div>
-                    <!--end of row-->
-                    <div class="row">
-                        <div class="col-sm-10 col-sm-offset-1">
-                            <ul class="accordion accordion-2">
-                            <h4 class="uppercase" style="margin-right:12px; padding-top: 85px;">Search</h4>
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">Can I save my searches to re-run later?</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            Yes, PubSavvy PubMed Search automatically saves your search history. Starting with PubSavvy 3.0, you can now turn on iCloud to make your search history available across devices (iPhone, iPod Touch, and iPad). At no time can the developers of PubSavvy or third parties access your search or Collections content.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">Does PubSavvy include search results from MEDLINE?</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            Yes - PubSavvy searches the National Library of Medicine's PubMed database, which includes both MEDLINE-indexed citations and publisher-supplied citations. (These are typically more recent, and they do not have the indexing terms, called "MeSH" or Medical Subject Heading, attached to them yet.) You can search only the MEDLINE portion of PubMed by using the tag [MeSH] after your search, for example "Hemorrhagic Fever, Ebola"[Mesh]. These terms are not necessarily in plain English, so try looking them up in the MeSH indexing tree.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">Is the search case sensitive?</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            Just like on the PubMed website, search terms you enter are not case sensitive. However, Boolean operators (AND, OR, and NOT) must be in all caps. It's easy to forget this, which is why PubSavvy's shortcut keys automatically enter these terms in the correct case.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">Can I use 'AND' and 'OR' in the same search?</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            Yes, you can - but be sure to use parentheses to make sure PubSavvy can understand the logic of what you are looking for. For example, maybe you want to read studies that look at how well people adhere to regimens for weight loss. You might use a search string something like this: Adherence AND (diet OR exercise OR "weight loss"). Without parentheses you may get unexpected results - in this example, without parentheses around the ORs, the search will bring up all kinds of citations which don't include the Adherence term.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">I tried to run a search and got an error message.</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            Make sure you are connected to the internet. PubSavvy can only run a new search when you have a network connection on your phone. (You can access your Collections even if you are not connected, however.) If you continue to experience problems please let us know.
-                                        </p>
-                                    </div>
-                                </li>                                
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">How does PubSavvy sort search results?</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            Results are sorted by the most recently published articles first, the same as the default sort on the PubMed web page. When you go to Related Items, the resulting list there is sorted by relevance, which is determined by similarity of National Library of Medicine indexing terms. PubSavvy's creators believe that returning results in the same order and format for all users enhances reproducibility and minimizes bias. We do not accept paid links, and we do not sort results to promote drugs, devices, or journal publishers.
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">I am trying to use the PubMed.gov website and I can't find the Limits feature. <br>Did PubMed Limits disappear? Why can't I limit my search to the past 30 days?</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            This is correct - for users of the PubMed website, on either computers or mobile devices, NCBI has made a change to the interface which replaced the Limits feature with a set of filters contained in a sidebar of the search results page. You can read about the change and see tutorials here. One consequence of the change to Limits is that the default date limit choices now omit options for past 30 days, past 60 days, past 180 days, etc. However, you still CAN use these limits by entering the phrase in quotes followed by the field limiter [DP]. <br><br>
-
-                                            Example: influenza AND "last 30 days"[DP] <br><br>
-
-                                            For users who prefer to use this option rather than entering exact dates, we tested this text string substitution and it works in PubSavvy for iPhone as well on the PubMed website, PubMed Mobile website, and in all but one of the other PubMed iPhone apps that we have tried. (Besides PubSavvy these include PubMed On Tap, PubMed Clip, PubMed in Hand, PubSearch Plus, Go PubMed, and Orkov. Mobile Abstracts was the only iOS app we tested which does not seem to support this syntax.) In PubSavvy, of course, you also have the option to pick the exact date range you want to search by going into "Refine" after you run your keyword search, and selecting the desired To and From dates from the clickwheel.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">Can I use 'AND' and 'OR' in the same search?</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            Yes, you can - but be sure to use parentheses to make sure PubSavvy can understand the logic of what you are looking for. For example, maybe you want to read studies that look at how well people adhere to regimens for weight loss. You might use a search string something like this: Adherence AND (diet OR exercise OR "weight loss"). Without parentheses you may get unexpected results - in this example, without parentheses around the ORs, the search will bring up all kinds of citations which don't include the Adherence term.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">What if I want to search for a word only in the article title?</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            You can use the PubMed / MEDLINE tag [TI] to indicate a word or phrase to be searched in the title only. Use the square brackets on the custom PubSavvy keyboard to enter PubMed tags, like this: "HeLa cells"[ti]. The tags are not case sensitive. Other handy indicators are [AU] for author, [1AU] for first author, and [LASTAU] for senior author (traditionally listed last on a publication). More PubMed search tags are listed here.
-                                        </p>
-                                    </div>
-                                </li>
-                                <h4 class="uppercase" style="margin-right:12px; padding-top: 85px;">Refine Search</h4>
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">When I search PubMed, only some of the resulting articles are actually relevant to my question. Is there a way to select only the good ones?</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                           Yes - you can create a Collection to hold only the citations you want. The easiest way to do this is to press the "Select" button at the top right of the search results page. In Select mode, you can tap on the records you want to save and a checkmark will appear on the right. When you are done selecting the set of citations you want, tap "Move" at the top of the page to add them to a Collection. You can also add citations to a collection one by one, by using the + sign on the Abstract page.<br><br>
-
-                                          To make multiple collections on different topics, go to Preferences and change the collection settings to "Ask Me Where." To remove citations from a collection, click on the citation and and press the white X, then Yes to confirm the deletion.
-                                        </p>
-                                    </div>
-                                </li>
-                                COLLECTIONS
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">I want to re-categorize some of my search results. How do I manage items in my Collections?</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            You can now edit meta-data about your Collections as well as moving and deleting the citations contained in them. To delete or rename collections, click on Edit at the top right in the list of Collections. Click the red dot and confirm deletion to delete a collection. To rename, click on the right hand side on the name. You can move articles between collections by clicking on the two folders icon when in the collection - select the articles you want to move, click Move, and then select the collection you want to move them to. To see details of the collection (date created, number of items) and to add any notes / descriptions about the collection, click on the i (info) button at the bottom right.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">Help - I had some items selected from my search results list and they disappeared!</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            Make sure you save your selections into a Collection (either the default My Collection, or a named collection you created) using the "Move" button. You can continue to load up more results in Select mode, and the set of selections will be kept, but they will disappear if you re-run the search before adding them to a Collection.
-                                        </p>
-                                    </div>
-                                </li>
-                                <h4 class="uppercase" style="margin-right:12px; padding-top: 85px;">Preferences</h4>
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">Does PubSavvy allow me to import my search results to EndNote or other reference manager programs?</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            Yes. Just go to Preferences and turn on "Medline export." Now when you email articles or Collections, the email will include an attachment which is a MEDLINE-formatted text file. This format can be imported into EndNote®, Reference Manager®, ProCite®, RefWorks, or other bibliographic management software. <br><br>
-
-                                            For EndNote: save the attachment from the PubSavvy email, and open EndNote. Choose "Import..." from the File menu, and select your saved file . Under "Import option," select the PubMed (NLM) import filter. (This is the same filter you use when importing search results from the PubMed web site - find it under "Other Filters" if it is not already in your list of frequently used styles.) Click on Import, and all of your formatted citations will come into EndNote in the correct fields. Unlike some citation importers, the full text of the abstract will be included as well as the author, journal name, date, and pages.<br><br>
-
-                                            For RefMan and ProCite, follow the procedure above but use the import filter / file format called "PubMed." In RefWorks, the import filter is called "NLM PubMed". EndNote, Reference Manager, and ProCite are trademarks of Thompson Reuters.<br>
-                                        </p>
-                                    </div>
-                                </li>
-                                <h4 class="uppercase" style="margin-right:12px; padding-top: 85px;">General User Information</h4>
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">Who are you and why'd you build this app?</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            As an independent consultant and researcher in evidence-based medicine, I use PubMed a LOT. Having the power to search this database on a mobile device was extremely appealing - but I found that current apps didn't have some of the features I wanted. Generally a PubMed search returns so many records that being able to narrow it down using preset filters or your own added terms is a big plus - and personally, when hunting for relevant papers I love being able to screen through and select citations from a list, rather than viewing them one by one. PubSavvy was built to do all that and more, with some custom features to make your life easier. <br><br>
-
-                                            Having an vision of what I wanted but zero programming experience, I was fortunate enough to work with the talented folks at Aboveground Systems, who made it all come to life, and Dan Kwon, who is helping me keep up with the flood of changes to the underlying operating system. PubSavvy has been a great tool for me, making research portable and enabling me to access key articles across devices. I hope you find it useful too. <br>
-
-                                            I would always love to hear from you about any issues you are having with the app, fun or frustrating PubMed search anecdotes, and any comments on your experience using PubSavvy PubMed search. Contact me directly to say hello! <br><br>
-
-                                            -Diana
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">I'm a health care provider and I'm concerned about privacy. Are you collecting my searches? Are you going to sell this data? Or use it to advertise to me?</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            No, no, and no. There is no tracking of search content or user information associated with PubSavvy. We will never sell your information to drug reps, insurers, or other third parties - indeed, we don't even it have it ourselves. We do not collect any identifying information from our users.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">What's next for PubSavvy?</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            We have just released PubSavvy PubMed Search 3.1, to address some issues with the appearance of the app on iOS 8, particularly on older devices. Next up, a re-haul of the backend code for more polished performance and a more obvious way to access some features, like selecting studies for Collections. If you have feature requests or spot some glitches, please send 'em our way. Let us know what version of iOS you have and what type/generation of device.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">I am reviewing the level of evidence for medical iPhone apps. 1) Was a physician involved in development? 2) Are results from the app based on scientific evidence (e.g. published studies)?</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            Thanks for your questions on evidence-based medicine. <br><br>
-
-1) No, a physician has not been involved in the initial development, as the app is not intended to provide medical advice. PubSavvy was created by an experienced researcher with a Master's of Public Health and 10 years' involvement in systematic review of medical literature, working with a mobile apps developer. We do have physicians using the app who have provided helpful feedback on the user interface. <br><br>
-
-2) Yes. PubSavvy is an interface for searching PubMed, the database of over 20 million biomedical journal articles (most of which are peer-reviewed) indexed by the National Library of Medicine. Search results consist of clinical literature citations and abstracts, and full text articles where they are available. In keeping with best practices for evidence-based medicine, search terms are completely transparent and results are not filtered or sorted by any "hidden" criteria. We've also included some pre-loaded search strings for finding randomized trials, so that users can hone in on studies representing the best level of evidence.<br>
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">Is there advertising in the app?</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            No. PubSavvy is supported solely by app sales, we do not have in-app advertising and will not be adding it.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">Why does the article say "free full text" and then the full text link says I have to be a subscriber?</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            Of the millions of articles in over 20,000 journals available in PubMed, sometimes full text links are not tagged correctly, or the journal has changed the status of its content. This can happen with articles being tagged as free which in fact cannot be accessed (for instance, journals which formerly had a free archive, like the Journal of Applied Genetics, or articles which will be free under the NIH Public Access Policy, but are still within the one-year grace period). Occasionally you will see the opposite - an article may not be tagged as free full text, but if you link out to the PubMed record (through the globe icon at the bottom of the abstract in PubSavvy), and then to the publisher-supplied link, some journals actually do not require a login. <br><br>
-
-                                            We do our best to make sure NLM's PubMed links out to full text are working correctly in PubSavvy. If you see a link that is working on the PubMed website, but sending you to the wrong place in PubSavvy, please let us know. If the PubMed links are wrong (or missing) on the PubMed website as well, unfortunately there is not much we can do about it currently.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">Where do you stand on advertising in medical apps?</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            We've said it before - PubSavvy is and will always be a PubMed search app without ads, and without pharmaceutical or device industry sponsorship. Ads in medical apps are potentially lucrative, especially if they target prescribing physicians (NYTimes: Drug App Comes Free, Ads Included). However, in addition to simply being annoying, paid advertising or sponsorship in medical apps can distort evidence needed for unbiased decision-making. We're committed to supporting PubSavvy through app sales alone.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <h4 class="inline-block mb0">The link out to NCBI's PubMed website takes me to a different place now. Why?</h4>
-                                    </div>
-                                    <div class="content">
-                                        <p>
-                                            When you click on the globe icon in PubSavvy at the bottom of an abstract, the website you link to will now look a little different. This is because NCBI has redirected mobile Safari users to its new mobile version of PubMed, a web app called PubMed Mobile. It is a stripped-down version of the full PubMed website, which was giving mobile Safari users the error message, "We are sorry, but NCBI web applications do not support your browser, and may not function properly." If you prefer to go to the full site anyway, scroll down to the bottom of the abstract and click on the link at the bottom left that says "Standard PubMed."
-                                        </p>
-                                    </div>
-                                </li>
-                            </ul>
-                            <!--end of accordion-->
-                        </div>
-                    </div>
-                    <!--end of row-->
-                </div>
-                <!--end of container-->
-            </section>
-            <footer class="footer-1 bg-dark">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6">
-                            <img alt="Logo" class="logo" src="img/logo-light.png" />
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="widget">
-                                <h6 class="title">Recent Posts</h6>
-                                <hr>
-                                <ul class="link-list recent-posts">
-                                    <li>
-                                        <a href="#">Hugging pugs is super trendy</a>
-                                        <span class="date">February
-                                            <span class="number">14, 2015</span>
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Spinning vinyl is oh so cool</a>
-                                        <span class="date">February
-                                            <span class="number">9, 2015</span>
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Superior theme design by pros</a>
-                                        <span class="date">January
-                                            <span class="number">27, 2015</span>
-                                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!--end of widget-->
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="widget">
-                                <h6 class="title">Latest Updates</h6>
-                                <hr>
-                                <div class="twitter-feed">
-                                    <div class="tweets-feed" data-widget-id="492085717044981760">
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end of widget-->
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="widget">
-                                <h6 class="title">Instagram</h6>
-                                <hr>
-                                <div class="instafeed" data-user-name="funsizeco">
-                                    <ul></ul>
-                                </div>
-                            </div>
-                            <!--end of widget-->
-                        </div>
-                    </div>
-                    <!--end of row-->
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <span class="sub">&copy; Copyright 2015 - Medium Rare</span>
-                        </div>
-                        <div class="col-sm-6 text-right">
-                            <ul class="list-inline social-list">
-                                <li>
-                                    <a href="#">
-                                        <i class="ti-twitter-alt"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="ti-facebook"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="ti-dribbble"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="ti-vimeo-alt"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!--end of container-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <div class="main-container">
-<!-- Start header Section-->
-      <section style="background-image: url('/site/img/intro-home5.jpg');" class="header-section fading-title parallax">
-        <div class="section-shade sep-top-5x sep-bottom-3x">
-          <div class="container">
-            <div class="section-title upper light">
-              <h2 class="small-space">Frequently Asked<span class="text-primary"> Questions</span></h2>
-              <p class="lead">Here you can find any possible answer to your questions.</p>
-            </div>
-          </div>
+    <section class="image-bg bg-dark parallax overlay pt140 pb140 pt-xs-40 pb-xs-40">
+        <div class="background-image-holder fadeIn" style="transform: translate3d(0px, 98px, 0px); background: url(file:///Users/sarahalder/Development/pubsavvyswipe/public/template/img/vent3.jpg);">
+            <img alt="Background Image" class="background-image" src="img/account-background-1.png" style="display: none;">
         </div>
-      </section>
-      <!-- End header Section-->
-      <!-- Start Portfolio Detail section-->
-      <section class="sep-bottom-2x">
+
         <div class="container">
-          <div class="row">
-            <div class="col-md-9 col-md-push-3 sep-top-2x">
-              <div class="section-title">
-                <h3 class="upper">Frequently Asked Questions</h3>
-                <p>
-                  Contrary to popular belief, Lorem Ipsum is not simply random text.
-                  It has roots in a piece of classical Latin literature from 45 BC,
-                  making it over 2000 years old. Richard McClintock, a Latin professor
-                  at Hampden-Sydney College in Virginia, looked up one of the more
-                </p>
-              </div>
-              <!-- start accordion group-->
-              <div class="sep-top-lg">
-                <h5>Search</h5>
-                <div id="accordion" class="accordion-group">
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse0" class="accordion-toggle">Can I save my searches to re-run later?<i class="accordion-icon fa fa-minus"></i></a></div>
-                    <div id="collapse0" class="accordion-body panel-collapse in">
-                      <p>
-                        Yes, PubSavvy PubMed Search automatically saves your search history. Starting with PubSavvy 3.0, you can now turn on iCloud to make your search history available across devices (iPhone, iPod Touch, and iPad). At no time can the developers of PubSavvy or third parties access your search or Collections content.
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="accordion-toggle">Does PubSavvy include search results from MEDLINE?<i class="accordion-icon fa fa-plus"></i></a></div>
-                    <div id="collapse1" class="accordion-body panel-collapse collapse">
-                      <p>
-                        Yes - PubSavvy searches the National Library of Medicine's PubMed database, which includes both MEDLINE-indexed citations and publisher-supplied citations. (These are typically more recent, and they do not have the indexing terms, called "MeSH" or Medical Subject Heading, attached to them yet.) You can search only the MEDLINE portion of PubMed by using the tag [MeSH] after your search, for example "Hemorrhagic Fever, Ebola"[Mesh]. These terms are not necessarily in plain English, so try looking them up in the MeSH indexing tree.
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="accordion-toggle">Is the search case sensitive?<i class="accordion-icon fa fa-plus"></i></a></div>
-                    <div id="collapse2" class="accordion-body panel-collapse collapse">
-                      <p>
-                        Just like on the PubMed website, search terms you enter are not case sensitive. However, Boolean operators (AND, OR, and NOT) must be in all caps. It's easy to forget this, which is why PubSavvy's shortcut keys automatically enter these terms in the correct case.
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse3" class="accordion-toggle">Can I use 'AND' and 'OR' in the same search?<i class="accordion-icon fa fa-plus"></i></a></div>
-                    <div id="collapse3" class="accordion-body panel-collapse collapse">
-                      <p>
-                        Yes, you can - but be sure to use parentheses to make sure PubSavvy can understand the logic of what you are looking for. For example, maybe you want to read studies that look at how well people adhere to regimens for weight loss. You might use a search string something like this: Adherence AND (diet OR exercise OR "weight loss"). Without parentheses you may get unexpected results - in this example, without parentheses around the ORs, the search will bring up all kinds of citations which don't include the Adherence term.
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse4" class="accordion-toggle">I tried to run a search and got an error message.<i class="accordion-icon fa fa-plus"></i></a></div>
-                    <div id="collapse4" class="accordion-body panel-collapse collapse">
-                      <p>
-                        Make sure you are connected to the internet. PubSavvy can only run a new search when you have a network connection on your phone. (You can access your Collections even if you are not connected, however.) 
-                        If you continue to experience problems please let us know.
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse5" class="accordion-toggle">How does PubSavvy sort search results?<i class="accordion-icon fa fa-plus"></i></a></div>
-                    <div id="collapse5" class="accordion-body panel-collapse collapse">
-                      <p>
-                        Results are sorted by the most recently published articles first, the same as the default sort on the PubMed web page. When you go to Related Items, the resulting list there is sorted by relevance, which is determined by similarity of National Library of Medicine indexing terms. PubSavvy's creators believe that returning results in the same order and format for all users enhances reproducibility and minimizes bias. We do not accept paid links, and we do not sort results to promote drugs, devices, or journal publishers. 
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse6" class="accordion-toggle">I am trying to use the PubMed.gov website and I can't find the Limits feature. Did PubMed Limits disappear? Why can't I limit my search to the past 30 days?<i class="accordion-icon fa fa-plus"></i></a></div>
-                    <div id="collapse6" class="accordion-body panel-collapse collapse">
-                      <p>
-                        This is correct - for users of the PubMed website, on either computers or mobile devices, NCBI has made a change to the interface which replaced the Limits feature with a set of filters contained in a sidebar of the search results page. You can read about the change and see tutorials here. 
-                        One consequence of the change to Limits is that the default date limit choices now omit options for past 30 days, past 60 days, past 180 days, etc. However, you still CAN use these limits by entering the phrase in quotes followed by the field limiter [DP].
-                      </p>
-                      <p>
-                        Example: influenza AND "last 30 days"[DP]
-                      </p>
-                      <p>
-                        For users who prefer to use this option rather than entering exact dates, we tested this text string substitution and it works in PubSavvy for iPhone as well on the PubMed website, PubMed Mobile website, and in all but one of the other PubMed iPhone apps that we have tried. (Besides PubSavvy these include PubMed On Tap, PubMed Clip, PubMed in Hand, PubSearch Plus, Go PubMed, and Orkov. Mobile Abstracts was the only iOS app we tested which does not seem to support this syntax.) In PubSavvy, of course, you also have the option to pick the exact date range you want to search by going into "Refine" after you run your keyword search, and selecting the desired To and From dates from the clickwheel.
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse7" class="accordion-toggle">What if I want to search for a word only in the article title?<i class="accordion-icon fa fa-plus"></i></a></div>
-                    <div id="collapse7" class="accordion-body panel-collapse collapse">
-                      <p>
-                        You can use the PubMed / MEDLINE tag [TI] to indicate a word or phrase to be searched in the title only. Use the square brackets on the custom PubSavvy keyboard to enter PubMed tags, like this: "HeLa cells"[ti]. The tags are not case sensitive. Other handy indicators are [AU] for author, [1AU] for first author, and [LASTAU] for senior author (traditionally listed last on a publication). More PubMed search tags are listed here.
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                  <br/>
-                  <h5>Refine Search</h5>
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse8" class="accordion-toggle">When I search PubMed, only some of the resulting articles are actually relevant to my question. Is there a way to select only the good ones?<i class="accordion-icon fa fa-plus"></i></a></div>
-                    <div id="collapse8" class="accordion-body panel-collapse collapse">
-                      <p>
-                        Yes - you can create a Collection to hold only the citations you want. The easiest way to do this is to press the "Select" button at the top right of the search results page. In Select mode, you can tap on the records you want to save and a checkmark will appear on the right. When you are done selecting the set of citations you want, tap "Move" at the top of the page to add them to a Collection. You can also add citations to a collection one by one, by using the + sign on the Abstract page. 
-                      </p>
-                      <p>
-                        To make multiple collections on different topics, go to Preferences and change the collection settings to "Ask Me Where." To remove citations from a collection, click on the citation and and press the white X, then Yes to confirm the deletion. 
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                  <br/>
-                  <h5>Collections</h5>
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse9" class="accordion-toggle">I want to re-categorize some of my search results. How do I manage items in my Collections?<i class="accordion-icon fa fa-plus"></i></a></div>
-                    <div id="collapse9" class="accordion-body panel-collapse collapse">
-                      <p>
-                        You can now edit meta-data about your Collections as well as moving and deleting the citations contained in them. To delete or rename collections, click on Edit at the top right in the list of Collections. Click the red dot and confirm deletion to delete a collection. To rename, click on the right hand side on the name. You can move articles between collections by clicking on the two folders icon when in the collection - select the articles you want to move, click Move, and then select the collection you want to move them to. To see details of the collection (date created, number of items) and to add any notes / descriptions about the collection, click on the i (info) button at the bottom right.
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse10" class="accordion-toggle">Help - I had some items selected from my search results list and they disappeared!<i class="accordion-icon fa fa-plus"></i></a></div>
-                    <div id="collapse10" class="accordion-body panel-collapse collapse">
-                      <p>
-                        Make sure you save your selections into a Collection (either the default My Collection, or a named collection you created) using the "Move" button. You can continue to load up more results in Select mode, and the set of selections will be kept, but they will disappear if you re-run the search before adding them to a Collection.
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                  <br/>
-                  <h5>Preferences</h5>
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse11" class="accordion-toggle">Does PubSavvy allow me to import my search results to EndNote or other reference manager programs?<i class="accordion-icon fa fa-plus"></i></a></div>
-                    <div id="collapse11" class="accordion-body panel-collapse collapse">
-                      <p>
-                        Yes. Just go to Preferences and turn on "Medline export." Now when you email articles or Collections, the email will include an attachment which is a MEDLINE-formatted text file. This format can be imported into EndNote®, Reference Manager®, ProCite®, RefWorks, or other bibliographic management software.
-                      </p>
-                      <p>
-                        For EndNote: save the attachment from the PubSavvy email, and open EndNote. Choose "Import..." from the File menu, and select your saved file . Under "Import option," select the PubMed (NLM) import filter. (This is the same filter you use when importing search results from the PubMed web site - find it under "Other Filters" if it is not already in your list of frequently used styles.) Click on Import, and all of your formatted citations will come into EndNote in the correct fields. Unlike some citation importers, the full text of the abstract will be included as well as the author, journal name, date, and pages. 
-                      </p>
-                      <p>
-                        For RefMan and ProCite, follow the procedure above but use the import filter / file format called "PubMed." In RefWorks, the import filter is called "NLM PubMed". EndNote, Reference Manager, and ProCite are trademarks of Thompson Reuters.
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                  <br/>
-                  <h5>General User Info</h5>
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse12" class="accordion-toggle">Who are you and why'd you build this app?<i class="accordion-icon fa fa-plus"></i></a></div>
-                    <div id="collapse12" class="accordion-body panel-collapse collapse">
-                      <p>
-                        As an independent consultant and researcher in evidence-based medicine, I use PubMed a LOT. Having the power to search this database on a mobile device was extremely appealing - but I found that current apps didn't have some of the features I wanted. Generally a PubMed search returns so many records that being able to narrow it down using preset filters or your own added terms is a big plus - and personally, when hunting for relevant papers I love being able to screen through and select citations from a list, rather than viewing them one by one. PubSavvy was built to do all that and more, with some custom features to make your life easier.
-                      </p>
-                      <p>
-                      Having an vision of what I wanted but zero programming experience, I was fortunate enough to work with the talented folks at Aboveground Systems, who made it all come to life, and Dan Kwon, who is helping me keep up with the flood of changes to the underlying operating system. PubSavvy has been a great tool for me, making research portable and enabling me to access key articles across devices. I hope you find it useful too. 
-                      </p>
-                      <p>
-                        I would always love to hear from you about any issues you are having with the app, fun or frustrating PubMed search anecdotes, and any comments on your experience using PubSavvy PubMed search.  Contact me directly to say hello!
-                      </p>
-                      <p>
-                        -Diana
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse13" class="accordion-toggle">I'm a health care provider and I'm concerned about privacy. Are you collecting my searches? Are you going to sell this data? Or use it to advertise to me?<i class="accordion-icon fa fa-plus"></i></a></div>
-                    <div id="collapse13" class="accordion-body panel-collapse collapse">
-                      <p>
-                       No, no, and no. There is no tracking of search content or user information associated with PubSavvy. We will never sell your information to drug reps, insurers, or other third parties - indeed, we don't even it have it ourselves. We do not collect any identifying information from our users. 
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse14" class="accordion-toggle">What's next for PubSavvy?<i class="accordion-icon fa fa-plus"></i></a></div>
-                    <div id="collapse14" class="accordion-body panel-collapse collapse">
-                      <p>
-                        We have just released PubSavvy PubMed Search 3.1, to address some issues with the appearance of the app on iOS 8, particularly on older devices. Next up, a re-haul of the backend code for more polished performance and a more obvious way to access some features, like selecting studies for Collections. If you have feature requests or spot some glitches, please send 'em our way. Let us know what version of iOS you have and what type/generation of device.
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse14" class="accordion-toggle">I am reviewing the level of evidence for medical iPhone apps. 1) Was a physician involved in development? 2) Are results from the app based on scientific evidence (e.g. published studies)?<i class="accordion-icon fa fa-plus"></i></a></div>
-                    <div id="collapse14" class="accordion-body panel-collapse collapse">
-                      <p>
-                        Thanks for your questions on evidence-based medicine.
-                      </p>
-                      <p>
-                        1) No, a physician has not been involved in the initial development, as the app is not intended to provide medical advice. PubSavvy was created by an experienced researcher with a Master's of Public Health and
-                        10 years' involvement in systematic review of medical literature, working with a mobile apps developer. We do have physicians using the app who have provided helpful feedback on the user interface.
-                      </p>
-                      <p>
-                        2) Yes. PubSavvy is an interface for searching PubMed, the database of over 20 million biomedical journal articles (most of which are peer-reviewed) indexed by the National Library of Medicine. Search results consist of clinical literature citations and abstracts, and full text articles where they are available. In keeping with best practices for evidence-based medicine, search terms are completely transparent and results are not filtered or sorted by any "hidden" criteria. We've also included some pre-loaded search strings for finding randomized trials, so that users can hone in on studies representing the best level of evidence.
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse14" class="accordion-toggle">Is there advertising in the app?<i class="accordion-icon fa fa-plus"></i></a></div>
-                    <div id="collapse14" class="accordion-body panel-collapse collapse">
-                      <p>
-                        No. PubSavvy is supported solely by app sales, we do not have in-app advertising and will not be adding it.
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse14" class="accordion-toggle">Why does the article say "free full text" and then the full text link says I have to be a subscriber?<i class="accordion-icon fa fa-plus"></i></a></div>
-                    <div id="collapse14" class="accordion-body panel-collapse collapse">
-                      <p>
-                        Of the millions of articles in over 20,000 journals available in PubMed, sometimes full text links are not tagged correctly, or the journal has changed the status of its content. This can happen with articles being tagged as free which in fact cannot be accessed (for instance, journals which formerly had a free archive, like the Journal of Applied Genetics, or articles which will be free under the NIH Public Access Policy, but are still within the one-year grace period). Occasionally you will see the opposite - an article may not be tagged as free full text, but if you link out to the PubMed record (through the globe icon at the bottom of the abstract in PubSavvy), and then to the publisher-supplied link, some journals actually do not require a login. 
-                      </p>
-                      <p>
-                        We do our best to make sure NLM's PubMed links out to full text are working correctly in PubSavvy. If you see a link that is working on the PubMed website, but sending you to the wrong place in PubSavvy, please let us know. If the PubMed links are wrong (or missing) on the PubMed website as well, unfortunately there is not much we can do about it currently.
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse14" class="accordion-toggle">Where do you stand on advertising in medical apps?<i class="accordion-icon fa fa-plus"></i></a></div>
-                    <div id="collapse14" class="accordion-body panel-collapse collapse">
-                      <p>
-                        We've said it before - PubSavvy is and will always be a PubMed search app without ads, and without pharmaceutical or device industry sponsorship. Ads in medical apps are potentially lucrative, especially if they target prescribing physicians (NYTimes: Drug App Comes Free, Ads Included). However, in addition to simply being annoying, paid advertising or sponsorship in medical apps can distort evidence needed for unbiased decision-making. We're committed to supporting PubSavvy through app sales alone. 
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                  <!-- start accordion item-->
-                  <div class="accordion-item panel">
-                    <div class="accordion-heading upper"><a data-toggle="collapse" data-parent="#accordion" href="#collapse14" class="accordion-toggle">The link out to NCBI's PubMed website takes me to a different place now. Why?<i class="accordion-icon fa fa-plus"></i></a></div>
-                    <div id="collapse14" class="accordion-body panel-collapse collapse">
-                      <p>
-                        hen you click on the globe icon in PubSavvy at the bottom of an abstract, the website you link to will now look a little different. This is because NCBI has redirected mobile Safari users to its new mobile version of PubMed, a web app called PubMed Mobile. It is a stripped-down version of the full PubMed website, which was giving mobile Safari users the error message, "We are sorry, but NCBI web applications do not support your browser, and may not function properly." If you prefer to go to the full site anyway, scroll down to the bottom of the abstract and click on the link at the bottom left that says "Standard PubMed." 
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                </div>
-              </div>
-              <!-- end accordion group-->
-              <div class="sep-top-2x">
-                <h4 class="upper">Didn't find your question?</h4>
-              </div>
-              <div class="row">
-                <div class="col-md-6 sep-top-md icon-gradient">
-                  <div class="icon-box icon-horizontal icon-md">
-                  <a href="mailto:info@frameresearch.com">
-                    <div class="icon-content img-circle"><i class="fa fa-envelope"></i></div>
-                    <div class="icon-box-content">
-                      <h5 class="upper">Email Us</h5>
-                    </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
+            <div class="row">
+                <div class="col-sm-12 text-left">
+                    <h2 class="uppercase mb8">Frequently Asked Questions</h2>
+                    <p class="lead mb40"><a href="mailto:info@frameresearch.comSubject=Question about PubSavvy" target="_top">Email us</a> if you've got more questions, and we'll do our best to answer
             </div>
-            <!-- start sidebar-->
-            <div class="col-md-3 col-md-pull-9 sep-top-2x">
-              <img style="width:80%"src="/site/img/history.png"/>         
-            </div>
-            <!-- end sidebar-->
-          </div>
+
+            
+            
         </div>
-      </section>
-      <!-- Start call to action section-->
-      <section class="call-to-action bg-primary sep-top-md sep-bottom-md">
+   <!--end of container-->
+    </section>
+
+    <section>
         <div class="container">
-          <div class="row">
-            <div class="col-md-9">
-              <h5 class="action-title upper light">HAVE AN IDEA? WE’RE HERE TO HELP YOU MANAGE YOUR WORK</h5>
+            <div class="row">
+            <a style="float:right; margin-top: -2em;" class="btn"data-target="#addQuestion" data-toggle="modal" data-dismiss="modal"> Add a Question </a>
+                <div class="col-sm-12 text-center">
+                    <h4 class="mb16"> </h4>
+                    <p class="lead mb64">
+                        
+                    </p>
+                </div>
             </div>
-            <div class="col-md-3 text-right"><a href="contact-us.html" class="btn btn-light btn-bordered btn-lg">Contact us</a></div>
+                    
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <ul ng-repeat = "question in questions track by $index" class="accordion accordion-2">
+                        <li>
+                            <div>
+                        <div >
+                            <input ng-hide="question.hidden =='yes'" ng-blur="updateQuestion(question)" ng-model="question.index" type="text" />
+                            <input ng-hide="question.hidden =='yes'" ng-blur="updateQuestion(question)" ng-model="question.question" type="text" />
+                            <textarea ng-hide="question.hidden =='yes'" ng-blur="updateQuestion(question)" ng-model="question.answer" type="text" /></textarea>
+                            <a ng-hide="question.hidden == 'yes'" ng-click="finishedEditing(question)"class="btn"> Finished Editing </a>
+                        </div>
+
+                        <div ng-show="question.visible == 'yes'" class="">
+                            <h4 class="inline-block mb0"><p style="display:inline;"><%question.index%>.</p> <%question.question%></h4>
+                        </div>
+                        <div ng-show="question.visible == 'yes'" style="padding: 2em">
+                            <p><%question.answer%></p>
+                        </div>
+                       
+                        <div style="margin-left:1em;">       
+                        <a ng-show="question.visible == 'yes'" ng-click="toggleVisibility(question)"class="btn"> Edit </a>
+                        <a ng-show="question.visible == 'yes'" ng-click="deleteQuestion(question)"class="btn"> Delete </a>
+                        </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <!--end of accordion-->
+                </div>
+            </div>
+            <!--end of row-->
+        </div>
+                <!--end of container-->
+    </section>
+
+
+
+<div id="addQuestion" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 style="text-align:center; margin-top: 1em;" class="uppercase mb16">Add A Question</h4>
+          </div>
+          <div class="modal-body">
+            <input ng-model="newQuestion.question" type="text" placeholder="Question">
+            <textarea ng-model="newQuestion.answer" type="text" placeholder="Answer"> </textarea>
+            <input ng-model="newQuestion.index" type="text" placeholder="Position">
+            <a style="text-align:center !important;" class='btn' ng-click="addQuestion()" data-dismiss="modal">Add</a>
           </div>
         </div>
-      </section>
-      <!-- End call to action section-->
 
 
-            {{>footer}}
-        </div>
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/flexslider.min.js"></script>
-<script src="js/lightbox.min.js"></script>
-<script src="js/masonry.min.js"></script>
-<script src="js/twitterfetcher.min.js"></script>
-<script src="js/spectragram.min.js"></script>
-<script src="js/ytplayer.min.js"></script>
-<script src="js/countdown.min.js"></script>
-<script src="js/smooth-scroll.min.js"></script>
-<script src="js/parallax.js"></script>
-<script src="js/scripts.js"></script>
-    </body>
+  </div>
+</div>
+    
+        {{>footer}}
+
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/flexslider.min.js"></script>
+    <script src="js/lightbox.min.js"></script>
+    <script src="js/masonry.min.js"></script>
+    <script src="js/twitterfetcher.min.js"></script>
+    <script src="js/spectragram.min.js"></script>
+    <script src="js/ytplayer.min.js"></script>
+    <script src="js/countdown.min.js"></script>
+    <script src="js/smooth-scroll.min.js"></script>
+    <script src="js/parallax.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
 </html>

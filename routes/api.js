@@ -7,6 +7,7 @@ var deviceController = require('../controllers/DeviceController.js');
 var profileController = require('../controllers/ProfileController.js');
 var autosearchController = require('../controllers/AutoSearchController.js');
 var articleController = require('../controllers/ArticleController.js');
+var questionController = require('../controllers/QuestionController.js');
 
 var controllers = {
 	'account':accountController,
@@ -18,7 +19,8 @@ var controllers = {
  	'autosearch':autosearchController, 
  	'article':articleController,
  	'search':articleController,
- 	'related':articleController
+ 	'related':articleController, 
+ 	'question': questionController
  };
 
 
@@ -79,6 +81,7 @@ router.get('/:resource/:id', function(req, res, next) {
 
 
 router.post('/:resource', function(req, res, next) {
+	console.log('POST: '+JSON.stringify(req.params));
 	
 	var controller = controllers[req.params.resource];
 	if (controller == null){
@@ -105,7 +108,24 @@ router.put('/:resource/:id', function(req, res, next) {
 	}
 	controller.handlePut(req, res, {'id':req.params.id, 'parameters':req.query});
 
+});
 
+
+router.delete('/:resource/:id', function(req, res, next) {
+	console.log('made it to router.delete in api.js')
+ var controller = controllers[req.params.resource];
+	if (controller == null){
+		res.send({'confirmation':'fail', 'message':'Invalid Resource: '+req.params.resource});
+		return;
+	}
+	
+	if (req.params.id == null){
+		res.send({'confirmation':'fail', 'message':'Missing resource identiifer.'});
+		return;
+	}
+	console.log(req.params.id);
+	controller.handleDelete(req, res, {'id':req.params.id, 'parameters':req.query});
+  	
 });
 
 

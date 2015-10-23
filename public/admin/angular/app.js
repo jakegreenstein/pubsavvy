@@ -3,10 +3,11 @@ var modules = [
   'AutoSearchModule',
   'HomeModule',
   'AccountModule',
+  'QuestionModule',
   'AccountServiceModule', 
   'GeneralServiceModule',
   'RestServiceModule', 
-  'UploadServiceModule'
+  'UploadServiceModule',
 ];
 
 
