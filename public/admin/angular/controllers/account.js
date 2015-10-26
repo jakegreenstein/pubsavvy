@@ -6,7 +6,7 @@ accountCtr.controller('AccountController', ['$scope', 'restService', 'accountSer
 	$scope.profile = {'id':null, 'email':'', 'firstName':'', 'lastName':'', 'image':'','password':'', 'phone':'', 'specialty':''};
     $scope.newPassword = '';
     $scope.confirmPassword = '';
-    $scope.section = 'account-information';
+    $scope.section = 'search-history';
     $scope.device = null;
     $scope.articles = {};
     $scope.relatedArticles = {};

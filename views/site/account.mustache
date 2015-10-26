@@ -123,7 +123,7 @@
         <div class="row">
             <div class="col-md-3 hidden-sm hidden-xs reccomended-articles">
                 <div class="widget">
-                    <h6 class="title">Reccomended </h6>
+                    <h6 class="title">Recommended </h6>
                     <hr>
                     <ul ng-repeat = "(pmid, article) in relatedArticles track by $index" class=" recent-posts">
                         <li>
@@ -137,68 +137,9 @@
             <div class="col-md-9">
                 <div class="tabbed-content text-tabs text-center">
                     <ul class="tabs" style="border-bottom: red;">
-                        <li class="active">
-                            <div ng-click="updateSection('account-information')"  class="tab-title">
-                                <span>Account Information</span>
-                            </div>
-                            <div class="tab-content" style="padding-top: 20px;">
-                       
-                                <div ng-show="section == 'account-information'" style="min-height:120px; margin-bottom:36px;" class ="section" ng-file-drop="onFileSelect($files, 'image', 'images')">
-                            
 
-
-                                        <h5 style="margin-bottom: 0; text-align: left;" class="uppercase mb16">First Name</h5><br>
-                                        <input ng-model="profile.firstName" type="text" placeholder="First Name"  class= "form-control input-lg ng-pristine ng-valid">
-                                        <br />
-                                        <h5 style="margin-bottom: 0;  text-align: left;" class="uppercase mb16">Last Name</h5><br>
-                                        <input ng-model="profile.lastName" type="text" placeholder="Last Name"  class= "form-control input-lg ng-pristine ng-valid">
-                                        <br />
-                                        <h5 style="margin-bottom: 0;  text-align: left;" class="uppercase mb16">Specialty</h5><br>
-                                        <input ng-model="profile.specialty" type="text" placeholder="Specialty"  class= "form-control input-lg ng-pristine ng-valid">
-                                        <br/>
-                                    
-                                     <div ng-show="section == 'account-information'" style="min-width:100%"ng-file-drop="onFileSelect($files, 'image', 'images')">
-
-
-                                    
-                                        <p class= "uppercase mb16" style="margin-top:45px;margin-left: 20px;float:left; color: black;"> 
-                                        <img style=" width:120px;height:120px;border-radius:60px;border:2px solid #ddd; margin:auto;" src="https://media-service.appspot.com/site/images/<%profile.image%>?crop=120" align="left">
-
-                                        To update your profile image, drag and drop here
-                                        </p> 
-                                    </div>
-
-                                    <div class="clearfix"></div>
-
-                                        <h4 class="uppercase" style="margin-right:12px; padding-top: 15px;">Contact Information</h4>
-                                        <div style="padding:12px">
-                                            <h5 style="margin-bottom: 0; text-align: left" class="uppercase mb16">Email</h5><br>
-                                            <input ng-model="profile.email" type="text" placeholder="Email" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
-                                            <h5 style="margin-bottom: 0; text-align: left" class="uppercase mb16">Phone Number</h5><br>
-                                            <input ng-model="profile.phone" type="text" placeholder="(###) - ### - ####" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
-                                        </div>
-
-
-                                        <h4 class="uppercase" style="margin-right:12px;">Update Your Password</h4>
-
-                                        <div style="padding:12px">
-                                            <h5 style="margin-bottom: 0; text-align: left" class="uppercase mb16">New Password</h5><br>
-                                            <input ng-model="newPassword" type="password" placeholder="New Password" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
-                                            <h5 style="margin-bottom: 0; text-align: left" class="uppercase mb16">Confirm Password</h5><br>
-                                            <input ng-model="confirmPassword" type = "password" placeholder = "New Password" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
-                                        </div>
-
-                                        <br>
-                                        <br>
-
-                                        <div style="width:194px; margin:auto;">
-                                            <a ng-click="update()" align="center" class="btn" >Update Profile</a>
-                                        <br /><br />
-                                        </div>
-
-                        </li>
                         
-                        <li>
+                        <li class="active">
                             <div class="tab-title" ng-click="updateSection('search-history')">
                                 <span>Search History</span>
                             </div>
@@ -228,7 +169,7 @@
                                     </li>
                                     <li>
                                         <div class="tab-title" ng-click="updateSection('saved-searches')">
-                                            <span>Saved Searches</span>
+                                            <span>Saved Articles</span>
                                         </div>
                                         <div class="tab-content">
                                                             <!-- Start SAVED SEARCHES  -->
@@ -248,15 +189,65 @@
                 <!-- END SAVED ARTICLES --> >
                                         </div>
                                     </li>
+
+                                                            <li>
+                            <div ng-click="updateSection('account-information')"  class="tab-title">
+                                <span>Account Information</span>
+                            </div>
+                            <div class="tab-content" style="padding-top: 20px;">
+                       
+                                <div ng-show="section == 'account-information'" style="min-height:120px; margin-bottom:36px;" class ="section" ng-file-drop="onFileSelect($files, 'image', 'images')">
+                            
+
+
+                                        <h5 style="margin-bottom: 0; text-align: left;" class="uppercase mb16">First Name</h5><br>
+                                        <input ng-model="profile.firstName" type="text" placeholder="First Name"  class= "form-control input-lg ng-pristine ng-valid">
+                                        <br />
+                                        <h5 style="margin-bottom: 0;  text-align: left;" class="uppercase mb16">Last Name</h5><br>
+                                        <input ng-model="profile.lastName" type="text" placeholder="Last Name"  class= "form-control input-lg ng-pristine ng-valid">
+                                        <br />
+                                        
+                                    
+                                     <div ng-show="section == 'account-information'" style="min-width:100%"ng-file-drop="onFileSelect($files, 'image', 'images')">
+
+
+                                    
+                                        <p class= "uppercase mb16" style="margin-top:45px;margin-left: 20px;float:left; color: black;"> 
+                                        <img style=" width:120px;height:120px;border-radius:60px;border:2px solid #ddd; margin:auto;" src="https://media-service.appspot.com/site/images/<%profile.image%>?crop=120" align="left">
+
+                                        To update your profile image, drag and drop here
+                                        </p> 
+                                    </div>
+
+                                    <div class="clearfix"></div>
+
+                                        
+                                        <div style="padding:12px">
+                                            
+                                            
+                                        </div>
+
+
+                                        <h4 class="uppercase" style="margin-right:12px;">Update Your Password</h4>
+
+                                        <div style="padding:12px">
+                                            <h5 style="margin-bottom: 0; text-align: left" class="uppercase mb16">New Password</h5><br>
+                                            <input ng-model="newPassword" type="password" placeholder="New Password" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
+                                            <h5 style="margin-bottom: 0; text-align: left" class="uppercase mb16">Confirm Password</h5><br>
+                                            <input ng-model="confirmPassword" type = "password" placeholder = "New Password" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
+                                        </div>
+
+                                        <br>
+                                        <br>
+
+                                        <div style="width:194px; margin:auto;">
+                                            <a ng-click="update()" align="center" class="btn" >Update Profile</a>
+                                        <br /><br />
+                                        </div>
+
+                        </li>
                                 </ul>
                             </div>
-
-
-
-
-
-
-
 
 
 
