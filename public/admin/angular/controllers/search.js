@@ -47,4 +47,16 @@ searchCtr.controller('SearchController', ['$scope', 'restService', 'generalServi
             $scope.count = response['count'];
         });
     }
+
+    $scope.logout = function(){
+      accountService.logout(function(response, error){
+        if (error != null){
+          alert(error.message);
+          console.log('ERROR ! ! ! -- '+JSON.stringify(error));
+          return;
+        }
+        $scope.profile = {'id':null, 'email':'', 'password':'', 'firstName':'', 'lastName':''};
+        window.location = "/"
+      });
+    }
 }]);

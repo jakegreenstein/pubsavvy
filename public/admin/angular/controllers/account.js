@@ -148,7 +148,7 @@ accountCtr.controller('AccountController', ['$scope', 'restService', 'accountSer
           return;
         }
         $scope.profile = {'id':null, 'email':'', 'password':'', 'firstName':'', 'lastName':''};
-        window.location.href = '/admin/home';
+        window.location.href = '/';
       });
     }
 
