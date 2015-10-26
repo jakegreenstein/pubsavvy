@@ -11,7 +11,6 @@ accountCtr.controller('AccountController', ['$scope', 'restService', 'accountSer
     $scope.articles = {};
     $scope.relatedArticles = {};
 
-
     $scope.init = function(){
         console.log('init account controller')
         $scope.randomBackground = 'img/account-background-'+$scope.generalService.getRandomInt(1,3)+'.png';
@@ -90,6 +89,13 @@ accountCtr.controller('AccountController', ['$scope', 'restService', 'accountSer
 
     $scope.updateSection = function(newSection){
         $scope.section = newSection;
+
+            if (newSection == "account-information"){
+                $('.recommended-articles').hide();
+            }
+            else 
+                $('.recommended-articles').show();
+
     }
 
     $scope.redirect = function(term){
