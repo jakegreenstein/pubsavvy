@@ -132,11 +132,11 @@
                 <input ng-keyup="$event.keyCode == 13 ? search('0') : null" ng-model="terms" type="text" class="form-control input-lg">
                 <span class="input-group-btn">
                   <button style="margin-left:10px; margin-top:10px;color:white;"ng-click="search('0')" type="submit" class="btn btn-primary btn-sm">Search</button></span>
-              </div>
+              </div> <br>
               <!-- end search form-->
               <div ng-show="resultsVisible" class="sep-top-md">
                 <p class="lead text-muted">Search results for:&nbsp;<strong><% terms.toString() %></strong></p>
-                <p class="lead text-muted"># Results:&nbsp;<strong><% count %></strong></p>
+                <p class="lead text-muted">Number of Results:&nbsp;<strong><% count %></strong></p>
               </div>
               <!-- start accordion group-->
               <div class="sep-top-xs">
