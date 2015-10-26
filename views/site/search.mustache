@@ -24,6 +24,7 @@
     <script src="/admin/js/fileupload/angular-file-upload.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
     
+    <script data-require="ui-bootstrap@*" data-semver="0.12.1" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
     <script src='/admin/angular/app.js'></script>
 
     <script src='/admin/angular/services/restService.js'></script>
@@ -102,31 +103,38 @@
             </nav>
         </div>
 
-      <!-- Start header Section-->
-      <section style="background-image: url('img/intro-home4.jpg');" class="header-section fading-title parallax">
-        <div class="section-shade sep-top-5x sep-bottom-3x">
-          <div class="container">
-            <div class="section-title upper light">
-              <h2 class="small-space">Search on site</h2>
-              <p class="lead">Enter your search terms below</p>
-            </div>
-          </div>
-        </div>
-      </section>
+
+                  <section class="image-bg bg-dark parallax overlay pt140 pb140 pt-xs-40 pb-xs-40">
+                <div class="background-image-holder fadeIn" style="transform: translate3d(0px, 98px, 0px); background: url(file:///Users/sarahalder/Development/pubsavvyswipe/public/template/img/vent3.jpg);">
+                    <img alt="Background Image" class="background-image" src="img/search.png" style="display: none;">
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 text-left">
+                           
+                            <h2 class="uppercase mb8">Search</h2>
+                            <p class="lead mb40">Enter your search terms below.</p>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
       <!-- End header Section-->
       <!-- Start Portfolio Detail section-->
       <section class="sep-bottom-2x">
         <div class="container">
           <div class="row">
             <!-- start main content-->
-            <div class="col-md-9 col-md-push-3 sep-top-2x">
+            <div class="col-md-9 col-md-push-2 sep-top-2x">
               <!-- start search form-->
-              <div class="input-group theme-form-group"><span class="input-group-btn">
-                  <button ng-click="search('0')" type="submit" class="btn btn-primary btn-sm"><i class="fa fa-search fa-2x"></i></button></span>
-                <input ng-keyup="$event.keyCode == 13 ? search('0') : null" ng-model="terms" type="text" placeholder="Search on site" class="form-control input-lg">
+              <div class="input-group theme-form-group">
+                <input ng-keyup="$event.keyCode == 13 ? search('0') : null" ng-model="terms" type="text" class="form-control input-lg">
+                <span class="input-group-btn">
+                  <button style="margin-left:10px; margin-top:10px;color:white;"ng-click="search('0')" type="submit" class="btn btn-primary btn-sm">Search</button></span>
               </div>
               <!-- end search form-->
-              <div class="sep-top-md">
+              <div ng-show="resultsVisible" class="sep-top-md">
                 <p class="lead text-muted">Search results for:&nbsp;<strong><% terms.toString() %></strong></p>
                 <p class="lead text-muted"># Results:&nbsp;<strong><% count %></strong></p>
               </div>
@@ -137,10 +145,12 @@
                   <div ng-repeat="result in results track by $index" class="accordion-item panel">
                     <h5 class="accordion-heading"><a href="#"><% result['title'] %></a></h5>
                     <div>
-                      <h6>PMID: <% result['pmid'] %>&nbsp;&nbsp;Date: <% result['date'] %>&nbsp;&nbsp;Journal: <% result['journal']['title'] %></h6>
-                      <h6>Authors:</h6>
-                      <h6 ng-repeat="author in result['authors'] track by $index"><% author.firstName %>&nbsp;<% author.lastName %></h6>
-                    </div>
+                      <h6>PMID:<p style="display:inline;"> <% result['pmid'] %></p></h6>
+                      <h6>Date: <p style="display:inline;"><% result['date'] %></p></h6>
+                      <h6>Journal: <p style="display:inline;"><% result['journal']['title'] %></p></h6>
+                      <h6 style="display:inline;">Authors:</h6>
+                      <p style="display:inline;" ng-repeat="author in result['authors'] track by $index"><% author.firstName %>&nbsp;<% author.lastName %></p>
+                    </div><br>
                     <div class="accordion-body">
                       <p class="lead">
                         <% result['abstract'] %>
@@ -151,8 +161,8 @@
                 </div>
               </div>
               <!-- end accordion group-->
-              <!-- start pagination-->
-              <div class="sep-top-md text-center">
+
+              <div ng-show="resultsVisible" class="sep-top-md text-center">
                 <ul class="pagination pagination-beads">
                   <li ng-click="search('0')" class="active"><a href="#">1</a></li>
                   <li ng-click="search(1*results.length)"><a href="#">2</a></li>
@@ -191,6 +201,17 @@
 
       <div id="back_to_top"><a href="#" class="fa fa-arrow-up fa-lg"></a></div>
     </div>
-    {{>scripts}}
+    <script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/flexslider.min.js"></script>
+<script src="js/lightbox.min.js"></script>
+<script src="js/masonry.min.js"></script>
+<script src="js/twitterfetcher.min.js"></script>
+<script src="js/spectragram.min.js"></script>
+<script src="js/ytplayer.min.js"></script>
+<script src="js/countdown.min.js"></script>
+<script src="js/smooth-scroll.min.js"></script>
+<script src="js/parallax.js"></script>
+<script src="js/scripts.js"></script>
   </body>
 </html>

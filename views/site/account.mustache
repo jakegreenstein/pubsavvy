@@ -178,8 +178,14 @@
                     <table style="width:100%">
                     
                         <tr style="font-family: 'Raleway'; text-transform: uppercase; font-weight: 500; letter-spacing: 1px; color: black; text-align: left;" ng-repeat = "pmid in device.saved track by $index">
-                            <td style="padding:12px;"><%articles[pmid]['title']%></td>
-                            <td align="right"><a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/<%pmid%>"><i style="width:24px;"class="fa fa-file fa-lg" style="margin-right:12px;"></i></a></td>      
+                            <label> Title</label>
+                            <td style="padding:12px; float:top;"><a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/<%pmid%>"><%articles[pmid]['title']%></a> </td>
+                            
+                            <label> Author</label>
+                            <td><p style="display:inline;" ng-repeat= "author in articles[pmid]['authors']"> <% author.firstName %>&nbsp;<% author.lastName %> </p></td>
+                            
+                            <label> Journal</label>
+                            <td style = "padding:15px;" align="right"><%articles[pmid]['journal']['title']%></td>      
                             <td>
                              <a ng-click="removeArticle($index)" align="center" style="border: 2px solid #ec6a6a; margin-top: 15px;" class="btn" >Remove</a>
                               
