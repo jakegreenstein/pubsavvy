@@ -76,6 +76,8 @@
                                         Account
                                     </a>
                                 </li>
+                                <li ng-show="profile.id == null"><a href="#" data-toggle="modal" data-target="#loginModal">Log In</a></li> 
+                                <li ng-show="profile.id != null "><a ng-click="logout()">Log Out</a></li> 
                                 
                             </ul>
                         </div>

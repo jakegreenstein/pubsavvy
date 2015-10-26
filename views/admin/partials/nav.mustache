@@ -17,7 +17,7 @@
 
                     <li ng-show="profile.id == null"><a href="#" data-toggle="modal" data-target="#loginModal">Log In</a></li>   
 
-                    <li ng-show="profile.id != null "><a ng-click="logout()">Log Out</a></li>  
+                    <li ng-show="profile.id != null "><a class="btn btn-sm" ng-click="logout()">Log Out</a></li>  
             </ul>
           </div>
         </div>
@@ -69,7 +69,8 @@
                       </div>
                       <div class="row" style="background:#fff;border-top:1px solid #ccc;margin-top:36px; padding-top:24px; padding-bottom:24px">
                         
-                          <button ng-click="login()" data-toggle="modal" data-target="#loginModal" type="submit" class="btn btn-success btn-large">Log in</button>
+                          <button ng-click="login()" data-toggle="modal" data-target="#loginModal" type="submit" class="btn btn-success btn-large" style="color:white;">Log in</button>
+                          <a> Forgot Password? </a>
                           
                       </div>
                 </div>

@@ -40,7 +40,7 @@
     </head>
 
     <body ng-app="PubSavvySwipe" ng-controller="AccountController" ng-init="init()">
-        <div class="nav-container">
+<div class="nav-container">
             <a id="top"></a>
             <nav>
                 <div class="nav-bar">
@@ -85,7 +85,8 @@
                         <!--end of menu module-->
 
                     <div class="module right">
-                        <a ng-show="profile.id == null" class="btn btn-sm" href="#" data-toggle="modal" data-target="#loginModal">Login</a>
+                        <a ng-show="profile.id == null" class="btn btn-sm" href="#" data-toggle="modal" data-target="#loginModal">Log In</a>
+                        <a ng-show="profile.id != null" class="btn btn-sm" href="#" data-toggle="modal" data-target="#loginModal">Log Out</a>
                     </div>
                     </div>
                     <!--end of module group-->
