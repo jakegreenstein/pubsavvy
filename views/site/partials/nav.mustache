@@ -27,7 +27,7 @@
                                     
                                 </li>
                                 <li ng-show="profile.id != null" title="Portfolio"id="menu_item_Portfolio" data-ref="#" class="">
-                                    <a ng-show="profile.id != null" href="/admin/search-pubmed">
+                                    <a ng-show="profile.id != null" href="/site/search">
                                         Search
                                     </a>
                                     
@@ -44,7 +44,7 @@
 
                     <div class="module right">
                         <a ng-show="profile.id == null" class="btn btn-sm" href="#" data-toggle="modal" data-target="#loginModal">Log In</a>
-                        <a ng-show="profile.id != null" class="btn btn-sm" href="#" data-toggle="modal" data-target="#loginModal">Log Out</a>
+                        <a ng-show="profile.id != null" class="btn btn-sm" href="#" ng-click="logout()">Log Out</a>
                     </div>
                     </div>
                     <!--end of module group-->

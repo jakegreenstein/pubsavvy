@@ -1,13 +1,24 @@
 var searchCtr = angular.module('SearchModule', []);
 
-searchCtr.controller('SearchController', ['$scope', 'restService', 'generalService', function($scope, restService, generalService){
+searchCtr.controller('SearchController', ['$scope', 'restService', 'generalService', 'accountService', function($scope, restService, generalService, accountService){
     $scope['generalService'] = generalService;
     $scope.terms = null;
     $scope.articles = null;
     $scope.results = new Array();
     $scope.loading = false;
+    $scope.profile = null;
 	
 	$scope.init = function(){
+        accountService.checkCurrentUser(function(response, error){
+
+            if (error != null){
+                console.log('ERROR ! ! ! -- '+JSON.stringify(error));
+                return;
+            }
+
+            $scope.profile = response.profile;
+        });
+
         var requestObject = $scope.generalService.parseLocation('admin');
 
         if( requestObject.params.term == null ) // no default search, ignore
@@ -15,6 +26,7 @@ searchCtr.controller('SearchController', ['$scope', 'restService', 'generalServi
 
         $scope.terms = requestObject.params.term;
         $scope.search(0);
+
 	}
 
     $scope.search = function(offset){
