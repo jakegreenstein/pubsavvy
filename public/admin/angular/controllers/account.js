@@ -6,11 +6,10 @@ accountCtr.controller('AccountController', ['$scope', 'restService', 'accountSer
 	$scope.profile = {'id':null, 'email':'', 'firstName':'', 'lastName':'', 'image':'','password':'', 'phone':'', 'specialty':''};
     $scope.newPassword = '';
     $scope.confirmPassword = '';
-    $scope.section = 'account-information';
+    $scope.section = 'search-history';
     $scope.device = null;
     $scope.articles = {};
     $scope.relatedArticles = {};
-
 
     $scope.init = function(){
         console.log('init account controller')
@@ -90,6 +89,13 @@ accountCtr.controller('AccountController', ['$scope', 'restService', 'accountSer
 
     $scope.updateSection = function(newSection){
         $scope.section = newSection;
+
+            if (newSection == "account-information"){
+                $('.recommended-articles').hide();
+            }
+            else 
+                $('.recommended-articles').show();
+
     }
 
     $scope.redirect = function(term){
@@ -142,7 +148,7 @@ accountCtr.controller('AccountController', ['$scope', 'restService', 'accountSer
           return;
         }
         $scope.profile = {'id':null, 'email':'', 'password':'', 'firstName':'', 'lastName':''};
-        window.location.href = '/admin/home';
+        window.location.href = '/';
       });
     }
 

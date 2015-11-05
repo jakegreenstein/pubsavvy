@@ -6,10 +6,11 @@ questionCtr.controller('QuestionController', ['$scope', 'restService', 'accountS
     $scope.questions = null;
     $scope.visible = true;
     $scope.hidden = true;
+    $scope.profile = null;
 
     $scope.init = function(){
         getQuestions();
-        checkIfAdmin();
+        checkUser();
     }
 
     function getQuestions(){
@@ -29,6 +30,18 @@ questionCtr.controller('QuestionController', ['$scope', 'restService', 'accountS
             }
             $scope.newQuestion.index = $scope.questions.length;
 
+        });
+    }
+
+    function checkUser(){
+        accountService.checkCurrentUser(function(response, error){
+
+            if (error != null){
+                console.log('ERROR ! ! ! -- '+JSON.stringify(error));
+                return;
+            }
+
+          $scope.profile = response.profile;
         });
     }
 
@@ -108,6 +121,18 @@ questionCtr.controller('QuestionController', ['$scope', 'restService', 'accountS
 
         question['visible'] = 'no';
         question['hidden'] = 'no';
+    }
+
+     $scope.logout = function(){
+      accountService.logout(function(response, error){
+        if (error != null){
+          alert(error.message);
+          console.log('ERROR ! ! ! -- '+JSON.stringify(error));
+          return;
+        }
+        $scope.profile = {'id':null, 'email':'', 'password':'', 'firstName':'', 'lastName':''};
+        window.location = "/"
+      });
     }
 
 }]);
