@@ -57,9 +57,9 @@ this.handlePost = function(req, res, pkg){
 			sendgrid.send({
 					to:       profile.email,
 					from:     'info@frameresearch.com',
-					fromname: 'PUB SAVVY',
+					fromname: 'PubSavvy Team',
 					subject:  'Welcome to PubSavvy Swipe',
-					html:     'Thanks for signing up with a free account with PubSavvy Swipe, the iOS tool for exploring medical research! You can access your account <a style="color:red" href="http://www.pubsavvy.com/site/account">here</a>. You will see your saved items and search history, and you can change your name and password. Keep in touch with us <a style="color:red" href="https://pubsavvyswipe.herokuapp.com/site/faq">here</a> for PubSavvy tips and announcements. We\'ll keep you apprised of new app releases and features, and you can unsubscribe at any time and still use the app.'
+					html:     'Hello '+profile.firstName+',<br /><br />Thanks for signing up with a free account with PubSavvy Swipe, the iOS tool for exploring medical research! You can access your account <a style="color:blue" href="http://www.pubsavvy.com/site/account">here</a>. You will see your saved items and search history, and you can change your name and password. Keep in touch with us <a style="color:blue" href="https://pubsavvyswipe.herokuapp.com/site/faq">here</a> for PubSavvy tips and announcements. We\'ll keep you apprised of new app releases and features, and you can unsubscribe at any time and still use the app.'
 			}, function(err, json) {
 				if (err) {
 					res.json({'confirmation':'fail', 'message':err});
