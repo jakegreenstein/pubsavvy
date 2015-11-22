@@ -53,8 +53,23 @@ this.handlePost = function(req, res, pkg){
 				return;
 			}
 		
-			req.session.user = profile._id; // install cookie with profile id set to 'user'
-			res.json({'confirmation':'success', 'profile':profile.summary()});
+			var sendgrid = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD);
+			sendgrid.send({
+					to:       profile.email,
+					from:     'info@thegridmedia.com',
+					fromname: 'PUB SAVVY',
+					subject:  'WELCOME TO PUB SAVVY',
+					text:     'This is the welcome message!'
+			}, function(err, json) {
+				if (err) {
+					res.json({'confirmation':'fail', 'message':err});
+					return;
+				}
+
+				req.session.user = profile._id; // install cookie with profile id set to 'user'
+				res.json({'confirmation':'success', 'profile':profile.summary()});
+				return;
+			});
 		});
 	});
 	return;
