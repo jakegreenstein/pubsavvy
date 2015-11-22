@@ -56,7 +56,7 @@ this.handlePost = function(req, res, pkg){
 			var sendgrid = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD);
 			sendgrid.send({
 					to:       profile.email,
-					from:     'info@thegridmedia.com',
+					from:     'info@frameresearch.com',
 					fromname: 'PUB SAVVY',
 					subject:  'WELCOME TO PUB SAVVY',
 					text:     'This is the welcome message!'
