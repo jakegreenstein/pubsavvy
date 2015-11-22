@@ -1,3 +1,5 @@
+var Profile = require('../models/Profile.js');
+var mongoose = require('mongoose');
 var express = require('express');
 var router = express.Router();
 
