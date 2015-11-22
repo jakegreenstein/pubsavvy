@@ -15,6 +15,12 @@ router.get('/:page', function(req, res, next) {
 		return;
 	}
 
+	if (page == 'logout'){
+		req.session.reset();
+		res.redirect('/');
+	  	return;
+	}
+
 
 	res.render('site/'+page, {'title':page.toUpperCase()});
 });
