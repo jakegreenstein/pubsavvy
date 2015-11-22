@@ -65,10 +65,12 @@ function login(req, res){
 
 function logout(req, res){
 	req.session.reset();
-  	if(req.session.user != undefined){
-  		res.json({'confirmation':'fail', 'message':'logout unsuccessful'});
-  		return;
-  	}
+
+  	// if(req.session.user != undefined){
+  	// 	res.json({'confirmation':'fail', 'message':'logout unsuccessful'});
+  	// 	return;
+  	// }
+  	
   	res.json({'confirmation':'success'});
   	return;
 }
