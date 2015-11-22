@@ -30,7 +30,7 @@ router.get('/:page', function(req, res, next) {
 			return;
 		}
 
-		var authorized = ['dianaframe@gmail.com', 'dianaframe@earthlink.net'];
+		var authorized = ['dianaframe@gmail.com', 'dianaframe@earthlink.net', 'dan.kwon234@gmail.com'];
 		if (authorized.indexOf(profile.email) == -1){
 			res.send({'confirmation':'fail', 'message':'Unauthorized'});
 			return;
