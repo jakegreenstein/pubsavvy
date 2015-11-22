@@ -9,6 +9,13 @@ router.get('/', function(req, res, next) {
 
 router.get('/:page', function(req, res, next) {
 	var page = req.params.page;
+
+	if (page == 'iosapp'){ // redirect to itunes page
+		res.redirect('https://itunes.apple.com/us/app/pubsavvy-swipe/id1045169328?mt=8');
+		return;
+	}
+
+
 	res.render('site/'+page, {'title':page.toUpperCase()});
 });
 
