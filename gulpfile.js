@@ -23,11 +23,43 @@ gulp.task('build', function(){
 				'./public/site/js/scripts.js'
     		]
     	)
-        .pipe(gp_concat('gulp-concat.js'))
+        .pipe(gp_concat('vendor-concat.js'))
         .pipe(gulp.dest('./public/min/'))
         .pipe(gp_rename('vendor.min.js'))
         .pipe(gp_uglify())
         .pipe(gulp.dest('./public/build/'));
 });
 
-gulp.task('default', ['build'], function(){});
+
+gulp.task('angular', function(){
+    return gulp.src(
+    		[
+				'./public/admin/bower_components/jquery/dist/jquery.min.js',
+				'./public/admin/js/fileupload/angular-file-upload-shim.js',
+				'./public/admin/bower_components/angular/angular.min.js',
+				'./public/admin/bower_components/angular-route/angular-route.min.js',
+				'./public/admin/bower_components/angular-sanitize/angular-sanitize.min.js',
+				'./public/admin/bower_components/angular-resource/angular-resource.min.js',
+				'./public/admin/js/fileupload/angular-file-upload.js',
+				'./public/admin/js/numeral.min.js',
+				'./public/admin/angular/app.js',
+				'./public/admin/angular/services/accountService.js',
+				'./public/admin/angular/services/generalService.js',
+				'./public/admin/angular/services/restService.js',
+				'./public/admin/angular/services/uploadService.js',
+				'./public/admin/angular/controllers/autosearch.js',
+				'./public/admin/angular/controllers/home.js',
+				'./public/admin/angular/controllers/search.js',
+				'./public/admin/angular/controllers/account.js',
+				'./public/admin/angular/controllers/question.js'
+    		]
+    	)
+        .pipe(gp_concat('angular-concat.js'))
+        .pipe(gulp.dest('./public/min/'))
+        .pipe(gp_rename('app.js'))
+        .pipe(gp_uglify())
+        .pipe(gulp.dest('./public/build/'));
+});
+
+gulp.task('default', ['build', 'angular'], function(){});
+
