@@ -1,6 +1,6 @@
 var accountService = angular.module('AccountServiceModule', ['RestServiceModule']);
 
-restService.factory('accountService', ['restService', function(restService){
+accountService.factory('accountService', ['restService', function(restService){
 	
 	var accountManager = {};
 	

@@ -1,6 +1,6 @@
 var uploadService = angular.module('UploadServiceModule', ['angularFileUpload']);
 
-restService.factory('uploadService', ['$http', '$upload', function($http, $upload){
+uploadService.factory('uploadService', ['$http', '$upload', function($http, $upload){
 	
 	var uploadManager = {};
 	
