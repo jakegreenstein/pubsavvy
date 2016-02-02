@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-<title>PubSavvy Swipe | Account</title>
+<title>PubSavvy Swipe | About</title>
 <meta name="viewport" content="width=device-width, initial-scale=0.8">
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/themify-icons.css" rel="stylesheet" type="text/css" media="all" />
@@ -32,13 +32,67 @@
 
     <script src='/admin/angular/controllers/autosearch.js'></script>
     <script src='/admin/angular/controllers/home.js'></script>
+    <script src='/admin/angular/controllers/about.js'></script>
     <script src='/admin/angular/controllers/search.js'></script>
     <script src='/admin/angular/controllers/account.js'></script>
     <script src='/admin/angular/controllers/question.js'></script>
 
     </head>
-<body>
+<body ng-app="PubSavvySwipe" ng-controller="AboutController" ng-init="init()">
+    <div class="nav-container">
+            <a id="top"></a>
+            <nav>
+                <div class="nav-bar">
+                    <div class="module left">
+                        <a href="/">
+                            <img class="logo logo-light" alt="Foundry" src="img/pubsavvy-logo.png" />
+                            <img class="logo logo-dark" alt="Foundry" src="img/pubsavvy-logo.png" />
+                        </a>
+                    </div>
+                    <div class="module widget-handle mobile-toggle right visible-sm visible-xs">
+                        <i class="ti-menu"></i>
+                    </div>
+                    <div class="module-group right">
+                        <div class="module left">
+                            <ul class="menu">
+                                <li title="Portfolio"id="menu_item_Portfolio" data-ref="#"class="">
+                                    <a href="/site/about">
+                                        About
+                                    </a>
+                                    
+                                </li>
+                                <li title="Portfolio"id="menu_item_Portfolio" data-ref="#"class="">
+                                    <a href="/site/faq">
+                                        FAQ
+                                    </a>
+                                    
+                                </li>
+                                <li ng-show="profile.id != null" title="Portfolio"id="menu_item_Portfolio" data-ref="#" class="">
+                                    <a ng-show="profile.id != null" href="/admin/search-pubmed">
+                                        Search
+                                    </a>
+                                    
+                                </li>
+                                <li ng-show="profile.id != null" title="Portfolio" id="menu_item_Portfolio" data-ref="#" class="">
+                                    <a ng-show="profile.id != null" href="/site/account">
+                                        Account
+                                    </a>
+                                </li>
 
+                                
+                            </ul>
+                        </div>
+                        <!--end of menu module-->
+
+                    <div class="module right">
+                        <a ng-show="profile.id == null" class="btn btn-sm" href="#" data-toggle="modal" data-target="#loginModal">Log In</a>
+                        <a ng-show="profile.id != null" ng-click="logout()" class="btn btn-sm" href="#" >Log Out</a>
+                    </div>
+                    </div>
+                    <!--end of module group-->
+                </div>
+            </nav>
+        </div>
 
 
 
