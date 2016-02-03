@@ -124,7 +124,7 @@
         <div class="row">
             <div class="col-md-3 hidden-sm hidden-xs ">
                 <div class="widget recommended-articles">
-                    <h6 class="title">Related to Your Saved Items </h6>
+                    <h6 class="title" style="text-transform:none">Related to Your Saved Items </h6>
                     <hr>
                     <ul ng-repeat = "(pmid, article) in relatedArticles track by $index" class=" recent-posts">
                         <li>
@@ -142,7 +142,7 @@
                         
                         <li class="active">
                             <div class="tab-title" ng-click="updateSection('search-history')">
-                                <span>Search History</span>
+                                <span style="text-transform:none">Search History</span>
                             </div>
                             
                             <div class="tab-content">
@@ -150,9 +150,9 @@
                                 <!-- Start SEARCH HISTORY  -->
                                 <div ng-show="section == 'search-history'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px; margin-bottom:60px;"> 
                     
-                                    <table style="width:100%">
+                    <table style="width:100%">
                         
-                        <tr style="font-family: 'Raleway'; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; color: black;" ng-repeat = "(key, value) in device.searchHistory track by $index" >
+                        <tr style="font-family: 'Raleway'; font-weight: 700; letter-spacing: 1px; color: black;" ng-repeat = "(key, value) in device.searchHistory track by $index" >
                             <td ><%key%></td>
                             <td align="center"><span><%generalService.formattedNumber(value['count'])%> results</span></td>
                             <td>
@@ -170,14 +170,14 @@
                                     </li>
                                     <li>
                                         <div class="tab-title" ng-click="updateSection('saved-searches')">
-                                            <span>Saved Articles</span>
+                                            <span style="text-transform:none">Saved Articles</span>
                                         </div>
                                         <div class="tab-content">
                                                             <!-- Start SAVED SEARCHES  -->
                 <div ng-show="section == 'saved-searches'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px; margin-bottom:60px;"> 
                     <table style="width:100%">
                     
-                        <tr style="font-family: 'Raleway'; text-transform: uppercase; font-weight: 500; letter-spacing: 1px; color: black; text-align: left; height:300px;" ng-repeat = "pmid in device.saved track by $index">
+                        <tr style="font-family: 'Raleway'; font-weight: 500; letter-spacing: 1px; color: black; text-align: left; height:300px;" ng-repeat = "pmid in device.saved track by $index">
                             
                             <td style="vertical-align: text-top;"><a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/<%pmid%>"><%articles[pmid]['title']%></a> </td>
                             
@@ -200,7 +200,7 @@
 
                                                             <li>
                             <div ng-click="updateSection('account-information')"  class="tab-title">
-                                <span>Account Information</span>
+                                <span style="text-transform:none">Account Information</span>
                             </div>
                             <div class="tab-content" style="padding-top: 20px;">
                        
