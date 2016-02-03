@@ -923,6 +923,7 @@ var modules = [
   'SearchModule',
   'AutoSearchModule',
   'HomeModule',
+  'AboutModule',
   'AccountModule',
   'QuestionModule',
   'AccountServiceModule', 
