@@ -129,7 +129,7 @@
                     <ul ng-repeat = "(pmid, article) in relatedArticles track by $index" class=" recent-posts">
                         <li>
                             <a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/<%pmid%>"><%relatedArticles[pmid]['title']%></a>
-                            <span class="date" style='text-transform: capitalize;'><%relatedArticles[pmid]['journal']['title']%></span>
+                            <span class="date" style='text-transform: capitalize;'><%relatedArticles[pmid]['journal']['iso']%></span>
                         </li>
                     </ul>
                 </div>
@@ -182,10 +182,10 @@
                             <td style="vertical-align: text-top;"><a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/<%pmid%>"><%articles[pmid]['title']%></a> </td>
                             
                             
-                            <td style="vertical-align: text-top;"><p style="display:inline; vertical-align: text-top;" ng-repeat= "author in articles[pmid]['authors']"> <% author.firstName %>&nbsp;<% author.lastName %> </p></td>
+                            <td style="vertical-align: text-top;"><p style="display:inline; vertical-align: text-top;" ng-repeat= "author in articles[pmid]['authors']"> <% author.lastName %>&nbsp;<% author.firstName.chatAt(0) %></p></td>
                             
                             
-                            <td style = "padding-right:15px; vertical-align: text-top;"><%articles[pmid]['journal']['title']%></td>      
+                            <td style = "padding-right:15px; vertical-align: text-top;"><%articles[pmid]['journal']['iso']%></td>      
                             <td style="vertical-align: text-top;">
                              <a ng-click="removeArticle($index)" align="center" style="border: 2px solid #ec6a6a; vertical-align: text-top;" class="btn" >Remove</a>
                               
