@@ -99,7 +99,7 @@ accountCtr.controller('AccountController', ['$scope', 'restService', 'accountSer
     }
 
     $scope.redirect = function(term){
-        window.location.href = '/admin/search-pubmed?term='+term;
+        window.location.href = '/site/search?term='+term;
     }
 
     $scope.onFileSelect = function(files, entity, media){
