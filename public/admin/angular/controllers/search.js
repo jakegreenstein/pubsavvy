@@ -42,7 +42,7 @@ searchCtr.controller('SearchController', ['$scope', 'restService', 'generalServi
         }
         
         $scope.loading = true;
-        restService.query({resource:'search', term:$scope.terms.toString(), offset:offset, id:null}, function(response){
+        restService.query({resource:'search', term:$scope.terms.toString(), device:$scope.profile.device, offset:offset, id:null}, function(response){
             $scope.loading = false;
             if (response.confirmation != 'success') {
                 alert('Error: ' + response.message);
