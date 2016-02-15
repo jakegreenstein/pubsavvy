@@ -13,6 +13,12 @@ this.handleGet = function(req, res, pkg){
 				res.send({'confirmation':'fail','message':"Profile "+pkg.id+" not found"});
 				return;
 			}
+
+			if (profile == null){
+				res.send({'confirmation':'fail','message':"Profile "+pkg.id+" not found"});
+				return;
+			}
+
 			res.json({'confirmation':'success', "profile":profile.summary()});
 		});
 		return;
