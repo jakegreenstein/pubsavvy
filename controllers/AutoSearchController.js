@@ -16,6 +16,7 @@ this.handleGet = function(req, res, pkg){
 				res.send({'confirmation':'fail','message':"AutoSearch "+pkg.id+" not found"});
 				return;
 			}
+
 			
 			
 			res.json({'confirmation':'success', "autosearch":autosearch.summary()});
