@@ -39,7 +39,6 @@ searchCtr.controller('SearchController', ['$scope', 'restService', 'generalServi
             return;
 
         $scope.terms = requestObject.params.term;
-        $scope.search(0);
 
 	}
 
