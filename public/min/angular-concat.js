@@ -1767,7 +1767,7 @@ questionCtr.controller('QuestionController', ['$scope', 'restService', 'accountS
     $scope.questions = null;
     $scope.visible = true;
     $scope.hidden = true;
-    $scope.profile = null;
+    $scope.profile = {firstName:'', email:''};
 
     $scope.init = function(){
         getQuestions();
