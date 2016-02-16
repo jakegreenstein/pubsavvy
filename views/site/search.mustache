@@ -179,8 +179,11 @@
                                             <div class="accordion-group">
                                               <!-- start accordion item-->
                                               <div style="text-align:left" ng-repeat="pmid in device.saved track by $index" class="accordion-item panel">
-                                                <h5 class="accordion-heading"><a href="http://www.ncbi.nlm.nih.gov/pubmed/<%pmid%>" target="_blank"><%articles[pmid]['title']%></a></h5>
-                                                <div>
+                                                <h5 class="accordion-heading">
+                                                    <a href="http://www.ncbi.nlm.nih.gov/pubmed/<%pmid%>" target="_blank"><%articles[pmid]['title']%></a>
+                                                </h5>
+                                                <a ng-click="removeArticle($index)" align="center" style="border: 2px solid #ec6a6a; vertical-align: text-top;" class="btn" >Remove</a>
+                                              <div>
                                                   <h6>PMID:<p style="display:inline;"> <% articles[pmid]['pmid'] %></p></h6>
                                                   <h6>Date: <p style="display:inline;"><% articles[pmid]['date'] %></p></h6>
                                                   <h6>Journal: <p style="display:inline;"><% articles[pmid]['journal']['iso'] %></p></h6>
