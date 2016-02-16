@@ -1522,7 +1522,11 @@ var searchCtr = angular.module('SearchModule', []);
 searchCtr.controller('SearchController', ['$scope', 'restService', 'generalService', 'accountService', function($scope, restService, generalService, accountService){
     $scope['generalService'] = generalService;
     $scope.terms = null;
-    $scope.articles = null;
+    $scope.section = 'search';
+    $scope.device = null;
+    $scope.articles = {};
+    $scope.relatedArticles = {};
+    $scope.loading = false;
     
     $scope.loading = false;
     $scope.profile = null;
@@ -1531,6 +1535,9 @@ searchCtr.controller('SearchController', ['$scope', 'restService', 'generalServi
     $scope.results = new Array();
     $scope.currentPage = 1
     $scope.numPerPage = 10
+    $scope.searchClass = 'active';
+    $scope.historyClass = '';
+    $scope.savedClass = '';
 
 	
 	$scope.init = function(){
@@ -1542,6 +1549,7 @@ searchCtr.controller('SearchController', ['$scope', 'restService', 'generalServi
             }
 
             $scope.profile = response.profile;
+            getDevices();
         });
 
         var requestObject = $scope.generalService.parseLocation('admin');
@@ -1550,78 +1558,8 @@ searchCtr.controller('SearchController', ['$scope', 'restService', 'generalServi
             return;
 
         $scope.terms = requestObject.params.term;
-        $scope.search(0);
 
 	}
-
-    $scope.search = function(offset){
-        if ($scope.terms==null || $scope.terms==""){
-            alert("Please enter search terms");
-            return;
-        }
-        
-        $scope.loading = true;
-        restService.query({resource:'search', term:$scope.terms.toString(), offset:offset, id:null}, function(response){
-            $scope.loading = false;
-            if (response.confirmation != 'success') {
-                alert('Error: ' + response.message);
-                return;
-            }
-
-            $scope.results = response['results'];
-
-            $scope.$watch('currentPage + numPerPage', function() {
-            var begin = (($scope.currentPage - 1) * $scope.numPerPage)
-            , end = begin + $scope.numPerPage;
-
-            $scope.results = $scope.results.slice(begin, end);
-            });
-
-            $scope.count = response['count'];
-            $scope.resultsVisible = true;
-        });
-
-    }
-
-
-
-    $scope.logout = function(){
-      accountService.logout(function(response, error){
-        if (error != null){
-          alert(error.message);
-          console.log('ERROR ! ! ! -- '+JSON.stringify(error));
-          return;
-        }
-        $scope.profile = {'id':null, 'email':'', 'password':'', 'firstName':'', 'lastName':''};
-        window.location = "/"
-      });
-    }
-}]);
-
-var accountCtr = angular.module('AccountModule', []);
-
-accountCtr.controller('AccountController', ['$scope', 'restService', 'accountService', 'generalService', 'uploadService', function($scope, restService, accountService, generalService, uploadService){
-    $scope['generalService'] = generalService;
-	$scope.profile = {'id':null, 'email':'', 'firstName':'', 'lastName':'', 'image':'','password':'', 'phone':'', 'specialty':''};
-    $scope.newPassword = '';
-    $scope.confirmPassword = '';
-    $scope.section = 'search-history';
-    $scope.device = null;
-    $scope.articles = {};
-    $scope.relatedArticles = {};
-
-    $scope.init = function(){
-        console.log('init account controller')
-        $scope.randomBackground = 'img/account-background-'+$scope.generalService.getRandomInt(1,3)+'.png';
-        accountService.checkCurrentUser(function(response, error){
-            if (error != null)
-                return;
-            
-            $scope.profile = response['profile'];
-            getDevices();
-        });
-    }
-
 
     function getDevices(){
         console.log('triggered get devices');
@@ -1632,7 +1570,7 @@ accountCtr.controller('AccountController', ['$scope', 'restService', 'accountSer
                 return;
             }
             $scope.device = response.devices[0];
-            console.log($scope.device);
+            console.log("DEVICE:" + JSON.stringify($scope.device));
 
             if ($scope.device == null) 
                 return;
@@ -1686,6 +1624,45 @@ accountCtr.controller('AccountController', ['$scope', 'restService', 'accountSer
         });
     }    
 
+    $scope.search = function(offset){
+        if ($scope.terms==null || $scope.terms==""){
+            alert("Please enter search terms");
+            return;
+        }
+        
+        $scope.loading = true;
+        restService.query({resource:'search', term:$scope.terms.toString(), device:$scope.profile.device, offset:offset, id:null}, function(response){
+            $scope.loading = false;
+            if (response.confirmation != 'success') {
+                alert('Error: ' + response.message);
+                return;
+            }
+
+            $scope.results = response['results'];
+
+            $scope.$watch('currentPage + numPerPage', function() {
+            var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+            , end = begin + $scope.numPerPage;
+
+            $scope.results = $scope.results.slice(begin, end);
+            });
+
+            $scope.count = response['count'];
+            $scope.resultsVisible = true;
+        });
+    }
+
+    $scope.redirect = function(key){
+        console.log("REDIRECT");
+        $scope.terms = key;
+        $scope.section = 'search';
+        document.getElementById('searchTab').click();
+        $scope.historyClass = '';
+        $scope.searchClass = 'active';
+
+        $scope.search(0);
+    }
+
     $scope.updateSection = function(newSection){
         $scope.section = newSection;
 
@@ -1697,8 +1674,37 @@ accountCtr.controller('AccountController', ['$scope', 'restService', 'accountSer
 
     }
 
-    $scope.redirect = function(term){
-        window.location.href = '/admin/search-pubmed?term='+term;
+
+
+    $scope.logout = function(){
+      accountService.logout(function(response, error){
+        if (error != null){
+          alert(error.message);
+          console.log('ERROR ! ! ! -- '+JSON.stringify(error));
+          return;
+        }
+        $scope.profile = {'id':null, 'email':'', 'password':'', 'firstName':'', 'lastName':''};
+        window.location = "/"
+      });
+    }
+}]);
+
+var accountCtr = angular.module('AccountModule', []);
+
+accountCtr.controller('AccountController', ['$scope', 'restService', 'accountService', 'generalService', 'uploadService', function($scope, restService, accountService, generalService, uploadService){
+    $scope['generalService'] = generalService;
+	$scope.profile = {'id':null, 'email':'', 'firstName':'', 'lastName':'', 'image':'','password':'', 'phone':'', 'specialty':''};
+    $scope.newPassword = '';
+    $scope.confirmPassword = '';
+
+    $scope.init = function(){
+        console.log('init account controller')
+        accountService.checkCurrentUser(function(response, error){
+            if (error != null)
+                return;
+            
+            $scope.profile = response['profile'];
+        });
     }
 
     $scope.onFileSelect = function(files, entity, media){
@@ -1878,6 +1884,17 @@ questionCtr.controller('QuestionController', ['$scope', 'restService', 'accountS
         question['hidden'] = 'no';
     }
 
+    $scope.login = function(){
+      accountService.login($scope.loginUser, function(response, error){
+        if (error != null){
+          alert(error.message);
+          console.log('ERROR ! ! ! -- '+JSON.stringify(error));
+          return;
+        }
+        window.location.href = '/site/account';
+      });
+    }
+    
      $scope.logout = function(){
       accountService.logout(function(response, error){
         if (error != null){
