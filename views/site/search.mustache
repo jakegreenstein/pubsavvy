@@ -6,9 +6,6 @@
     </head>
 
   <body ng-app="PubSavvySwipe" ng-controller="SearchController" ng-init="init()">
-   <div class="loading-overlay" ng-show="loading">
-      <div spinner spin="loading"></div>
-   </div>
     <div id="load"></div><!--[if lt IE 9]>
     <p class="browsehappy">You are using an strong outdated browser. <br>Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -229,5 +226,8 @@
     </div>
     {{>footer}}
     {{>scripts}}
+    <div class="loading-overlay" ng-show="loading">
+      <div spinner spin="loading"></div>
+   </div>
   </body>
 </html>
