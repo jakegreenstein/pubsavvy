@@ -8,7 +8,7 @@
   <body ng-app="PubSavvySwipe" ng-controller="SearchController" ng-init="init()">
    <div class="loading-overlay" ng-show="loading">
       <div spinner spin="loading"></div>
-    </div>
+   </div>
     <div id="load"></div><!--[if lt IE 9]>
     <p class="browsehappy">You are using an strong outdated browser. <br>Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -39,57 +39,173 @@
         <div class="container">
           <div class="row">
             
-            <!-- start main content-->
-            <div class="col-md-9 col-md-push-2 sep-top-2x">
-              <!-- start search form-->
-              <div class="input-group theme-form-group">
-                <input ng-keyup="$event.keyCode == 13 ? search('0') : null" ng-model="terms" type="text" class="form-control input-lg">
-                <span class="input-group-btn">
-                  <button style="margin-left:10px; margin-top:10px;color:white;"ng-click="search('0')" type="submit" class="btn btn-primary btn-sm">Search</button></span>
-              </div> <br>
-              <!-- end search form-->
-              <div ng-show="resultsVisible" class="sep-top-md">
-                <p class="lead text-muted">Search results for:&nbsp;<strong><% terms.toString() %></strong></p>
-                <p class="lead text-muted">Number of Results:&nbsp;<strong><% count %></strong></p>
-              </div>
-              <!-- start accordion group-->
-              <div class="sep-top-xs">
-                <div class="accordion-group">
-                  <!-- start accordion item-->
-                  <div ng-repeat="result in results track by $index" class="accordion-item panel">
-                    <h5 class="accordion-heading"><a href="#"><% result['title'] %></a></h5>
-                    <div>
-                      <h6>PMID:<p style="display:inline;"> <% result['pmid'] %></p></h6>
-                      <h6>Date: <p style="display:inline;"><% result['date'] %></p></h6>
-                      <h6>Journal: <p style="display:inline;"><% result['journal']['title'] %></p></h6>
-                      <h6 style="display:inline;">Authors:</h6>
-                      <p style="display:inline;" ng-repeat="author in result['authors'] track by $index"><% author.firstName %>&nbsp;<% author.lastName %></p>
-                    </div><br>
-                    <div class="accordion-body">
-                      <p class="lead">
-                        <% result['abstract'] %>
-                      </p>
-                    </div>
-                  </div>
-                  <!-- end accordion item-->
-                </div>
-              </div>
-              <!-- end accordion group-->
+            <div class="col-md-3 hidden-sm hidden-xs ">
+                            <div class="widget recommended-articles">
+                                <h6 class="title" style="text-transform:none">Related to Your Saved Items </h6>
+                                <hr>
+                                <ul ng-repeat = "(pmid, article) in relatedArticles track by $index" class=" recent-posts">
+                                    <li>
+                                        <a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/<%pmid%>"><%relatedArticles[pmid]['title']%></a>
+                                        <span class="date" style='text-transform: capitalize;'><%relatedArticles[pmid]['journal']['iso']%></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
-              <div ng-show="resultsVisible" class="sep-top-md text-center">
-                <ul class="pagination pagination-beads">
-                  <li ng-click="search('0')" class="active"><a href="#">1</a></li>
-                  <li ng-click="search(1*results.length)"><a href="#">2</a></li>
-                  <li ng-click="search(2*results.length)"><a href="#">3</a></li>
-                  <li ng-click="search(3*results.length)"><a href="#">4</a></li>
-                  <li ng-click="search(4*results.length)"><a href="#">5</a></li>
-                  <li ng-click="search(5*results.length)"><a href="#">6</a></li>
-                  <li ng-click="search(6*results.length)"><a href="#">7</a></li>
-                </ul>
-              </div>
-              <!-- end pagination-->
-            </div>
-            <!--end main content-->
+                        <div class="col-md-9">
+                            <div class="tabbed-content text-tabs text-center">
+                                <ul class="tabs" style="border-bottom: red;">
+
+                                  <li ng-class="searchClass">
+                                    <!-- start main content-->
+                                    <div class="tab-title" ng-click="updateSection('search')">
+                                        <span id="searchTab" style="text-transform:none">Search</span>
+                                    </div>
+                                    <div class="tab-content">
+                                      
+                                      <!-- Start SEARCH  -->
+                                      <div ng-show="section == 'search'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px; margin-bottom:60px;"> 
+                                        
+                                        <!-- start search form-->
+                                        <div class="input-group theme-form-group">
+                                          <input ng-keyup="$event.keyCode == 13 ? search('0') : null" ng-model="terms" type="text" class="form-control input-lg">
+                                          <span class="input-group-btn">
+                                            <button style="margin-left:10px; margin-top:10px;color:white;"ng-click="search('0')" type="submit" class="btn btn-primary btn-sm">Search</button></span>
+                                        </div> <br>
+                                        <!-- end search form-->
+                                        
+                                        <div style="text-align:left" ng-show="resultsVisible" class="sep-top-md">
+                                          <p class="lead text-muted">Search results for:&nbsp;<strong><% terms.toString() %></strong></p>
+                                          <p class="lead text-muted">Number of Results:&nbsp;<strong><% count %></strong></p>
+                                        </div>
+                                         
+                                          <!-- start accordion group-->
+                                          <div class="sep-top-xs">
+                                            <div class="accordion-group">
+                                              <!-- start accordion item-->
+                                              <div style="text-align:left" ng-repeat="result in results track by $index" class="accordion-item panel">
+                                                <h5 class="accordion-heading"><a href="http://www.ncbi.nlm.nih.gov/pubmed/<%result['pmid']%>" target="_blank"><% result['title'] %></a></h5>
+                                                <div>
+                                                  <h6>PMID:<p style="display:inline;"> <% result['pmid'] %></p></h6>
+                                                  <h6>Date: <p style="display:inline;"><% result['date'] %></p></h6>
+                                                  <h6>Journal: <p style="display:inline;"><% result['journal']['iso'] %></p></h6>
+                                                  <h6 style="display:inline;">Authors:</h6>
+                                                  <p style="display:inline;word-wrap:break-word" ng-repeat="author in result['authors'] track by $index"><% author.firstName.charAt(0) %>.&nbsp;<% author.lastName %>&nbsp;</p>
+                                                </div><br>
+                                                <div class="accordion-body">
+                                                  <p class="lead">
+                                                    <% result['abstract'] %>
+                                                  </p>
+                                                </div>
+                                              </div>
+                                              <!-- end accordion item-->
+                                            </div>
+                                          </div>
+                                          <!-- end accordion group-->
+
+                                          <div ng-show="resultsVisible" class="sep-top-md text-center">
+                                            <ul style="display:block" class="pagination pagination-beads">
+                                              <li ng-click="search('0')" class="active"><a href="#">1</a></li>
+                                              <li ng-click="search(1*results.length)"><a href="#">2</a></li>
+                                              <li ng-click="search(2*results.length)"><a href="#">3</a></li>
+                                              <li ng-click="search(3*results.length)"><a href="#">4</a></li>
+                                              <li ng-click="search(4*results.length)"><a href="#">5</a></li>
+                                              <li ng-click="search(5*results.length)"><a href="#">6</a></li>
+                                              <li ng-click="search(6*results.length)"><a href="#">7</a></li>
+                                            </ul>
+                                          </div>
+                                          <!-- end pagination-->
+                                        </div>
+                                        <!--end main content--> 
+                                    </div>
+                                </li>
+
+                                    <li ng-class="historyClass">
+                                        <div class="tab-title" ng-click="updateSection('search-history')">
+                                            <span style="text-transform:none">Search History</span>
+                                        </div>
+                                        
+                                        <div class="tab-content">
+
+                                            <!-- Start SEARCH HISTORY  -->
+                                            <div ng-show="section == 'search-history'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px; margin-bottom:60px;"> 
+                                
+                                             <table style="width:100%">
+                                    
+                                                <tr style="font-family: 'Raleway'; font-weight: 700; letter-spacing: 1px; color: black;" ng-repeat = "(key, value) in device.searchHistory track by $index" >
+                                                    <td ><%key%></td>
+                                                    <td align="center"><span><%generalService.formattedNumber(value['count'])%> results</span></td>
+                                                    <td>
+                                                     <a ng-click="redirect(key)" align="center" style="margin-top: 15px;" class="btn" >Search</a>
+
+                                                   </td>
+                                                </tr>
+                                            </table>
+
+
+                                        </div>
+                                        <!-- END SEARCH HISTORY -->
+                                    </div>
+                                </li>
+                                
+                                <li ng-class="savedClass">
+                                    <div class="tab-title" ng-click="updateSection('saved-searches')">
+                                        <span style="text-transform:none">Saved Articles</span>
+                                    </div>
+                                    <div class="tab-content">
+                                                                        <!-- Start SAVED SEARCHES  -->
+                                        <div ng-show="section == 'saved-searches'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px; margin-bottom:60px;"> 
+                                            <!-- <table style="width:100%">
+                                    
+                                                <tr style="font-family: 'Raleway'; font-weight: 500; letter-spacing: 1px; color: black; text-align: left; height:300px;" ng-repeat = "pmid in device.saved track by $index">
+                                            
+                                                    <td style="vertical-align: text-top;"><a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/<%pmid%>"><%articles[pmid]['title']%></a> </td>
+                                            
+                                            
+                                                    <td style="vertical-align: text-top;"><p style="display:inline; vertical-align: text-top;" ng-repeat= "author in articles[pmid]['authors']"> <% author.lastName %>&nbsp;<% author.firstName.chatAt(0) %></p></td>
+                                            
+                                            
+                                                    <td style = "padding-right:15px; vertical-align: text-top;"><%articles[pmid]['journal']['iso']%></td>      
+                                                    <td style="vertical-align: text-top;">
+                                                        <a ng-click="removeArticle($index)" align="center" style="border: 2px solid #ec6a6a; vertical-align: text-top;" class="btn" >Remove</a>
+                                              
+                                                    </td>
+
+                                                </tr>
+                                            </table> -->
+
+                                            <!-- start accordion group-->
+                                          <div class="sep-top-xs">
+                                            <div class="accordion-group">
+                                              <!-- start accordion item-->
+                                              <div style="text-align:left" ng-repeat="pmid in device.saved track by $index" class="accordion-item panel">
+                                                <h5 class="accordion-heading"><a href="http://www.ncbi.nlm.nih.gov/pubmed/<%pmid%>" target="_blank"><%articles[pmid]['title']%></a></h5>
+                                                <div>
+                                                  <h6>PMID:<p style="display:inline;"> <% articles[pmid]['pmid'] %></p></h6>
+                                                  <h6>Date: <p style="display:inline;"><% articles[pmid]['date'] %></p></h6>
+                                                  <h6>Journal: <p style="display:inline;"><% articles[pmid]['journal']['iso'] %></p></h6>
+                                                  <h6 style="display:inline;">Authors:</h6>
+                                                  <p style="display:inline;word-wrap:break-word" ng-repeat="author in articles[pmid]['authors']"><% author.firstName.charAt(0) %>.&nbsp;<% author.lastName %>&nbsp;</p>
+                                                </div><br>
+                                                <div class="accordion-body">
+                                                  <p class="lead">
+                                                    <% articles[pmid]['abstract'] %>
+                                                  </p>
+                                                </div>
+                                              </div>
+                                              <!-- end accordion item-->
+                                            </div>
+                                          </div>
+                                          <!-- end accordion group-->
+                                        </div>
+                                        <!-- END SAVED ARTICLES --> >
+                                    </div>
+                                </li>
+                              </ul>
+                            </div>
+
+                            </div>
+                            <!--end of nine col-->
             
           </div>
         </div>

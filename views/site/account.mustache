@@ -113,57 +113,62 @@
 
                                 <li>
                                     <!-- start main content-->
-                                    <div class="col-md-9 col-md-push-2 sep-top-2x">
-                                      <!-- start search form-->
-                                      <div class="input-group theme-form-group">
-                                        <input ng-keyup="$event.keyCode == 13 ? search('0') : null" ng-model="terms" type="text" class="form-control input-lg">
-                                        <span class="input-group-btn">
-                                          <button style="margin-left:10px; margin-top:10px;color:white;"ng-click="search('0')" type="submit" class="btn btn-primary btn-sm">Search</button></span>
-                                      </div> <br>
-                                      <!-- end search form-->
-                                      <div ng-show="resultsVisible" class="sep-top-md">
-                                        <p class="lead text-muted">Search results for:&nbsp;<strong><% terms.toString() %></strong></p>
-                                        <p class="lead text-muted">Number of Results:&nbsp;<strong><% count %></strong></p>
-                                      </div>
-                                      <!-- start accordion group-->
-                                      <div class="sep-top-xs">
-                                        <div class="accordion-group">
-                                          <!-- start accordion item-->
-                                          <div ng-repeat="result in results track by $index" class="accordion-item panel">
-                                            <h5 class="accordion-heading"><a href="#"><% result['title'] %></a></h5>
-                                            <div>
-                                              <h6>PMID:<p style="display:inline;"> <% result['pmid'] %></p></h6>
-                                              <h6>Date: <p style="display:inline;"><% result['date'] %></p></h6>
-                                              <h6>Journal: <p style="display:inline;"><% result['journal']['title'] %></p></h6>
-                                              <h6 style="display:inline;">Authors:</h6>
-                                              <p style="display:inline;" ng-repeat="author in result['authors'] track by $index"><% author.firstName %>&nbsp;<% author.lastName %></p>
-                                            </div><br>
-                                            <div class="accordion-body">
-                                              <p class="lead">
-                                                <% result['abstract'] %>
-                                              </p>
+                                    <div class="tab-title" ng-click="updateSection('search')">
+                                        <span style="text-transform:none">Search</span>
+                                    </div>
+                                    <div class="tab-content">
+                                                                    <!-- Start SAVED SEARCHES  -->
+                                        <div ng-show="section == 'search'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px; margin-bottom:60px;"> 
+                                          <!-- start search form-->
+                                          <div class="input-group theme-form-group">
+                                            <input ng-keyup="$event.keyCode == 13 ? search('0') : null" ng-model="terms" type="text" class="form-control input-lg">
+                                            <span class="input-group-btn">
+                                              <button style="margin-left:10px; margin-top:10px;color:white;"ng-click="search('0')" type="submit" class="btn btn-primary btn-sm">Search</button></span>
+                                          </div> <br>
+                                          <!-- end search form-->
+                                          <div ng-show="resultsVisible" class="sep-top-md">
+                                            <p class="lead text-muted">Search results for:&nbsp;<strong><% terms.toString() %></strong></p>
+                                            <p class="lead text-muted">Number of Results:&nbsp;<strong><% count %></strong></p>
+                                          </div>
+                                          <!-- start accordion group-->
+                                          <div class="sep-top-xs">
+                                            <div class="accordion-group">
+                                              <!-- start accordion item-->
+                                              <div ng-repeat="result in results track by $index" class="accordion-item panel">
+                                                <h5 class="accordion-heading"><a href="#"><% result['title'] %></a></h5>
+                                                <div>
+                                                  <h6>PMID:<p style="display:inline;"> <% result['pmid'] %></p></h6>
+                                                  <h6>Date: <p style="display:inline;"><% result['date'] %></p></h6>
+                                                  <h6>Journal: <p style="display:inline;"><% result['journal']['title'] %></p></h6>
+                                                  <h6 style="display:inline;">Authors:</h6>
+                                                  <p style="display:inline;" ng-repeat="author in result['authors'] track by $index"><% author.firstName %>&nbsp;<% author.lastName %></p>
+                                                </div><br>
+                                                <div class="accordion-body">
+                                                  <p class="lead">
+                                                    <% result['abstract'] %>
+                                                  </p>
+                                                </div>
+                                              </div>
+                                              <!-- end accordion item-->
                                             </div>
                                           </div>
-                                          <!-- end accordion item-->
+                                          <!-- end accordion group-->
+
+                                          <div ng-show="resultsVisible" class="sep-top-md text-center">
+                                            <ul class="pagination pagination-beads">
+                                              <li ng-click="search('0')" class="active"><a href="#">1</a></li>
+                                              <li ng-click="search(1*results.length)"><a href="#">2</a></li>
+                                              <li ng-click="search(2*results.length)"><a href="#">3</a></li>
+                                              <li ng-click="search(3*results.length)"><a href="#">4</a></li>
+                                              <li ng-click="search(4*results.length)"><a href="#">5</a></li>
+                                              <li ng-click="search(5*results.length)"><a href="#">6</a></li>
+                                              <li ng-click="search(6*results.length)"><a href="#">7</a></li>
+                                            </ul>
+                                          </div>
+                                          <!-- end pagination-->
                                         </div>
-                                      </div>
-                                      <!-- end accordion group-->
-
-                                      <div ng-show="resultsVisible" class="sep-top-md text-center">
-                                        <ul class="pagination pagination-beads">
-                                          <li ng-click="search('0')" class="active"><a href="#">1</a></li>
-                                          <li ng-click="search(1*results.length)"><a href="#">2</a></li>
-                                          <li ng-click="search(2*results.length)"><a href="#">3</a></li>
-                                          <li ng-click="search(3*results.length)"><a href="#">4</a></li>
-                                          <li ng-click="search(4*results.length)"><a href="#">5</a></li>
-                                          <li ng-click="search(5*results.length)"><a href="#">6</a></li>
-                                          <li ng-click="search(6*results.length)"><a href="#">7</a></li>
-                                        </ul>
-                                      </div>
-                                      <!-- end pagination-->
+                                        <!--end main content--> 
                                     </div>
-                                    <!--end main content--> 
-
                                 </li>
                                 <!-- <li>
                                     <div ng-click="updateSection('account-information')"  class="tab-title">
