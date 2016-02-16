@@ -9,86 +9,58 @@
 
         <div class="main-container">
             
-            <!-- ACCOUNT BANNER -->
-            <section class="image-bg bg-dark parallax overlay pt140 pb140 pt-xs-40 pb-xs-40">
-                <div class="background-image-holder fadeIn" style="transform: translate3d(0px, 98px, 0px); background: url(file:///Users/sarahalder/Development/pubsavvyswipe/public/template/img/vent3.jpg);">
-                    <img alt="Background Image" class="background-image" src="img/account-background-2.png" style="display: none;">
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12 text-left">
-                            <h2><img style="width:80px;height:80px;border-radius:40px;border:2px solid #ddd; margin-right:24px;" src="https://media-service.appspot.com/site/images/<%profile.image%>?crop=120"> </h2>
-                            <h2 class="uppercase mb8">Manage Account</h2>
-                            <p class="lead mb40">Manage your account information and your stored data.</p>
-                        </div>
-                    </div>
-                    <!--end of row-->
-                </div>
-                <!--end of container-->
-            </section>
-            <!-- END ACCOUNT BANNER -->
-
-
-
             <section>
                 
                 <div class="container">
                     
                     <div class="row">
                         
+                    <div class="col-md-9">
                         
-                        
-                                <!-- <li>
-                                    <div ng-click="updateSection('account-information')"  class="tab-title">
-                                        <span style="text-transform:none">Account Information</span>
-                                    </div>
-                                    <div class="tab-content" style="padding-top: 20px;">
-                                   
-                                        <div ng-show="section == 'account-information'" style="min-height:120px; margin-bottom:36px;" class ="section" ng-file-drop="onFileSelect($files, 'image', 'images')">
+                        <h3 style="text-transform:none">Account Information</h3>
+                   
+                            <div style="min-height:120px; margin-bottom:36px;" class="section">
 
-                                            <h5 style="margin-bottom: 0; text-align: left;" class="uppercase mb16">First Name</h5><br>
-                                            <input ng-model="profile.firstName" type="text" placeholder="First Name"  class= "form-control input-lg ng-pristine ng-valid">
-                                            <br />
-                                            <h5 style="margin-bottom: 0;  text-align: left;" class="uppercase mb16">Last Name</h5><br>
-                                            <input ng-model="profile.lastName" type="text" placeholder="Last Name"  class= "form-control input-lg ng-pristine ng-valid">
-                                            <br />
-                                                    
-                                            <div ng-show="section == 'account-information'" style="min-width:100%"ng-file-drop="onFileSelect($files, 'image', 'images')">
-                                                
-                                                <p class= "uppercase mb16" style="margin-top:45px;margin-left: 20px;float:left; color: black;"> 
-                                                <img style=" width:120px;height:120px;border-radius:60px;border:2px solid #ddd; margin:auto;" src="https://media-service.appspot.com/site/images/<%profile.image%>?crop=120" align="left">
+                                <h5 style="margin-bottom: 0; text-align: left;" class="uppercase mb16">First Name</h5><br>
+                                <input ng-model="profile.firstName" type="text" placeholder="First Name"  class= "form-control input-lg ng-pristine ng-valid">
+                                <br />
+                                <h5 style="margin-bottom: 0;  text-align: left;" class="uppercase mb16">Last Name</h5><br>
+                                <input ng-model="profile.lastName" type="text" placeholder="Last Name"  class= "form-control input-lg ng-pristine ng-valid">
+                                <br />
+                                        
+                                <div style="min-width:100%;" ng-file-drop="onFileSelect($files, 'image', 'images')">
+                                    
+                                    <p class= "uppercase mb16" style="margin-top:45px;margin-left: 20px;float:left; color: black;"> 
+                                    <img ng-show="profile.image.length>0" style=" width:120px;height:120px;border-radius:60px;border:2px solid #ddd; margin:auto;" src="https://media-service.appspot.com/site/images/<%profile.image%>?crop=120" align="left">
 
-                                                To update your profile image, drag and drop here
-                                                </p> 
-                                            </div>
+                                    To update your profile image, drag and drop here
+                                    </p> 
+                                </div>
 
-                                            <div class="clearfix"></div>
+                                <div class="clearfix"></div>
 
-                                            <div style="padding:12px"></div>
+                                <div style="padding:12px"></div>
 
-                                            <h4 class="uppercase" style="margin-right:12px;">Update Your Password</h4>
+                                <h4 class="uppercase" style="margin-right:12px;">Update Your Password</h4>
 
-                                            <div style="padding:12px">
-                                                <h5 style="margin-bottom: 0; text-align: left" class="uppercase mb16">New Password</h5><br>
-                                                <input ng-model="newPassword" type="password" placeholder="New Password" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
-                                                <h5 style="margin-bottom: 0; text-align: left" class="uppercase mb16">Confirm Password</h5><br>
-                                                <input ng-model="confirmPassword" type = "password" placeholder = "New Password" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
-                                            </div>
+                                <div style="padding:12px">
+                                    <h5 style="margin-bottom: 0; text-align: left" class="uppercase mb16">New Password</h5><br>
+                                    <input ng-model="newPassword" type="password" placeholder="New Password" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
+                                    <h5 style="margin-bottom: 0; text-align: left" class="uppercase mb16">Confirm Password</h5><br>
+                                    <input ng-model="confirmPassword" type = "password" placeholder = "New Password" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
+                                </div>
 
-                                            <br>
-                                            <br>
+                                <br>
+                                <br>
 
-                                            <div style="width:194px; margin:auto;">
-                                                <a ng-click="update()" align="center" class="btn" >Update Profile</a>
-                                                <br /><br />
-                                            </div>
-
-                                    </li> -->
-
-                              
+                                <div style="width:194px; margin:auto;">
+                                    <a ng-click="update()" align="center" class="btn" >Update Profile</a>
+                                    <br /><br />
+                                </div>
+                                  
+                            </div>
                         </div>
                         <!--end of row-->
-                    </div>
                     <!--end of container-->
                 </section>
             
