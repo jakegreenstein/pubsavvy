@@ -33,7 +33,7 @@
             
             <div class="container">
                 
-                <div class="row">
+                <div ng-show="profile.email=='dianaframe@earthlink.net'" class="row">
                 <a style="float:right; margin-top: -2em;" class="btn"data-target="#addQuestion" data-toggle="modal" data-dismiss="modal"> Add a Question </a>
                     <div class="col-sm-12 text-center">
                         <h4 class="mb16"> </h4>
@@ -63,7 +63,7 @@
                                     <p><%question.answer%></p>
                                 </div>
                                
-                                <div style="margin-left:1em;">       
+                                <div ng-show="profile.email=='dianaframe@earthlink.net'" style="margin-left:1em;">       
                                     <a ng-show="question.visible == 'yes'" ng-click="toggleVisibility(question)"class="btn"> Edit </a>
                                     <a ng-show="question.visible == 'yes'" ng-click="deleteQuestion(question)"class="btn"> Delete </a>
                                 </div>
