@@ -22,6 +22,17 @@ aboutCtr.controller('AboutController', ['$scope', 'restService', 'accountService
         });
     }
 
+    $scope.login = function(){
+      accountService.login($scope.loginUser, function(response, error){
+        if (error != null){
+          alert(error.message);
+          console.log('ERROR ! ! ! -- '+JSON.stringify(error));
+          return;
+        }
+        window.location.href = '/site/account';
+      });
+    }
+    
      $scope.logout = function(){
       accountService.logout(function(response, error){
         if (error != null){
