@@ -53,7 +53,6 @@
                             <div class="tabbed-content text-tabs text-center">
                                 <ul class="tabs" style="border-bottom: red;">
 
-                                    
                                     <li class="active">
                                         <div class="tab-title" ng-click="updateSection('search-history')">
                                             <span style="text-transform:none">Search History</span>
@@ -62,130 +61,169 @@
                                         <div class="tab-content">
 
                                             <!-- Start SEARCH HISTORY  -->
-                                <div ng-show="section == 'search-history'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px; margin-bottom:60px;"> 
+                                            <div ng-show="section == 'search-history'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px; margin-bottom:60px;"> 
                                 
-                                <table style="width:100%">
+                                             <table style="width:100%">
                                     
-                                    <tr style="font-family: 'Raleway'; font-weight: 700; letter-spacing: 1px; color: black;" ng-repeat = "(key, value) in device.searchHistory track by $index" >
-                                        <td ><%key%></td>
-                                        <td align="center"><span><%generalService.formattedNumber(value['count'])%> results</span></td>
-                                        <td>
-                                         <a ng-click="redirect(key)" align="center" style="margin-top: 15px;" class="btn" >Search</a>
+                                                <tr style="font-family: 'Raleway'; font-weight: 700; letter-spacing: 1px; color: black;" ng-repeat = "(key, value) in device.searchHistory track by $index" >
+                                                    <td ><%key%></td>
+                                                    <td align="center"><span><%generalService.formattedNumber(value['count'])%> results</span></td>
+                                                    <td>
+                                                     <a ng-click="redirect(key)" align="center" style="margin-top: 15px;" class="btn" >Search</a>
 
-                                       </td>
-                                    </tr>
-                                </table>
+                                                   </td>
+                                                </tr>
+                                            </table>
 
 
-                            </div>
-                            <!-- END SEARCH HISTORY -->
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="tab-title" ng-click="updateSection('saved-searches')">
-                                                        <span style="text-transform:none">Saved Articles</span>
-                                                    </div>
-                                                    <div class="tab-content">
-                                                                        <!-- Start SAVED SEARCHES  -->
-                            <div ng-show="section == 'saved-searches'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px; margin-bottom:60px;"> 
-                                <table style="width:100%">
-                                
-                                    <tr style="font-family: 'Raleway'; font-weight: 500; letter-spacing: 1px; color: black; text-align: left; height:300px;" ng-repeat = "pmid in device.saved track by $index">
-                                        
-                                        <td style="vertical-align: text-top;"><a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/<%pmid%>"><%articles[pmid]['title']%></a> </td>
-                                        
-                                        
-                                        <td style="vertical-align: text-top;"><p style="display:inline; vertical-align: text-top;" ng-repeat= "author in articles[pmid]['authors']"> <% author.lastName %>&nbsp;<% author.firstName.chatAt(0) %></p></td>
-                                        
-                                        
-                                        <td style = "padding-right:15px; vertical-align: text-top;"><%articles[pmid]['journal']['iso']%></td>      
-                                        <td style="vertical-align: text-top;">
-                                         <a ng-click="removeArticle($index)" align="center" style="border: 2px solid #ec6a6a; vertical-align: text-top;" class="btn" >Remove</a>
-                                          
-                                        </td>
-
-                                    </tr>
-                                </table>
-                            </div>
-                            <!-- END SAVED ARTICLES --> >
-                                                    </div>
-                                                </li>
-
-                                                                        <li>
-                                        <div ng-click="updateSection('account-information')"  class="tab-title">
-                                            <span style="text-transform:none">Account Information</span>
                                         </div>
-                                        <div class="tab-content" style="padding-top: 20px;">
-                                   
-                                            <div ng-show="section == 'account-information'" style="min-height:120px; margin-bottom:36px;" class ="section" ng-file-drop="onFileSelect($files, 'image', 'images')">
-                                        
-
-
-                                                    <h5 style="margin-bottom: 0; text-align: left;" class="uppercase mb16">First Name</h5><br>
-                                                    <input ng-model="profile.firstName" type="text" placeholder="First Name"  class= "form-control input-lg ng-pristine ng-valid">
-                                                    <br />
-                                                    <h5 style="margin-bottom: 0;  text-align: left;" class="uppercase mb16">Last Name</h5><br>
-                                                    <input ng-model="profile.lastName" type="text" placeholder="Last Name"  class= "form-control input-lg ng-pristine ng-valid">
-                                                    <br />
-                                                    
-                                                
-                                                 <div ng-show="section == 'account-information'" style="min-width:100%"ng-file-drop="onFileSelect($files, 'image', 'images')">
-
-
-                                                
-                                                    <p class= "uppercase mb16" style="margin-top:45px;margin-left: 20px;float:left; color: black;"> 
-                                                    <img style=" width:120px;height:120px;border-radius:60px;border:2px solid #ddd; margin:auto;" src="https://media-service.appspot.com/site/images/<%profile.image%>?crop=120" align="left">
-
-                                                    To update your profile image, drag and drop here
-                                                    </p> 
-                                                </div>
-
-                                                <div class="clearfix"></div>
-
-                                                    
-                                                    <div style="padding:12px">
-                                                        
-                                                        
-                                                    </div>
-
-
-                                                    <h4 class="uppercase" style="margin-right:12px;">Update Your Password</h4>
-
-                                                    <div style="padding:12px">
-                                                        <h5 style="margin-bottom: 0; text-align: left" class="uppercase mb16">New Password</h5><br>
-                                                        <input ng-model="newPassword" type="password" placeholder="New Password" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
-                                                        <h5 style="margin-bottom: 0; text-align: left" class="uppercase mb16">Confirm Password</h5><br>
-                                                        <input ng-model="confirmPassword" type = "password" placeholder = "New Password" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
-                                                    </div>
-
-                                                    <br>
-                                                    <br>
-
-                                                    <div style="width:194px; margin:auto;">
-                                                        <a ng-click="update()" align="center" class="btn" >Update Profile</a>
-                                                    <br /><br />
-                                                    </div>
-
-                                    </li>
-                                            </ul>
-                                        </div>
-
-
-
-
+                                        <!-- END SEARCH HISTORY -->
                                     </div>
-                                    <!--end of nine col-->
-                                </div>
-                                <!--end of row-->
+                                </li>
+                                
+                                <li>
+                                    <div class="tab-title" ng-click="updateSection('saved-searches')">
+                                        <span style="text-transform:none">Saved Articles</span>
+                                    </div>
+                                    <div class="tab-content">
+                                                                        <!-- Start SAVED SEARCHES  -->
+                                        <div ng-show="section == 'saved-searches'" style="padding-left:24px; padding-right:24px; margin-top:24px; min-height:216px; margin-bottom:60px;"> 
+                                            <table style="width:100%">
+                                    
+                                                <tr style="font-family: 'Raleway'; font-weight: 500; letter-spacing: 1px; color: black; text-align: left; height:300px;" ng-repeat = "pmid in device.saved track by $index">
+                                            
+                                                    <td style="vertical-align: text-top;"><a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/<%pmid%>"><%articles[pmid]['title']%></a> </td>
+                                            
+                                            
+                                                    <td style="vertical-align: text-top;"><p style="display:inline; vertical-align: text-top;" ng-repeat= "author in articles[pmid]['authors']"> <% author.lastName %>&nbsp;<% author.firstName.chatAt(0) %></p></td>
+                                            
+                                            
+                                                    <td style = "padding-right:15px; vertical-align: text-top;"><%articles[pmid]['journal']['iso']%></td>      
+                                                    <td style="vertical-align: text-top;">
+                                                        <a ng-click="removeArticle($index)" align="center" style="border: 2px solid #ec6a6a; vertical-align: text-top;" class="btn" >Remove</a>
+                                              
+                                                    </td>
+
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <!-- END SAVED ARTICLES --> >
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <!-- start main content-->
+                                    <div class="col-md-9 col-md-push-2 sep-top-2x">
+                                      <!-- start search form-->
+                                      <div class="input-group theme-form-group">
+                                        <input ng-keyup="$event.keyCode == 13 ? search('0') : null" ng-model="terms" type="text" class="form-control input-lg">
+                                        <span class="input-group-btn">
+                                          <button style="margin-left:10px; margin-top:10px;color:white;"ng-click="search('0')" type="submit" class="btn btn-primary btn-sm">Search</button></span>
+                                      </div> <br>
+                                      <!-- end search form-->
+                                      <div ng-show="resultsVisible" class="sep-top-md">
+                                        <p class="lead text-muted">Search results for:&nbsp;<strong><% terms.toString() %></strong></p>
+                                        <p class="lead text-muted">Number of Results:&nbsp;<strong><% count %></strong></p>
+                                      </div>
+                                      <!-- start accordion group-->
+                                      <div class="sep-top-xs">
+                                        <div class="accordion-group">
+                                          <!-- start accordion item-->
+                                          <div ng-repeat="result in results track by $index" class="accordion-item panel">
+                                            <h5 class="accordion-heading"><a href="#"><% result['title'] %></a></h5>
+                                            <div>
+                                              <h6>PMID:<p style="display:inline;"> <% result['pmid'] %></p></h6>
+                                              <h6>Date: <p style="display:inline;"><% result['date'] %></p></h6>
+                                              <h6>Journal: <p style="display:inline;"><% result['journal']['title'] %></p></h6>
+                                              <h6 style="display:inline;">Authors:</h6>
+                                              <p style="display:inline;" ng-repeat="author in result['authors'] track by $index"><% author.firstName %>&nbsp;<% author.lastName %></p>
+                                            </div><br>
+                                            <div class="accordion-body">
+                                              <p class="lead">
+                                                <% result['abstract'] %>
+                                              </p>
+                                            </div>
+                                          </div>
+                                          <!-- end accordion item-->
+                                        </div>
+                                      </div>
+                                      <!-- end accordion group-->
+
+                                      <div ng-show="resultsVisible" class="sep-top-md text-center">
+                                        <ul class="pagination pagination-beads">
+                                          <li ng-click="search('0')" class="active"><a href="#">1</a></li>
+                                          <li ng-click="search(1*results.length)"><a href="#">2</a></li>
+                                          <li ng-click="search(2*results.length)"><a href="#">3</a></li>
+                                          <li ng-click="search(3*results.length)"><a href="#">4</a></li>
+                                          <li ng-click="search(4*results.length)"><a href="#">5</a></li>
+                                          <li ng-click="search(5*results.length)"><a href="#">6</a></li>
+                                          <li ng-click="search(6*results.length)"><a href="#">7</a></li>
+                                        </ul>
+                                      </div>
+                                      <!-- end pagination-->
+                                    </div>
+                                    <!--end main content--> 
+
+                                </li>
+                                <!-- <li>
+                                    <div ng-click="updateSection('account-information')"  class="tab-title">
+                                        <span style="text-transform:none">Account Information</span>
+                                    </div>
+                                    <div class="tab-content" style="padding-top: 20px;">
+                                   
+                                        <div ng-show="section == 'account-information'" style="min-height:120px; margin-bottom:36px;" class ="section" ng-file-drop="onFileSelect($files, 'image', 'images')">
+
+                                            <h5 style="margin-bottom: 0; text-align: left;" class="uppercase mb16">First Name</h5><br>
+                                            <input ng-model="profile.firstName" type="text" placeholder="First Name"  class= "form-control input-lg ng-pristine ng-valid">
+                                            <br />
+                                            <h5 style="margin-bottom: 0;  text-align: left;" class="uppercase mb16">Last Name</h5><br>
+                                            <input ng-model="profile.lastName" type="text" placeholder="Last Name"  class= "form-control input-lg ng-pristine ng-valid">
+                                            <br />
+                                                    
+                                            <div ng-show="section == 'account-information'" style="min-width:100%"ng-file-drop="onFileSelect($files, 'image', 'images')">
+                                                
+                                                <p class= "uppercase mb16" style="margin-top:45px;margin-left: 20px;float:left; color: black;"> 
+                                                <img style=" width:120px;height:120px;border-radius:60px;border:2px solid #ddd; margin:auto;" src="https://media-service.appspot.com/site/images/<%profile.image%>?crop=120" align="left">
+
+                                                To update your profile image, drag and drop here
+                                                </p> 
+                                            </div>
+
+                                            <div class="clearfix"></div>
+
+                                            <div style="padding:12px"></div>
+
+                                            <h4 class="uppercase" style="margin-right:12px;">Update Your Password</h4>
+
+                                            <div style="padding:12px">
+                                                <h5 style="margin-bottom: 0; text-align: left" class="uppercase mb16">New Password</h5><br>
+                                                <input ng-model="newPassword" type="password" placeholder="New Password" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
+                                                <h5 style="margin-bottom: 0; text-align: left" class="uppercase mb16">Confirm Password</h5><br>
+                                                <input ng-model="confirmPassword" type = "password" placeholder = "New Password" style="padding-left:6px; margin-top:6px" class= "form-control input-lg ng-pristine ng-valid"><br />
+                                            </div>
+
+                                            <br>
+                                            <br>
+
+                                            <div style="width:194px; margin:auto;">
+                                                <a ng-click="update()" align="center" class="btn" >Update Profile</a>
+                                                <br /><br />
+                                            </div>
+
+                                    </li> -->
+
+                                </ul>
                             </div>
-                            <!--end of container-->
-                        </section>
 
-
-
-
+                            </div>
+                            <!--end of nine col-->
+                        </div>
+                        <!--end of row-->
+                    </div>
+                    <!--end of container-->
+                </section>
             
-        </div>
+            </div>
             <!-- End call to action section-->
 
         </div>
