@@ -3,6 +3,7 @@ var searchCtr = angular.module('SearchModule', []);
 searchCtr.controller('SearchController', ['$scope', 'restService', 'generalService', 'accountService', function($scope, restService, generalService, accountService){
     $scope['generalService'] = generalService;
     $scope.terms = null;
+    $scope.searchTerms = null;
     $scope.section = 'search';
     $scope.device = null;
     $scope.articles = {};
@@ -19,6 +20,9 @@ searchCtr.controller('SearchController', ['$scope', 'restService', 'generalServi
     $scope.searchClass = 'active';
     $scope.historyClass = '';
     $scope.savedClass = '';
+    $scope.count = null;
+
+
 
 	
 	$scope.init = function(){
@@ -119,7 +123,9 @@ searchCtr.controller('SearchController', ['$scope', 'restService', 'generalServi
                 return;
             }
 
+            $scope.searchTerms = $scope.terms;
             $scope.results = response['results'];
+            console.log(JSON.stringify($scope.results));
 
             $scope.$watch('currentPage + numPerPage', function() {
             var begin = (($scope.currentPage - 1) * $scope.numPerPage)
@@ -130,6 +136,11 @@ searchCtr.controller('SearchController', ['$scope', 'restService', 'generalServi
 
             $scope.count = response['count'];
             $scope.resultsVisible = true;
+            var key = $scope.terms.toString();
+            var d = new Date();
+            d = d.toDateString().substr(4, d.length);
+            $scope.device.searchHistory[key] = {count: $scope.count, timestamp: d};
+            
         });
     }
 
