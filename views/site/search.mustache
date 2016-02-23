@@ -6,16 +6,20 @@
     </head>
 
   <body ng-app="PubSavvySwipe" ng-controller="SearchController" ng-init="init()">
+
     <div id="load"></div><!--[if lt IE 9]>
     <p class="browsehappy">You are using an strong outdated browser. <br>Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+    <div class="page">
+      <div class="loading-overlay" ng-show="loading" ng-cloak>
+        <div spinner spin="loading"></div>
+    </div>
     {{>nav}}
     <div class="page">
-     
 
     <section class="image-bg bg-dark parallax overlay pt140 pb140 pt-xs-40 pb-xs-40">
-          <div class="background-image-holder fadeIn" style="transform: translate3d(0px, 98px, 0px); background: url(file:///Users/sarahalder/Development/pubsavvyswipe/public/template/img/vent3.jpg);">
-              <img alt="Background Image" class="background-image" src="img/search.png" style="display: none;">
+          <div class="background-image-holder fadeIn" style="transform: translate3d(0px, 98px, 0px);">
+              <img class="background-image" src="img/search.png" style="display: none;">
           </div>
           <div class="container">
               <div class="row">
@@ -72,7 +76,7 @@
                                         <!-- end search form-->
                                         
                                         <div style="text-align:left" ng-show="resultsVisible" class="sep-top-md">
-                                          <p class="lead text-muted">Search results for:&nbsp;<strong><% terms.toString() %></strong></p>
+                                          <p class="lead text-muted">Search results for:&nbsp;<strong><% searchTerms.toString() %></strong></p>
                                           <p class="lead text-muted">Number of Results:&nbsp;<strong><% count %></strong></p>
                                         </div>
                                          
@@ -82,17 +86,14 @@
                                               <!-- start accordion item-->
                                               <div style="text-align:left" ng-repeat="result in results track by $index" class="accordion-item panel">
                                                 <h5 class="accordion-heading"><a href="http://www.ncbi.nlm.nih.gov/pubmed/<%result['pmid']%>" target="_blank"><% result['title'] %></a></h5>
-                                                <div>
-                                                  <h6>PMID:<p style="display:inline;"> <% result['pmid'] %></p></h6>
-                                                  <h6>Date: <p style="display:inline;"><% result['date'] %></p></h6>
-                                                  <h6>Journal: <p style="display:inline;"><% result['journal']['iso'] %></p></h6>
-                                                  <h6 style="display:inline;">Authors:</h6>
                                                   <p style="display:inline;word-wrap:break-word" ng-repeat="author in result['authors'] track by $index"><% author.firstName.charAt(0) %>.&nbsp;<% author.lastName %>&nbsp;</p>
-                                                </div><br>
+                                                  <h6><p style="display:inline;"><% result['journal']['iso'] %> <% result['date'] %></p></h6>
+                                                  
                                                 <div class="accordion-body">
                                                   <p class="lead">
-                                                    <% result['abstract'] %>
+                                                    <% result['abstract'].substr(0,200).concat('...') %>
                                                   </p>
+                                                  <p>PMID:&nbsp;<% result['pmid'] %></p>
                                                 </div>
                                               </div>
                                               <!-- end accordion item-->
@@ -131,12 +132,12 @@
                                     
                                                 <tr style="font-family: 'Raleway'; font-weight: 700; letter-spacing: 1px; color: black;" ng-repeat = "(key, value) in device.searchHistory track by $index" >
                                                     <td ><%key%></td>
-                                                    <td align="center"><span><%generalService.formattedNumber(value['count'])%> results</span></td>
+                                                    <td align="center"><span><%generalService.formattedNumber(value['count'])%> results (<% value.timestamp | date : 'MMM d yyyy' %>)</span></td>
                                                     <td>
-                                                     <a ng-click="redirect(key)" align="center" style="margin-top: 15px;" class="btn" >Search</a>
+                                                     <a href="" ng-click="redirect(key)" align="center" style="border: 1px solid #47b475;" class="btn-sm" >Search</a>
 
                                                    </td>
-                                                </tr>
+                                                </tr>                                                
                                             </table>
 
 
@@ -177,20 +178,20 @@
                                               <!-- start accordion item-->
                                               <div style="text-align:left" ng-repeat="pmid in device.saved track by $index" class="accordion-item panel">
                                                 <h5 class="accordion-heading">
+                                                    <a ng-click="removeArticle($index)" align="center" style="border: 2px solid #ec6a6a; vertical-align: text-top;" class="btn-sm" >Remove</a>
                                                     <a href="http://www.ncbi.nlm.nih.gov/pubmed/<%pmid%>" target="_blank"><%articles[pmid]['title']%></a>
                                                 </h5>
-                                                <a ng-click="removeArticle($index)" align="center" style="border: 2px solid #ec6a6a; vertical-align: text-top;" class="btn" >Remove</a>
+
                                               <div>
-                                                  <h6>PMID:<p style="display:inline;"> <% articles[pmid]['pmid'] %></p></h6>
-                                                  <h6>Date: <p style="display:inline;"><% articles[pmid]['date'] %></p></h6>
-                                                  <h6>Journal: <p style="display:inline;"><% articles[pmid]['journal']['iso'] %></p></h6>
-                                                  <h6 style="display:inline;">Authors:</h6>
+                                                  
+                                                  <p style="display:inline;"><% articles[pmid]['journal']['iso'] %> <% articles[pmid]['date'] %></p>
                                                   <p style="display:inline;word-wrap:break-word" ng-repeat="author in articles[pmid]['authors']"><% author.firstName.charAt(0) %>.&nbsp;<% author.lastName %>&nbsp;</p>
                                                 </div><br>
                                                 <div class="accordion-body">
                                                   <p class="lead">
-                                                    <% articles[pmid]['abstract'] %>
+                                                    <% articles[pmid]['abstract'].substr(0,200).concat('...') %>
                                                   </p>
+                                                  <p>PMID:&nbsp;<% articles[pmid]['pmid'] %></p>
                                                 </div>
                                               </div>
                                               <!-- end accordion item-->
@@ -217,17 +218,14 @@
             <div class="col-md-9">
               <h5 class="action-title upper light">HAVE AN IDEA? WE’RE HERE TO HELP YOU MANAGE YOUR WORK</h5>
             </div>
-            <div class="col-md-3 text-right"><a href="contact-us.html" class="btn btn-light btn-bordered btn-lg">Contact us</a></div>
+            <div class="col-md-3 text-right"><a href="mailto:info@frameresearch.com" class="btn btn-light btn-bordered btn-lg">Contact us</a></div>
           </div>
         </div>
       </section>
       <!-- End call to action section-->
-
     </div>
+
     {{>footer}}
     {{>scripts}}
-    <div class="loading-overlay" ng-show="loading">
-      <div spinner spin="loading"></div>
-   </div>
   </body>
 </html>

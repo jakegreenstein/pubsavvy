@@ -28,7 +28,7 @@ questionCtr.controller('QuestionController', ['$scope', 'restService', 'accountS
                 question['visible'] = 'yes';
                 question['hidden'] = 'yes';
             }
-            $scope.newQuestion.index = $scope.questions.length;
+            $scope.newQuestion.index = $scope.questions.length+1;
 
         });
     }
@@ -59,7 +59,7 @@ questionCtr.controller('QuestionController', ['$scope', 'restService', 'accountS
                 question['hidden'] = 'yes';
             }
             orderByIndex();
-            $scope.newQuestion = {'question':'', 'answer':'', 'index':$scope.questions.length};
+            $scope.newQuestion = {'question':'', 'answer':'', 'index':$scope.questions.length+1};
         });
     }
 
@@ -70,11 +70,14 @@ questionCtr.controller('QuestionController', ['$scope', 'restService', 'accountS
                 return;
             }
 
+            console.log("DELETE: " + JSON.stringify(response));
+
             var index = $scope.questions.indexOf(question);
             if (index == -1)
                 return;
 
             $scope.questions.splice(index, 1);
+            $scope.newQuestion.index = $scope.questions.length+1;
         });
     }
 

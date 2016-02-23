@@ -90,6 +90,8 @@ accountService.factory('accountService', ['restService', function(restService){
 			alert("Please enter a valid email");
 			return;
 		}
+
+		credentials.email = credentials.email.toLowerCase().trim();
 		
 		
 		restService.post({resource:'login', id:null}, credentials, function(response){

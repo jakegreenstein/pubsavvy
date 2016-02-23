@@ -9,8 +9,8 @@
     <div class="main-container">
 
         <section class="image-bg bg-dark parallax overlay pt140 pb140 pt-xs-40 pb-xs-40">
-            <div class="background-image-holder fadeIn" style="transform: translate3d(0px, 98px, 0px); background: url(file:///Users/sarahalder/Development/pubsavvyswipe/public/template/img/vent3.jpg);">
-                <img alt="Background Image" class="background-image" src="img/account-background-1.png" style="display: none;">
+            <div class="background-image-holder fadeIn" style="transform: translate3d(0px, 98px, 0px);">
+                <img class="background-image" src="img/account-background-1.png" style="display: none;">
             </div>
 
             <div class="container">
@@ -33,7 +33,7 @@
             
             <div class="container">
                 
-                <div ng-show="profile.email=='dianaframe@earthlink.net'" class="row">
+                <div ng-show="profile.email=='dianaframe@earthlink.net' || profile.email=='dianaframe@gmail.com'" class="row">
                 <a style="float:right; margin-top: -2em;" class="btn"data-target="#addQuestion" data-toggle="modal" data-dismiss="modal"> Add a Question </a>
                     <div class="col-sm-12 text-center">
                         <h4 class="mb16"> </h4>
@@ -56,14 +56,14 @@
                                 </div>
 
                                 <div ng-show="question.visible == 'yes'" class="">
-                                    <h4 class="inline-block mb0"><p style="display:inline;"><%question.index%>.</p> <%question.question%></h4>
+                                    <h4 class="inline-block mb0"><p style="display:inline;"><%$index+1%>.</p> <%question.question%></h4>
                                 </div>
                                 
                                 <div ng-show="question.visible == 'yes'" style="padding: 2em">
                                     <p><%question.answer%></p>
                                 </div>
                                
-                                <div ng-show="profile.email=='dianaframe@earthlink.net'" style="margin-left:1em;">       
+                                <div ng-show="profile.email=='dianaframe@earthlink.net' || profile.email=='dianaframe@gmail.com'" style="margin-left:1em;">       
                                     <a ng-show="question.visible == 'yes'" ng-click="toggleVisibility(question)"class="btn"> Edit </a>
                                     <a ng-show="question.visible == 'yes'" ng-click="deleteQuestion(question)"class="btn"> Delete </a>
                                 </div>
