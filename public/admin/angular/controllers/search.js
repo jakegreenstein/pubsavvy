@@ -109,6 +109,13 @@ searchCtr.controller('SearchController', ['$scope', 'restService', 'generalServi
         });
     }    
 
+    $scope.shortenString = function(string){
+        if (string.length<60){
+            return string;
+        }
+        return string.substring(0,60).concat('...');
+    }
+
     $scope.removeArticle = function(pmidIndex){
         var newPmidList = $scope.device.saved.splice(pmidIndex, 1);
         restService.put({resource:'device', id:$scope.device.id}, $scope.device, function(response){

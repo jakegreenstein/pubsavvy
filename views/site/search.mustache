@@ -130,8 +130,8 @@
                                 
                                              <table style="width:100%">
                                     
-                                                <tr style="font-family: 'Raleway'; font-weight: 700; letter-spacing: 1px; color: black;" ng-repeat = "(key, value) in device.searchHistory track by $index" >
-                                                    <td ><%key%></td>
+                                                <tr style="font-family: 'Raleway'; font-weight: 700; letter-spacing: 1px; color: black" ng-repeat = "(key, value) in device.searchHistory track by $index" >
+                                                    <td><% shortenString(key) %></td>
                                                     <td align="center"><span><%generalService.formattedNumber(value['count'])%> results (<% value.timestamp | date : 'MMM d yyyy' %>)</span></td>
                                                     <td>
                                                      <a href="" ng-click="redirect(key)" align="center" style="border: 1px solid #47b475;" class="btn-sm" >Search</a>
@@ -179,21 +179,19 @@
                                             <div class="accordion-group">
                                               <!-- start accordion item-->
                                               <div style="text-align:left" ng-repeat="pmid in device.saved track by $index" class="accordion-item panel">
-                                                <h5 class="accordion-heading">
+                                                <h5 style="margin-bottom:0px" class="accordion-heading">
                                                     <a ng-click="removeArticle($index)" align="center" style="border: 2px solid #ec6a6a; vertical-align: text-top;" class="btn-sm" >Remove</a>
                                                     <a href="http://www.ncbi.nlm.nih.gov/pubmed/<%pmid%>" target="_blank"><%articles[pmid]['title']%></a>
                                                 </h5>
-
-                                              <div>
-                                                  
-                                                  <p style="display:inline;"><% articles[pmid]['journal']['iso'] %> <% articles[pmid]['date'] %></p>
-                                                  <p style="display:inline;word-wrap:break-word" ng-repeat="author in articles[pmid]['authors']"><% author.firstName.charAt(0) %>.&nbsp;<% author.lastName %>&nbsp;</p>
-                                                </div><br>
+                                                <div>
+                                                  <p style="display:inline;word-wrap:break-word" ng-repeat="author in articles[pmid]['authors'] track by $index">&nbsp;<% author.firstName.charAt(0) %>.<% author.lastName %>,</p>
+                                                   <p style="display:inline;"><% articles[pmid]['journal']['iso'] %>, <% articles[pmid]['date'] %></p>
+                                                </div>
                                                 <div class="accordion-body">
-                                                  <p class="lead">
+                                                  <p style="margin-bottom:0px" class="lead">
                                                     <% articles[pmid]['abstract'].substr(0,200).concat('...') %>
                                                   </p>
-                                                  <p>PMID:&nbsp;<% articles[pmid]['pmid'] %></p>
+                                                  <span>PMID:&nbsp;<% articles[pmid]['pmid'] %></span>
                                                 </div>
                                               </div>
                                               <!-- end accordion item-->
