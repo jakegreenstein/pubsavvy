@@ -85,15 +85,15 @@
                                             <div class="accordion-group">
                                               <!-- start accordion item-->
                                               <div style="text-align:left" ng-repeat="result in results track by $index" class="accordion-item panel">
-                                                <h5 class="accordion-heading"><a href="http://www.ncbi.nlm.nih.gov/pubmed/<%result['pmid']%>" target="_blank"><% result['title'] %></a></h5>
-                                                  <p style="display:inline;word-wrap:break-word" ng-repeat="author in result['authors'] track by $index"><% author.firstName.charAt(0) %>.&nbsp;<% author.lastName %>&nbsp;</p>
-                                                  <h6><p style="display:inline;"><% result['journal']['iso'] %> <% result['date'] %></p></h6>
+                                                <h5 style="margin-bottom:0px" class="accordion-heading"><a href="http://www.ncbi.nlm.nih.gov/pubmed/<%result['pmid']%>" target="_blank"><% result['title'] %></a></h5>
+                                                  <p style="display:inline;word-wrap:break-word" ng-repeat="author in result['authors'] track by $index">&nbsp;<% author.firstName.charAt(0) %>.&nbsp;<% author.lastName %>,</p>
+                                                  <p style="display:inline;"><% result['journal']['iso'] %>, <% result['date'] %></p>
                                                   
                                                 <div class="accordion-body">
-                                                  <p class="lead">
+                                                  <p style="margin-bottom:0px" class="lead">
                                                     <% result['abstract'].substr(0,200).concat('...') %>
                                                   </p>
-                                                  <p>PMID:&nbsp;<% result['pmid'] %></p>
+                                                  <span>PMID:&nbsp;<% result['pmid'] %></span>
                                                 </div>
                                               </div>
                                               <!-- end accordion item-->
