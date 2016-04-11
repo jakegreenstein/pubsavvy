@@ -64,8 +64,9 @@ this.handlePost = function(req, res, pkg){
 					to:       profile.email,
 					from:     'info@frameresearch.com',
 					fromname: 'PubSavvy Team',
+					bcc: 'dianaframe@gmail.com',
 					subject:  'Welcome to PubSavvy Swipe',
-					html:     'Hello,<br /><br />Thanks for signing up with a free account with PubSavvy Swipe, the iOS tool for exploring medical research! You can access your account <a style="color:blue" href="http://www.pubsavvy.com/site/account">here</a>. You will see your saved items and search history, and you can change your name and password. Keep in touch with us <a style="color:blue" href="https://pubsavvyswipe.herokuapp.com/site/faq">here</a> for PubSavvy tips and announcements. We\'ll keep you apprised of new app releases and features, and you can unsubscribe at any time and still use the app.'
+					html:     'Hello,<br /><br />Thanks for signing up with a free account with PubSavvy Swipe, the iOS tool for exploring medical research! You can access your account <a style="color:blue" href="http://www.pubsavvy.com/site/account">here</a> and see your saved items and search history <a style="color:blue" href="http://www.pubsavvy.com/site/search">here</a>. Keep in touch with us at <a style="color:blue" href="maito:info@frameresearch.com">info@frameresearch.com</a> for PubSavvy feedback, feature requests, and to stay informed on future releases. We hope you enjoy the app, and please do rate us in the App Store!<br /><br />The PubSavvy Team'
 			}, function(err, json) {
 				if (err) {
 					res.json({'confirmation':'fail', 'message':err});
