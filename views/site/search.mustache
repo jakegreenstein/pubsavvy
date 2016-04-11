@@ -86,8 +86,8 @@
                                               <!-- start accordion item-->
                                               <div style="text-align:left" ng-repeat="result in results track by $index" class="accordion-item panel">
                                                 <h5 style="margin-bottom:0px" class="accordion-heading"><a href="http://www.ncbi.nlm.nih.gov/pubmed/<%result['pmid']%>" target="_blank"><% result['title'] %></a></h5>
-                                                  <p style="display:inline;word-wrap:break-word" ng-repeat="author in result['authors'] track by $index">&nbsp;<% author.firstName.charAt(0) %>.&nbsp;<% author.lastName %>,</p>
-                                                  <p style="display:inline;"><% result['journal']['iso'] %>, <% result['date'] %></p>
+                                                  <p style="display:inline;word-wrap:break-word" ng-repeat="author in result['authors'] track by $index">&nbsp;<% author.lastName %>&nbsp;<% author.firstName.charAt(0) %>.,</p>
+                                                  <p style="display:inline;">&nbsp;<% result['journal']['iso'] %>,&nbsp;<% result['date'] %></p>
                                                   
                                                 <div class="accordion-body">
                                                   <p style="margin-bottom:0px" class="lead">
@@ -184,8 +184,8 @@
                                                     <a href="http://www.ncbi.nlm.nih.gov/pubmed/<%pmid%>" target="_blank"><%articles[pmid]['title']%></a>
                                                 </h5>
                                                 <div>
-                                                  <p style="display:inline;word-wrap:break-word" ng-repeat="author in articles[pmid]['authors'] track by $index">&nbsp;<% author.firstName.charAt(0) %>.<% author.lastName %>,</p>
-                                                   <p style="display:inline;"><% articles[pmid]['journal']['iso'] %>, <% articles[pmid]['date'] %></p>
+                                                  <p style="display:inline;word-wrap:break-word" ng-repeat="author in articles[pmid]['authors'] track by $index">&nbsp;<% author.lastName %>&nbsp;<% author.firstName.charAt(0) %>.,</p>
+                                                   <p style="display:inline;">&nbsp;<% articles[pmid]['journal']['iso'] %>,&nbsp;<% articles[pmid]['date'] %></p>
                                                 </div>
                                                 <div class="accordion-body">
                                                   <p style="margin-bottom:0px" class="lead">
