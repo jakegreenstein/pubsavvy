@@ -44,7 +44,7 @@ function cleanUpResults(articles){
 		return list;
 	
 	
-	var months = ['Jan', 'Feb', 'Mac', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+	var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 	for (var i=0; i<articles.length; i++){
 		var summary = {};
 		var result = articles[i];
