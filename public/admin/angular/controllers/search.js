@@ -100,6 +100,15 @@ searchCtr.controller('SearchController', ['$scope', 'restService', 'generalServi
         }); 
     }
 
+    $scope.removeSearch = function(key){
+        delete $scope.device.searchHistory[key];
+        restService.put({resource:'device', id:$scope.device.id}, $scope.device, function(response){
+            $scope.device = response.device;
+        }, function(error, headers){
+            console.log('ERROR ! ! ! -- '+JSON.stringify(error));
+        });
+    }    
+
     $scope.removeArticle = function(pmidIndex){
         var newPmidList = $scope.device.saved.splice(pmidIndex, 1);
         restService.put({resource:'device', id:$scope.device.id}, $scope.device, function(response){

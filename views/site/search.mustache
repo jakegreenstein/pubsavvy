@@ -135,7 +135,9 @@
                                                     <td align="center"><span><%generalService.formattedNumber(value['count'])%> results (<% value.timestamp | date : 'MMM d yyyy' %>)</span></td>
                                                     <td>
                                                      <a href="" ng-click="redirect(key)" align="center" style="border: 1px solid #47b475;" class="btn-sm" >Search</a>
-
+                                                   </td>
+                                                   <td>
+                                                     <a href="" ng-click="removeSearch(key)" align="center" class="btn-sm btn-danger" >Remove</a>
                                                    </td>
                                                 </tr>                                                
                                             </table>
